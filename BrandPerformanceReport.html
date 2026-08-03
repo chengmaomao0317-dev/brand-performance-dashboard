@@ -435,28 +435,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
 .cs-bs-v{font-size:14px;font-weight:600;color:#1a1a18}
 .cs-bs-l{font-size:9px;color:#aaa;margin-top:2px}
 .cs-sec-label{font-size:10px;font-weight:600;color:#999;letter-spacing:.04em;margin:0 0 8px}
-.cs-store-wrap{border:.5px solid rgba(0,0,0,.09);border-radius:10px;overflow:hidden;margin-bottom:10px}
-.cs-store-hd{display:grid;grid-template-columns:88px 1fr;background:#f7f5f1}
-.cs-store-label{padding:9px 12px;display:flex;align-items:center;gap:6px;border-right:.5px solid rgba(0,0,0,.07)}
-.cs-store-nm{font-size:12px;font-weight:600;color:#1a1a18}
+.cs-store-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.cs-store-wrap{border:.5px solid rgba(0,0,0,.09);border-radius:10px;overflow:hidden;background:#fff}
+.cs-store-hd{padding:10px 12px 8px}
+.cs-store-hd-wo{background:#2d5a9e}
+.cs-store-hd-ki{background:#c04070}
+.cs-store-label{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.cs-store-nm{font-size:12px;font-weight:600;color:#fff}
 .cs-pill{font-size:9px;font-weight:600;padding:1px 5px;border-radius:3px}
-.cs-pill-wo{background:#e6eef8;color:#0c447c}
-.cs-pill-ki{background:#fbeaf0;color:#72243e}
-.cs-store-stats{display:grid;grid-template-columns:repeat(4,1fr);background:#f7f5f1}
-.cs-ss{padding:9px 0;text-align:center;border-right:.5px solid rgba(0,0,0,.07)}
-.cs-ss:last-child{border-right:none}
-.cs-ss-v{font-size:12px;font-weight:600;color:#1a1a18}
-.cs-ss-l{font-size:9px;color:#aaa;margin-top:1px}
-.cs-c-row{display:grid;grid-template-columns:88px 1fr;border-top:.5px solid rgba(0,0,0,.06)}
-.cs-c-cell{padding:8px 12px;display:flex;align-items:center;gap:7px;border-right:.5px solid rgba(0,0,0,.06);background:#fff}
-.cs-av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0}
+.cs-pill-wo{background:rgba(255,255,255,.22);color:#fff}
+.cs-pill-ki{background:rgba(255,255,255,.22);color:#fff}
+.cs-store-stats{display:grid;grid-template-columns:repeat(4,1fr)}
+.cs-ss{text-align:center}
+.cs-ss-v{font-size:12px;font-weight:600;color:#fff}
+.cs-ss-l{font-size:9px;color:rgba(255,255,255,.6);margin-top:1px}
+.cs-c-row{display:flex;align-items:center;gap:8px;padding:7px 12px;border-top:.5px solid rgba(0,0,0,.06)}
+.cs-c-cell{display:flex;align-items:center;gap:6px;min-width:64px}
+.cs-av{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0}
 .cs-av-wo{background:#e6eef8;color:#0c447c}
 .cs-av-ki{background:#fbeaf0;color:#72243e}
-.cs-c-name{font-size:11px;color:#1a1a18}
-.cs-c-stats{display:grid;grid-template-columns:repeat(4,1fr);background:#fff}
-.cs-cs{padding:8px 0;text-align:center;border-right:.5px solid rgba(0,0,0,.06)}
+.cs-c-name{font-size:11px;color:#1a1a18;white-space:nowrap}
+.cs-c-stats{display:flex;gap:0;flex:1}
+.cs-cs{flex:1;text-align:center;border-right:.5px solid rgba(0,0,0,.06)}
 .cs-cs:last-child{border-right:none}
-.cs-cs-v{font-size:12px;font-weight:600;color:#1a1a18}
+.cs-cs-v{font-size:11px;font-weight:600;color:#1a1a18}
 .cs-cs-l{font-size:9px;color:#aaa;margin-top:1px}
 .cs-rate-hi{color:#2a7a4a}.cs-rate-lo{color:#a32d2d}.cs-rate-mid{color:#ba7517}
 .cs-total-bar{background:#f0ede8;border-radius:10px;padding:12px 16px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:.5px solid rgba(0,0,0,.07);margin-top:18px}
@@ -2736,13 +2738,15 @@ function renderConsultantTab(){
         </div>
       </div>`;
     }).join('');
+    const hdCls = brandKey==='wo'?'cs-store-hd-wo':'cs-store-hd-ki';
+    const rateStyle = s.成交率===null?'color:rgba(255,255,255,.5)':s.成交率>=70?'color:#7fe0a8':s.成交率>=50?'color:#ffd68a':'color:#ff9f9f';
     return `<div class="cs-store-wrap">
-      <div class="cs-store-hd">
+      <div class="cs-store-hd ${hdCls}">
         <div class="cs-store-label"><span class="cs-store-nm">${storeName}</span><span class="cs-pill ${pillCls}">${brand}</span></div>
         <div class="cs-store-stats">
           <div class="cs-ss"><div class="cs-ss-v">${s.接待}</div><div class="cs-ss-l">新客接待</div></div>
           <div class="cs-ss"><div class="cs-ss-v">${s.成交}</div><div class="cs-ss-l">成交</div></div>
-          <div class="cs-ss"><div class="cs-ss-v" style="color:${rateClr(s.成交率)}">${fmtRate(s.成交率)}</div><div class="cs-ss-l">成交率</div></div>
+          <div class="cs-ss"><div class="cs-ss-v" style="${rateStyle}">${fmtRate(s.成交率)}</div><div class="cs-ss-l">成交率</div></div>
           <div class="cs-ss"><div class="cs-ss-v">${fmtAmt(s.平均客單)}</div><div class="cs-ss-l">平均客單</div></div>
         </div>
       </div>
@@ -2754,12 +2758,25 @@ function renderConsultantTab(){
   const ki = brandBlock('ki','原綺');
   const total = calcStats(records);
 
-  // 取所有門市列表（保持順序）
-  const allStoreKeys = [...new Set(records.map(r=>r.storeKey))];
-  const storeBlocks = allStoreKeys.map(sk=>{
+  // 門市排序
+  const STORE_ORDER = ['wo_zhanqian','wo_daan','wo_zhongxiao','wo_dongmen','wo_banqiao','wo_taichung','ki_dongmen','ki_taichung'];
+  const STORE_INFO = {
+    wo_zhanqian:{store:'站前', brand:'原渥', brandKey:'wo'},
+    wo_daan:    {store:'大安', brand:'原渥', brandKey:'wo'},
+    wo_zhongxiao:{store:'忠孝', brand:'原渥', brandKey:'wo'},
+    wo_dongmen: {store:'東門', brand:'原渥', brandKey:'wo'},
+    wo_banqiao: {store:'板橋', brand:'原渥', brandKey:'wo'},
+    wo_taichung:{store:'台中', brand:'原渥', brandKey:'wo'},
+    ki_dongmen: {store:'台北', brand:'原綺', brandKey:'ki'},
+    ki_taichung:{store:'台中', brand:'原綺', brandKey:'ki'},
+  };
+  // 原渥六間固定顯示（含無資料的大安）；原綺只顯示有資料的門市
+  const woKeys = STORE_ORDER.filter(k=>k.startsWith('wo_'));
+  const kiKeys = STORE_ORDER.filter(k=>k.startsWith('ki_') && records.some(r=>r.storeKey===k));
+  const storeBlocks = [...woKeys, ...kiKeys].map(sk=>{
     const sr = records.filter(r=>r.storeKey===sk);
-    const {store, brand, brandKey} = sr[0];
-    return storeHtml(sk, store, brand, brandKey, sr);
+    const info = sr.length>0 ? {store:sr[0].store, brand:sr[0].brand, brandKey:sr[0].brandKey} : STORE_INFO[sk];
+    return storeHtml(sk, info.store, info.brand, info.brandKey, sr);
   }).join('');
 
   let modeLabel = '';
@@ -2809,7 +2826,9 @@ function renderConsultantTab(){
     </div>
 
     <div style="font-size:10px;font-weight:600;color:#999;letter-spacing:.04em;margin-bottom:8px">門市 × 諮詢師</div>
-    ${storeBlocks || '<div style="padding:40px;text-align:center;color:#ccc;font-size:13px">此期間無資料</div>'}
+    <div class="cs-store-grid">
+      ${storeBlocks || '<div style="padding:40px;text-align:center;color:#ccc;font-size:13px;grid-column:1/-1">此期間無資料</div>'}
+    </div>
 
   `;
 }
