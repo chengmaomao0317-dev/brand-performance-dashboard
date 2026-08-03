@@ -180,5 +180,55 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:1499, total_amt:1499},  // 詹閔智，體驗未成交
     ]
   },
+  {
+    date:'2026-08-01', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:999,  total_amt:15399}, // 王靖雯，體驗+購課成交
+      {type:'新客', trial_amt:0,    total_amt:0},     // 鄧珮姍，胡馨芳分享消耗未成交
+    ]
+  },
+  {
+    date:'2026-08-01', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'柯孟君',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:118999},  // 林鈺淳
+    ]
+  },
+  {
+    date:'2026-08-01', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:14999},   // 黃舒鈺
+    ]
+  },
+  {
+    date:'2026-08-01', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:16498},   // 曾宛如（9999+6499）
+    ]
+  },
+  {
+    date:'2026-08-01', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳霽',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:41799},   // 徐雅瑩
+    ]
+  },
+  {
+    date:'2026-08-01', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'呂秋玫',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:22999},   // 張雅嵐
+    ]
+  },
+  {
+    date:'2026-08-01', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:63000},   // 胡巧儀（48000+15000）
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
