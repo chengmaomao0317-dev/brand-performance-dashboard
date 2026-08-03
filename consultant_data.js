@@ -150,5 +150,12 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:8498, total_amt:8498},   // 王哲慧，三項體驗未成交
     ]
   },
+  {
+    date:'2026-08-01', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},  // 吳苡婕，體驗未成交
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];

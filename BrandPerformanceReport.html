@@ -423,9 +423,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
 .cs-seg-btn.on{background:#1a1a18;color:#fff}
 .cs-mo-btn{font-size:12px;padding:5px 12px;border-radius:7px;border:.5px solid rgba(0,0,0,.12);background:#fff;color:#888;cursor:pointer}
 .cs-brand-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
-.cs-brand-card{border-radius:10px;border:.5px solid rgba(0,0,0,.09);overflow:hidden}
-.cs-brand-top-wo{border-top:2px solid #2d5a9e}
-.cs-brand-top-ki{border-top:2px solid #c04070}
+.cs-brand-card{border-radius:0 10px 10px 0;border:.5px solid rgba(0,0,0,.09);background:#fff;overflow:hidden}
+.cs-brand-top-wo{border-left:3px solid #2d5a9e}
+.cs-brand-top-ki{border-left:3px solid #c04070}
 .cs-brand-hd{padding:10px 14px 8px;display:flex;align-items:center;justify-content:space-between}
 .cs-brand-name{font-size:13px;font-weight:600}
 .cs-brand-name.wo{color:#0c447c}.cs-brand-name.ki{color:#72243e}
@@ -2811,13 +2811,6 @@ function renderConsultantTab(){
     <div style="font-size:10px;font-weight:600;color:#999;letter-spacing:.04em;margin-bottom:8px">門市 × 諮詢師</div>
     ${storeBlocks || '<div style="padding:40px;text-align:center;color:#ccc;font-size:13px">此期間無資料</div>'}
 
-    <div style="font-size:10px;font-weight:600;color:#999;letter-spacing:.04em;margin:18px 0 8px">集團合計</div>
-    <div class="cs-total-bar">
-      <div class="cs-tb"><div class="cs-tb-v">${total.接待}</div><div class="cs-tb-l">新客接待</div></div>
-      <div class="cs-tb"><div class="cs-tb-v">${total.成交}</div><div class="cs-tb-l">成交</div></div>
-      <div class="cs-tb"><div class="cs-tb-v" style="color:${rateClr(total.成交率)}">${fmtRate(total.成交率)}</div><div class="cs-tb-l">成交率</div></div>
-      <div class="cs-tb"><div class="cs-tb-v">${fmtAmt(total.平均客單)}</div><div class="cs-tb-l">平均客單</div></div>
-    </div>
   `;
 }
 
