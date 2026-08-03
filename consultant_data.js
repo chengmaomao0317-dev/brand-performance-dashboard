@@ -140,5 +140,15 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:999, total_amt:35999},  // 張可慧，體驗+購課成交
     ]
   },
+  {
+    date:'2026-08-01', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:37000},  // 吳佩穎，體驗+購課成交
+      {type:'新客', trial_amt:999,  total_amt:999},    // 劉瑞淇，體驗未成交
+      {type:'新客', trial_amt:2000, total_amt:37000},  // 吳芯伝，體驗+購課成交
+      {type:'新客', trial_amt:8498, total_amt:8498},   // 王哲慧，三項體驗未成交
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
