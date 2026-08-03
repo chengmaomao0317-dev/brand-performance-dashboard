@@ -157,5 +157,28 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:999, total_amt:999},  // 吳苡婕，體驗未成交
     ]
   },
+  {
+    date:'2026-08-01', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'林雨芸',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:35999},  // 何意敏，體驗+購課成交
+      {type:'新客', trial_amt:999, total_amt:999},    // 范姜渦，體驗未成交
+    ]
+  },
+  {
+    date:'2026-08-01', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},    // 李明瑤，體驗未成交
+      {type:'新客', trial_amt:999, total_amt:999},    // 鄭沛淇，體驗未成交
+    ]
+  },
+  {
+    date:'2026-08-01', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:1499, total_amt:1499},  // 詹閔智，體驗未成交
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
