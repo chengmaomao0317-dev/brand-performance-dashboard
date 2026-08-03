@@ -151,6 +151,13 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
+    date:'2026-07-02', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:7999},  // 蔡函穎，體驗+購課成交
+    ]
+  },
+  {
     date:'2026-08-01', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
     consultant:'森珮筠',
     clients:[
