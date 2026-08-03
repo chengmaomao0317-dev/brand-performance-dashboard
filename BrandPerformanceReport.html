@@ -418,7 +418,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
 .cs-seg-btn:last-child{border-right:none}
 .cs-custom-range{display:flex;align-items:center;padding:8px 0 4px;gap:2px}
 .cs-date-input{font-size:12px;padding:4px 8px;border:.5px solid rgba(0,0,0,.18);border-radius:6px;color:#444;background:#fafafa;cursor:pointer;outline:none}
-.cs-month-input{font-size:12px;padding:5px 10px;border:none;border-right:.5px solid rgba(0,0,0,.1);background:#fff;color:#888;cursor:pointer;font-weight:500;outline:none}
+.cs-month-input{font-size:12px;padding:5px 10px;border:none;border-right:.5px solid rgba(0,0,0,.1);background:#fff;color:#888;cursor:pointer;font-weight:500;outline:none;appearance:none;-webkit-appearance:none}
 .cs-month-input.on{background:#1a1a1a;color:#fff}
 .cs-seg-btn.on{background:#1a1a18;color:#fff}
 .cs-mo-btn{font-size:12px;padding:5px 12px;border-radius:7px;border:.5px solid rgba(0,0,0,.12);background:#fff;color:#888;cursor:pointer}
@@ -2796,9 +2796,20 @@ function renderConsultantTab(){
       <div class="cs-seg">
         <button class="cs-seg-btn${_csMode==='today'?' on':''}"     onclick="_csMode='today';renderConsultantTab()">今日</button>
         <button class="cs-seg-btn${_csMode==='yesterday'?' on':''}" onclick="_csMode='yesterday';renderConsultantTab()">昨日</button>
-        <input type="month" class="cs-month-input${_csMode==='month'?' on':''}"
-               value="${_csMonth}"
-               onchange="_csMonth=this.value;_csMode='month';renderConsultantTab()">
+        <select class="cs-month-input${_csMode==='month'?' on':''}"
+                onchange="_csMonth=this.value;_csMode='month';renderConsultantTab()">
+          ${(()=>{
+            const opts=[];
+            for(let i=0;i<12;i++){
+              const d=new Date(); d.setDate(1); d.setMonth(d.getMonth()-i);
+              const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0');
+              const val=`${y}-${m}`;
+              const label=`${y}年${m}月`;
+              opts.push(`<option value="${val}"${_csMonth===val?' selected':''}>${label}</option>`);
+            }
+            return opts.join('');
+          })()}
+        </select>
         <button class="cs-seg-btn${_csMode==='custom'?' on':''}"    onclick="_csMode='custom';renderConsultantTab()">自訂</button>
       </div>
       ${_csMode!=='month'?`<span style="font-size:12px;color:#999;margin-left:10px">${modeLabel}</span>`:''}
