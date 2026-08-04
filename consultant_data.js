@@ -732,5 +732,15 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:2000, total_amt:17000},  // 江怡霓，體驗+購課成交
     ]
   },
+  {
+    date:'2026-08-03', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},      // Lou Som Lei，嘟嘟唇，已到未購
+      {type:'新客', trial_amt:0, total_amt:14999},  // 范美儀，微整雕塑喬亞登HAJ，成交
+      {type:'新客', trial_amt:0, total_amt:14999},  // Lou Sio Kei，微整雕塑喬亞登HAJ，成交
+      {type:'新客', trial_amt:0, total_amt:0},      // 蔡旻庭，肉毒，已到未購
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
