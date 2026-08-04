@@ -959,5 +959,131 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:6999, total_amt:6999},  // 呂家菲，體驗未成交
     ]
   },
+  {
+    date:'2026-07-13', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:4000},  // 許綉君，體驗+訂金成交
+    ]
+  },
+  {
+    date:'2026-07-14', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:6000, total_amt:20000},  // 諏訪間裕子，體驗+購課成交
+      {type:'新客', trial_amt:999,  total_amt:999},    // 季汶欣，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-16', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:16400},  // 張彩鳳，體驗+購課成交
+      {type:'新客', trial_amt:2000, total_amt:2000},   // 林依萱，體驗未成交
+      {type:'新客', trial_amt:999,  total_amt:2999},   // 蕭雅雯，體驗+訂金成交
+    ]
+  },
+  {
+    date:'2026-07-20', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:35999},  // 吳仁勝，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-21', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:15399},  // 許綵渝，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-22', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},  // 張采汝，使用分享課程，未購
+    ]
+  },
+  {
+    date:'2026-07-23', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:1998, total_amt:1998},  // 林卉羚，雙體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-23', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},  // 翁慧婷，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-25', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:18999},  // 楊靜純，體驗+購課成交
+      {type:'新客', trial_amt:0,   total_amt:24000},  // 洪綺妍，購課成交
+    ]
+  },
+  {
+    date:'2026-07-25', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},  // 鄭羽芯，使用分享課程，未購
+    ]
+  },
+  {
+    date:'2026-07-27', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:15399},  // 劉胤映，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-27', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:3299, total_amt:20699},  // 涂愷恩，體驗+購課成交
+      {type:'新客', trial_amt:999,  total_amt:15399},  // 趙羿婷，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-28', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:1499, total_amt:2099},  // 洪映珊，體驗+產品成交
+    ]
+  },
+  {
+    date:'2026-07-29', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:4000},  // 陳菲，體驗+訂金成交
+    ]
+  },
+  {
+    date:'2026-07-30', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:1499, total_amt:1499},  // 李佳玲，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-31', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},  // 賴品璇，體驗未成交
+      {type:'新客', trial_amt:999, total_amt:999},  // 許庭婷，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-31', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:2000},   // 李可薇，體驗未成交
+      {type:'新客', trial_amt:2298, total_amt:42797},  // 陳昱蓁，體驗+購課成交
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
