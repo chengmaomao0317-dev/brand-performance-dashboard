@@ -742,5 +742,12 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:0, total_amt:0},      // 蔡旻庭，肉毒，已到未購
     ]
   },
+  {
+    date:'2026-07-01', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:35999},  // 李宜蓁，體驗+購課成交
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
