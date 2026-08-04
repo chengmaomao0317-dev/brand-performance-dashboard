@@ -749,5 +749,176 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:999, total_amt:35999},  // 李宜蓁，體驗+購課成交
     ]
   },
+  {
+    date:'2026-07-02', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},  // 陳蕙安，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-03', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},    // 陳承欣，體驗未成交
+      {type:'新客', trial_amt:999, total_amt:35999},  // 張禎云，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-06', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:18999},  // 陳妍安，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-06', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:18999},  // 彭琦雁，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-07', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},  // 孫明琼，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-08', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},  // 王沛文，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-09', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:1998, total_amt:7997},  // 賴怡君，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-14', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},  // 吳美妘，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-15', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},  // 梁書寧，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-16', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:53999},  // 楊雅珺，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-17', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:15399},  // 張瀞心，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-17', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:6000, total_amt:66000},  // 張庭瑄，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-21', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:2199},  // 陳冠瑋，體驗+加購成交
+      {type:'新客', trial_amt:999, total_amt:999},   // 李明穎，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-21', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},   // 陳映蓉，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-23', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:37749},  // 吳宥萱，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-23', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},  // 賴咨羽，分享體驗課消耗，未購
+    ]
+  },
+  {
+    date:'2026-07-23', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:18999},  // 彭郁庭，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-25', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},  // 程連芳，使用朋友療程，未購
+    ]
+  },
+  {
+    date:'2026-07-27', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:16499},  // 李雅淇，體驗+購課+產品成交
+    ]
+  },
+  {
+    date:'2026-07-28', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},  // 吳淑貞，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-29', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:37574},  // 吳旻真，體驗+購課成交(生日95折)
+    ]
+  },
+  {
+    date:'2026-07-30', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:18999},   // 黃筱嵐，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-30', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:1499, total_amt:1499},   // 梅芷嵐，體驗未成交
+      {type:'新客', trial_amt:999,  total_amt:19749},  // 鐘凡真，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-31', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:1499, total_amt:1499},  // 劉明鳳，體驗未成交
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
