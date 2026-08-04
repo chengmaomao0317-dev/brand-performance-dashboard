@@ -2797,6 +2797,7 @@ function renderConsultantTab(){
         <button class="cs-seg-btn${_csMode==='today'?' on':''}"     onclick="_csMode='today';renderConsultantTab()">今日</button>
         <button class="cs-seg-btn${_csMode==='yesterday'?' on':''}" onclick="_csMode='yesterday';renderConsultantTab()">昨日</button>
         <select class="cs-month-input${_csMode==='month'?' on':''}"
+                onclick="if(_csMode!=='month'){_csMode='month';renderConsultantTab()}"
                 onchange="_csMonth=this.value;_csMode='month';renderConsultantTab()">
           ${(()=>{
             const opts=[];
