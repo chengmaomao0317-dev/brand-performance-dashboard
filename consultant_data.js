@@ -733,6 +733,168 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
+    date:'2026-07-24', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},  // 王若容，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-23', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},  // 李宜珊，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-22', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞衫',
+    clients:[
+      {type:'新客', trial_amt:6000, total_amt:63999},  // 陳翎軒，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-20', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:1499, total_amt:1499},  // 邱郁茵，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-18', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞衫',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},  // 許婉婷，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-18', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:7999},  // 楊惠理，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-17', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞衫',
+    clients:[
+      {type:'新客', trial_amt:2498, total_amt:14496},  // 柯妤柔，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-17', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:1499, total_amt:2099},  // 楊瑞櫻，體驗+加購成交
+    ]
+  },
+  {
+    date:'2026-07-16', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞衫',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},  // 葉玫伶，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-15', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:999,  total_amt:999},   // 王薇珺，體驗未成交
+      {type:'新客', trial_amt:1499, total_amt:1499},  // 林淑卿，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-15', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞衫',
+    clients:[
+      {type:'新客', trial_amt:2498, total_amt:24097},  // 吳承錦，體驗+購課成交
+      {type:'新客', trial_amt:2000, total_amt:20750},  // 林詩惠，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-14', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},    // 陳若瑋，體驗未成交
+      {type:'新客', trial_amt:999, total_amt:15399},  // 翁裝延，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-14', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞衫',
+    clients:[
+      {type:'新客', trial_amt:2999, total_amt:39749},  // 游巧婕，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-13', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:2999},  // 黃莛茵，體驗+付訂成交
+      {type:'新客', trial_amt:999, total_amt:999},   // Joanie Boswell，體驗未成交
+      {type:'新客', trial_amt:999, total_amt:999},   // 陳渝涵，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-13', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞衫',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:2000},  // 林詩芸，體驗未成交
+      {type:'新客', trial_amt:999,  total_amt:999},   // Trisha McCall，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-09', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞衫',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:15399},  // 曾思宇，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-08', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},  // 孫愷伶，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-07', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:1499, total_amt:1499},  // 邱雅琦，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-07', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞衫',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:2000},  // 郭小希，體驗未成交
+    ]
+  },
+  {
+    date:'2026-07-03', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:999,  total_amt:999},  // 邱信霏，體驗未成交
+      {type:'新客', trial_amt:6000, total_amt:8000},  // 劉璟璇，體驗+加購成交
+    ]
+  },
+  {
+    date:'2026-07-02', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞衫',
+    clients:[
+      {type:'新客', trial_amt:2999, total_amt:2999},   // 高潔，體驗未成交
+      {type:'新客', trial_amt:999,  total_amt:18999},  // 范芸瑄，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-07-01', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:17000},  // 張立輝，體驗+購課成交
+    ]
+  },
+  {
     date:'2026-08-03', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
     consultant:'蔡亞衫',
     clients:[
