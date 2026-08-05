@@ -1085,5 +1085,27 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:2298, total_amt:42797},  // 陳昱蓁，體驗+購課成交
     ]
   },
+  {
+    date:'2026-08-04', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},  // 洪于芳，黑眼圈填充，已到未購
+      {type:'新客', trial_amt:0, total_amt:0},  // 楊季穎，頰凹填充，已到未購
+    ]
+  },
+  {
+    date:'2026-08-04', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳霄',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:9999},   // 方詠瑩，膠原蛋白針，成交
+    ]
+  },
+  {
+    date:'2026-08-04', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:36000},  // 蘇汗雨，瑞斯朗HA，成交
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
