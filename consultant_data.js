@@ -355,7 +355,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-07-03', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999, total_amt:999},  // 胡氏梅幸，體驗未成交
       {type:'新客', trial_amt:999, total_amt:999},  // 蔡沐妘，體驗未成交
@@ -379,7 +379,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-07-07', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999, total_amt:999},    // 歐陽儀芳，體驗未成交
       {type:'新客', trial_amt:999, total_amt:40999},  // 康雅婷，體驗+購課成交
@@ -402,14 +402,14 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-07-08', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999, total_amt:35999},  // 駱瓏心，體驗+購課成交
     ]
   },
   {
     date:'2026-07-09', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999,  total_amt:999},   // 王詩琦，體驗未成交
       {type:'新客', trial_amt:6000, total_amt:6000},  // 劉姵君，體驗未成交
@@ -431,7 +431,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-07-10', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999, total_amt:999},  // 謝宜澄，體驗未成交
       {type:'新客', trial_amt:999, total_amt:999},  // 劉佳兪，體驗未成交
@@ -439,7 +439,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-07-14', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:1299, total_amt:35299},  // 吳育儒，體驗+購課成交
       {type:'新客', trial_amt:0,    total_amt:0},      // 陳沛漾，當天未施作未成交
@@ -462,14 +462,14 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-07-15', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999, total_amt:15999},  // 郭柔慈，體驗+購課成交
     ]
   },
   {
     date:'2026-07-16', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:1299, total_amt:1299},   // 鄭于玫，體驗未成交
       {type:'新客', trial_amt:999,  total_amt:15399},  // 吳泳緻，體驗+購課成交
@@ -477,7 +477,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-07-17', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999, total_amt:15999},  // 鄧怡珊，體驗+購課成交
       {type:'新客', trial_amt:999, total_amt:75999},  // 曾詠津，體驗+購課成交
@@ -492,7 +492,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-07-18', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999, total_amt:15399},  // 李佳紋，體驗+購課成交
     ]
@@ -506,7 +506,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-07-21', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999,  total_amt:35999},  // 裴雅涵，體驗+購課成交
       {type:'新客', trial_amt:2298, total_amt:19698},  // Waranya，體驗+購課+產品成交
@@ -514,7 +514,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-07-22', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999, total_amt:999},  // 陳惠美，體驗未成交
       {type:'新客', trial_amt:999, total_amt:999},  // 吳芷琳，體驗未成交
@@ -531,7 +531,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-07-23', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999, total_amt:999},  // 黃婉綺，體驗未成交
       {type:'新客', trial_amt:999, total_amt:999},  // 林佳瑩，體驗未成交
@@ -546,7 +546,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-07-24', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999, total_amt:15999},  // 陳乙慧，體驗+購課成交
       {type:'新客', trial_amt:999, total_amt:35999},  // 黃君薇，體驗+購課成交
@@ -562,7 +562,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-07-25', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999, total_amt:999},  // 張妙盈，體驗未成交
     ]
@@ -576,7 +576,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-07-28', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999,  total_amt:999},    // 王思尹，體驗未成交
       {type:'新客', trial_amt:999,  total_amt:15999},  // 洪豐家，體驗+購課成交
@@ -599,7 +599,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-07-29', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:6000, total_amt:8000},  // 莊殷如，體驗+加購成交
       {type:'新客', trial_amt:999,  total_amt:8499},  // 陳玉真，體驗+付訂成交
@@ -621,7 +621,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-07-30', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999,   total_amt:15999},  // 王子瀅，體驗+購課成交
       {type:'新客', trial_amt:10499, total_amt:96699},  // 陳晏圻，體驗+購課成交
@@ -636,7 +636,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-07-31', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999, total_amt:35999},  // 林芳毓，體驗+購課成交
       {type:'新客', trial_amt:999, total_amt:999},    // 黃莉芳，體驗未成交
@@ -645,7 +645,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-08-01', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999, total_amt:35999},  // 何意敏，體驗+購課成交
       {type:'新客', trial_amt:999, total_amt:999},    // 范姜渦，體驗未成交
@@ -697,7 +697,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-08-01', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
-    consultant:'陳霽',
+    consultant:'陳甯',
     clients:[
       {type:'新客', trial_amt:0, total_amt:41799},   // 徐雅瑩
     ]
@@ -1109,7 +1109,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-08-04', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
-    consultant:'陳霄',
+    consultant:'陳甯',
     clients:[
       {type:'新客', trial_amt:0, total_amt:9999},   // 方詠瑩，膠原蛋白針，成交
     ]
@@ -1155,7 +1155,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-08-04', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999, total_amt:35999},  // 黃珮慈，體驗+購課成交
     ]
