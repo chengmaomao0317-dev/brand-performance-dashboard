@@ -2754,7 +2754,7 @@ function renderConsultantTab(){
     const otherRow = has公司 ? `<div class="cs-c-row" style="opacity:.7">
       <div class="cs-c-cell"><div class="cs-av" style="background:#d0ccc6;color:#fff">公</div><span class="cs-c-name">公司</span></div>
       <div class="cs-c-stats">
-        <div class="cs-cs"><div class="cs-cs-v">${cs公司.接待}${shareCount>0?`<span style="font-size:9px;color:#aaa;margin-left:2px">+${shareCount}分享</span>`:''}</div><div class="cs-cs-l">接待</div></div>
+        <div class="cs-cs"><div class="cs-cs-v">${cs公司.接待 + shareCount}</div><div class="cs-cs-l">接待</div></div>
         <div class="cs-cs"><div class="cs-cs-v">${cs公司.接待>0?cs公司.成交:'—'}</div>${cs公司.接待>0?chipsHtml(cs公司):''}</div>
         <div class="cs-cs"><div class="cs-cs-v" style="color:${cs公司.接待>0?rateClr(cs公司.成交率):'#aaa'}">${cs公司.接待>0?fmtRate(cs公司.成交率):'—'}</div><div class="cs-cs-l">成交率</div></div>
         <div class="cs-cs"><div class="cs-cs-v" style="color:${cs公司.接待>0?'#1a1a18':'#aaa'}">${cs公司.接待>0?fmtAmt(cs公司.平均客單):'—'}</div><div class="cs-cs-l">平均客單</div></div>
