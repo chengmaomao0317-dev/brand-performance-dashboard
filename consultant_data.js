@@ -1124,5 +1124,20 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:0, total_amt:14999},  // 朱安湘，喬亞登HAJ，成交
     ]
   },
+  {
+    date:'2026-08-04', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:37000},  // 張雁筑，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-08-04', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠',
+    clients:[
+      {type:'新客', trial_amt:2498, total_amt:5498},   // 黃絹嵐，體驗+購課成交
+      {type:'新客', trial_amt:2000, total_amt:37000},  // 王暄蕙，體驗+購課成交
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
