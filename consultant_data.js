@@ -371,6 +371,13 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
+    date:'2026-07-04', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'林雨芑',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},  // 廖得茗，消耗課程
+    ]
+  },
+  {
     date:'2026-07-07', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
     consultant:'林雨芑',
     clients:[
@@ -444,13 +451,6 @@ const CONSULTANT_RECORDS = [
     consultant:'黃詩涵',
     clients:[
       {type:'新客', trial_amt:999, total_amt:999},  // 黃筱媛，體驗未成交
-    ]
-  },
-  {
-    date:'2026-07-14', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
-    consultant:'郭子萍',
-    clients:[
-      {type:'新客', trial_amt:0, total_amt:880},  // 楊雅萍，產品成交
     ]
   },
   {
