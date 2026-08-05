@@ -167,6 +167,13 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
+    date:'2026-07-06', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'公司',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},  // 張夢珊，公關新客，素人拍攝+體驗體雕，未成交
+    ]
+  },
+  {
     date:'2026-07-07', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
     consultant:'森珮筠',
     clients:[
@@ -416,6 +423,13 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
+    date:'2026-07-09', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'公司',
+    clients:[
+      {type:'其他', trial_amt:0, total_amt:0},  // 陳明姿，分享客
+    ]
+  },
+  {
     date:'2026-07-10', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
     consultant:'林雨芸',
     clients:[
@@ -657,7 +671,7 @@ const CONSULTANT_RECORDS = [
     consultant:'吳凱婷',
     clients:[
       {type:'新客', trial_amt:999,  total_amt:15399}, // 王靖雯，體驗+購課成交
-      {type:'新客', trial_amt:0,    total_amt:0},     // 鄧珮姍，胡馨芳分享消耗未成交
+      {type:'其他', trial_amt:0,    total_amt:0},     // 鄧珮姍，胡馨芳分享消耗未購
     ]
   },
   {
@@ -860,7 +874,7 @@ const CONSULTANT_RECORDS = [
     date:'2026-07-23', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
     consultant:'廖梓涵',
     clients:[
-      {type:'新客', trial_amt:0, total_amt:0},  // 賴咨羽，分享體驗課消耗，未購
+      {type:'其他', trial_amt:0, total_amt:0},  // 賴咨羽，分享體驗課消耗，未購
     ]
   },
   {
@@ -874,7 +888,7 @@ const CONSULTANT_RECORDS = [
     date:'2026-07-25', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
     consultant:'王詩涵',
     clients:[
-      {type:'新客', trial_amt:0, total_amt:0},  // 程連芳，使用朋友療程，未購
+      {type:'其他', trial_amt:0, total_amt:0},  // 程連芳，使用朋友療程，未購
     ]
   },
   {
@@ -1001,7 +1015,7 @@ const CONSULTANT_RECORDS = [
     date:'2026-07-22', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
     consultant:'廖梓涵',
     clients:[
-      {type:'新客', trial_amt:0, total_amt:0},  // 張采汝，使用分享課程，未購
+      {type:'其他', trial_amt:0, total_amt:0},  // 張采汝，使用分享課程，未購
     ]
   },
   {
@@ -1030,7 +1044,7 @@ const CONSULTANT_RECORDS = [
     date:'2026-07-25', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
     consultant:'廖梓涵',
     clients:[
-      {type:'新客', trial_amt:0, total_amt:0},  // 鄭羽芯，使用分享課程，未購
+      {type:'其他', trial_amt:0, total_amt:0},  // 鄭羽芯，使用分享課程，未購
     ]
   },
   {
@@ -1137,6 +1151,27 @@ const CONSULTANT_RECORDS = [
     clients:[
       {type:'新客', trial_amt:2498, total_amt:5498},   // 黃絹嵐，體驗+購課成交
       {type:'新客', trial_amt:2000, total_amt:37000},  // 王暄蕙，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-08-04', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'林雨芸',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:35999},  // 黃珮慈，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-08-04', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'其他', trial_amt:0, total_amt:0},  // 陳愷霓，使用分享課程，未購
+    ]
+  },
+  {
+    date:'2026-08-04', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},  // 周思彤，體驗未成交
     ]
   },
   // 新增記錄時複製上面的格式

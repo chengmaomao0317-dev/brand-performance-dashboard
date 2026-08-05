@@ -2683,13 +2683,21 @@ function renderConsultantTab(){
   });
 
   // 計算每筆 record 的統計
-  function calcStats(recs){
+  // includeOther=true：'其他'(分享客)納入接待數，但不計入成交（用於門市/品牌/總計）
+  // includeOther=false：只計新客，用於諮詢師個人統計
+  function calcStats(recs, includeOther=false){
     let 接待=0, 成交=0, totalAmt=0;
     recs.forEach(r => {
-      r.clients.filter(c=>c.type==='新客').forEach(c=>{
-        接待++;
-        totalAmt += c.total_amt;
-        if(c.total_amt > c.trial_amt) 成交++;
+      r.clients.forEach(c=>{
+        if(c.type==='新客'){
+          接待++;
+          totalAmt += c.total_amt;
+          if(c.total_amt > c.trial_amt) 成交++;
+        } else if(c.type==='其他' && includeOther){
+          接待++;
+          totalAmt += c.total_amt;
+          // 分享客不計入成交
+        }
       });
     });
     const 成交率 = 接待>0 ? Math.round(成交/接待*100) : null;
@@ -2711,7 +2719,7 @@ function renderConsultantTab(){
   // 品牌統計
   function brandBlock(brandKey, brandLabel){
     const br = records.filter(r=>r.brandKey===brandKey);
-    const s = calcStats(br);
+    const s = calcStats(br, true);
     const topCls = brandKey==='wo'?'cs-brand-top-wo':'cs-brand-top-ki';
     const nameCls = brandKey==='wo'?'wo':'ki';
     const stores = [...new Set(br.map(r=>r.storeKey))];
@@ -2720,10 +2728,10 @@ function renderConsultantTab(){
 
   // 門市+諮詢師區塊
   function storeHtml(storeKey, storeName, brand, brandKey, recs){
-    const s = calcStats(recs);
+    const s = calcStats(recs, true);
     const pillCls = brandKey==='wo'?'cs-pill-wo':'cs-pill-ki';
     const avCls = brandKey==='wo'?'cs-av-wo':'cs-av-ki';
-    const consultants = [...new Set(recs.map(r=>r.consultant))];
+    const consultants = [...new Set(recs.map(r=>r.consultant))].filter(c=>c!=='公司');
     const cRows = consultants.map(c=>{
       const cr = recs.filter(r=>r.consultant===c);
       const cs = calcStats(cr);
@@ -2738,6 +2746,20 @@ function renderConsultantTab(){
         </div>
       </div>`;
     }).join('');
+    // 公司列：公司新客 + 各諮詢師名下的分享客(type:'其他')
+    const compRecs = recs.filter(r=>r.consultant==='公司');
+    const cs公司 = calcStats(compRecs);  // 計算公司名下新客的成交數據
+    const shareCount = recs.reduce((n,r)=>n+r.clients.filter(c=>c.type==='其他').length, 0);
+    const has公司 = cs公司.接待>0 || shareCount>0;
+    const otherRow = has公司 ? `<div class="cs-c-row" style="opacity:.7">
+      <div class="cs-c-cell"><div class="cs-av" style="background:#d0ccc6;color:#fff">公</div><span class="cs-c-name">公司</span></div>
+      <div class="cs-c-stats">
+        <div class="cs-cs"><div class="cs-cs-v">${cs公司.接待}${shareCount>0?`<span style="font-size:9px;color:#aaa;margin-left:2px">+${shareCount}分享</span>`:''}</div><div class="cs-cs-l">接待</div></div>
+        <div class="cs-cs"><div class="cs-cs-v">${cs公司.接待>0?cs公司.成交:'—'}</div>${cs公司.接待>0?chipsHtml(cs公司):''}</div>
+        <div class="cs-cs"><div class="cs-cs-v" style="color:${cs公司.接待>0?rateClr(cs公司.成交率):'#aaa'}">${cs公司.接待>0?fmtRate(cs公司.成交率):'—'}</div><div class="cs-cs-l">成交率</div></div>
+        <div class="cs-cs"><div class="cs-cs-v" style="color:${cs公司.接待>0?'#1a1a18':'#aaa'}">${cs公司.接待>0?fmtAmt(cs公司.平均客單):'—'}</div><div class="cs-cs-l">平均客單</div></div>
+      </div>
+    </div>` : '';
     const hdCls = brandKey==='wo'?'cs-store-hd-wo':'cs-store-hd-ki';
     const rateStyle = s.成交率===null?'color:rgba(255,255,255,.5)':s.成交率>=70?'color:#7fe0a8':s.成交率>=50?'color:#ffd68a':'color:#ff9f9f';
     return `<div class="cs-store-wrap">
@@ -2750,13 +2772,13 @@ function renderConsultantTab(){
           <div class="cs-ss"><div class="cs-ss-v">${fmtAmt(s.平均客單)}</div><div class="cs-ss-l">平均客單</div></div>
         </div>
       </div>
-      ${cRows}
+      ${cRows}${otherRow}
     </div>`;
   }
 
   const wo = brandBlock('wo','原渥');
   const ki = brandBlock('ki','原綺');
-  const total = calcStats(records);
+  const total = calcStats(records, true);
 
   // 門市排序
   const STORE_ORDER = ['wo_zhanqian','wo_daan','wo_zhongxiao','wo_dongmen','wo_banqiao','wo_taichung','ki_dongmen','ki_taichung'];
