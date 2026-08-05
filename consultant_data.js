@@ -1107,5 +1107,22 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:0, total_amt:36000},  // 蘇汗雨，瑞斯朗HA，成交
     ]
   },
+  {
+    date:'2026-08-04', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:84000},  // 王莉貞，膠原蛋白針+微晶瓷，成交
+      {type:'新客', trial_amt:0, total_amt:0},      // 黃家朋，臉部埋線，已到未購
+      {type:'新客', trial_amt:0, total_amt:0},      // 黃培鈞，臉部埋線，已到未購
+      {type:'新客', trial_amt:0, total_amt:0},      // 劉育婷，黑眼圈填充，已到未購
+    ]
+  },
+  {
+    date:'2026-08-04', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'呂秋玫',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:14999},  // 朱安湘，喬亞登HAJ，成交
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
