@@ -1014,9 +1014,10 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-07-22', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
-    consultant:'廖梓涵',
+    consultant:'公司',
     clients:[
-      {type:'其他', trial_amt:0, total_amt:0},  // 張采汝，使用分享課程，未購
+      {type:'其他', trial_amt:0, total_amt:0},  // 張采汐，分享客
+      {type:'其他', trial_amt:0, total_amt:0},  // 周楚涵，分享客（周珈穎課程轉讓）
     ]
   },
   {
