@@ -2873,7 +2873,9 @@ function renderConsultantTab(){
           <div class="cs-tp-tabs" id="cs-trend-wo-tabs"></div>
         </div>
         <div class="cs-tp-leg" id="cs-trend-wo-leg"></div>
-        <div style="position:relative;width:100%;height:220px"><canvas id="cs-trend-wo" role="img" aria-label="原渥平均客單月趨勢">原渥平均客單月趨勢</canvas></div>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+          <div style="position:relative;min-width:480px;height:220px"><canvas id="cs-trend-wo" role="img" aria-label="原渥平均客單月趨勢">原渥平均客單月趨勢</canvas></div>
+        </div>
       </div>
       <div class="cs-tp-divider"></div>
       <div>
@@ -2882,7 +2884,9 @@ function renderConsultantTab(){
           <div class="cs-tp-tabs" id="cs-trend-ki-tabs"></div>
         </div>
         <div class="cs-tp-leg" id="cs-trend-ki-leg"></div>
-        <div style="position:relative;width:100%;height:220px"><canvas id="cs-trend-ki" role="img" aria-label="原綺平均客單月趨勢">原綺平均客單月趨勢</canvas></div>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+          <div style="position:relative;min-width:480px;height:220px"><canvas id="cs-trend-ki" role="img" aria-label="原綺平均客單月趨勢">原綺平均客單月趨勢</canvas></div>
+        </div>
       </div>
     </div>
     ` : ''}
