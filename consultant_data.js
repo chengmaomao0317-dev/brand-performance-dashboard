@@ -895,6 +895,49 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
+    date:'2026-08-05', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},  // 林冠伶，體驗未成交
+    ]
+  },
+  {
+    date:'2026-08-05', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:20750},  // 何如嬡，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-08-05', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'林雨芑',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:37000},  // 何庭珊，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-08-05', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},  // 黃茂翔，未施作未成交
+    ]
+  },
+  {
+    date:'2026-08-05', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:6998},  // 陳思妤，體驗+購課成交
+      {type:'新客', trial_amt:999, total_amt:999},   // 楊晉婷，體驗未成交
+    ]
+  },
+  {
+    date:'2026-08-05', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      {type:'新客', trial_amt:3499, total_amt:24998},  // 劉佳榕，體驗+購課成交
+    ]
+  },
+  {
     date:'2026-08-03', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
     consultant:'蔡亞衫',
     clients:[
@@ -1276,6 +1319,20 @@ const CONSULTANT_RECORDS = [
     consultant:'計品卉',
     clients:[
       {type:'新客', trial_amt:0, total_amt:36000},  // 蘇汗雨，瑞斯朗HA，成交
+    ]
+  },
+  {
+    date:'2026-08-05', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'公司',
+    clients:[
+      {type:'其他', trial_amt:0, total_amt:0},  // 林哲緯，分享客
+    ]
+  },
+  {
+    date:'2026-08-05', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳甯',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:121885},  // 蘇毓斐，水光針+微整雕塑+無雙電波+鼻線
     ]
   },
   {
