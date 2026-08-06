@@ -421,6 +421,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
 .cs-month-input{font-size:12px;padding:5px 10px;border:none;border-right:.5px solid rgba(0,0,0,.1);background:#fff;color:#888;cursor:pointer;font-weight:500;outline:none;appearance:none;-webkit-appearance:none}
 .cs-month-input.on{background:#1a1a1a;color:#fff}
 .cs-seg-btn.on{background:#1a1a18;color:#fff}
+.cs-trend-btn{font-size:12px;padding:5px 14px;border-radius:7px;border:.5px solid rgba(0,0,0,.18);background:#fff;color:#555;cursor:pointer;font-weight:500;margin-left:auto;transition:background .12s}
+.cs-trend-btn.on{background:#1a1a18;color:#fff;border-color:#1a1a18}
+.cs-trend-panel{background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;padding:16px 18px;margin-bottom:16px}
+.cs-tp-brand-hd{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.cs-tp-badge{padding:2px 11px;border-radius:20px;font-size:11px;font-weight:500}
+.cs-tp-tabs{display:flex;gap:5px;flex-wrap:wrap}
+.cs-tp-tab{padding:3px 10px;border-radius:6px;border:.5px solid rgba(0,0,0,.12);font-size:11px;cursor:pointer;background:#fafaf8;color:#888}
+.cs-tp-tab.wo-on{background:#2d5a9e;color:#fff;border-color:#2d5a9e}
+.cs-tp-tab.ki-on{background:#c04070;color:#fff;border-color:#c04070}
+.cs-tp-leg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.cs-tp-li{display:flex;align-items:center;gap:4px;font-size:11px;color:#888}
+.cs-tp-ld{width:16px;height:3px;border-radius:2px}
+.cs-tp-divider{height:.5px;background:rgba(0,0,0,.07);margin:14px 0}
 .cs-mo-btn{font-size:12px;padding:5px 12px;border-radius:7px;border:.5px solid rgba(0,0,0,.12);background:#fff;color:#888;cursor:pointer}
 .cs-brand-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
 .cs-brand-card{border-radius:0 10px 10px 0;border:.5px solid rgba(0,0,0,.09);background:#fff;overflow:hidden}
@@ -2651,10 +2664,17 @@ let _csMode = 'month'; // 'today' | 'yesterday' | 'month' | 'custom'
 let _csMonth = '';    // YYYY-MM，月份選擇器
 let _csStart = '';
 let _csEnd   = '';
+let _csTrendOpen = false;
+let _woTrendStore = null;
+let _kiTrendStore = null;
+let _woTrendChart = null;
+let _kiTrendChart = null;
 
 function renderConsultantTab(){
   const el = document.getElementById('consultant-tab-body');
   if(!el) return;
+  if(_woTrendChart){_woTrendChart.destroy();_woTrendChart=null;}
+  if(_kiTrendChart){_kiTrendChart.destroy();_kiTrendChart=null;}
 
   // 今日 / 昨日字串
   const now = new Date();
@@ -2854,12 +2874,35 @@ function renderConsultantTab(){
         <button class="cs-seg-btn${_csMode==='custom'?' on':''}"    onclick="_csMode='custom';renderConsultantTab()">自訂</button>
       </div>
       ${_csMode!=='month'?`<span style="font-size:12px;color:#999;margin-left:10px">${modeLabel}</span>`:''}
+      <button class="cs-trend-btn${_csTrendOpen?' on':''}" onclick="_csTrendOpen=!_csTrendOpen;renderConsultantTab()">客單趨勢 ${_csTrendOpen?'▲':'▼'}</button>
     </div>
     ${customRow}
     ${(()=>{
       const refDate = _csMode==='month' ? _csMonth+'-01' : _csMode==='yesterday' ? yestStr : _csStart || todayStr;
       return refDate < '2026-07-01' ? `<div style="font-size:10px;color:#bbb8b2;margin-top:-6px;padding-bottom:6px">2026/07前資料參考用</div>` : '';
     })()}
+
+    ${_csTrendOpen ? `
+    <div class="cs-trend-panel">
+      <div>
+        <div class="cs-tp-brand-hd">
+          <span class="cs-tp-badge" style="background:#e6f1fb;color:#185fa5">原渥</span>
+          <div class="cs-tp-tabs" id="cs-trend-wo-tabs"></div>
+        </div>
+        <div class="cs-tp-leg" id="cs-trend-wo-leg"></div>
+        <div style="position:relative;width:100%;height:220px"><canvas id="cs-trend-wo" role="img" aria-label="原渥平均客單月趨勢">原渥平均客單月趨勢</canvas></div>
+      </div>
+      <div class="cs-tp-divider"></div>
+      <div>
+        <div class="cs-tp-brand-hd">
+          <span class="cs-tp-badge" style="background:#fbeaf0;color:#993556">原綺</span>
+          <div class="cs-tp-tabs" id="cs-trend-ki-tabs"></div>
+        </div>
+        <div class="cs-tp-leg" id="cs-trend-ki-leg"></div>
+        <div style="position:relative;width:100%;height:220px"><canvas id="cs-trend-ki" role="img" aria-label="原綺平均客單月趨勢">原綺平均客單月趨勢</canvas></div>
+      </div>
+    </div>
+    ` : ''}
 
     <div style="font-size:10px;font-weight:600;color:#999;letter-spacing:.04em;margin-bottom:8px">品牌</div>
     <div class="cs-brand-row">
@@ -2887,6 +2930,110 @@ function renderConsultantTab(){
     </div>
 
   `;
+  if(_csTrendOpen) setTimeout(initTrendPanel, 0);
+}
+
+// ══════════════════════════════════════════
+//  客單趨勢 Panel
+// ══════════════════════════════════════════
+function computeMonthlyAvg(){
+  const raw={};
+  CONSULTANT_RECORDS.forEach(rec=>{
+    const key=`${rec.brandKey}|${rec.store}|${rec.consultant}|${rec.date.slice(0,7)}`;
+    if(!raw[key]) raw[key]={bk:rec.brandKey,store:rec.store,cs:rec.consultant,mo:rec.date.slice(0,7),sum:0,n:0};
+    rec.clients.forEach(c=>{if(c.total_amt>c.trial_amt){raw[key].sum+=c.total_amt;raw[key].n++;}});
+  });
+  const res={wo:{},ki:{}};
+  Object.values(raw).forEach(({bk,store,cs,mo,sum,n})=>{
+    if(!n||!res[bk]) return;
+    if(!res[bk][store]) res[bk][store]={};
+    if(!res[bk][store][cs]) res[bk][store][cs]={};
+    res[bk][store][cs][mo]=Math.round(sum/n);
+  });
+  return res;
+}
+
+function drawTrendChart(canvasId,legId,storeData,bk){
+  const canvas=document.getElementById(canvasId);
+  const legEl=document.getElementById(legId);
+  if(!canvas||!legEl) return null;
+  const WO_C=['#185fa5','#378add','#0f6e56','#1d9e75','#4a3aa7','#85b7eb'];
+  const KI_C=['#c04070','#d4537e','#993556','#ed93b1'];
+  const clrs=bk==='wo'?WO_C:KI_C;
+  const BD=[[],[5,5],[3,3],[8,3],[5,3,1,3]];
+  const monthSet=new Set();
+  Object.values(storeData).forEach(m=>Object.keys(m).forEach(k=>monthSet.add(k)));
+  const months=[...monthSet].sort();
+  const labels=months.map(m=>`${parseInt(m.split('-')[1])}月`);
+  const consultants=Object.keys(storeData);
+  legEl.innerHTML=consultants.map((cs,i)=>{
+    const nick=NICKNAMES[cs]?` (${NICKNAMES[cs]})`:'';
+    return `<span class="cs-tp-li"><span class="cs-tp-ld" style="background:${clrs[i%clrs.length]}"></span>${cs}${nick}</span>`;
+  }).join('');
+  const datasets=consultants.map((cs,i)=>({
+    label:cs,
+    data:months.map(mo=>storeData[cs][mo]??null),
+    borderColor:clrs[i%clrs.length],
+    backgroundColor:clrs[i%clrs.length]+'15',
+    borderWidth:2.5,
+    borderDash:BD[i]||[],
+    pointRadius:5,pointHoverRadius:8,
+    pointBackgroundColor:clrs[i%clrs.length],
+    pointBorderColor:'#fff',pointBorderWidth:2,
+    tension:0.3,spanGaps:false,fill:false,
+  }));
+  return new Chart(canvas,{
+    type:'line',
+    data:{labels,datasets},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          callbacks:{label:x=>x.parsed.y!=null?`${x.dataset.label}: NT$${Math.round(x.parsed.y).toLocaleString()}`:`${x.dataset.label}: —`},
+          backgroundColor:'#fff',borderColor:'#e8e7e1',borderWidth:0.5,
+          titleColor:'#1a1a18',bodyColor:'#898781',padding:10,
+        }
+      },
+      scales:{
+        x:{grid:{color:'#e8e7e1'},ticks:{color:'#898781',font:{size:11}},border:{color:'#e8e7e1'}},
+        y:{grid:{color:'#e8e7e1'},ticks:{color:'#898781',font:{size:10},callback:v=>'$'+Math.round(v/1000)+'K'},border:{color:'#e8e7e1'}}
+      }
+    }
+  });
+}
+
+function initTrendPanel(){
+  const mo=computeMonthlyAvg();
+  const woStores=Object.keys(mo.wo);
+  const kiStores=Object.keys(mo.ki);
+  if(!_woTrendStore||!mo.wo[_woTrendStore]) _woTrendStore=woStores[0];
+  if(!_kiTrendStore||!mo.ki[_kiTrendStore]) _kiTrendStore=kiStores[0];
+  ['wo','ki'].forEach(bk=>{
+    const stores=bk==='wo'?woStores:kiStores;
+    const cur=bk==='wo'?_woTrendStore:_kiTrendStore;
+    const tabsEl=document.getElementById(`cs-trend-${bk}-tabs`);
+    if(tabsEl) tabsEl.innerHTML=stores.map(s=>
+      `<button class="cs-tp-tab${s===cur?' '+bk+'-on':''}" onclick="_${bk}TrendStore='${s}';switchTrendStore('${bk}')">${s}</button>`
+    ).join('');
+  });
+  if(_woTrendStore&&mo.wo[_woTrendStore]) _woTrendChart=drawTrendChart('cs-trend-wo','cs-trend-wo-leg',mo.wo[_woTrendStore],'wo');
+  if(_kiTrendStore&&mo.ki[_kiTrendStore]) _kiTrendChart=drawTrendChart('cs-trend-ki','cs-trend-ki-leg',mo.ki[_kiTrendStore],'ki');
+}
+
+function switchTrendStore(bk){
+  const mo=computeMonthlyAvg();
+  const store=bk==='wo'?_woTrendStore:_kiTrendStore;
+  if(bk==='wo'){
+    if(_woTrendChart){_woTrendChart.destroy();_woTrendChart=null;}
+    if(mo.wo[store]) _woTrendChart=drawTrendChart('cs-trend-wo','cs-trend-wo-leg',mo.wo[store],'wo');
+  } else {
+    if(_kiTrendChart){_kiTrendChart.destroy();_kiTrendChart=null;}
+    if(mo.ki[store]) _kiTrendChart=drawTrendChart('cs-trend-ki','cs-trend-ki-leg',mo.ki[store],'ki');
+  }
+  document.querySelectorAll(`#cs-trend-${bk}-tabs .cs-tp-tab`).forEach(b=>{
+    b.className='cs-tp-tab'+(b.textContent===store?` ${bk}-on`:'');
+  });
 }
 
 // ══════════════════════════════════════════
