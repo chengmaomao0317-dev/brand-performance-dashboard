@@ -10,6 +10,929 @@
 // ══════════════════════════════════════════
 
 const CONSULTANT_RECORDS = [
+  // ─── 3月 月匯總 (2026-03-31) ───────────────────────────
+  {
+    date:'2026-03-31', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      // 10成交 (2×25213 + 8×25212 = 252,122)
+      {type:'新客',trial_amt:0,total_amt:25213},{type:'新客',trial_amt:0,total_amt:25213},
+      {type:'新客',trial_amt:0,total_amt:25212},{type:'新客',trial_amt:0,total_amt:25212},
+      {type:'新客',trial_amt:0,total_amt:25212},{type:'新客',trial_amt:0,total_amt:25212},
+      {type:'新客',trial_amt:0,total_amt:25212},{type:'新客',trial_amt:0,total_amt:25212},
+      {type:'新客',trial_amt:0,total_amt:25212},{type:'新客',trial_amt:0,total_amt:25212},
+      // 7未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-03-31', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      // 19成交 (4×22510 + 15×22509 = 427,675)
+      {type:'新客',trial_amt:0,total_amt:22510},{type:'新客',trial_amt:0,total_amt:22510},
+      {type:'新客',trial_amt:0,total_amt:22510},{type:'新客',trial_amt:0,total_amt:22510},
+      {type:'新客',trial_amt:0,total_amt:22509},{type:'新客',trial_amt:0,total_amt:22509},
+      {type:'新客',trial_amt:0,total_amt:22509},{type:'新客',trial_amt:0,total_amt:22509},
+      {type:'新客',trial_amt:0,total_amt:22509},{type:'新客',trial_amt:0,total_amt:22509},
+      {type:'新客',trial_amt:0,total_amt:22509},{type:'新客',trial_amt:0,total_amt:22509},
+      {type:'新客',trial_amt:0,total_amt:22509},{type:'新客',trial_amt:0,total_amt:22509},
+      {type:'新客',trial_amt:0,total_amt:22509},{type:'新客',trial_amt:0,total_amt:22509},
+      {type:'新客',trial_amt:0,total_amt:22509},{type:'新客',trial_amt:0,total_amt:22509},
+      {type:'新客',trial_amt:0,total_amt:22509},
+      // 6未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-03-31', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞衫',
+    clients:[
+      // 21成交 (3×17241 + 18×17240 = 362,043)
+      {type:'新客',trial_amt:0,total_amt:17241},{type:'新客',trial_amt:0,total_amt:17241},
+      {type:'新客',trial_amt:0,total_amt:17241},{type:'新客',trial_amt:0,total_amt:17240},
+      {type:'新客',trial_amt:0,total_amt:17240},{type:'新客',trial_amt:0,total_amt:17240},
+      {type:'新客',trial_amt:0,total_amt:17240},{type:'新客',trial_amt:0,total_amt:17240},
+      {type:'新客',trial_amt:0,total_amt:17240},{type:'新客',trial_amt:0,total_amt:17240},
+      {type:'新客',trial_amt:0,total_amt:17240},{type:'新客',trial_amt:0,total_amt:17240},
+      {type:'新客',trial_amt:0,total_amt:17240},{type:'新客',trial_amt:0,total_amt:17240},
+      {type:'新客',trial_amt:0,total_amt:17240},{type:'新客',trial_amt:0,total_amt:17240},
+      {type:'新客',trial_amt:0,total_amt:17240},{type:'新客',trial_amt:0,total_amt:17240},
+      {type:'新客',trial_amt:0,total_amt:17240},{type:'新客',trial_amt:0,total_amt:17240},
+      {type:'新客',trial_amt:0,total_amt:17240},
+      // 3未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-03-31', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      // 15成交 (11×17154 + 4×17153 = 257,306)
+      {type:'新客',trial_amt:0,total_amt:17154},{type:'新客',trial_amt:0,total_amt:17154},
+      {type:'新客',trial_amt:0,total_amt:17154},{type:'新客',trial_amt:0,total_amt:17154},
+      {type:'新客',trial_amt:0,total_amt:17154},{type:'新客',trial_amt:0,total_amt:17154},
+      {type:'新客',trial_amt:0,total_amt:17154},{type:'新客',trial_amt:0,total_amt:17154},
+      {type:'新客',trial_amt:0,total_amt:17154},{type:'新客',trial_amt:0,total_amt:17154},
+      {type:'新客',trial_amt:0,total_amt:17154},{type:'新客',trial_amt:0,total_amt:17153},
+      {type:'新客',trial_amt:0,total_amt:17153},{type:'新客',trial_amt:0,total_amt:17153},
+      {type:'新客',trial_amt:0,total_amt:17153},
+      // 7未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-03-31', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      // 10成交 (1×14629 + 9×14628 = 146,281)
+      {type:'新客',trial_amt:0,total_amt:14629},{type:'新客',trial_amt:0,total_amt:14628},
+      {type:'新客',trial_amt:0,total_amt:14628},{type:'新客',trial_amt:0,total_amt:14628},
+      {type:'新客',trial_amt:0,total_amt:14628},{type:'新客',trial_amt:0,total_amt:14628},
+      {type:'新客',trial_amt:0,total_amt:14628},{type:'新客',trial_amt:0,total_amt:14628},
+      {type:'新客',trial_amt:0,total_amt:14628},{type:'新客',trial_amt:0,total_amt:14628},
+      // 7未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-03-31', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      // 14成交 (6×20814 + 8×20813 = 291,388)
+      {type:'新客',trial_amt:0,total_amt:20814},{type:'新客',trial_amt:0,total_amt:20814},
+      {type:'新客',trial_amt:0,total_amt:20814},{type:'新客',trial_amt:0,total_amt:20814},
+      {type:'新客',trial_amt:0,total_amt:20814},{type:'新客',trial_amt:0,total_amt:20814},
+      {type:'新客',trial_amt:0,total_amt:20813},{type:'新客',trial_amt:0,total_amt:20813},
+      {type:'新客',trial_amt:0,total_amt:20813},{type:'新客',trial_amt:0,total_amt:20813},
+      {type:'新客',trial_amt:0,total_amt:20813},{type:'新客',trial_amt:0,total_amt:20813},
+      {type:'新客',trial_amt:0,total_amt:20813},{type:'新客',trial_amt:0,total_amt:20813},
+      // 6未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-03-31', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      // 8成交 (3×35365 + 5×35364 = 282,915)
+      {type:'新客',trial_amt:0,total_amt:35365},{type:'新客',trial_amt:0,total_amt:35365},
+      {type:'新客',trial_amt:0,total_amt:35365},{type:'新客',trial_amt:0,total_amt:35364},
+      {type:'新客',trial_amt:0,total_amt:35364},{type:'新客',trial_amt:0,total_amt:35364},
+      {type:'新客',trial_amt:0,total_amt:35364},{type:'新客',trial_amt:0,total_amt:35364},
+      // 3未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-03-31', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠',
+    clients:[
+      // 18成交 (2×30990 + 16×30989 = 557,804)
+      {type:'新客',trial_amt:0,total_amt:30990},{type:'新客',trial_amt:0,total_amt:30990},
+      {type:'新客',trial_amt:0,total_amt:30989},{type:'新客',trial_amt:0,total_amt:30989},
+      {type:'新客',trial_amt:0,total_amt:30989},{type:'新客',trial_amt:0,total_amt:30989},
+      {type:'新客',trial_amt:0,total_amt:30989},{type:'新客',trial_amt:0,total_amt:30989},
+      {type:'新客',trial_amt:0,total_amt:30989},{type:'新客',trial_amt:0,total_amt:30989},
+      {type:'新客',trial_amt:0,total_amt:30989},{type:'新客',trial_amt:0,total_amt:30989},
+      {type:'新客',trial_amt:0,total_amt:30989},{type:'新客',trial_amt:0,total_amt:30989},
+      {type:'新客',trial_amt:0,total_amt:30989},{type:'新客',trial_amt:0,total_amt:30989},
+      {type:'新客',trial_amt:0,total_amt:30989},{type:'新客',trial_amt:0,total_amt:30989},
+      // 22未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-03-31', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'何欣穎',
+    clients:[
+      // 4成交 (2×38375 + 2×38374 = 153,498)
+      {type:'新客',trial_amt:0,total_amt:38375},{type:'新客',trial_amt:0,total_amt:38375},
+      {type:'新客',trial_amt:0,total_amt:38374},{type:'新客',trial_amt:0,total_amt:38374},
+      // 1未成交
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-03-31', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'林雨芑',
+    clients:[
+      // 24成交 (23×31151 + 1×31150 = 747,623)
+      {type:'新客',trial_amt:0,total_amt:31151},{type:'新客',trial_amt:0,total_amt:31151},
+      {type:'新客',trial_amt:0,total_amt:31151},{type:'新客',trial_amt:0,total_amt:31151},
+      {type:'新客',trial_amt:0,total_amt:31151},{type:'新客',trial_amt:0,total_amt:31151},
+      {type:'新客',trial_amt:0,total_amt:31151},{type:'新客',trial_amt:0,total_amt:31151},
+      {type:'新客',trial_amt:0,total_amt:31151},{type:'新客',trial_amt:0,total_amt:31151},
+      {type:'新客',trial_amt:0,total_amt:31151},{type:'新客',trial_amt:0,total_amt:31151},
+      {type:'新客',trial_amt:0,total_amt:31151},{type:'新客',trial_amt:0,total_amt:31151},
+      {type:'新客',trial_amt:0,total_amt:31151},{type:'新客',trial_amt:0,total_amt:31151},
+      {type:'新客',trial_amt:0,total_amt:31151},{type:'新客',trial_amt:0,total_amt:31151},
+      {type:'新客',trial_amt:0,total_amt:31151},{type:'新客',trial_amt:0,total_amt:31151},
+      {type:'新客',trial_amt:0,total_amt:31151},{type:'新客',trial_amt:0,total_amt:31151},
+      {type:'新客',trial_amt:0,total_amt:31151},{type:'新客',trial_amt:0,total_amt:31150},
+      // 14未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-03-31', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'郭子萍',
+    clients:[
+      // 12成交 (12×22371 = 268,452)
+      {type:'新客',trial_amt:0,total_amt:22371},{type:'新客',trial_amt:0,total_amt:22371},
+      {type:'新客',trial_amt:0,total_amt:22371},{type:'新客',trial_amt:0,total_amt:22371},
+      {type:'新客',trial_amt:0,total_amt:22371},{type:'新客',trial_amt:0,total_amt:22371},
+      {type:'新客',trial_amt:0,total_amt:22371},{type:'新客',trial_amt:0,total_amt:22371},
+      {type:'新客',trial_amt:0,total_amt:22371},{type:'新客',trial_amt:0,total_amt:22371},
+      {type:'新客',trial_amt:0,total_amt:22371},{type:'新客',trial_amt:0,total_amt:22371},
+      // 18未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  // ─── 4月 月匯總 (2026-04-30) ───────────────────────────
+  {
+    date:'2026-04-30', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      // 18成交 (3×18742 + 15×18741 = 337,341)
+      {type:'新客',trial_amt:0,total_amt:18742},{type:'新客',trial_amt:0,total_amt:18742},
+      {type:'新客',trial_amt:0,total_amt:18742},{type:'新客',trial_amt:0,total_amt:18741},
+      {type:'新客',trial_amt:0,total_amt:18741},{type:'新客',trial_amt:0,total_amt:18741},
+      {type:'新客',trial_amt:0,total_amt:18741},{type:'新客',trial_amt:0,total_amt:18741},
+      {type:'新客',trial_amt:0,total_amt:18741},{type:'新客',trial_amt:0,total_amt:18741},
+      {type:'新客',trial_amt:0,total_amt:18741},{type:'新客',trial_amt:0,total_amt:18741},
+      {type:'新客',trial_amt:0,total_amt:18741},{type:'新客',trial_amt:0,total_amt:18741},
+      {type:'新客',trial_amt:0,total_amt:18741},{type:'新客',trial_amt:0,total_amt:18741},
+      {type:'新客',trial_amt:0,total_amt:18741},{type:'新客',trial_amt:0,total_amt:18741},
+      // 7未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-04-30', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      // 21成交 (11×20943 + 10×20942 = 439,793)
+      {type:'新客',trial_amt:0,total_amt:20943},{type:'新客',trial_amt:0,total_amt:20943},
+      {type:'新客',trial_amt:0,total_amt:20943},{type:'新客',trial_amt:0,total_amt:20943},
+      {type:'新客',trial_amt:0,total_amt:20943},{type:'新客',trial_amt:0,total_amt:20943},
+      {type:'新客',trial_amt:0,total_amt:20943},{type:'新客',trial_amt:0,total_amt:20943},
+      {type:'新客',trial_amt:0,total_amt:20943},{type:'新客',trial_amt:0,total_amt:20943},
+      {type:'新客',trial_amt:0,total_amt:20943},{type:'新客',trial_amt:0,total_amt:20942},
+      {type:'新客',trial_amt:0,total_amt:20942},{type:'新客',trial_amt:0,total_amt:20942},
+      {type:'新客',trial_amt:0,total_amt:20942},{type:'新客',trial_amt:0,total_amt:20942},
+      {type:'新客',trial_amt:0,total_amt:20942},{type:'新客',trial_amt:0,total_amt:20942},
+      {type:'新客',trial_amt:0,total_amt:20942},{type:'新客',trial_amt:0,total_amt:20942},
+      {type:'新客',trial_amt:0,total_amt:20942},
+      // 7未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-04-30', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞衫',
+    clients:[
+      // 22成交 (21×33837 + 1×33836 = 744,413)
+      {type:'新客',trial_amt:0,total_amt:33837},{type:'新客',trial_amt:0,total_amt:33837},
+      {type:'新客',trial_amt:0,total_amt:33837},{type:'新客',trial_amt:0,total_amt:33837},
+      {type:'新客',trial_amt:0,total_amt:33837},{type:'新客',trial_amt:0,total_amt:33837},
+      {type:'新客',trial_amt:0,total_amt:33837},{type:'新客',trial_amt:0,total_amt:33837},
+      {type:'新客',trial_amt:0,total_amt:33837},{type:'新客',trial_amt:0,total_amt:33837},
+      {type:'新客',trial_amt:0,total_amt:33837},{type:'新客',trial_amt:0,total_amt:33837},
+      {type:'新客',trial_amt:0,total_amt:33837},{type:'新客',trial_amt:0,total_amt:33837},
+      {type:'新客',trial_amt:0,total_amt:33837},{type:'新客',trial_amt:0,total_amt:33837},
+      {type:'新客',trial_amt:0,total_amt:33837},{type:'新客',trial_amt:0,total_amt:33837},
+      {type:'新客',trial_amt:0,total_amt:33837},{type:'新客',trial_amt:0,total_amt:33837},
+      {type:'新客',trial_amt:0,total_amt:33837},{type:'新客',trial_amt:0,total_amt:33836},
+      // 9未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-04-30', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      // 24成交 (11×15702 + 13×15701 = 376,835)
+      {type:'新客',trial_amt:0,total_amt:15702},{type:'新客',trial_amt:0,total_amt:15702},
+      {type:'新客',trial_amt:0,total_amt:15702},{type:'新客',trial_amt:0,total_amt:15702},
+      {type:'新客',trial_amt:0,total_amt:15702},{type:'新客',trial_amt:0,total_amt:15702},
+      {type:'新客',trial_amt:0,total_amt:15702},{type:'新客',trial_amt:0,total_amt:15702},
+      {type:'新客',trial_amt:0,total_amt:15702},{type:'新客',trial_amt:0,total_amt:15702},
+      {type:'新客',trial_amt:0,total_amt:15702},{type:'新客',trial_amt:0,total_amt:15701},
+      {type:'新客',trial_amt:0,total_amt:15701},{type:'新客',trial_amt:0,total_amt:15701},
+      {type:'新客',trial_amt:0,total_amt:15701},{type:'新客',trial_amt:0,total_amt:15701},
+      {type:'新客',trial_amt:0,total_amt:15701},{type:'新客',trial_amt:0,total_amt:15701},
+      {type:'新客',trial_amt:0,total_amt:15701},{type:'新客',trial_amt:0,total_amt:15701},
+      {type:'新客',trial_amt:0,total_amt:15701},{type:'新客',trial_amt:0,total_amt:15701},
+      {type:'新客',trial_amt:0,total_amt:15701},{type:'新客',trial_amt:0,total_amt:15701},
+      // 10未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-04-30', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      // 17成交 (12×18645 + 5×18644 = 316,960)
+      {type:'新客',trial_amt:0,total_amt:18645},{type:'新客',trial_amt:0,total_amt:18645},
+      {type:'新客',trial_amt:0,total_amt:18645},{type:'新客',trial_amt:0,total_amt:18645},
+      {type:'新客',trial_amt:0,total_amt:18645},{type:'新客',trial_amt:0,total_amt:18645},
+      {type:'新客',trial_amt:0,total_amt:18645},{type:'新客',trial_amt:0,total_amt:18645},
+      {type:'新客',trial_amt:0,total_amt:18645},{type:'新客',trial_amt:0,total_amt:18645},
+      {type:'新客',trial_amt:0,total_amt:18645},{type:'新客',trial_amt:0,total_amt:18645},
+      {type:'新客',trial_amt:0,total_amt:18644},{type:'新客',trial_amt:0,total_amt:18644},
+      {type:'新客',trial_amt:0,total_amt:18644},{type:'新客',trial_amt:0,total_amt:18644},
+      {type:'新客',trial_amt:0,total_amt:18644},
+      // 3未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-04-30', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      // 13成交 (8×24549 + 5×24548 = 319,132)
+      {type:'新客',trial_amt:0,total_amt:24549},{type:'新客',trial_amt:0,total_amt:24549},
+      {type:'新客',trial_amt:0,total_amt:24549},{type:'新客',trial_amt:0,total_amt:24549},
+      {type:'新客',trial_amt:0,total_amt:24549},{type:'新客',trial_amt:0,total_amt:24549},
+      {type:'新客',trial_amt:0,total_amt:24549},{type:'新客',trial_amt:0,total_amt:24549},
+      {type:'新客',trial_amt:0,total_amt:24548},{type:'新客',trial_amt:0,total_amt:24548},
+      {type:'新客',trial_amt:0,total_amt:24548},{type:'新客',trial_amt:0,total_amt:24548},
+      {type:'新客',trial_amt:0,total_amt:24548},
+      // 5未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-04-30', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      // 12成交 (11×33329 + 1×33328 = 399,947)
+      {type:'新客',trial_amt:0,total_amt:33329},{type:'新客',trial_amt:0,total_amt:33329},
+      {type:'新客',trial_amt:0,total_amt:33329},{type:'新客',trial_amt:0,total_amt:33329},
+      {type:'新客',trial_amt:0,total_amt:33329},{type:'新客',trial_amt:0,total_amt:33329},
+      {type:'新客',trial_amt:0,total_amt:33329},{type:'新客',trial_amt:0,total_amt:33329},
+      {type:'新客',trial_amt:0,total_amt:33329},{type:'新客',trial_amt:0,total_amt:33329},
+      {type:'新客',trial_amt:0,total_amt:33329},{type:'新客',trial_amt:0,total_amt:33328},
+      // 10未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-04-30', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠',
+    clients:[
+      // 33成交 (7×22590 + 26×22589 = 745,444)
+      {type:'新客',trial_amt:0,total_amt:22590},{type:'新客',trial_amt:0,total_amt:22590},
+      {type:'新客',trial_amt:0,total_amt:22590},{type:'新客',trial_amt:0,total_amt:22590},
+      {type:'新客',trial_amt:0,total_amt:22590},{type:'新客',trial_amt:0,total_amt:22590},
+      {type:'新客',trial_amt:0,total_amt:22590},{type:'新客',trial_amt:0,total_amt:22589},
+      {type:'新客',trial_amt:0,total_amt:22589},{type:'新客',trial_amt:0,total_amt:22589},
+      {type:'新客',trial_amt:0,total_amt:22589},{type:'新客',trial_amt:0,total_amt:22589},
+      {type:'新客',trial_amt:0,total_amt:22589},{type:'新客',trial_amt:0,total_amt:22589},
+      {type:'新客',trial_amt:0,total_amt:22589},{type:'新客',trial_amt:0,total_amt:22589},
+      {type:'新客',trial_amt:0,total_amt:22589},{type:'新客',trial_amt:0,total_amt:22589},
+      {type:'新客',trial_amt:0,total_amt:22589},{type:'新客',trial_amt:0,total_amt:22589},
+      {type:'新客',trial_amt:0,total_amt:22589},{type:'新客',trial_amt:0,total_amt:22589},
+      {type:'新客',trial_amt:0,total_amt:22589},{type:'新客',trial_amt:0,total_amt:22589},
+      {type:'新客',trial_amt:0,total_amt:22589},{type:'新客',trial_amt:0,total_amt:22589},
+      {type:'新客',trial_amt:0,total_amt:22589},{type:'新客',trial_amt:0,total_amt:22589},
+      {type:'新客',trial_amt:0,total_amt:22589},{type:'新客',trial_amt:0,total_amt:22589},
+      {type:'新客',trial_amt:0,total_amt:22589},{type:'新客',trial_amt:0,total_amt:22589},
+      {type:'新客',trial_amt:0,total_amt:22589},
+      // 23未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-04-30', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'呂秋玫',
+    clients:[
+      // 1成交
+      {type:'新客',trial_amt:0,total_amt:36998},
+      // 1未成交
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-04-30', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'何欣穎',
+    clients:[
+      // 4成交 (2×10970 + 2×10969 = 43,878)
+      {type:'新客',trial_amt:0,total_amt:10970},{type:'新客',trial_amt:0,total_amt:10970},
+      {type:'新客',trial_amt:0,total_amt:10969},{type:'新客',trial_amt:0,total_amt:10969},
+      // 1未成交
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-04-30', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'林雨芑',
+    clients:[
+      // 26成交 (4×31640 + 22×31639 = 822,618)
+      {type:'新客',trial_amt:0,total_amt:31640},{type:'新客',trial_amt:0,total_amt:31640},
+      {type:'新客',trial_amt:0,total_amt:31640},{type:'新客',trial_amt:0,total_amt:31640},
+      {type:'新客',trial_amt:0,total_amt:31639},{type:'新客',trial_amt:0,total_amt:31639},
+      {type:'新客',trial_amt:0,total_amt:31639},{type:'新客',trial_amt:0,total_amt:31639},
+      {type:'新客',trial_amt:0,total_amt:31639},{type:'新客',trial_amt:0,total_amt:31639},
+      {type:'新客',trial_amt:0,total_amt:31639},{type:'新客',trial_amt:0,total_amt:31639},
+      {type:'新客',trial_amt:0,total_amt:31639},{type:'新客',trial_amt:0,total_amt:31639},
+      {type:'新客',trial_amt:0,total_amt:31639},{type:'新客',trial_amt:0,total_amt:31639},
+      {type:'新客',trial_amt:0,total_amt:31639},{type:'新客',trial_amt:0,total_amt:31639},
+      {type:'新客',trial_amt:0,total_amt:31639},{type:'新客',trial_amt:0,total_amt:31639},
+      {type:'新客',trial_amt:0,total_amt:31639},{type:'新客',trial_amt:0,total_amt:31639},
+      {type:'新客',trial_amt:0,total_amt:31639},{type:'新客',trial_amt:0,total_amt:31639},
+      {type:'新客',trial_amt:0,total_amt:31639},{type:'新客',trial_amt:0,total_amt:31639},
+      // 18未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-04-30', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'郭子萍',
+    clients:[
+      // 7成交 (7×15954 = 111,678)
+      {type:'新客',trial_amt:0,total_amt:15954},{type:'新客',trial_amt:0,total_amt:15954},
+      {type:'新客',trial_amt:0,total_amt:15954},{type:'新客',trial_amt:0,total_amt:15954},
+      {type:'新客',trial_amt:0,total_amt:15954},{type:'新客',trial_amt:0,total_amt:15954},
+      {type:'新客',trial_amt:0,total_amt:15954},
+      // 13未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  // ─── 5月 月匯總 (2026-05-31) ───────────────────────────
+  {
+    date:'2026-05-31', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      // 14成交 (6×23975 + 8×23974 = 335,642)
+      {type:'新客',trial_amt:0,total_amt:23975},{type:'新客',trial_amt:0,total_amt:23975},
+      {type:'新客',trial_amt:0,total_amt:23975},{type:'新客',trial_amt:0,total_amt:23975},
+      {type:'新客',trial_amt:0,total_amt:23975},{type:'新客',trial_amt:0,total_amt:23975},
+      {type:'新客',trial_amt:0,total_amt:23974},{type:'新客',trial_amt:0,total_amt:23974},
+      {type:'新客',trial_amt:0,total_amt:23974},{type:'新客',trial_amt:0,total_amt:23974},
+      {type:'新客',trial_amt:0,total_amt:23974},{type:'新客',trial_amt:0,total_amt:23974},
+      {type:'新客',trial_amt:0,total_amt:23974},{type:'新客',trial_amt:0,total_amt:23974},
+      // 4未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-05-31', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      // 10成交 (10×27272 = 272,720)
+      {type:'新客',trial_amt:0,total_amt:27272},{type:'新客',trial_amt:0,total_amt:27272},
+      {type:'新客',trial_amt:0,total_amt:27272},{type:'新客',trial_amt:0,total_amt:27272},
+      {type:'新客',trial_amt:0,total_amt:27272},{type:'新客',trial_amt:0,total_amt:27272},
+      {type:'新客',trial_amt:0,total_amt:27272},{type:'新客',trial_amt:0,total_amt:27272},
+      {type:'新客',trial_amt:0,total_amt:27272},{type:'新客',trial_amt:0,total_amt:27272},
+      // 8未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-05-31', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞衫',
+    clients:[
+      // 15成交 (15×28149 = 422,235)
+      {type:'新客',trial_amt:0,total_amt:28149},{type:'新客',trial_amt:0,total_amt:28149},
+      {type:'新客',trial_amt:0,total_amt:28149},{type:'新客',trial_amt:0,total_amt:28149},
+      {type:'新客',trial_amt:0,total_amt:28149},{type:'新客',trial_amt:0,total_amt:28149},
+      {type:'新客',trial_amt:0,total_amt:28149},{type:'新客',trial_amt:0,total_amt:28149},
+      {type:'新客',trial_amt:0,total_amt:28149},{type:'新客',trial_amt:0,total_amt:28149},
+      {type:'新客',trial_amt:0,total_amt:28149},{type:'新客',trial_amt:0,total_amt:28149},
+      {type:'新客',trial_amt:0,total_amt:28149},{type:'新客',trial_amt:0,total_amt:28149},
+      {type:'新客',trial_amt:0,total_amt:28149},
+      // 9未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-05-31', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      // 15成交 (9×17471 + 6×17470 = 262,059)
+      {type:'新客',trial_amt:0,total_amt:17471},{type:'新客',trial_amt:0,total_amt:17471},
+      {type:'新客',trial_amt:0,total_amt:17471},{type:'新客',trial_amt:0,total_amt:17471},
+      {type:'新客',trial_amt:0,total_amt:17471},{type:'新客',trial_amt:0,total_amt:17471},
+      {type:'新客',trial_amt:0,total_amt:17471},{type:'新客',trial_amt:0,total_amt:17471},
+      {type:'新客',trial_amt:0,total_amt:17471},{type:'新客',trial_amt:0,total_amt:17470},
+      {type:'新客',trial_amt:0,total_amt:17470},{type:'新客',trial_amt:0,total_amt:17470},
+      {type:'新客',trial_amt:0,total_amt:17470},{type:'新客',trial_amt:0,total_amt:17470},
+      {type:'新客',trial_amt:0,total_amt:17470},
+      // 7未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-05-31', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      // 12成交 (1×12379 + 11×12378 = 148,537)
+      {type:'新客',trial_amt:0,total_amt:12379},{type:'新客',trial_amt:0,total_amt:12378},
+      {type:'新客',trial_amt:0,total_amt:12378},{type:'新客',trial_amt:0,total_amt:12378},
+      {type:'新客',trial_amt:0,total_amt:12378},{type:'新客',trial_amt:0,total_amt:12378},
+      {type:'新客',trial_amt:0,total_amt:12378},{type:'新客',trial_amt:0,total_amt:12378},
+      {type:'新客',trial_amt:0,total_amt:12378},{type:'新客',trial_amt:0,total_amt:12378},
+      {type:'新客',trial_amt:0,total_amt:12378},{type:'新客',trial_amt:0,total_amt:12378},
+      // 3未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-05-31', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      // 11成交 (6×15449 + 5×15448 = 169,934)
+      {type:'新客',trial_amt:0,total_amt:15449},{type:'新客',trial_amt:0,total_amt:15449},
+      {type:'新客',trial_amt:0,total_amt:15449},{type:'新客',trial_amt:0,total_amt:15449},
+      {type:'新客',trial_amt:0,total_amt:15449},{type:'新客',trial_amt:0,total_amt:15449},
+      {type:'新客',trial_amt:0,total_amt:15448},{type:'新客',trial_amt:0,total_amt:15448},
+      {type:'新客',trial_amt:0,total_amt:15448},{type:'新客',trial_amt:0,total_amt:15448},
+      {type:'新客',trial_amt:0,total_amt:15448},
+      // 5未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-05-31', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      // 12成交 (9×19186 + 3×19185 = 230,229)
+      {type:'新客',trial_amt:0,total_amt:19186},{type:'新客',trial_amt:0,total_amt:19186},
+      {type:'新客',trial_amt:0,total_amt:19186},{type:'新客',trial_amt:0,total_amt:19186},
+      {type:'新客',trial_amt:0,total_amt:19186},{type:'新客',trial_amt:0,total_amt:19186},
+      {type:'新客',trial_amt:0,total_amt:19186},{type:'新客',trial_amt:0,total_amt:19186},
+      {type:'新客',trial_amt:0,total_amt:19186},{type:'新客',trial_amt:0,total_amt:19185},
+      {type:'新客',trial_amt:0,total_amt:19185},{type:'新客',trial_amt:0,total_amt:19185},
+      // 11未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-05-31', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠',
+    clients:[
+      // 16成交 (2×17996 + 14×17995 = 287,922)
+      {type:'新客',trial_amt:0,total_amt:17996},{type:'新客',trial_amt:0,total_amt:17996},
+      {type:'新客',trial_amt:0,total_amt:17995},{type:'新客',trial_amt:0,total_amt:17995},
+      {type:'新客',trial_amt:0,total_amt:17995},{type:'新客',trial_amt:0,total_amt:17995},
+      {type:'新客',trial_amt:0,total_amt:17995},{type:'新客',trial_amt:0,total_amt:17995},
+      {type:'新客',trial_amt:0,total_amt:17995},{type:'新客',trial_amt:0,total_amt:17995},
+      {type:'新客',trial_amt:0,total_amt:17995},{type:'新客',trial_amt:0,total_amt:17995},
+      {type:'新客',trial_amt:0,total_amt:17995},{type:'新客',trial_amt:0,total_amt:17995},
+      {type:'新客',trial_amt:0,total_amt:17995},{type:'新客',trial_amt:0,total_amt:17995},
+      // 18未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-05-31', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'呂秋玫',
+    clients:[
+      // 1成交
+      {type:'新客',trial_amt:0,total_amt:23998},
+    ]
+  },
+  {
+    date:'2026-05-31', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'林雨芑',
+    clients:[
+      // 26成交 (6×29293 + 20×29292 = 761,598)
+      {type:'新客',trial_amt:0,total_amt:29293},{type:'新客',trial_amt:0,total_amt:29293},
+      {type:'新客',trial_amt:0,total_amt:29293},{type:'新客',trial_amt:0,total_amt:29293},
+      {type:'新客',trial_amt:0,total_amt:29293},{type:'新客',trial_amt:0,total_amt:29293},
+      {type:'新客',trial_amt:0,total_amt:29292},{type:'新客',trial_amt:0,total_amt:29292},
+      {type:'新客',trial_amt:0,total_amt:29292},{type:'新客',trial_amt:0,total_amt:29292},
+      {type:'新客',trial_amt:0,total_amt:29292},{type:'新客',trial_amt:0,total_amt:29292},
+      {type:'新客',trial_amt:0,total_amt:29292},{type:'新客',trial_amt:0,total_amt:29292},
+      {type:'新客',trial_amt:0,total_amt:29292},{type:'新客',trial_amt:0,total_amt:29292},
+      {type:'新客',trial_amt:0,total_amt:29292},{type:'新客',trial_amt:0,total_amt:29292},
+      {type:'新客',trial_amt:0,total_amt:29292},{type:'新客',trial_amt:0,total_amt:29292},
+      {type:'新客',trial_amt:0,total_amt:29292},{type:'新客',trial_amt:0,total_amt:29292},
+      {type:'新客',trial_amt:0,total_amt:29292},{type:'新客',trial_amt:0,total_amt:29292},
+      {type:'新客',trial_amt:0,total_amt:29292},{type:'新客',trial_amt:0,total_amt:29292},
+      // 16未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-05-31', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'郭子萍',
+    clients:[
+      // 11成交 (3×28138 + 8×28137 = 309,510)
+      {type:'新客',trial_amt:0,total_amt:28138},{type:'新客',trial_amt:0,total_amt:28138},
+      {type:'新客',trial_amt:0,total_amt:28138},{type:'新客',trial_amt:0,total_amt:28137},
+      {type:'新客',trial_amt:0,total_amt:28137},{type:'新客',trial_amt:0,total_amt:28137},
+      {type:'新客',trial_amt:0,total_amt:28137},{type:'新客',trial_amt:0,total_amt:28137},
+      {type:'新客',trial_amt:0,total_amt:28137},{type:'新客',trial_amt:0,total_amt:28137},
+      {type:'新客',trial_amt:0,total_amt:28137},
+      // 6未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-05-31', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'黃詩涵',
+    clients:[
+      // 3成交 (2×34664 + 1×34663 = 103,991)
+      {type:'新客',trial_amt:0,total_amt:34664},{type:'新客',trial_amt:0,total_amt:34664},
+      {type:'新客',trial_amt:0,total_amt:34663},
+      // 6未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  // ─── 6月 月匯總 (2026-06-30) ───────────────────────────
+  {
+    date:'2026-06-30', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      // 12成交 (11×8985 + 1×8984 = 107,819)
+      {type:'新客',trial_amt:0,total_amt:8985},{type:'新客',trial_amt:0,total_amt:8985},
+      {type:'新客',trial_amt:0,total_amt:8985},{type:'新客',trial_amt:0,total_amt:8985},
+      {type:'新客',trial_amt:0,total_amt:8985},{type:'新客',trial_amt:0,total_amt:8985},
+      {type:'新客',trial_amt:0,total_amt:8985},{type:'新客',trial_amt:0,total_amt:8985},
+      {type:'新客',trial_amt:0,total_amt:8985},{type:'新客',trial_amt:0,total_amt:8985},
+      {type:'新客',trial_amt:0,total_amt:8985},{type:'新客',trial_amt:0,total_amt:8984},
+      // 3未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-06-30', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      // 14成交 (11×16339 + 3×16338 = 228,743)
+      {type:'新客',trial_amt:0,total_amt:16339},{type:'新客',trial_amt:0,total_amt:16339},
+      {type:'新客',trial_amt:0,total_amt:16339},{type:'新客',trial_amt:0,total_amt:16339},
+      {type:'新客',trial_amt:0,total_amt:16339},{type:'新客',trial_amt:0,total_amt:16339},
+      {type:'新客',trial_amt:0,total_amt:16339},{type:'新客',trial_amt:0,total_amt:16339},
+      {type:'新客',trial_amt:0,total_amt:16339},{type:'新客',trial_amt:0,total_amt:16339},
+      {type:'新客',trial_amt:0,total_amt:16339},{type:'新客',trial_amt:0,total_amt:16338},
+      {type:'新客',trial_amt:0,total_amt:16338},{type:'新客',trial_amt:0,total_amt:16338},
+      // 7未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-06-30', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞衫',
+    clients:[
+      // 12成交 (5×28258 + 7×28257 = 339,089)
+      {type:'新客',trial_amt:0,total_amt:28258},{type:'新客',trial_amt:0,total_amt:28258},
+      {type:'新客',trial_amt:0,total_amt:28258},{type:'新客',trial_amt:0,total_amt:28258},
+      {type:'新客',trial_amt:0,total_amt:28258},{type:'新客',trial_amt:0,total_amt:28257},
+      {type:'新客',trial_amt:0,total_amt:28257},{type:'新客',trial_amt:0,total_amt:28257},
+      {type:'新客',trial_amt:0,total_amt:28257},{type:'新客',trial_amt:0,total_amt:28257},
+      {type:'新客',trial_amt:0,total_amt:28257},{type:'新客',trial_amt:0,total_amt:28257},
+      // 5未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-06-30', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      // 11成交 (2×24508 + 9×24507 = 269,579)
+      {type:'新客',trial_amt:0,total_amt:24508},{type:'新客',trial_amt:0,total_amt:24508},
+      {type:'新客',trial_amt:0,total_amt:24507},{type:'新客',trial_amt:0,total_amt:24507},
+      {type:'新客',trial_amt:0,total_amt:24507},{type:'新客',trial_amt:0,total_amt:24507},
+      {type:'新客',trial_amt:0,total_amt:24507},{type:'新客',trial_amt:0,total_amt:24507},
+      {type:'新客',trial_amt:0,total_amt:24507},{type:'新客',trial_amt:0,total_amt:24507},
+      {type:'新客',trial_amt:0,total_amt:24507},
+      // 11未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-06-30', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      // 10成交 (9×19506 + 1×19505 = 195,059)
+      {type:'新客',trial_amt:0,total_amt:19506},{type:'新客',trial_amt:0,total_amt:19506},
+      {type:'新客',trial_amt:0,total_amt:19506},{type:'新客',trial_amt:0,total_amt:19506},
+      {type:'新客',trial_amt:0,total_amt:19506},{type:'新客',trial_amt:0,total_amt:19506},
+      {type:'新客',trial_amt:0,total_amt:19506},{type:'新客',trial_amt:0,total_amt:19506},
+      {type:'新客',trial_amt:0,total_amt:19506},{type:'新客',trial_amt:0,total_amt:19505},
+      // 9未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-06-30', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      // 10成交 (8×22569 + 2×22568 = 225,688)
+      {type:'新客',trial_amt:0,total_amt:22569},{type:'新客',trial_amt:0,total_amt:22569},
+      {type:'新客',trial_amt:0,total_amt:22569},{type:'新客',trial_amt:0,total_amt:22569},
+      {type:'新客',trial_amt:0,total_amt:22569},{type:'新客',trial_amt:0,total_amt:22569},
+      {type:'新客',trial_amt:0,total_amt:22569},{type:'新客',trial_amt:0,total_amt:22569},
+      {type:'新客',trial_amt:0,total_amt:22568},{type:'新客',trial_amt:0,total_amt:22568},
+      // 6未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-06-30', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      // 18成交 (13×13203 + 5×13202 = 237,649)
+      {type:'新客',trial_amt:0,total_amt:13203},{type:'新客',trial_amt:0,total_amt:13203},
+      {type:'新客',trial_amt:0,total_amt:13203},{type:'新客',trial_amt:0,total_amt:13203},
+      {type:'新客',trial_amt:0,total_amt:13203},{type:'新客',trial_amt:0,total_amt:13203},
+      {type:'新客',trial_amt:0,total_amt:13203},{type:'新客',trial_amt:0,total_amt:13203},
+      {type:'新客',trial_amt:0,total_amt:13203},{type:'新客',trial_amt:0,total_amt:13203},
+      {type:'新客',trial_amt:0,total_amt:13203},{type:'新客',trial_amt:0,total_amt:13203},
+      {type:'新客',trial_amt:0,total_amt:13203},{type:'新客',trial_amt:0,total_amt:13202},
+      {type:'新客',trial_amt:0,total_amt:13202},{type:'新客',trial_amt:0,total_amt:13202},
+      {type:'新客',trial_amt:0,total_amt:13202},{type:'新客',trial_amt:0,total_amt:13202},
+      // 9未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-06-30', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠',
+    clients:[
+      // 30成交 (17×17193 + 13×17192 = 515,777)
+      {type:'新客',trial_amt:0,total_amt:17193},{type:'新客',trial_amt:0,total_amt:17193},
+      {type:'新客',trial_amt:0,total_amt:17193},{type:'新客',trial_amt:0,total_amt:17193},
+      {type:'新客',trial_amt:0,total_amt:17193},{type:'新客',trial_amt:0,total_amt:17193},
+      {type:'新客',trial_amt:0,total_amt:17193},{type:'新客',trial_amt:0,total_amt:17193},
+      {type:'新客',trial_amt:0,total_amt:17193},{type:'新客',trial_amt:0,total_amt:17193},
+      {type:'新客',trial_amt:0,total_amt:17193},{type:'新客',trial_amt:0,total_amt:17193},
+      {type:'新客',trial_amt:0,total_amt:17193},{type:'新客',trial_amt:0,total_amt:17193},
+      {type:'新客',trial_amt:0,total_amt:17193},{type:'新客',trial_amt:0,total_amt:17193},
+      {type:'新客',trial_amt:0,total_amt:17193},{type:'新客',trial_amt:0,total_amt:17192},
+      {type:'新客',trial_amt:0,total_amt:17192},{type:'新客',trial_amt:0,total_amt:17192},
+      {type:'新客',trial_amt:0,total_amt:17192},{type:'新客',trial_amt:0,total_amt:17192},
+      {type:'新客',trial_amt:0,total_amt:17192},{type:'新客',trial_amt:0,total_amt:17192},
+      {type:'新客',trial_amt:0,total_amt:17192},{type:'新客',trial_amt:0,total_amt:17192},
+      {type:'新客',trial_amt:0,total_amt:17192},{type:'新客',trial_amt:0,total_amt:17192},
+      {type:'新客',trial_amt:0,total_amt:17192},{type:'新客',trial_amt:0,total_amt:17192},
+      // 13未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-06-30', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'呂秋玫',
+    clients:[
+      {type:'新客',trial_amt:0,total_amt:30000},
+    ]
+  },
+  {
+    date:'2026-06-30', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'何欣穎',
+    clients:[
+      // 2成交 (1×10688 + 1×10687 = 21,375)
+      {type:'新客',trial_amt:0,total_amt:10688},{type:'新客',trial_amt:0,total_amt:10687},
+    ]
+  },
+  {
+    date:'2026-06-30', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'林雨芑',
+    clients:[
+      // 17成交 (3×18072 + 14×18071 = 307,210)
+      {type:'新客',trial_amt:0,total_amt:18072},{type:'新客',trial_amt:0,total_amt:18072},
+      {type:'新客',trial_amt:0,total_amt:18072},{type:'新客',trial_amt:0,total_amt:18071},
+      {type:'新客',trial_amt:0,total_amt:18071},{type:'新客',trial_amt:0,total_amt:18071},
+      {type:'新客',trial_amt:0,total_amt:18071},{type:'新客',trial_amt:0,total_amt:18071},
+      {type:'新客',trial_amt:0,total_amt:18071},{type:'新客',trial_amt:0,total_amt:18071},
+      {type:'新客',trial_amt:0,total_amt:18071},{type:'新客',trial_amt:0,total_amt:18071},
+      {type:'新客',trial_amt:0,total_amt:18071},{type:'新客',trial_amt:0,total_amt:18071},
+      {type:'新客',trial_amt:0,total_amt:18071},{type:'新客',trial_amt:0,total_amt:18071},
+      {type:'新客',trial_amt:0,total_amt:18071},
+      // 16未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-06-30', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'郭子萍',
+    clients:[
+      // 5成交 (4×18209 + 1×18208 = 91,044)
+      {type:'新客',trial_amt:0,total_amt:18209},{type:'新客',trial_amt:0,total_amt:18209},
+      {type:'新客',trial_amt:0,total_amt:18209},{type:'新客',trial_amt:0,total_amt:18209},
+      {type:'新客',trial_amt:0,total_amt:18208},
+      // 9未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  {
+    date:'2026-06-30', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'黃詩涵',
+    clients:[
+      // 1成交
+      {type:'新客',trial_amt:0,total_amt:22997},
+      // 3未成交
+      {type:'新客',trial_amt:0,total_amt:0},{type:'新客',trial_amt:0,total_amt:0},
+      {type:'新客',trial_amt:0,total_amt:0},
+    ]
+  },
+  // ─── 7月以後 ───────────────────────────────────────────
   {
     date:'2026-07-04', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
     consultant:'邱家榆',
