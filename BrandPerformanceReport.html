@@ -2665,8 +2665,8 @@ let _csMonth = '';    // YYYY-MM，月份選擇器
 let _csStart = '';
 let _csEnd   = '';
 let _csTrendOpen = false;
-let _woTrendStore = null;
-let _kiTrendStore = null;
+let _woTrendStore = '全部';
+let _kiTrendStore = '全部';
 let _woTrendChart = null;
 let _kiTrendChart = null;
 
@@ -2963,19 +2963,16 @@ function drawTrendChart(canvasId,legId,storeData,bk){
     return `<span class="cs-tp-li"><span class="cs-tp-ld" style="background:${clrs[i%clrs.length]}"></span>${cs}${nick}</span>`;
   }).join('');
   const datasets=consultants.map((cs,i)=>({
-    label:cs,
+    label:cs+(NICKNAMES[cs]?` (${NICKNAMES[cs]})`:''),
     data:months.map(mo=>storeData[cs][mo]??null),
+    backgroundColor:clrs[i%clrs.length]+'cc',
     borderColor:clrs[i%clrs.length],
-    backgroundColor:clrs[i%clrs.length]+'15',
-    borderWidth:2.5,
-    borderDash:BD[i]||[],
-    pointRadius:5,pointHoverRadius:8,
-    pointBackgroundColor:clrs[i%clrs.length],
-    pointBorderColor:'#fff',pointBorderWidth:2,
-    tension:0.3,spanGaps:false,fill:false,
+    borderWidth:1,
+    borderRadius:3,
+    borderSkipped:false,
   }));
   return new Chart(canvas,{
-    type:'line',
+    type:'bar',
     data:{labels,datasets},
     options:{
       responsive:true,maintainAspectRatio:false,
@@ -2988,19 +2985,42 @@ function drawTrendChart(canvasId,legId,storeData,bk){
         }
       },
       scales:{
-        x:{grid:{color:'#e8e7e1'},ticks:{color:'#898781',font:{size:11}},border:{color:'#e8e7e1'}},
+        x:{grid:{display:false},ticks:{color:'#898781',font:{size:11}},border:{color:'#e8e7e1'}},
         y:{grid:{color:'#e8e7e1'},ticks:{color:'#898781',font:{size:10},callback:v=>'$'+Math.round(v/1000)+'K'},border:{color:'#e8e7e1'}}
       }
     }
   });
 }
 
+function computeStoreMonthlyAvg(){
+  const raw={};
+  CONSULTANT_RECORDS.forEach(rec=>{
+    const key=`${rec.brandKey}|${rec.store}|${rec.date.slice(0,7)}`;
+    if(!raw[key]) raw[key]={bk:rec.brandKey,store:rec.store,mo:rec.date.slice(0,7),sum:0,n:0};
+    rec.clients.forEach(c=>{
+      if(c.type!=='其他'&&c.total_amt>c.trial_amt){raw[key].sum+=c.total_amt;raw[key].n++;}
+    });
+  });
+  const res={wo:{},ki:{}};
+  Object.values(raw).forEach(({bk,store,mo,sum,n})=>{
+    if(!n||!res[bk]) return;
+    if(!res[bk][store]) res[bk][store]={};
+    res[bk][store][mo]=Math.round(sum/n);
+  });
+  return res;
+}
+
+function getStoreData(mo,bk,store){
+  if(store==='全部') return computeStoreMonthlyAvg()[bk]||null;
+  return mo[bk][store]||null;
+}
+
 function initTrendPanel(){
   const mo=computeMonthlyAvg();
-  const woStores=Object.keys(mo.wo);
-  const kiStores=Object.keys(mo.ki);
-  if(!_woTrendStore||!mo.wo[_woTrendStore]) _woTrendStore=woStores[0];
-  if(!_kiTrendStore||!mo.ki[_kiTrendStore]) _kiTrendStore=kiStores[0];
+  const woStores=['全部',...Object.keys(mo.wo)];
+  const kiStores=['全部',...Object.keys(mo.ki)];
+  if(!_woTrendStore||(_woTrendStore!=='全部'&&!mo.wo[_woTrendStore])) _woTrendStore='全部';
+  if(!_kiTrendStore||(_kiTrendStore!=='全部'&&!mo.ki[_kiTrendStore])) _kiTrendStore='全部';
   ['wo','ki'].forEach(bk=>{
     const stores=bk==='wo'?woStores:kiStores;
     const cur=bk==='wo'?_woTrendStore:_kiTrendStore;
@@ -3009,19 +3029,22 @@ function initTrendPanel(){
       `<button class="cs-tp-tab${s===cur?' '+bk+'-on':''}" onclick="_${bk}TrendStore='${s}';switchTrendStore('${bk}')">${s}</button>`
     ).join('');
   });
-  if(_woTrendStore&&mo.wo[_woTrendStore]) _woTrendChart=drawTrendChart('cs-trend-wo','cs-trend-wo-leg',mo.wo[_woTrendStore],'wo');
-  if(_kiTrendStore&&mo.ki[_kiTrendStore]) _kiTrendChart=drawTrendChart('cs-trend-ki','cs-trend-ki-leg',mo.ki[_kiTrendStore],'ki');
+  const woData=getStoreData(mo,'wo',_woTrendStore);
+  const kiData=getStoreData(mo,'ki',_kiTrendStore);
+  if(woData) _woTrendChart=drawTrendChart('cs-trend-wo','cs-trend-wo-leg',woData,'wo');
+  if(kiData) _kiTrendChart=drawTrendChart('cs-trend-ki','cs-trend-ki-leg',kiData,'ki');
 }
 
 function switchTrendStore(bk){
   const mo=computeMonthlyAvg();
   const store=bk==='wo'?_woTrendStore:_kiTrendStore;
+  const data=getStoreData(mo,bk,store);
   if(bk==='wo'){
     if(_woTrendChart){_woTrendChart.destroy();_woTrendChart=null;}
-    if(mo.wo[store]) _woTrendChart=drawTrendChart('cs-trend-wo','cs-trend-wo-leg',mo.wo[store],'wo');
+    if(data) _woTrendChart=drawTrendChart('cs-trend-wo','cs-trend-wo-leg',data,'wo');
   } else {
     if(_kiTrendChart){_kiTrendChart.destroy();_kiTrendChart=null;}
-    if(mo.ki[store]) _kiTrendChart=drawTrendChart('cs-trend-ki','cs-trend-ki-leg',mo.ki[store],'ki');
+    if(data) _kiTrendChart=drawTrendChart('cs-trend-ki','cs-trend-ki-leg',data,'ki');
   }
   document.querySelectorAll(`#cs-trend-${bk}-tabs .cs-tp-tab`).forEach(b=>{
     b.className='cs-tp-tab'+(b.textContent===store?` ${bk}-on`:'');
