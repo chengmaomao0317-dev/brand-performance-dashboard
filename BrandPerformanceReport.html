@@ -2747,23 +2747,6 @@ function renderConsultantTab(){
     return {s, topCls, nameCls, stores, br, brandLabel};
   }
 
-  const NICKNAMES = {
-    '吳凱婷': 'Kate',
-    '廖梓涵': 'Candy',
-    '李晨研': 'Nana',
-    '蔡亞衫': 'Sunny',
-    '翁筱芸': 'Hannah',
-    '王詩涵': '樂樂',
-    '森珮筠': '森森',
-    '郭子萍': 'Una',
-    '呂秋玫': 'Mei',
-    '林雨芑': 'Lulu',
-    '何欣穎': 'Molly',
-    '柯孟君': 'Kelly',
-    '計品卉': 'Krystal',
-    '陳甯': 'Ning',
-  };
-
   // 門市+諮詢師區塊
   function storeHtml(storeKey, storeName, brand, brandKey, recs){
     const s = calcStats(recs, true);
@@ -2932,6 +2915,15 @@ function renderConsultantTab(){
   `;
   if(_csTrendOpen) setTimeout(initTrendPanel, 0);
 }
+
+// ── 諮詢師暱稱（全域）──────────────────────────────────────
+const NICKNAMES = {
+  '吳凱婷': 'Kate', '廖梓涵': 'Candy', '李晨研': 'Nana',
+  '蔡亞衫': 'Sunny', '翁筱芸': 'Hannah', '王詩涵': '樂樂',
+  '森珮筠': '森森', '郭子萍': 'Una', '呂秋玫': 'Mei',
+  '林雨芑': 'Lulu', '何欣穎': 'Molly', '柯孟君': 'Kelly',
+  '計品卉': 'Krystal', '陳甯': 'Ning',
+};
 
 // ══════════════════════════════════════════
 //  客單趨勢 Panel
