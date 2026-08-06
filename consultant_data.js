@@ -916,7 +916,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-05', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    date:'2026-08-05', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
     consultant:'郭子萍',
     clients:[
       {type:'新客', trial_amt:0, total_amt:0},  // 黃茂翔，未施作未成交
