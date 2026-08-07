@@ -1656,6 +1656,13 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
+    date:'2026-07-25', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'公司',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},
+    ]
+  },
+  {
     date:'2026-07-24', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
     consultant:'李晨研',
     clients:[
