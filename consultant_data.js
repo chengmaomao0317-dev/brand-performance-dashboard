@@ -1889,6 +1889,30 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
+    date:'2026-08-07', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:15000},  // 廖婉竹，肉毒成交
+      {type:'新客', trial_amt:0, total_amt:21999},  // 郭蘊緹，仙女針成交
+      {type:'新客', trial_amt:0, total_amt:9999},   // 蔡伊晴，瑞斯朗成交
+    ]
+  },
+  {
+    date:'2026-08-07', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'呂秋玫',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:6498},   // 蘇郁珈，肉毒成交
+      {type:'新客', trial_amt:0, total_amt:57999},  // 陳姵慈，膠原蛋白+再生針成交
+    ]
+  },
+  {
+    date:'2026-08-07', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'公司',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},  // 黃孟鈺，諮詢未成交
+    ]
+  },
+  {
     date:'2026-08-05', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
     consultant:'郭子萍',
     clients:[
