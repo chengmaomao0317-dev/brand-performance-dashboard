@@ -2367,6 +2367,55 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
+    date:'2026-08-08', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:10000},  // 陳品君，無雙電波成交
+      {type:'新客', trial_amt:0, total_amt:9900},   // 黃鈺棋，玻尿酸成交
+      {type:'新客', trial_amt:0, total_amt:0},      // 江幸橋，諮詢未成交
+    ]
+  },
+  {
+    date:'2026-08-08', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:45999},  // 蘇以文，膠原蛋白針成交
+      {type:'新客', trial_amt:0, total_amt:9999},   // 郭叡臻，玻尿酸成交
+    ]
+  },
+  {
+    date:'2026-08-08', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'柯孟君',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},      // 藍雅偵，諮詢未成交
+      {type:'新客', trial_amt:0, total_amt:12997},  // 李汶晏，水光針+皮秒+肉毒成交
+      {type:'新客', trial_amt:0, total_amt:35499},  // 黃沛澄，鼻埋線成交
+    ]
+  },
+  {
+    date:'2026-08-07', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳甯',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:22000},  // 黃穎彤，嘟嘟唇+玻尿酸成交
+      {type:'新客', trial_amt:0, total_amt:33000},  // 陳宜蓁，肉毒臉部成交
+      {type:'新客', trial_amt:0, total_amt:0},      // 林家蔚，諮詢未成交
+    ]
+  },
+  {
+    date:'2026-08-07', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'柯孟君',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},  // 林孟璇，已到未成交
+    ]
+  },
+  {
+    date:'2026-08-07', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:16998},  // 邱宇翔，皮秒體驗+喬雅露成交
+    ]
+  },
+  {
     date:'2026-08-05', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'公司',
     clients:[
