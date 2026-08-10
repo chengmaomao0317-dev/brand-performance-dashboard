@@ -530,6 +530,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
   <!-- ── TAB 2: 業績細項 ── -->
   <div id="tab1" class="tab-content">
     <div class="kpi-strip" id="kpi-strip"></div>
+    <div id="brand-trend-wrap" style="margin:14px 0 10px"></div>
     <div id="tab3-body"></div>
   </div>
 
@@ -2044,6 +2045,86 @@ function switchMoTab(idx){
 // ══════════════════════════════════════════
 //  REFRESH (re-render all tabs)
 // ══════════════════════════════════════════
+// ══════════════════════════════════════════
+//  BRAND MONTHLY TREND CHART
+// ══════════════════════════════════════════
+let _brandTrendChart = null;
+function renderBrandTrendChart(){
+  const el = document.getElementById('brand-trend-wrap');
+  if(!el) return;
+
+  // Build monthly totals: sum across stores, up to latest month with data
+  const MO_LABELS = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  let maxIdx = 0;
+  [...KI_STORES,...WO_STORES].forEach(k=>{
+    (DATA[k].months||[]).forEach((m,i)=>{ if(m.rev>0||m.new_n>0) maxIdx=Math.max(maxIdx,i); });
+  });
+  const labels = MO_LABELS.slice(0, maxIdx+1);
+  const kiData = labels.map((_,i)=> KI_STORES.reduce((s,k)=>s+(DATA[k].months[i]?.rev||0),0));
+  const woData = labels.map((_,i)=> WO_STORES.reduce((s,k)=>s+(DATA[k].months[i]?.rev||0),0));
+
+  // Last point = open circle (current month still in progress)
+  const lastIdx = labels.length - 1;
+  const kiPtBg = labels.map((_,i)=> i===lastIdx?'#fff':'#c04070');
+  const woPtBg = labels.map((_,i)=> i===lastIdx?'#fff':'#2d5a9e');
+
+  el.innerHTML = `
+    <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;padding:16px 20px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <span style="font-size:13px;font-weight:600;color:#1a1a18">品牌月業績趨勢</span>
+        <div style="display:flex;gap:14px">
+          <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#555">
+            <div style="width:18px;height:2.5px;background:#c04070;border-radius:2px"></div>原綺
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#555">
+            <div style="width:18px;height:2.5px;background:#2d5a9e;border-radius:2px"></div>原渥
+          </div>
+        </div>
+      </div>
+      <canvas id="brand-trend-canvas" height="80"></canvas>
+    </div>`;
+
+  if(_brandTrendChart){ _brandTrendChart.destroy(); _brandTrendChart=null; }
+  const ctx = document.getElementById('brand-trend-canvas').getContext('2d');
+  _brandTrendChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          label:'原綺', data:kiData,
+          borderColor:'#c04070', backgroundColor:'rgba(192,64,112,0.07)',
+          borderWidth:2, tension:0.35, fill:true,
+          pointRadius:4, pointBorderWidth:2,
+          pointBackgroundColor:kiPtBg, pointBorderColor:'#c04070',
+        },
+        {
+          label:'原渥', data:woData,
+          borderColor:'#2d5a9e', backgroundColor:'rgba(45,90,158,0.06)',
+          borderWidth:2, tension:0.35, fill:true,
+          pointRadius:4, pointBorderWidth:2,
+          pointBackgroundColor:woPtBg, pointBorderColor:'#2d5a9e',
+        }
+      ]
+    },
+    options:{
+      responsive:true,
+      interaction:{mode:'index',intersect:false},
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label} $${ctx.parsed.y.toLocaleString()}`}}
+      },
+      scales:{
+        x:{grid:{display:false}, ticks:{font:{size:11},color:'#888'}},
+        y:{
+          grid:{color:'rgba(0,0,0,.04)'},
+          ticks:{font:{size:10},color:'#aaa', callback:v=>'$'+(v/1000000).toFixed(0)+'M'}
+        }
+      }
+    }
+  });
+}
+
 // Inject current-month new-client data from CONSULTANT_RECORDS into DATA[k].months
 // so H2 months (idx>=6) with real data are not hidden by the isEmpty filter.
 function injectCurrentMonthData(){
@@ -2103,6 +2184,7 @@ function refreshAll(){
   recalcTotals();
   renderKPI();
   renderHistChart();
+  renderBrandTrendChart();
   renderTab1();
   renderTab3();
   renderTab4();
