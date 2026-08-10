@@ -491,6 +491,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
 
 /* ── Tablet & phone ── */
 @media(max-width:768px){
+  body{overflow-x:hidden}
+
   /* Header: shrink to 60px, hide subtitle */
   .header-inner{padding:0 14px;height:60px;gap:12px}
   .header-title{font-size:14px}
@@ -508,10 +510,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
   .page{padding:12px 12px}
 
   /* ── Tab 1/總覽: KPI + grids ── */
+  /* !important needed to override renderKPI() inline style */
+  #kpi-strip{grid-template-columns:1fr 1fr !important}
+  #kpi-strip > div:nth-child(3){display:none}  /* hide vertical divider */
   .kpi-strip{grid-template-columns:1fr 1fr}
   .stores-2,.stores-3{grid-template-columns:1fr}
   .hch-wrap{grid-template-columns:1fr}
-  .trend-grid{grid-template-columns:1fr 1fr}
+  .trend-grid{grid-template-columns:1fr}
 
   /* ── Tab 2/每月業績 ── */
   /* sticky tab selector: header 60px + nav 44px = 104px */
