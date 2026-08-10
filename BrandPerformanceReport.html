@@ -9,7 +9,7 @@
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-serif;background:#f5f4f0;color:#1a1a18;font-size:13px;line-height:1.5}
 /* ── Header ── */
 .site-header{background:#000;border-bottom:1px solid #1a1a1a;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.5)}
-.header-inner{display:flex;align-items:center;gap:18px;padding:14px 32px;height:81px;max-width:1600px;margin:0 auto}
+.header-inner{display:flex;align-items:center;gap:18px;padding:14px 32px;height:81px;max-width:1600px;margin:0 auto;overflow:hidden}
 .logo-svg{flex-shrink:0}
 .header-divider{width:1px;height:42px;background:#2a2a2a;flex-shrink:0}
 .header-text{display:flex;flex-direction:column;gap:3px}
@@ -483,6 +483,120 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
 .cs-chip{font-size:9px;padding:1px 5px;border-radius:3px}
 .cs-chip-ok{background:#eaf3de;color:#27500a}
 .cs-chip-no{background:#fcebeb;color:#791f1f}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — all tabs
+   Breakpoints: ≤768px (tablet/phone), ≤480px (phone)
+══════════════════════════════════════════ */
+
+/* ── Tablet & phone ── */
+@media(max-width:768px){
+  /* Header: shrink to 60px, hide subtitle */
+  .header-inner{padding:0 14px;height:60px;gap:12px}
+  .header-title{font-size:14px}
+  .header-sub{display:none}
+  .logo-svg{width:52px;height:auto}
+
+  /* Nav: adjust sticky top to match 60px header, enable horizontal scroll */
+  .nav-bar{top:60px}
+  .nav-inner{padding:0 10px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:4px;flex-wrap:nowrap}
+  .nav-inner::-webkit-scrollbar{display:none}
+  /* Year filter: sticky to the right edge so it's always visible */
+  .nav-filter{position:sticky;right:0;background:#000;padding-left:8px;padding-right:4px;flex-shrink:0;border-left:1px solid rgba(255,255,255,.12);margin-left:4px}
+
+  /* Page padding */
+  .page{padding:12px 12px}
+
+  /* ── Tab 1/總覽: KPI + grids ── */
+  .kpi-strip{grid-template-columns:1fr 1fr}
+  .stores-2,.stores-3{grid-template-columns:1fr}
+  .hch-wrap{grid-template-columns:1fr}
+  .trend-grid{grid-template-columns:1fr 1fr}
+
+  /* ── Tab 2/每月業績 ── */
+  /* sticky tab selector: header 60px + nav 44px = 104px */
+  .mo-tabs-wrap{top:104px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;width:100%;max-width:100%}
+  .mo-tabs-wrap::-webkit-scrollbar{display:none}
+  .mo-brand-row{grid-template-columns:1fr}
+  .mo-store-grid{grid-template-columns:1fr 1fr}
+  .mo-stats-row{grid-template-columns:1fr 1fr}
+  .mo-bc-rev{font-size:18px}
+
+  /* ── Tab 3/業績細項 ── */
+  .tab3-nav{top:104px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;flex-wrap:nowrap;padding-bottom:4px}
+  .tab3-nav::-webkit-scrollbar{display:none}
+  /* Store card header */
+  .store-hd{padding:12px 12px}
+  .store-name-big{font-size:17px}
+  .store-rev-big{font-size:18px}
+  .store-src-grid{grid-template-columns:1fr 1fr}
+  /* perf table font */
+  .perf-tbl{font-size:9px}
+  .perf-tbl th,.perf-tbl td{padding:4px 6px}
+
+  /* ── Tab 6/諮詢師 ── */
+  .cs-top-bar{top:104px;gap:6px}
+  .cs-brand-row{grid-template-columns:1fr}
+  .cs-store-grid{grid-template-columns:1fr}
+  .cs-brand-stats{grid-template-columns:repeat(4,1fr)} /* keep 4, let it shrink */
+  .cs-total-bar{grid-template-columns:1fr 1fr}
+}
+
+/* ── Phone only ── */
+@media(max-width:480px){
+  /* Header */
+  .header-inner{padding:0 10px;height:52px}
+  .nav-bar{top:52px}
+  .tab3-nav,.mo-tabs-wrap,.cs-top-bar{top:96px}
+  .header-divider{display:none}
+  .logo-svg{width:44px}
+
+  /* Nav: tighter */
+  .nav-item{font-size:11px;padding:4px 9px}
+
+  /* Page */
+  .page{padding:8px 8px}
+
+  /* KPI */
+  .kpi-value{font-size:18px}
+  .kpi-card{padding:10px 12px}
+
+  /* Hist chart */
+  .hch-chart{height:90px}
+  .hch-panel{padding:10px 10px 8px}
+
+  /* Trend cards: 1 column on phone */
+  .trend-grid{grid-template-columns:1fr}
+
+  /* Tab 2 brand cards */
+  .mo-store-grid{grid-template-columns:1fr}
+  .mo-bc-body{flex-direction:column;align-items:flex-start;gap:8px}
+  .mo-bc-stats{flex-wrap:wrap;gap:12px}
+  .mo-bc-stat-val{font-size:11px}
+  .mo-group-card{padding:14px 14px}
+  .mo-group-rev{font-size:24px}
+  .mo-group-ach{font-size:16px}
+
+  /* Tab 3 pills: tighter */
+  .tab3-pg{padding:4px 6px}
+  .tab3-pill{font-size:11px;padding:3px 7px}
+  /* Store header metrics: 2×2 already done, but also tweak font */
+  .store-met-v{font-size:12px}
+  .store-src-inner{padding:10px 10px}
+  /* Perf table tighter */
+  .perf-tbl{font-size:8.5px}
+  .perf-tbl th,.perf-tbl td{padding:4px 4px}
+
+  /* Tab 6 consultant */
+  .cs-store-grid{grid-template-columns:1fr}
+  .cs-brand-stats{grid-template-columns:1fr 1fr}
+  .cs-total-bar{grid-template-columns:1fr 1fr}
+  .cs-c-row{flex-wrap:wrap;gap:6px}
+  .cs-c-stats{flex-wrap:wrap}
+  .cs-cs{min-width:25%}
+  .cs-top-bar{flex-wrap:wrap}
+  .cs-trend-btn{margin-left:0}
+}
 </style>
 </head>
 <body>
@@ -1507,6 +1621,37 @@ function renderStoreDetail(s, storeKey){
 
   const TGT_CELL = 'background:#f5f3ee;border-left:0.5px solid #dbd8d0';
 
+  // ── YoY helper ──────────────────────────────────────
+  const lyMo = (typeof LY_MONTHLY!=='undefined' && LY_MONTHLY[storeKey]) || null;
+  function mkLyCell(cur, lyVal, isCount=false){
+    const curStr = isCount ? (cur||'—') : fmtM(cur);
+    if(!lyMo || lyVal==null || lyVal===0) return curStr;
+    const pct = lyVal>0 ? (cur-lyVal)/lyVal : null;
+    const lyStr = isCount ? lyVal : fmtM(lyVal);
+    const pctClr = pct===null ? '#aaa' : pct>=0 ? '#2a7a4a' : '#c0392b';
+    const pctStr = pct!==null ? `<div style="font-size:9px;font-weight:600;color:${pctClr};line-height:1.2">${pct>=0?'+':''}${Math.round(pct*100)}%</div>` : '';
+    return `<div style="display:flex;flex-direction:column;align-items:flex-end;line-height:1.4">
+      <div>${curStr}</div>
+      <div style="font-size:9px;color:#ccc;line-height:1.2">${lyStr}</div>
+      ${pctStr}
+    </div>`;
+  }
+  // Compute LY YTD (sum months up to latest month with data)
+  let lyYTD = null;
+  if(lyMo){
+    let lastMoIdx = 0;
+    s.months.forEach((m,i)=>{ if(m.rev>0||m.new_n>0) lastMoIdx=i; });
+    lyYTD={rev:0,new_rev:0,old_rev:0,new_n:0,old_n:0};
+    for(let i=0;i<=lastMoIdx;i++){
+      lyYTD.rev     += lyMo[i]?.rev||0;
+      lyYTD.new_rev += lyMo[i]?.new_rev||0;
+      lyYTD.old_rev += lyMo[i]?.old_rev||0;
+      lyYTD.new_n   += lyMo[i]?.new_n||0;
+      lyYTD.old_n   += lyMo[i]?.old_n||0;
+    }
+  }
+  // ────────────────────────────────────────────────────
+
   const monthRows = s.months.map((m,idx)=>{
     const isEmpty = m.rev===0 && m.new_n===0;
     if(isEmpty && idx>=6) return '';  // H2 無資料直接隱藏
@@ -1543,11 +1688,12 @@ function renderStoreDetail(s, storeKey){
       </div></div></td>
     </tr>` : '';
     const toggleBtn = hasSrc ? `<span class="toggle-btn" onclick="toggleMonthRow(this,'${expId}')">+</span>` : `<span style="display:inline-block;width:19px"></span>`;
+    const ly = lyMo ? lyMo[idx] : null;
     return `<tr>
       <td>${toggleBtn}${m.m}</td>
-      <td>${fmtM(m.new_rev)}</td><td>${m.new_n||'—'}</td>
-      <td>${fmtM(m.old_rev)}</td><td>${m.old_n||'—'}</td>
-      <td>${fmtM(m.rev)}</td>
+      <td>${mkLyCell(m.new_rev, ly?.new_rev)}</td><td>${mkLyCell(m.new_n, ly?.new_n, true)}</td>
+      <td>${mkLyCell(m.old_rev, ly?.old_rev)}</td><td>${mkLyCell(m.old_n, ly?.old_n, true)}</td>
+      <td>${mkLyCell(m.rev, ly?.rev)}</td>
       <td style="${TGT_CELL}">${tgt?fmtM(tgt):'—'}</td>
       <td>${achStr}</td>
     </tr>${expRow}`;
@@ -1607,9 +1753,9 @@ function renderStoreDetail(s, storeKey){
         ${monthRows}
         <tr>
           <td>合計</td>
-          <td>${fmtM(s.new_rev)}</td><td>${fmtN(s.new_count)}</td>
-          <td>${fmtM(s.old_rev)}</td><td>${fmtN(s.old_count)}</td>
-          <td>${fmtM(s.revenue)}</td>
+          <td>${mkLyCell(s.new_rev, lyYTD?.new_rev)}</td><td>${mkLyCell(s.new_count, lyYTD?.new_n, true)}</td>
+          <td>${mkLyCell(s.old_rev, lyYTD?.old_rev)}</td><td>${mkLyCell(s.old_count, lyYTD?.old_n, true)}</td>
+          <td>${mkLyCell(s.revenue, lyYTD?.rev)}</td>
           <td style="${TGT_CELL}">${s.target_h1?fmtM(s.target_h1):'—'}</td>
           <td><span style="color:${pctTextColor(s.achieve_h1)}">${fmtPct(s.achieve_h1)}</span></td>
         </tr>
@@ -1671,6 +1817,7 @@ function renderTab3(){
 //  MONTHLY SNAP DATA
 // ══════════════════════════════════════════
 let MO_SNAP_DATA=[];   // index 0=1月, 1=2月, …
+let LY_MONTHLY={};    // 2025 monthly per-store: {storeKey:[{rev,new_rev,old_rev,new_n,old_n}×12]}
 let _curMoTab=0;
 
 function parseMoSheet(gd){
@@ -2616,6 +2763,7 @@ function parseStoreSheet(gd,storeMap){
   // Metric rows follow: c1=總業績/新客業績/舊客業績/新客數/舊客數/目標, c2=YTD, cols 3-14=months 1-12
   const rows=gd.table.rows||[];
   const storeMetrics={};
+  const storeMetrics25={};
   let curKey=null, curYear=null;
 
   for(const r of rows){
@@ -2625,15 +2773,18 @@ function parseStoreSheet(gd,storeMap){
     if(sep){
       const storePart=sep[1].trim(), year=parseInt(sep[2]);
       curYear=year;
-      if(year===2026 && storeMap[storePart]){
+      if((year===2026||year===2025) && storeMap[storePart]){
         curKey=storeMap[storePart];
-        if(!storeMetrics[curKey]) storeMetrics[curKey]={};
+        if(year===2026 && !storeMetrics[curKey])   storeMetrics[curKey]={};
+        if(year===2025 && !storeMetrics25[curKey]) storeMetrics25[curKey]={};
       } else { curKey=null; }
       continue;
     }
-    if(!curKey||curYear!==2026) continue;
+    if(!curKey) continue;
+    const _m = curYear===2026 ? storeMetrics : curYear===2025 ? storeMetrics25 : null;
+    if(!_m) continue;
     if(['總業績','新客業績','舊客業績','新客數','舊客數','目標'].includes(col1s)){
-      storeMetrics[curKey][col1s]=r;
+      _m[curKey][col1s]=r;
     }
   }
 
@@ -2664,6 +2815,25 @@ function parseStoreSheet(gd,storeMap){
     if(months[5].rev===0 && totalRev>sum15) months[5].rev=totalRev-sum15;
     result[key]={totalRev,newRev,oldRev,totalCnt:newCnt+oldCnt,newCnt,oldCnt,months};
   }
+
+  // Also parse 2025 monthly data → populate LY_MONTHLY (used for YoY per-cell display)
+  for(const[key,m] of Object.entries(storeMetrics25)){
+    const revR=m['總業績']; if(!revR) continue;
+    const newRevR=m['新客業績'], oldRevR=m['舊客業績'];
+    const newCntR=m['新客數'], oldCntR=m['舊客數'];
+    const lyMonths=[];
+    for(let mo=0;mo<12;mo++){
+      lyMonths.push({
+        rev:    toN(cv(revR,   3+mo)),
+        new_rev:toN(cv(newRevR,3+mo)),
+        old_rev:toN(cv(oldRevR,3+mo)),
+        new_n:  toN(cv(newCntR,3+mo)),
+        old_n:  toN(cv(oldCntR,3+mo)),
+      });
+    }
+    LY_MONTHLY[key]=lyMonths;
+  }
+
   return result;
 }
 
