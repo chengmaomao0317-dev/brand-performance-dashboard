@@ -2044,7 +2044,62 @@ function switchMoTab(idx){
 // ══════════════════════════════════════════
 //  REFRESH (re-render all tabs)
 // ══════════════════════════════════════════
+// Inject current-month new-client data from CONSULTANT_RECORDS into DATA[k].months
+// so H2 months (idx>=6) with real data are not hidden by the isEmpty filter.
+function injectCurrentMonthData(){
+  const RECORD_TO_DATA = {
+    'ki_dongmen':'ki_taipei', 'ki_taichung':'ki_taichung',
+    'wo_zhanqian':'wo_zhanqian', 'wo_daan':'wo_daan',
+    'wo_zhongxiao':'wo_zhongxiao', 'wo_dongmen':'wo_dongmen',
+    'wo_taichung':'wo_taichung', 'wo_banqiao':'wo_banqiao',
+  };
+  if(typeof CONSULTANT_RECORDS==='undefined'||!CONSULTANT_RECORDS.length) return;
+  // Find the latest month in CONSULTANT_RECORDS
+  const allDates = CONSULTANT_RECORDS.map(r=>r.date||'').filter(Boolean).sort();
+  const latestMonth = allDates[allDates.length-1].slice(0,7); // 'YYYY-MM'
+  const moIdx = parseInt(latestMonth.slice(5,7)) - 1; // 0-based
+  if(moIdx < 6) return; // only patch H2 months (July onward)
+  const moLabel = (moIdx+1)+'月';
+
+  // Aggregate new-client totals per DATA key for the latest month
+  const totals = {};
+  for(const r of CONSULTANT_RECORDS){
+    if(!r.date || !r.date.startsWith(latestMonth)) continue;
+    const dk = RECORD_TO_DATA[r.storeKey]; if(!dk) continue;
+    if(!totals[dk]) totals[dk]={new_rev:0, new_n:0};
+    for(const c of (r.clients||[])){
+      if(c.type==='新客' && c.total_amt>0){
+        totals[dk].new_rev += c.total_amt;
+        totals[dk].new_n++;
+      }
+    }
+  }
+
+  // Patch DATA[k].months[moIdx]
+  for(const [dk, t] of Object.entries(totals)){
+    const d = DATA[dk]; if(!d) continue;
+    // Pad months array if shorter than needed
+    while(d.months.length <= moIdx){
+      const padIdx = d.months.length;
+      d.months.push({m:(padIdx+1)+'月', rev:0, new_rev:0, new_n:0, old_rev:0, old_n:0, achieve:null, tgt:null});
+    }
+    const mo = d.months[moIdx];
+    // Only override if CONSULTANT_RECORDS has more data than what sync provided
+    if(t.new_n > (mo.new_n||0)){
+      // monthly_tgt (每月業績狀況進度目標) 優先於 store-sheet 同步的 mo.tgt
+      const tgt = (d.monthly_tgt?d.monthly_tgt[moIdx]:null) || mo.tgt || null;
+      mo.m = moLabel;
+      mo.new_rev = t.new_rev;
+      mo.new_n = t.new_n;
+      mo.rev = t.new_rev + (mo.old_rev||0);
+      mo.tgt = tgt;  // 同步更新 tgt，讓業績細項顯示正確目標
+      mo.achieve = (tgt&&mo.rev>0) ? mo.rev/tgt : null;
+    }
+  }
+}
+
 function refreshAll(){
+  injectCurrentMonthData();
   recalcTotals();
   renderKPI();
   renderHistChart();
