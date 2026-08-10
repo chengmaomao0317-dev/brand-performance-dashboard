@@ -1825,6 +1825,13 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
+    date:'2026-08-07', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:35999},  // 許雅如，體驗+購課成交
+    ]
+  },
+  {
     date:'2026-08-05', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
     consultant:'李晨研',
     clients:[
@@ -2424,6 +2431,13 @@ const CONSULTANT_RECORDS = [
     consultant:'吳凱婷',
     clients:[
       {type:'新客', trial_amt:999, total_amt:999},  // 周思彤，體驗未成交
+    ]
+  },
+  {
+    date:'2026-08-08', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:1998, total_amt:20748},  // 楊姿瑩，體驗+購課成交
     ]
   },
   // 新增記錄時複製上面的格式
