@@ -1909,7 +1909,7 @@ const CONSULTANT_RECORDS = [
     date:'2026-08-07', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
     consultant:'公司',
     clients:[
-      {type:'新客', trial_amt:0, total_amt:0},  // 黃孟鈺，諮詢未成交
+      {type:'未到', trial_amt:0, total_amt:0, name:'黃孟鈺'},
     ]
   },
   {
@@ -2157,6 +2157,21 @@ const CONSULTANT_RECORDS = [
     clients:[
       {type:'新客', trial_amt:1499, total_amt:1499},   // 梅芷嵐，體驗未成交
       {type:'新客', trial_amt:999,  total_amt:19749},  // 鐘凡真，體驗+購課成交
+    ]
+  },
+  {
+    date:'2026-08-10', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},          // 余孟璇，諮詢未成交（預約周五再來）
+      {type:'新客', trial_amt:1499, total_amt:11498},    // 韓婷仔，體驗水光+購5堂
+    ]
+  },
+  {
+    date:'2026-08-10', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:3499, total_amt:3499},    // 許曉盈，體驗水光+音波（住日本）
     ]
   },
   {
@@ -2504,6 +2519,20 @@ const CONSULTANT_RECORDS = [
     consultant:'吳凱婷',
     clients:[
       {type:'新客', trial_amt:999, total_amt:999},  // 周思彤，體驗未成交
+    ]
+  },
+  {
+    date:'2026-08-10', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:1499, total_amt:12098},  // 蔡博任，體驗水光+精華+購水光5堂
+    ]
+  },
+  {
+    date:'2026-08-10', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:77000},  // 湯瑋琪，體驗音波+購音波30堂贈20堂
     ]
   },
   {
