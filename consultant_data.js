@@ -2413,6 +2413,29 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
+    date:'2026-08-10', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'柯孟君',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:15000},  // 徐郁惠，嘟嘟唇→肉毒(1U)，成交
+    ]
+  },
+  {
+    date:'2026-08-10', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:138888}, // 林美妤，喬亞登HAJ+無雙電波，成交
+      {type:'新客', trial_amt:0, total_amt:0},       // 陳苡琳，鼻部埋線，諮詢未成交
+    ]
+  },
+  {
+    date:'2026-08-10', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳甯',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:70999},  // 黃湘勻，微晶瓷+瑞斯朗HA，成交
+      {type:'新客', trial_amt:0, total_amt:3999},   // 徐子涵，蜂巢+皮秒臉部，成交
+    ]
+  },
+  {
     date:'2026-08-08', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬',
     clients:[
