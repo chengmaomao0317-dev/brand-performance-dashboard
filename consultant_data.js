@@ -2572,5 +2572,80 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:1998, total_amt:20748},  // 楊姿瑩，體驗+購課成交
     ]
   },
+  {
+    date:'2026-08-11', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠',
+    clients:[
+      {type:'新客', trial_amt:1299, total_amt:1299},   // 張家寧，體驗美胸，未成交
+      {type:'新客', trial_amt:999,  total_amt:15999},  // 林蔚珊，體驗體雕+購6堂贈2堂，成交
+    ]
+  },
+  {
+    date:'2026-08-11', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'林雨芑',
+    clients:[
+      {type:'新客', trial_amt:999,  total_amt:15399}, // 稅昶喻，體驗肩頸+購6堂贈2堂，成交
+      {type:'新客', trial_amt:999,  total_amt:999},   // 鐘淳美，體驗音波，未成交
+    ]
+  },
+  {
+    date:'2026-08-11', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:2000},  // 曾郁棋，體驗音波2部位，未成交
+    ]
+  },
+  {
+    date:'2026-08-11', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:20750}, // 李幼珊，體驗音波+購8堂贈2堂，成交
+    ]
+  },
+  {
+    date:'2026-08-11', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},   // 鐘蕙瑀，體驗音波(含大腿)，未成交
+      {type:'新客', trial_amt:999, total_amt:999},   // 李婀瑄，體驗音波，未成交
+    ]
+  },
+  {
+    date:'2026-08-11', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},   // 張齡瑤，體驗小香肩，未成交
+      {type:'新客', trial_amt:999, total_amt:999},   // 溫珮宜，體驗音波，未成交(蜂巢780為李怡樺產品業績)
+    ]
+  },
+  {
+    date:'2026-08-11', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:26998}, // 林毓淳，超玩美電波(眼周一發)，成交
+    ]
+  },
+  {
+    date:'2026-08-11', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'呂秋玫',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:1000},  // 錢玟均，消脂針訂金，成交
+    ]
+  },
+  {
+    date:'2026-08-11', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'柯孟君',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:81999}, // 鄭綺云，仙女HA×2，成交
+    ]
+  },
+  {
+    date:'2026-08-11', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳甯',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:9999},  // 楊鎵綺，瑞斯朗HA，成交
+      {type:'新客', trial_amt:0, total_amt:2298},  // 陳品蓁，除毛體驗腋下+比基尼，成交
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
