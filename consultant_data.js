@@ -2671,13 +2671,6 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-12', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
-    consultant:'呂秋玫',
-    clients:[
-      {type:'新客', trial_amt:0, total_amt:1580},     // 周品君，賦活因子3瓶，成交
-    ]
-  },
-  {
     date:'2026-08-12', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
     consultant:'林雨芑',
     clients:[
@@ -2748,7 +2741,7 @@ const CONSULTANT_RECORDS = [
     date:'2026-08-12', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
     consultant:'呂秋玫',
     clients:[
-      {type:'新客', trial_amt:0, total_amt:13998}, // 周品君，瑞斯朗1CC+皮秒+蜂巢，成交
+      {type:'新客', trial_amt:0, total_amt:15578}, // 周品君，瑞斯朗1CC+皮秒+蜂巢+賦活因子3瓶，成交
       {type:'新客', trial_amt:0, total_amt:0},     // 黃先生，鼻基底填充，未成交
       {type:'新客', trial_amt:0, total_amt:23498}, // 邱文珠，肉毒+原三點仙女3CC，成交
       {type:'新客', trial_amt:0, total_amt:15000}, // 何立慈，肉毒1瓶，成交
