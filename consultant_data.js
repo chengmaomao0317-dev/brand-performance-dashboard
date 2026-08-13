@@ -2647,5 +2647,120 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:0, total_amt:2298},  // 陳品蓁，除毛體驗腋下+比基尼，成交
     ]
   },
+  {
+    date:'2026-08-12', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      {type:'新客', trial_amt:1999, total_amt:3999}, // 周思羽，體驗微分子爆水奇蹟+訂金，成交
+    ]
+  },
+  {
+    date:'2026-08-12', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999}, // 陳欣柔，體驗體雕(腹部)，未成交
+      {type:'新客', trial_amt:999, total_amt:999}, // 楊慧青，體驗體雕(腹部)，未成交
+    ]
+  },
+  {
+    date:'2026-08-12', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:999,  total_amt:999},   // 許悅悅，體驗音波，未成交
+      {type:'新客', trial_amt:1499, total_amt:1499},  // 黃品熏，體驗無針水光，未成交
+    ]
+  },
+  {
+    date:'2026-08-12', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'呂秋玫',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:1580},     // 周品君，賦活因子3瓶，成交
+    ]
+  },
+  {
+    date:'2026-08-12', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'林雨芑',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},    // 黃雅慧，體驗音波(大腿)，未成交
+    ]
+  },
+  {
+    date:'2026-08-12', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999}, // 蘇仕芸，體驗音波，未成交
+    ]
+  },
+  {
+    date:'2026-08-12', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:999,  total_amt:15724}, // 黃若涵，體驗音波+夏日C位攻略(生日95折)，成交
+      {type:'新客', trial_amt:2000, total_amt:17500}, // 戴詩昀，體驗音波2部位+夏日C位攻略，成交
+      {type:'新客', trial_amt:999,  total_amt:15999}, // 李宛庭，體驗音波+購6堂贈2堂，成交
+    ]
+  },
+  {
+    date:'2026-08-12', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},   // 王敏雯，體驗音波(含大腿)，未成交
+      {type:'新客', trial_amt:999, total_amt:19749}, // 潘煒妮，體驗音波+購6堂贈2堂+加購2堂，成交
+    ]
+  },
+  {
+    date:'2026-08-12', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:999,  total_amt:2999},  // 鄭詩穎，體驗小香肩+訂金，成交
+      {type:'新客', trial_amt:999,  total_amt:999},   // 王映筑，體驗音波(大腿)，未成交
+    ]
+  },
+  {
+    date:'2026-08-12', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞衫',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:56110}, // 黃澄珊，體驗音波+購音波30堂+皮秒+纖萃，成交
+    ]
+  },
+  {
+    date:'2026-08-12', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳甯',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},     // 楊沂瑾，鼻部埋線，未成交
+    ]
+  },
+  {
+    date:'2026-08-12', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:60498}, // 李怡萱，喬亞登HA×2+肉毒×2+鼻線，成交
+    ]
+  },
+  {
+    date:'2026-08-12', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:1499},  // 朱紜璟，肉毒除皺，成交
+    ]
+  },
+  {
+    date:'2026-08-12', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'呂秋玫',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:13998}, // 周品君，瑞斯朗1CC+皮秒+蜂巢，成交
+      {type:'新客', trial_amt:0, total_amt:0},     // 黃先生，鼻基底填充，未成交
+      {type:'新客', trial_amt:0, total_amt:23498}, // 邱文珠，肉毒+原三點仙女3CC，成交
+      {type:'新客', trial_amt:0, total_amt:15000}, // 何立慈，肉毒1瓶，成交
+    ]
+  },
+  {
+    date:'2026-08-12', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:1499},  // 張曉昀，肉毒除皺1區，成交
+      {type:'新客', trial_amt:0, total_amt:0},     // 林瑞樊，頰凹填充，未成交
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
