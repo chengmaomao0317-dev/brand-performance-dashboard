@@ -2836,5 +2836,151 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:0, total_amt:0},     // 于珊，頰凹填充，未成交
     ]
   },
+  {
+    date:'2026-08-14', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:2000}, // 郭瓊葵，體驗體雕2部位，未成交
+    ]
+  },
+  {
+    date:'2026-08-15', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:37000}, // 程冠馨，體驗體雕+購14堂贈6堂，成交
+      {type:'新客', trial_amt:2000, total_amt:2000},  // 陳資云，體驗體雕2部位，未成交
+      {type:'新客', trial_amt:999,  total_amt:999},   // 鄭育芷，體驗體雕1部位，未成交
+      {type:'新客', trial_amt:999,  total_amt:999},   // 曾郁捷，體驗體雕1部位，未成交
+    ]
+  },
+  {
+    date:'2026-08-14', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠',
+    clients:[
+      {type:'新客', trial_amt:1998, total_amt:1998}, // 黃喬莉，體驗香肩+體雕，未成交
+      {type:'新客', trial_amt:999,  total_amt:6998}, // 陳瑋瑋，體驗體雕+購三堂，成交
+      {type:'新客', trial_amt:999,  total_amt:6998}, // 陳憶萱，體驗體雕+購三堂，成交
+    ]
+  },
+  {
+    date:'2026-08-15', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠',
+    clients:[
+      {type:'新客', trial_amt:999,  total_amt:999},   // 王凱齡，體驗體雕(手)，未成交
+      {type:'新客', trial_amt:999,  total_amt:999},   // 張旻宸，體驗體雕(大腿)，未成交
+      {type:'新客', trial_amt:2000, total_amt:2000},  // 宋妍安，體驗體雕(大小腿)，未成交
+      {type:'新客', trial_amt:999,  total_amt:999},   // 王佳悠，體驗體雕(腹部)，未成交
+      {type:'新客', trial_amt:1998, total_amt:76998}, // 楊于溶，體驗香肩+體雕+購30堂贈20堂，成交
+    ]
+  },
+  {
+    date:'2026-08-14', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'林雨芑',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:40999}, // 黨佳文，體驗音波+購30堂贈20堂，成交
+      {type:'新客', trial_amt:999, total_amt:15399}, // 黎玉貞，體驗音波+購腹部6堂贈2堂，成交
+      {type:'新客', trial_amt:999, total_amt:999},   // 黃意茹，體驗音波，未成交
+      {type:'新客', trial_amt:999, total_amt:999},   // 謝子萱，體驗音波(大腿)，未成交
+    ]
+  },
+  {
+    date:'2026-08-14', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},   // 張采琳，體驗音波(大腿)，未成交
+      {type:'新客', trial_amt:999, total_amt:999},   // 張芝語，體驗音波，未成交
+    ]
+  },
+  {
+    date:'2026-08-15', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'林雨芑',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:40999}, // 鄭卜慈，體驗音波+購30堂贈20堂，成交
+    ]
+  },
+  {
+    date:'2026-08-15', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:1599},  // 劉昱謙，體驗杏仁酸+加購無針保濕精華，成交
+    ]
+  },
+  {
+    date:'2026-08-14', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:19749}, // 陳逸珊，體驗音波+購8堂贈2堂，成交
+      {type:'新客', trial_amt:999, total_amt:19749}, // 李心瑀，體驗音波+購8堂贈2堂，成交
+    ]
+  },
+  {
+    date:'2026-08-14', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:35999}, // 洪育婕，體驗音波(大腿)+購14堂贈6堂，成交
+    ]
+  },
+  {
+    date:'2026-08-15', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:19749}, // 張庭甄，體驗音波+購8堂贈2堂，成交
+    ]
+  },
+  {
+    date:'2026-08-14', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:8998}, // 陳品華，體驗音波+夏日C位攻略4堂，成交
+      {type:'新客', trial_amt:999, total_amt:999},  // 許韓蓁，體驗小香肩，未成交
+      {type:'新客', trial_amt:999, total_amt:999},  // 鄭舒妃，體驗音波(大腿)，未成交
+    ]
+  },
+  {
+    date:'2026-08-15', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:17000}, // 林欣瑩，體驗音波+購6堂贈2堂，成交
+      {type:'新客', trial_amt:2000, total_amt:20750}, // 楊潔茹，體驗音波+購6堂贈2堂+加購2堂，成交
+      {type:'新客', trial_amt:999,  total_amt:999},   // 吳采愉，體驗小香肩，未成交
+    ]
+  },
+  {
+    date:'2026-08-15', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:2000},  // 蘇芃諭，體驗音波(大腿)，未成交
+      {type:'新客', trial_amt:999,  total_amt:15399}, // 陳樂融，體驗小香肩+購6堂贈2堂，成交
+      {type:'新客', trial_amt:999,  total_amt:35999}, // 蔡怡君，體驗音波+購14堂贈6堂，成交
+    ]
+  },
+  {
+    date:'2026-08-15', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    consultant:'公司',
+    clients:[
+      {type:'其他', trial_amt:0, total_amt:0},        // 曾詩茵，杜伊茹分享音波1堂
+    ]
+  },
+  {
+    date:'2026-08-14', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999},   // 黃碧盈，體驗音波，未成交
+    ]
+  },
+  {
+    date:'2026-08-14', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞衫',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:2000}, // 余冠瑾，體驗音波2部位(大腿)，未成交
+    ]
+  },
+  {
+    date:'2026-08-15', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:2000}, // 林宣妤，體驗音波2部位，未成交
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
