@@ -3022,5 +3022,23 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:0, total_amt:21999}, // 賈梅梅，仙女HA，成交
     ]
   },
+  // ─── 8/14 台中原綺 ──────────────────────────
+  {
+    date:'2026-08-14', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'何欣穎',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:48000},  // 徐佳怡，再生針3CC，成交
+      {type:'新客', trial_amt:0, total_amt:76998},  // 曹雅涵，膠原蛋白針+伊蘿絲，成交
+      {type:'新客', trial_amt:0, total_amt:186000}, // 王惠儀，膠原蛋白針+再生針+肉毒，成交
+    ]
+  },
+  {
+    date:'2026-08-14', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:48000},  // 賴玥廷，再生針3CC，成交
+      {type:'新客', trial_amt:0, total_amt:21999},  // 高婉婷，仙女玻尿酸3CC，成交
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
