@@ -2982,5 +2982,45 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:2000, total_amt:2000}, // 林宣妤，體驗音波2部位，未成交
     ]
   },
+  {
+    date:'2026-08-14', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:14999}, // 黃紀茹，喬亞登HAJ，成交
+    ]
+  },
+  {
+    date:'2026-08-14', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'柯孟君',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},     // 廖艾薇，黑眼圈填充，未成交
+    ]
+  },
+  {
+    date:'2026-08-15', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},     // 黃小姐，嘟嘟唇，未成交
+      {type:'新客', trial_amt:0, total_amt:22999}, // 王致皓，膠原蛋白針×2，成交
+      {type:'新客', trial_amt:0, total_amt:0},     // 許綉君，肉毒臉部，未成交
+    ]
+  },
+  {
+    date:'2026-08-15', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'柯孟君',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:3999},   // 趙曼真，蜂巢+皮秒，成交
+      {type:'新客', trial_amt:0, total_amt:102000}, // 熊嘉麗，喬亞登+肉毒，成交
+      {type:'新客', trial_amt:0, total_amt:0},      // 鐘朝凱，臉部皮秒，未成交
+    ]
+  },
+  {
+    date:'2026-08-15', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳甯',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:61999}, // 楊怡璇，肉毒+瑞斯朗HA×3，成交
+      {type:'新客', trial_amt:0, total_amt:21999}, // 賈梅梅，仙女HA，成交
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
