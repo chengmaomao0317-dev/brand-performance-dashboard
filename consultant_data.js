@@ -3064,5 +3064,38 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:999, total_amt:75999}, // 李姿璇，音波30堂，成交
     ]
   },
+  // ─── 8/17 台北原綺 ──────────────────────────
+  {
+    date:'2026-08-17', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'柯孟君',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:9999},  // 高畠泉，消脂針×2，成交
+    ]
+  },
+  {
+    date:'2026-08-17', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:23499}, // 楊毓娟，女神HA×2+肉毒，成交
+      {type:'新客', trial_amt:0, total_amt:21798}, // 陳美齡，喬亞登+肉毒，成交
+    ]
+  },
+  {
+    date:'2026-08-17', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳甯',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},     // 陳冠豪，黑眼圈填充，未成交
+    ]
+  },
+  // ─── 8/17 大安 ──────────────────────────────
+  {
+    date:'2026-08-17', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:37000}, // 王珮芬，音波14堂，成交
+      {type:'新客', trial_amt:999,  total_amt:75999}, // 陳佳容，音波30堂，成交
+      {type:'新客', trial_amt:2000, total_amt:2000},  // 尹歆文，音波體驗，未成交
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
