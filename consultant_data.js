@@ -1606,13 +1606,6 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-08-01', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
-    consultant:'計品卉',
-    clients:[
-      {type:'新客', trial_amt:0, total_amt:16498},   // 曾宛如（9999+6499）
-    ]
-  },
-  {
-    date:'2026-08-01', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳甯',
     clients:[
       {type:'新客', trial_amt:0, total_amt:41799},   // 徐雅瑩
@@ -3038,6 +3031,37 @@ const CONSULTANT_RECORDS = [
     clients:[
       {type:'新客', trial_amt:0, total_amt:48000},  // 賴玥廷，再生針3CC，成交
       {type:'新客', trial_amt:0, total_amt:21999},  // 高婉婷，仙女玻尿酸3CC，成交
+    ]
+  },
+  // ─── 8/17 東門 ──────────────────────────────
+  {
+    date:'2026-08-17', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:15399}, // 李沛芹，香扃6堂，成交
+    ]
+  },
+  // ─── 8/17 忠孝 ──────────────────────────────
+  {
+    date:'2026-08-17', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:1998, total_amt:1998}, // 陳宥華，小香扃+音波，未成交
+    ]
+  },
+  // ─── 8/17 館前 ──────────────────────────────
+  {
+    date:'2026-08-17', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:4499, total_amt:11598}, // 陳嘉宜，水拉提+濃縮精華，成交
+    ]
+  },
+  {
+    date:'2026-08-17', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:75999}, // 李姿璇，音波30堂，成交
     ]
   },
   // 新增記錄時複製上面的格式
