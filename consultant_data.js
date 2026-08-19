@@ -3177,5 +3177,29 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:999,  total_amt:999},  // 劉洧慈，肩頸體驗，未成交
     ]
   },
+  // ─── 8/18 台北原綺 ──────────────────────────
+  {
+    date:'2026-08-18', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳甯',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:6000}, // 劉昀軒，肉毒除皺一區，成交
+    ]
+  },
+  // ─── 8/18 台中原綺 ──────────────────────────
+  {
+    date:'2026-08-18', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'呂秋玫',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:128495}, // 林宜臻，電波+音波+仙女+肉毒，成交
+    ]
+  },
+  {
+    date:'2026-08-18', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},     // 黃儀芝，無雙電波，未成交
+      {type:'新客', trial_amt:0, total_amt:1499},  // 李嘉琪，肉毒除皺1區，成交
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
