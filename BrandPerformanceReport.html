@@ -748,6 +748,7 @@ const DATA = {
   wo_zhanqian: {
     id:'wo_zhanqian', label:'站前', brand:'原渥', brandKey:'wo',
     revenue:8515753, target_h1:10650000, achieve_h1:0.80,
+    monthly_tgt:[0,0,0,0,0,0,0,1950000,0,0,0,0],
     new_rev:3044532, new_count:224, new_avg:13592,
     old_rev:5471221, old_count:1773, old_avg:3086,
     yoy_h1:-0.56,
@@ -3506,7 +3507,7 @@ function showStoreDetail(storeKey){
   recs.forEach(rec=>{
     rec.clients.filter(c=>c.type!=='未到').forEach(c=>{
       if(!byDate[rec.date])byDate[rec.date]=[];
-      byDate[rec.date].push({consultant:rec.consultant,type:c.type,sold:c.total_amt>c.trial_amt,amt:c.total_amt});
+      byDate[rec.date].push({consultant:rec.consultant,type:c.type,sold:c.total_amt>c.trial_amt,amt:c.total_amt,name:c.name||''});
     });
   });
   const sortedDates=Object.keys(byDate).sort();
@@ -3519,8 +3520,9 @@ function showStoreDetail(storeKey){
     const dayRev=cls.filter(c=>c.sold).reduce((s,c)=>s+c.amt,0);
     totalNew+=cls.length;totalSold+=daySold;totalRev+=dayRev;
     const d=new Date(date),m=d.getMonth()+1,dy=d.getDate(),wd=wds[d.getDay()];
-    const rows=cls.map((c,i)=>`<tr><td>${i+1}</td><td><span class="ki-tag t-${c.consultant}">${c.consultant}</span></td><td class="${c.sold?'ki-sold':'ki-no'}">${c.sold?'$'+c.amt.toLocaleString():'—'}</td><td class="${c.sold?'ki-sold':'ki-no'}">${c.type==='其他'?'分享客':c.sold?'✓ 成交':'✗ 未成交'}</td></tr>`).join('');
-    return `<div class="ki-day"><div class="ki-day-hd"><span>${m}月${dy}日（${wd}）</span><span class="ki-dmeta">新客 ${cls.length} 人｜成交 ${daySold} 人</span><span>${dayRev>0?'$'+dayRev.toLocaleString():'—'}</span></div><table class="ki-tbl"><thead><tr><th>#</th><th>諮詢師</th><th>業績</th><th>狀態</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+    const hasNames=cls.some(c=>c.name);
+    const rows=cls.map((c,i)=>`<tr><td>${i+1}</td>${hasNames?`<td>${c.name||'—'}</td>`:''}<td><span class="ki-tag t-${c.consultant}">${c.consultant}</span></td><td class="${c.sold?'ki-sold':'ki-no'}">${c.sold?'$'+c.amt.toLocaleString():'—'}</td><td class="${c.sold?'ki-sold':'ki-no'}">${c.type==='其他'?'分享客':c.sold?'✓ 成交':'✗ 未成交'}</td></tr>`).join('');
+    return `<div class="ki-day"><div class="ki-day-hd"><span>${m}月${dy}日（${wd}）</span><span class="ki-dmeta">新客 ${cls.length} 人｜成交 ${daySold} 人</span><span>${dayRev>0?'$'+dayRev.toLocaleString():'—'}</span></div><table class="ki-tbl"><thead><tr><th>#</th>${hasNames?'<th>顧客姓名</th>':''}<th>諮詢師</th><th>業績</th><th>狀態</th></tr></thead><tbody>${rows}</tbody></table></div>`;
   }).join('');
   // 標題日期範圍：依 filter mode 決定
   let rangeLabel;
