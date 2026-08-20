@@ -3084,7 +3084,7 @@ const CONSULTANT_RECORDS = [
     date:'2026-08-17', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳甯',
     clients:[
-      {type:'新客', trial_amt:0, total_amt:0},     // 陳冠豪，黑眼圈填充，未成交
+      {type:'新客', trial_amt:0, total_amt:22349},  // 陳冠豪，黑眼圈填充(8/17)+膠原蛋白針(8/19付款)，成交
     ]
   },
   // ─── 8/17 大安 ──────────────────────────────
@@ -3199,6 +3199,111 @@ const CONSULTANT_RECORDS = [
     clients:[
       {type:'新客', trial_amt:0, total_amt:0},     // 黃儀芝，無雙電波，未成交
       {type:'新客', trial_amt:0, total_amt:1499},  // 李嘉琪，肉毒除皺1區，成交
+    ]
+  },
+  // ─── 8/19 東門 ──────────────────────────────
+  {
+    date:'2026-08-19', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999}, // 張育慈，體雕體驗，未成交
+      {type:'新客', trial_amt:999, total_amt:999}, // 陳歷儒，體雕體驗，未成交
+    ]
+  },
+  // ─── 8/19 板橋 ──────────────────────────────
+  {
+    date:'2026-08-19', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:7999},  // 王婷萱，體雕3堂，成交
+      {type:'新客', trial_amt:1998, total_amt:1998},  // 呂敏智，雙體驗，未成交
+      {type:'新客', trial_amt:999,  total_amt:15399}, // 陳韋君，香肩6堂贈2堂，成交（產品4280不計）
+      {type:'新客', trial_amt:999,  total_amt:999},   // 蔡宜真，體雕體驗，未成交
+    ]
+  },
+  // ─── 8/19 台中原渥 ──────────────────────────
+  {
+    date:'2026-08-19', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999}, // 林宛萱，音波體驗(大腿)，未成交
+    ]
+  },
+  // ─── 8/19 忠孝 ──────────────────────────────
+  {
+    date:'2026-08-19', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999}, // 呂惠慧，音波體驗(大腿)，未成交
+      {type:'新客', trial_amt:999, total_amt:999}, // 曾靖婷，音波體驗(大腿)，未成交
+    ]
+  },
+  // ─── 8/19 館前 ──────────────────────────────
+  {
+    date:'2026-08-19', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:1499, total_amt:12698}, // 詹晴雯，無針水光5堂+精華，成交（產品4920不計）
+    ]
+  },
+  // ─── 8/19 大安 ──────────────────────────────
+  {
+    date:'2026-08-19', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:2999},  // 洪美玉，音波付訂，成交
+    ]
+  },
+  {
+    date:'2026-08-19', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞衫',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:37000}, // 馮盈捷，音波14堂贈6堂，成交
+    ]
+  },
+  // ─── 8/19 台北原綺 ────────────────────────────────────────
+  {
+    date:'2026-08-19', storeKey:'ki_dongmen', store:'台北原綺', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},      // 張華珍，嘟嘟唇，未成交
+      {type:'新客', trial_amt:0, total_amt:22999},  // 蔡佳穎，膠原蛋白針，成交
+    ]
+  },
+  {
+    date:'2026-08-19', storeKey:'ki_dongmen', store:'台北原綺', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:15000},  // 曾詩喬，肉毒，成交
+    ]
+  },
+  {
+    date:'2026-08-19', storeKey:'ki_dongmen', store:'台北原綺', brand:'原綺', brandKey:'ki',
+    consultant:'柯孟君',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:87498},  // 余葦柔，玻尿酸+肉毒，成交
+    ]
+  },
+  {
+    date:'2026-08-19', storeKey:'ki_dongmen', store:'台北原綺', brand:'原綺', brandKey:'ki',
+    consultant:'陳甯',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0},      // 何瑀宸，頰凹填充，未成交
+    ]
+  },
+  // ─── 8/19 台中原綺 ────────────────────────────────────────
+  {
+    date:'2026-08-19', storeKey:'ki_taichung', store:'台中原綺', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:61887}, // 李若喬，無雙電波，成交
+    ]
+  },
+  {
+    date:'2026-08-19', storeKey:'ki_taichung', store:'台中原綺', brand:'原綺', brandKey:'ki',
+    consultant:'呂秋玫',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:32999}, // 陳熙蕾，鼻部埋線，成交
     ]
   },
   // 新增記錄時複製上面的格式
