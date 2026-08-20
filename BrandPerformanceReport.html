@@ -3463,26 +3463,81 @@ const KI_DETAIL = {
         {n:'徐佳怡',c:'何欣穎',amt:'$48,000',s:true},{n:'曹雅涵',c:'何欣穎',amt:'$76,998',s:true},{n:'王惠儀',c:'何欣穎',amt:'$186,000',s:true},{n:'賴玥廷',c:'郭子萍',amt:'$48,000',s:true},{n:'高婉婷',c:'郭子萍',amt:'$21,999',s:true}]},
       {date:'8月18日（二）',meta:'新客 3 人｜成交 2 人',total:'$129,994',rows:[
         {n:'林宜臻',c:'呂秋玫',amt:'$128,495',s:true},{n:'黃儀芝',c:'郭子萍',amt:'—',s:false},{n:'李嘉琪',c:'郭子萍',amt:'$1,499',s:true}]},
+      {date:'8月19日（三）',meta:'新客 2 人｜成交 2 人',total:'$94,886',rows:[
+        {n:'李若喬',c:'郭子萍',amt:'$61,887',s:true},{n:'陳熙蕾',c:'呂秋玫',amt:'$32,999',s:true}]},
     ]
   }
 };
 
 function showKiDetail(storeKey){
-  const d = KI_DETAIL[storeKey]; if(!d) return;
-  const s = d.summary;
-  const daysHtml = d.days.map(day=>`
+  const d=KI_DETAIL[storeKey]; if(!d) return;
+  const s=d.summary;
+  const overlay=document.getElementById('kiModalOverlay');
+  overlay.classList.remove('wo-mode');
+  const daysHtml=d.days.map(day=>`
     <div class="ki-day">
       <div class="ki-day-hd"><span>${day.date}</span><span class="ki-dmeta">${day.meta}</span><span>${day.total}</span></div>
       <table class="ki-tbl"><thead><tr><th>#</th><th>顧客姓名</th><th>諮詢師</th><th>業績</th><th>狀態</th></tr></thead><tbody>
       ${day.rows.map((r,i)=>`<tr><td>${i+1}</td><td>${r.n}</td><td><span class="ki-tag t-${r.c}">${r.c}</span></td><td class="${r.s?'ki-sold':'ki-no'}">${r.amt}</td><td class="${r.s?'ki-sold':'ki-no'}">${r.s?'✓ 成交':r.note?r.note:'✗ 未成交'}</td></tr>`).join('')}
       </tbody></table>
     </div>`).join('');
-  document.getElementById('kiModalTitle').textContent = d.title;
-  document.getElementById('kiModalSum').innerHTML = `<div><span>總新客：</span><strong>${s.total} 人</strong></div><div><span>成交：</span><strong>${s.sold} 人（${s.rate}）</strong></div><div><span>總業績：</span><strong>${s.rev}</strong></div>`;
-  document.getElementById('kiModalDays').innerHTML = daysHtml;
-  document.getElementById('kiModalOverlay').classList.add('open');
+  document.getElementById('kiModalTitle').textContent=d.title;
+  document.getElementById('kiModalSum').innerHTML=`<div><span>總新客：</span><strong>${s.total} 人</strong></div><div><span>成交：</span><strong>${s.sold} 人（${s.rate}）</strong></div><div><span>總業績：</span><strong>${s.rev}</strong></div>`;
+  document.getElementById('kiModalDays').innerHTML=daysHtml;
+  overlay.classList.add('open');
 }
-function closeKiModal(){document.getElementById('kiModalOverlay').classList.remove('open');}
+function showStoreDetail(storeKey){
+  if(KI_DETAIL[storeKey]){showKiDetail(storeKey);return;}
+  // 依照目前選擇的日期區間 filter
+  const now=new Date(), fmtD=d=>d.toISOString().slice(0,10);
+  const todayS=fmtD(now), yest=new Date(now);yest.setDate(yest.getDate()-1);const yestS=fmtD(yest);
+  const s=_csStart||(_csMonth?_csMonth+'-01':todayS), e=_csEnd||todayS;
+  const dateOk=date=>{
+    if(_csMode==='today')     return date===todayS;
+    if(_csMode==='yesterday') return date===yestS;
+    if(_csMode==='month')     return date.startsWith(_csMonth);
+    if(_csMode==='custom')    return date>=s&&date<=e;
+    return true;
+  };
+  const allRecs=(typeof CONSULTANT_RECORDS!=='undefined')?CONSULTANT_RECORDS:[];
+  const recs=allRecs.filter(r=>r.storeKey===storeKey&&dateOk(r.date));
+  const storeName=(allRecs.find(r=>r.storeKey===storeKey)||{}).store||storeKey;
+  const byDate={};
+  recs.forEach(rec=>{
+    rec.clients.filter(c=>c.type!=='未到').forEach(c=>{
+      if(!byDate[rec.date])byDate[rec.date]=[];
+      byDate[rec.date].push({consultant:rec.consultant,type:c.type,sold:c.total_amt>c.trial_amt,amt:c.total_amt});
+    });
+  });
+  const sortedDates=Object.keys(byDate).sort();
+  if(!sortedDates.length){return;}
+  let totalNew=0,totalSold=0,totalRev=0;
+  const wds=['日','一','二','三','四','五','六'];
+  const daysHtml=sortedDates.map(date=>{
+    const cls=byDate[date];
+    const daySold=cls.filter(c=>c.sold).length;
+    const dayRev=cls.filter(c=>c.sold).reduce((s,c)=>s+c.amt,0);
+    totalNew+=cls.length;totalSold+=daySold;totalRev+=dayRev;
+    const d=new Date(date),m=d.getMonth()+1,dy=d.getDate(),wd=wds[d.getDay()];
+    const rows=cls.map((c,i)=>`<tr><td>${i+1}</td><td><span class="ki-tag t-${c.consultant}">${c.consultant}</span></td><td class="${c.sold?'ki-sold':'ki-no'}">${c.sold?'$'+c.amt.toLocaleString():'—'}</td><td class="${c.sold?'ki-sold':'ki-no'}">${c.type==='其他'?'分享客':c.sold?'✓ 成交':'✗ 未成交'}</td></tr>`).join('');
+    return `<div class="ki-day"><div class="ki-day-hd"><span>${m}月${dy}日（${wd}）</span><span class="ki-dmeta">新客 ${cls.length} 人｜成交 ${daySold} 人</span><span>${dayRev>0?'$'+dayRev.toLocaleString():'—'}</span></div><table class="ki-tbl"><thead><tr><th>#</th><th>諮詢師</th><th>業績</th><th>狀態</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  }).join('');
+  // 標題日期範圍：依 filter mode 決定
+  let rangeLabel;
+  if(_csMode==='today') rangeLabel=todayS.slice(5).replace('-','/');
+  else if(_csMode==='yesterday') rangeLabel=yestS.slice(5).replace('-','/');
+  else if(_csMode==='month') rangeLabel=`${parseInt(_csMonth.slice(5))}月`;
+  else{ const sd=new Date(s),ed=new Date(e); rangeLabel=`${sd.getMonth()+1}/${sd.getDate()}–${ed.getMonth()+1}/${ed.getDate()}`; }
+  const title=`${storeName} ${rangeLabel} 新客明細`;
+  const rate=totalNew>0?Math.round(totalSold/totalNew*100):0;
+  const overlay=document.getElementById('kiModalOverlay');
+  overlay.classList.add('wo-mode');
+  document.getElementById('kiModalTitle').textContent=title;
+  document.getElementById('kiModalSum').innerHTML=`<div><span>總新客：</span><strong>${totalNew} 人</strong></div><div><span>成交：</span><strong>${totalSold} 人（${rate}%）</strong></div><div><span>總業績：</span><strong>$${totalRev.toLocaleString()}</strong></div>`;
+  document.getElementById('kiModalDays').innerHTML=daysHtml;
+  overlay.classList.add('open');
+}
+function closeKiModal(){const o=document.getElementById('kiModalOverlay');o.classList.remove('open','wo-mode');}
 </script>
 
 <div class="ki-modal-overlay" id="kiModalOverlay" onclick="if(event.target===this)closeKiModal()">
