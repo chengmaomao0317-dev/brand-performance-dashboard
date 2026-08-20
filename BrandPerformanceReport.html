@@ -625,6 +625,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
 .t-何欣穎{background:#e8f5e9;color:#2e7d32}.t-柯孟君{background:#e3f2fd;color:#1565c0}
 .t-陳詩喬{background:#f3e5f5;color:#6a1b9a}.t-陳甯{background:#e8f5e9;color:#2e7d32}
 .t-計品卉{background:#fff3e0;color:#e65100}.t-公司{background:#eee;color:#555}
+.ki-modal-overlay.wo-mode .ki-modal-hd{background:#2d5a9e}
+.ki-modal-overlay.wo-mode .ki-sum{background:#eef2fb;border-color:#c5d0e8}
+.ki-modal-overlay.wo-mode .ki-sum strong{color:#2d5a9e}
+.ki-modal-overlay.wo-mode .ki-day-hd{background:#2d5a9e}
+.ki-modal-overlay.wo-mode .ki-tbl th{background:#dde5f5;color:#1a3a7a}
+.ki-modal-overlay.wo-mode .ki-day{border-color:#e0e8f5}
+.ki-modal-overlay.wo-mode .ki-tbl td{border-color:#e0e8f5}
+.ki-modal-overlay.wo-mode .ki-sold{color:#2d5a9e}
 </style>
 </head>
 <body>
@@ -3120,7 +3128,7 @@ function renderConsultantTab(){
     const rateStyle = s.成交率===null?'color:rgba(255,255,255,.5)':s.成交率>=70?'color:#7fe0a8':s.成交率>=50?'color:#ffd68a':'color:#ff9f9f';
     return `<div class="cs-store-wrap">
       <div class="cs-store-hd ${hdCls}">
-        <div class="cs-store-label"><span class="cs-store-nm">${storeName}</span><span class="cs-pill ${pillCls}">${brand}</span>${(storeKey==='ki_dongmen'||storeKey==='ki_taichung')?`<button onclick="event.stopPropagation();showKiDetail('${storeKey}')" style="margin-left:8px;padding:2px 9px;border:none;border-radius:10px;background:rgba(255,255,255,0.25);color:#fff;font-size:11px;cursor:pointer;font-weight:600">新客明細</button>`:''}</div>
+        <div class="cs-store-label"><span class="cs-store-nm">${storeName}</span><span class="cs-pill ${pillCls}">${brand}</span><button onclick="event.stopPropagation();showStoreDetail('${storeKey}')" style="margin-left:8px;padding:2px 9px;border:none;border-radius:10px;background:rgba(255,255,255,0.25);color:#fff;font-size:11px;cursor:pointer;font-weight:600">新客明細</button></div>
         <div class="cs-store-stats">
           <div class="cs-ss"><div class="cs-ss-v">${s.接待}</div><div class="cs-ss-l">新客接待</div></div>
           <div class="cs-ss"><div class="cs-ss-v">${s.成交}</div><div class="cs-ss-l">成交</div></div>
@@ -3400,8 +3408,8 @@ loadData();
 // ══════════════════════════════════════════
 const KI_DETAIL = {
   ki_dongmen: {
-    title:'台北原綺 8/1–8/18 新客明細',
-    summary:{total:54, sold:37, rate:'69%', rev:'$860,129'},
+    title:'台北原綺 8/1–8/19 新客明細',
+    summary:{total:59, sold:41, rate:'69%', rev:'$1,007,975'},
     days:[
       {date:'8月1日（五）',meta:'新客 3 人｜成交 3 人',total:'$175,797',rows:[
         {n:'林鈺淳',c:'柯孟君',amt:'$118,999',s:true},{n:'黃舒鈺',c:'陳詩喬',amt:'$14,999',s:true},{n:'徐雅瑩',c:'陳甯',amt:'$41,799',s:true}]},
