@@ -3488,8 +3488,7 @@ function showKiDetail(storeKey){
   overlay.classList.add('open');
 }
 function showStoreDetail(storeKey){
-  if(KI_DETAIL[storeKey]){showKiDetail(storeKey);return;}
-  // 依照目前選擇的日期區間 filter
+  // 依照目前選擇的日期區間 filter（ki / wo 統一動態生成）
   const now=new Date(), fmtD=d=>d.toISOString().slice(0,10);
   const todayS=fmtD(now), yest=new Date(now);yest.setDate(yest.getDate()-1);const yestS=fmtD(yest);
   const s=_csStart||(_csMonth?_csMonth+'-01':todayS), e=_csEnd||todayS;
@@ -3502,7 +3501,9 @@ function showStoreDetail(storeKey){
   };
   const allRecs=(typeof CONSULTANT_RECORDS!=='undefined')?CONSULTANT_RECORDS:[];
   const recs=allRecs.filter(r=>r.storeKey===storeKey&&dateOk(r.date));
-  const storeName=(allRecs.find(r=>r.storeKey===storeKey)||{}).store||storeKey;
+  const firstRec=allRecs.find(r=>r.storeKey===storeKey)||{};
+  const storeName=firstRec.store||storeKey;
+  const brandKey=firstRec.brandKey||'wo';
   const byDate={};
   recs.forEach(rec=>{
     rec.clients.filter(c=>c.type!=='未到').forEach(c=>{
@@ -3533,7 +3534,7 @@ function showStoreDetail(storeKey){
   const title=`${storeName} ${rangeLabel} 新客明細`;
   const rate=totalNew>0?Math.round(totalSold/totalNew*100):0;
   const overlay=document.getElementById('kiModalOverlay');
-  overlay.classList.add('wo-mode');
+  if(brandKey==='wo') overlay.classList.add('wo-mode'); else overlay.classList.remove('wo-mode');
   document.getElementById('kiModalTitle').textContent=title;
   document.getElementById('kiModalSum').innerHTML=`<div><span>總新客：</span><strong>${totalNew} 人</strong></div><div><span>成交：</span><strong>${totalSold} 人（${rate}%）</strong></div><div><span>總業績：</span><strong>$${totalRev.toLocaleString()}</strong></div>`;
   document.getElementById('kiModalDays').innerHTML=daysHtml;
