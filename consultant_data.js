@@ -1982,7 +1982,6 @@ const CONSULTANT_RECORDS = [
     date:'2026-08-03', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉',
     clients:[
-      {type:'新客', trial_amt:0, total_amt:0, name:'Lou'},      // Lou Som Lei，嘟嘟唇，已到未購
       {type:'新客', trial_amt:0, total_amt:14999, name:'范美儀'},  // 范美儀，微整雕塑喬亞登HAJ，成交
       {type:'新客', trial_amt:0, total_amt:14999, name:'Lou'},  // Lou Sio Kei，微整雕塑喬亞登HAJ，成交
       {type:'新客', trial_amt:0, total_amt:0, name:'蔡旻庭'},      // 蔡旻庭，肉毒，已到未購
