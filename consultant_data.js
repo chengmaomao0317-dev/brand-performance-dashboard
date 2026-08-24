@@ -3351,6 +3351,95 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:2000, total_amt:20750, name:'陳冠樺'},  // 音波6堂+2堂，成交（產品4280劉子嫻不計）
     ]
   },
+  // ─── 8/21 台北原綺 ────────────────────────────────────────
+  {
+    date:'2026-08-21', storeKey:'ki_dongmen', store:'台北原綺', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:1499,  name:'陳又瑄'},  // 肉毒除皺1區，成交
+    ]
+  },
+  {
+    date:'2026-08-21', storeKey:'ki_dongmen', store:'台北原綺', brand:'原綺', brandKey:'ki',
+    consultant:'柯孟君',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:57999, name:'沈依霓'},  // 仙女玻尿酸HA，成交
+    ]
+  },
+  // ─── 8/21 台中原綺 ────────────────────────────────────────
+  {
+    date:'2026-08-21', storeKey:'ki_taichung', store:'台中原綺', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:1499,  name:'呂婷儒'},  // 肉毒除皺1區，成交
+    ]
+  },
+  {
+    date:'2026-08-21', storeKey:'ki_taichung', store:'台中原綺', brand:'原綺', brandKey:'ki',
+    consultant:'呂秋玫',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:32999, name:'葉沼岑'},  // 仙女3CC+1CC，成交
+    ]
+  },
+  // ─── 8/21 大安 ───────────────────────────────────────────
+  {
+    date:'2026-08-21', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:18999, name:'陳永潔'},  // 肩頸8堂，成交
+    ]
+  },
+  // ─── 8/22 館前 ───────────────────────────────────────────
+  {
+    date:'2026-08-22', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:999,  total_amt:17874, name:'吳昀庭'},  // 音波6堂+1堂，成交
+      {type:'新客', trial_amt:6499, total_amt:6499,  name:'江盈慧'},  // 雙體驗未購，未成交
+      {type:'新客', trial_amt:2000, total_amt:4000,  name:'陳柚瑋'},  // 音波付訂未定課，成交
+      {type:'新客', trial_amt:2000, total_amt:77000, name:'陳錦晶'},  // 音波30堂，成交
+      {type:'新客', trial_amt:999,  total_amt:35999, name:'黃怡方'},  // 音波14堂，成交
+    ]
+  },
+  // ─── 8/22 忠孝 ───────────────────────────────────────────
+  {
+    date:'2026-08-22', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:1998, total_amt:38748, name:'劉可艾'},  // 小香肩+音波，成交
+    ]
+  },
+  // ─── 8/22 台中原渥 ───────────────────────────────────────
+  {
+    date:'2026-08-22', storeKey:'wo_taichung', store:'台中原渥', brand:'原渥', brandKey:'wo',
+    consultant:'林雨芸',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:2999,  name:'邱硯渝'},  // 音波體驗+付訂，成交
+      {type:'新客', trial_amt:999, total_amt:15399, name:'廖湘茹'},  // 肩頸6堂，成交
+    ]
+  },
+  // ─── 8/21 台中原渥 ───────────────────────────────────────
+  {
+    date:'2026-08-21', storeKey:'wo_taichung', store:'台中原渥', brand:'原渥', brandKey:'wo',
+    consultant:'呂秋玫',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:13959, name:'楊雅芳'},  // 肩頸6堂，成交
+    ]
+  },
+  {
+    date:'2026-08-21', storeKey:'wo_taichung', store:'台中原渥', brand:'原渥', brandKey:'wo',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999, name:'謝采慈'},  // 音波體驗，未成交
+    ]
+  },
+  {
+    date:'2026-08-21', storeKey:'wo_taichung', store:'台中原渥', brand:'原渥', brandKey:'wo',
+    consultant:'林雨芸',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:999, name:'陳玫君'},  // 音波體驗，未成交
+    ]
+  },
   // ─── 8/20 台中原渥 ───────────────────────────────────────
   {
     date:'2026-08-20', storeKey:'wo_taichung', store:'台中原渥', brand:'原渥', brandKey:'wo',
@@ -3358,6 +3447,24 @@ const CONSULTANT_RECORDS = [
     clients:[
       {type:'新客', trial_amt:999, total_amt:15999, name:'曾湘芸'},  // 音波6堂，成交
       {type:'新客', trial_amt:999, total_amt:999,   name:'詹詩儀'},  // 音波體驗，未成交
+    ]
+  },
+  // ─── 8/22 板橋 ───────────────────────────────────────────
+  {
+    date:'2026-08-22', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠',
+    clients:[
+      {type:'新客', trial_amt:999,  total_amt:15399, name:'陳慧君'},  // 香肩6堂，成交
+      {type:'新客', trial_amt:2000, total_amt:7999,  name:'江靜頤'},  // 體雕三堂，成交
+      {type:'新客', trial_amt:999,  total_amt:999,   name:'李婉秀'},  // 體雕體驗，未成交（產品1280簡郁珊不計）
+    ]
+  },
+  // ─── 8/21 板橋 ───────────────────────────────────────────
+  {
+    date:'2026-08-21', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:2000, name:'李姿靜'},  // 體雕體驗，未成交
     ]
   },
   // ─── 8/20 板橋 ───────────────────────────────────────────
@@ -3368,6 +3475,23 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:2999, total_amt:86249, name:'葉晏孜'},  // 體雕30堂，成交（780產品白婕瑜不計）
     ]
   },
+  // ─── 8/22 東門 ───────────────────────────────────────────
+  {
+    date:'2026-08-22', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:54000, name:'鄭艾珉'},  // 體雕14堂+夏日攻略，成交（產品400不計）
+      {type:'新客', trial_amt:2999, total_amt:32399, name:'周昱瑄'},  // 小香肩+體雕，成交
+    ]
+  },
+  // ─── 8/21 東門 ───────────────────────────────────────────
+  {
+    date:'2026-08-21', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:16400, name:'鄭巧筠'},  // 腹部體雕6堂，成交
+    ]
+  },
   // ─── 8/20 東門 ───────────────────────────────────────────
   {
     date:'2026-08-20', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
@@ -3376,6 +3500,28 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:2000, total_amt:17000, name:'周思妤'},  // 夏日攻略，成交（產品1280不計）
       {type:'新客', trial_amt:999,  total_amt:999,   name:'簡貝甯'},  // 體雕體驗，未成交
       {type:'新客', trial_amt:2999, total_amt:37999, name:'吳聖蕙'},  // 小香肩14堂，成交
+    ]
+  },
+  {
+    date:'2026-08-22', storeKey:'ki_dongmen', store:'台北原綺', brand:'原綺', brandKey:'ki',
+    consultant:'柯孟君',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0,     name:'謝羽柔'},
+      {type:'新客', trial_amt:0, total_amt:82498, name:'溫日賢'},
+    ]
+  },
+  {
+    date:'2026-08-22', storeKey:'ki_dongmen', store:'台北原綺', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:9999, name:'蔡亭君'},
+    ]
+  },
+  {
+    date:'2026-08-22', storeKey:'ki_dongmen', store:'台北原綺', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:0, name:'梁平'},
     ]
   },
   // 新增記錄時複製上面的格式
