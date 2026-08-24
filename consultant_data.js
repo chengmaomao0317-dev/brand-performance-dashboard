@@ -3412,7 +3412,7 @@ const CONSULTANT_RECORDS = [
   // ─── 8/22 台中原渥 ───────────────────────────────────────
   {
     date:'2026-08-22', storeKey:'wo_taichung', store:'台中原渥', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999, total_amt:2999,  name:'邱硯渝'},  // 音波體驗+付訂，成交
       {type:'新客', trial_amt:999, total_amt:15399, name:'廖湘茹'},  // 肩頸6堂，成交
@@ -3435,7 +3435,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-08-21', storeKey:'wo_taichung', store:'台中原渥', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999, total_amt:999, name:'陳玫君'},  // 音波體驗，未成交
     ]
@@ -3443,7 +3443,7 @@ const CONSULTANT_RECORDS = [
   // ─── 8/20 台中原渥 ───────────────────────────────────────
   {
     date:'2026-08-20', storeKey:'wo_taichung', store:'台中原渥', brand:'原渥', brandKey:'wo',
-    consultant:'林雨芸',
+    consultant:'林雨芑',
     clients:[
       {type:'新客', trial_amt:999, total_amt:15999, name:'曾湘芸'},  // 音波6堂，成交
       {type:'新客', trial_amt:999, total_amt:999,   name:'詹詩儀'},  // 音波體驗，未成交
