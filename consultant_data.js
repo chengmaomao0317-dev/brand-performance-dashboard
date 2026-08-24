@@ -2595,7 +2595,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-11', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    date:'2026-08-11', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
     consultant:'吳凱婷',
     clients:[
       {type:'新客', trial_amt:999, total_amt:999, name:'鐘蕙瑀'},   // 鐘蕙瑀，體驗音波(含大腿)，未成交
@@ -2603,7 +2603,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-11', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    date:'2026-08-11', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
     consultant:'廖梓涵',
     clients:[
       {type:'新客', trial_amt:999, total_amt:999, name:'張齡瑤'},   // 張齡瑤，體驗小香肩，未成交
@@ -2677,7 +2677,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-12', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    date:'2026-08-12', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
     consultant:'吳凱婷',
     clients:[
       {type:'新客', trial_amt:999,  total_amt:15724, name:'黃若涵'}, // 黃若涵，體驗音波+夏日C位攻略(生日95折)，成交
@@ -2686,7 +2686,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-12', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    date:'2026-08-12', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
     consultant:'廖梓涵',
     clients:[
       {type:'新客', trial_amt:999, total_amt:999, name:'王敏雯'},   // 王敏雯，體驗音波(含大腿)，未成交
@@ -2796,7 +2796,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-13', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    date:'2026-08-13', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
     consultant:'吳凱婷',
     clients:[
       {type:'新客', trial_amt:999,  total_amt:15399, name:'黃冠綺'}, // 黃冠綺，體驗小香肩+購6堂贈2堂，成交
@@ -2920,7 +2920,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-14', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    date:'2026-08-14', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
     consultant:'廖梓涵',
     clients:[
       {type:'新客', trial_amt:999, total_amt:8998, name:'陳品華'}, // 陳品華，體驗音波+夏日C位攻略4堂，成交
@@ -2929,7 +2929,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-15', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    date:'2026-08-15', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
     consultant:'廖梓涵',
     clients:[
       {type:'新客', trial_amt:2000, total_amt:17000, name:'林欣瑩'}, // 林欣瑩，體驗音波+購6堂贈2堂，成交
@@ -2938,7 +2938,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-15', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    date:'2026-08-15', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
     consultant:'吳凱婷',
     clients:[
       {type:'新客', trial_amt:2000, total_amt:2000, name:'蘇芃諭'},  // 蘇芃諭，體驗音波(大腿)，未成交
@@ -2947,7 +2947,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-15', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    date:'2026-08-15', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
     consultant:'公司',
     clients:[
       {type:'其他', trial_amt:0, total_amt:0, name:'曾詩茵'},        // 曾詩茵，杜伊茹分享音波1堂
@@ -3344,7 +3344,7 @@ const CONSULTANT_RECORDS = [
   },
   // ─── 8/20 館前 ───────────────────────────────────────────
   {
-    date:'2026-08-20', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    date:'2026-08-20', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
     consultant:'廖梓涵',
     clients:[
       {type:'新客', trial_amt:2000, total_amt:20750, name:'李馨均'},  // 音波6堂+2堂，成交（產品4280吳玉卿不計）
@@ -3391,7 +3391,7 @@ const CONSULTANT_RECORDS = [
   },
   // ─── 8/22 館前 ───────────────────────────────────────────
   {
-    date:'2026-08-22', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+    date:'2026-08-22', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
     consultant:'吳凱婷',
     clients:[
       {type:'新客', trial_amt:999,  total_amt:17874, name:'吳昀庭'},  // 音波6堂+1堂，成交
