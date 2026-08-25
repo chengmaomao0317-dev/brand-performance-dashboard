@@ -3586,5 +3586,19 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:2000, total_amt:77000, name:'陳韵茹'},
     ]
   },
+  {
+    date:'2026-08-24', storeKey:'ki_dongmen', store:'台北原綺', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:88000, name:'練瑋庭'},
+    ]
+  },
+  {
+    date:'2026-08-24', storeKey:'ki_dongmen', store:'台北原綺', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:180000, name:'黃淑怡'},
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
