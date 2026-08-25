@@ -3524,5 +3524,67 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:0, total_amt:0, name:'梁平'},
     ]
   },
+  {
+    date:'2026-08-24', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:37000, name:'吳珮芸'},
+      {type:'新客', trial_amt:2000, total_amt:17000, name:'蘇翌婷'},
+      {type:'新客', trial_amt:2000, total_amt:7999,  name:'林宜蓁'},
+    ]
+  },
+  {
+    date:'2026-08-24', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠',
+    clients:[
+      {type:'新客', trial_amt:7199, total_amt:7199, name:'呂冠慧'},
+      {type:'新客', trial_amt:2000, total_amt:2000, name:'蔡宜璇'},
+    ]
+  },
+  {
+    date:'2026-08-24', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:35999, name:'沈洛萍'},
+    ]
+  },
+  {
+    date:'2026-08-24', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:18999, name:'黃子凌'},
+    ]
+  },
+  {
+    date:'2026-08-24', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:999,  total_amt:15999, name:'杜鎔羽'},
+      {type:'新客', trial_amt:999,  total_amt:35999, name:'陳宣如'},
+    ]
+  },
+  {
+    date:'2026-08-24', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:999,  total_amt:999,  name:'李康薇'},   // 體驗未成交
+      {type:'新客', trial_amt:1998, total_amt:1998, name:'葉芷萱'},   // 體驗未成交，780自有產品劉沐晨售不計
+    ]
+  },
+  {
+    date:'2026-08-24', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞杉',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:4000, name:'林洛嫻'},  // 體驗+付訂，成交
+      {type:'新客', trial_amt:999,  total_amt:999,  name:'許毓芳'},  // 體驗未成交
+    ]
+  },
+  {
+    date:'2026-08-24', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:2000, total_amt:77000, name:'陳韵茹'},
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
