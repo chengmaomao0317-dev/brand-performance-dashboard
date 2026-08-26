@@ -3665,5 +3665,81 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:0, total_amt:3500, name:'李佩葿'},
     ]
   },
+  // ─── 2026-08-01 東門 ──────────────────────────
+  {
+    date:'2026-08-01', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'陳怡帆'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'張心華'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'雍華珮'},
+    ]
+  },
+  {
+    date:'2026-08-01', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'其他',
+    clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'詹靜宜'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'黃豐筑'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'葉亙慈'},
+    ]
+  },
+  // ─── 2026-08-03 東門 ──────────────────────────
+  {
+    date:'2026-08-03', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'蔡子琪'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'丁予晨'},
+    ]
+  },
+  {
+    date:'2026-08-03', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'其他',
+    clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'洪珮珊'},
+    ]
+  },
+  // ─── 2026-08-04 東門 ──────────────────────────
+  {
+    date:'2026-08-04', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      {type:'舊客體驗', trial_amt:7499, total_amt:0, name:'吳嘉馨'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'鄭宜庭'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'趙立嬅'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'夏芷柔'},
+    ]
+  },
+  {
+    date:'2026-08-04', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'其他',
+    clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'張舒媛'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'黃鈺淩'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'鄭舒文'},
+    ]
+  },
+  // ─── 2026-08-05 東門 ──────────────────────────
+  {
+    date:'2026-08-05', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      {type:'舊客體驗', trial_amt:1998, total_amt:7999, name:'許瑩瑄'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'丁予晨'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'范家嘉'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'李怡慧'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'劉巧婷'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'楊雨禾'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'顏利庭'},
+    ]
+  },
+  {
+    date:'2026-08-05', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'其他',
+    clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'林雅珮'},
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
