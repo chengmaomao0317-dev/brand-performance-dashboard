@@ -3639,7 +3639,7 @@ const CONSULTANT_RECORDS = [
   },
   {
     date:'2026-08-25', storeKey:'ki_dongmen', store:'台北原綺', brand:'原綺', brandKey:'ki',
-    consultant:'陳竇',
+    consultant:'陳甯',
     clients:[
       {type:'新客', trial_amt:0, total_amt:100888, name:'林依璇'},
     ]
