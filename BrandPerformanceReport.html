@@ -3103,7 +3103,8 @@ function renderConsultantTab(){
         if(c.type==='舊客'){totalOld++;}
         else if(c.type==='舊客體驗'){
           totalOld++;newTrial++;
-          if(c.total_amt>c.trial_amt){purchased++;revSum+=c.trial_amt+c.total_amt;}
+          revSum+=c.trial_amt; // 體驗金額全數計入
+          if(c.total_amt>c.trial_amt){purchased++;revSum+=c.total_amt;} // 成交再加課程金額
         }
       });
     });
