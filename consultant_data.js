@@ -3600,5 +3600,63 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:0, total_amt:180000, name:'黃淑怡'},
     ]
   },
+  {
+    date:'2026-08-25', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      {type:'新客', trial_amt:1499, total_amt:3499, name:'宋怡岱'},  // 體驗+訂金，成交
+    ]
+  },
+  {
+    date:'2026-08-25', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠',
+    clients:[
+      {type:'新客', trial_amt:1998, total_amt:24997, name:'許心瑜'},  // 500自有產品蕭雅琪售不計
+    ]
+  },
+  {
+    date:'2026-08-25', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'新客', trial_amt:1998, total_amt:17498, name:'王羿文'},
+    ]
+  },
+  {
+    date:'2026-08-25', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'公司',
+    clients:[
+      {type:'其他', trial_amt:0, total_amt:0, name:'林千洐'},  // 分享客，潘姿璿分享一堂
+    ]
+  },
+  {
+    date:'2026-08-25', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:999,  total_amt:999,   name:'洪維恆'},  // 體驗未成交
+      {type:'新客', trial_amt:999,  total_amt:999,   name:'陳妤涵'},  // 體驗未成交，780自有產品劉子嫻售不計
+      {type:'新客', trial_amt:1998, total_amt:17498, name:'周曉恩'},  // 成交
+    ]
+  },
+  {
+    date:'2026-08-25', storeKey:'ki_dongmen', store:'台北原綺', brand:'原綺', brandKey:'ki',
+    consultant:'陳竇',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:100888, name:'林依璇'},
+    ]
+  },
+  {
+    date:'2026-08-25', storeKey:'ki_dongmen', store:'台北原綺', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:31398, name:'吳蕙君'},
+    ]
+  },
+  {
+    date:'2026-08-25', storeKey:'ki_dongmen', store:'台北原綺', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:14999, name:'張雁筑'},
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
