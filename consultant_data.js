@@ -3658,5 +3658,12 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:0, total_amt:14999, name:'張雁筑'},
     ]
   },
+  {
+    date:'2026-08-25', storeKey:'ki_taichung', store:'台中原綺', brand:'原綺', brandKey:'ki',
+    consultant:'何欣穎',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:3500, name:'李佩葿'},
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
