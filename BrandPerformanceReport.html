@@ -3076,18 +3076,28 @@ function renderConsultantTab(){
   // 計算每筆 record 的統計
   // includeOther=true：'其他'(分享客)納入接待數，但不計入成交（用於門市/品牌/總計）
   // includeOther=false：只計新客，用於諮詢師個人統計
-  function calcStats(recs, includeOther=false){
+  // storeLevel=true  → 店總：未成交算 trial_amt；成交算 trial_amt + total_amt
+  // storeLevel=false → 諮詢師：未成交不計；成交只算 total_amt
+  function calcStats(recs, includeOther=false, storeLevel=false){
     let 接待=0, 成交=0, totalAmt=0;
     recs.forEach(r => {
       r.clients.forEach(c=>{
         if(c.type==='新客'){
           接待++;
-          totalAmt += c.total_amt;
-          if(c.total_amt > c.trial_amt) 成交++;
+          const converted = c.total_amt > 0; // 有課程金額即成交（含訂金）
+          const pAmt = c.product_amt || 0;
+          if(storeLevel){
+            totalAmt += c.trial_amt + pAmt;
+            if(converted) totalAmt += c.total_amt;
+          } else {
+            totalAmt += pAmt; // 自有產品通用計入
+            if(converted) totalAmt += c.total_amt;
+          }
+          if(converted) 成交++;
         } else if(c.type==='其他' && includeOther){
           接待++;
-          totalAmt += c.total_amt;
-          // 分享客不計入成交
+          // 分享客不計成交
+          if(storeLevel) totalAmt += c.trial_amt + (c.product_amt||0);
         }
       });
     });
@@ -3103,7 +3113,7 @@ function renderConsultantTab(){
         if(c.type==='舊客'){totalOld++;}
         else if(c.type==='舊客體驗'){
           totalOld++;newTrial++;
-          revSum+=c.trial_amt; // 體驗金額全數計入
+          revSum+=c.trial_amt+(c.product_amt||0); // 體驗金額+自有產品全數計入
           if(c.total_amt>c.trial_amt){purchased++;revSum+=c.total_amt;} // 成交再加課程金額
         }
       });
@@ -3111,7 +3121,7 @@ function renderConsultantTab(){
     const 開發率=totalOld>0?Math.round(newTrial/totalOld*100):null;
     const 成交率=newTrial>0?Math.round(purchased/newTrial*100):null;
     const 舊客客單=newTrial>0?Math.round(revSum/newTrial):null;
-    return {totalOld,newTrial,purchased,未購買:newTrial-purchased,開發率,成交率,舊客客單};
+    return {totalOld,newTrial,purchased,未購買:newTrial-purchased,開發率,成交率,舊客客單,舊客業績:revSum};
   }
 
   function rateClr(r){ return r===null?'#aaa':r>=70?'#2a7a4a':r>=50?'#ba7517':'#a32d2d'; }
@@ -3128,7 +3138,7 @@ function renderConsultantTab(){
   // 品牌統計
   function brandBlock(brandKey, brandLabel){
     const br = records.filter(r=>r.brandKey===brandKey);
-    const s = calcStats(br, true);
+    const s = calcStats(br, true, true);
     const topCls = brandKey==='wo'?'cs-brand-top-wo':'cs-brand-top-ki';
     const nameCls = brandKey==='wo'?'wo':'ki';
     const stores = [...new Set(br.map(r=>r.storeKey))];
@@ -3137,7 +3147,7 @@ function renderConsultantTab(){
 
   // 門市+諮詢師區塊
   function storeHtml(storeKey, storeName, brand, brandKey, recs){
-    const s = calcStats(recs, true);
+    const s = calcStats(recs, true, true);
     const rs = calcRetStats(recs);
     const pillCls = brandKey==='wo'?'cs-pill-wo':'cs-pill-ki';
     const avCls = brandKey==='wo'?'cs-av-wo':'cs-av-ki';
@@ -3186,7 +3196,7 @@ function renderConsultantTab(){
           <div class="cs-c-g"><div class="cs-c-gv">${crs.purchased}</div><div class="cs-c-gl">購買</div></div>
           <div class="cs-c-g"><div class="cs-c-gv" style="color:${rateClr(crs.成交率)}">${fmtRate(crs.成交率)}</div><div class="cs-c-gl">成交率</div></div>
         </div>
-        <div class="cs-c-foot">開發率 <strong>${fmtRate(crs.開發率)}</strong></div>`:''}
+        <div class="cs-c-foot">開發率 <strong>${fmtRate(crs.開發率)}</strong>　舊客業績 <strong>${fmtAmt(crs.舊客業績)}</strong></div>`:''}
       </div>`;
       const isOther = c==='其他';
       const avStyle = isOther ? 'background:#c8c4be;color:#fff' : '';
@@ -3244,7 +3254,7 @@ function renderConsultantTab(){
         <div class="cs-c-g"><div class="cs-c-gv">${crs公司.purchased}</div><div class="cs-c-gl">購買</div></div>
         <div class="cs-c-g"><div class="cs-c-gv" style="color:${rateClr(crs公司.成交率)}">${fmtRate(crs公司.成交率)}</div><div class="cs-c-gl">成交率</div></div>
       </div>
-      <div class="cs-c-foot">開發率 <strong>${fmtRate(crs公司.開發率)}</strong></div>`:''}
+      <div class="cs-c-foot">開發率 <strong>${fmtRate(crs公司.開發率)}</strong>　舊客業績 <strong>${fmtAmt(crs公司.舊客業績)}</strong></div>`:''}
     </div>`;
     const otherRow = has公司 ? `<div class="cs-c-card" style="opacity:.75">
       <div class="cs-c-card-hd">
@@ -3269,7 +3279,7 @@ function renderConsultantTab(){
     </div>` : '';
     return `<div class="cs-store-wrap">
       <div class="cs-store-hd ${hdCls}">
-        <div class="cs-store-label"><span class="cs-store-nm">${storeName}</span><span class="cs-pill ${pillCls}">${brand}</span><button onclick="event.stopPropagation();showStoreDetail('${storeKey}')" style="margin-left:8px;padding:2px 9px;border:none;border-radius:10px;background:rgba(255,255,255,0.25);color:#fff;font-size:11px;cursor:pointer;font-weight:600">新客明細</button></div>
+        <div class="cs-store-label"><span class="cs-store-nm">${storeName}</span><span class="cs-pill ${pillCls}">${brand}</span><button onclick="event.stopPropagation();showStoreDetail('${storeKey}')" style="margin-left:8px;padding:2px 9px;border:none;border-radius:10px;background:rgba(255,255,255,0.25);color:#fff;font-size:11px;cursor:pointer;font-weight:600">新客明細</button>${rs.totalOld>0?`<button onclick="event.stopPropagation();showRetDetail('${storeKey}')" style="margin-left:5px;padding:2px 9px;border:none;border-radius:10px;background:rgba(255,255,255,0.15);color:#fff;font-size:11px;cursor:pointer;font-weight:600">舊客明細</button>`:''}</div>
         <div class="cs-store-stats">
           <div class="cs-ss"><div class="cs-ss-v">${s.接待}</div><div class="cs-ss-l">新客接待</div></div>
           <div class="cs-ss"><div class="cs-ss-v">${s.成交}</div><div class="cs-ss-l">成交</div></div>
@@ -3284,7 +3294,7 @@ function renderConsultantTab(){
 
   const wo = brandBlock('wo','原渥');
   const ki = brandBlock('ki','原綺');
-  const total = calcStats(records, true);
+  const total = calcStats(records, true, true);
 
   // 門市排序
   const STORE_ORDER = ['wo_zhanqian','wo_daan','wo_zhongxiao','wo_dongmen','wo_banqiao','wo_taichung','ki_dongmen','ki_taichung'];
@@ -3682,6 +3692,62 @@ function showStoreDetail(storeKey){
   overlay.classList.add('open');
 }
 function closeKiModal(){const o=document.getElementById('kiModalOverlay');o.classList.remove('open','wo-mode');}
+function showRetDetail(storeKey){
+  const now=new Date(), fmtD=d=>d.toISOString().slice(0,10);
+  const todayS=fmtD(now), yest=new Date(now);yest.setDate(yest.getDate()-1);const yestS=fmtD(yest);
+  const s=_csStart||(_csMonth?_csMonth+'-01':todayS), e=_csEnd||todayS;
+  const dateOk=date=>{
+    if(_csMode==='today')     return date===todayS;
+    if(_csMode==='yesterday') return date===yestS;
+    if(_csMode==='month')     return date.startsWith(_csMonth);
+    if(_csMode==='custom')    return date>=s&&date<=e;
+    return true;
+  };
+  const allRecs=(typeof CONSULTANT_RECORDS!=='undefined')?CONSULTANT_RECORDS:[];
+  const recs=allRecs.filter(r=>r.storeKey===storeKey&&dateOk(r.date));
+  const firstRec=allRecs.find(r=>r.storeKey===storeKey)||{};
+  const storeName=firstRec.store||storeKey;
+  const brandKey=firstRec.brandKey||'wo';
+  const byDate={};
+  recs.forEach(rec=>{
+    rec.clients.filter(c=>c.type==='舊客體驗').forEach(c=>{
+      if(!byDate[rec.date])byDate[rec.date]=[];
+      const sold=c.total_amt>c.trial_amt;
+      byDate[rec.date].push({consultant:rec.consultant,name:c.name||'',trial:c.trial_amt,total:sold?c.total_amt:0,sold});
+    });
+  });
+  const sortedDates=Object.keys(byDate).sort();
+  if(!sortedDates.length){alert('此區間無舊客新體驗資料');return;}
+  let totalTrial=0,totalSold=0,totalNew=0,totalRev=0;
+  const wds=['日','一','二','三','四','五','六'];
+  const daysHtml=sortedDates.map(date=>{
+    const cls=byDate[date];
+    const daySold=cls.filter(c=>c.sold).length;
+    const dayRev=cls.reduce((s,c)=>s+c.trial+(c.sold?c.total:0),0);
+    totalNew+=cls.length;totalSold+=daySold;totalRev+=dayRev;
+    const d=new Date(date),m=d.getMonth()+1,dy=d.getDate(),wd=wds[d.getDay()];
+    const rows=cls.map((c,i)=>{
+      const rowRev=c.trial+(c.sold?c.total:0);
+      const trialStr='$'+c.trial.toLocaleString();
+      const totalStr=c.sold?'$'+c.total.toLocaleString():'—';
+      return `<tr><td>${i+1}</td><td>${c.name||'—'}</td><td><span class="ki-tag t-${c.consultant}">${c.consultant}</span></td><td>${trialStr}</td><td class="${c.sold?'ki-sold':'ki-no'}">${totalStr}</td><td class="${c.sold?'ki-sold':'ki-no'}">${c.sold?'✓ 成交':'✗ 未成交'}</td><td>$${rowRev.toLocaleString()}</td></tr>`;
+    }).join('');
+    return `<div class="ki-day"><div class="ki-day-hd"><span>${m}月${dy}日（${wd}）</span><span class="ki-dmeta">體驗 ${cls.length} 人｜成交 ${daySold} 人</span><span>${dayRev>0?'$'+dayRev.toLocaleString():'—'}</span></div><table class="ki-tbl"><thead><tr><th>#</th><th>顧客姓名</th><th>諮詢師</th><th>體驗金</th><th>課程金</th><th>狀態</th><th>合計</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  }).join('');
+  let rangeLabel;
+  if(_csMode==='today') rangeLabel=todayS.slice(5).replace('-','/');
+  else if(_csMode==='yesterday') rangeLabel=yestS.slice(5).replace('-','/');
+  else if(_csMode==='month') rangeLabel=`${parseInt(_csMonth.slice(5))}月`;
+  else{ const sd=new Date(s),ed=new Date(e); rangeLabel=`${sd.getMonth()+1}/${sd.getDate()}–${ed.getMonth()+1}/${ed.getDate()}`; }
+  const title=`${storeName} ${rangeLabel} 舊客新體驗明細`;
+  const rate=totalNew>0?Math.round(totalSold/totalNew*100):0;
+  const overlay=document.getElementById('kiModalOverlay');
+  if(brandKey==='wo') overlay.classList.add('wo-mode'); else overlay.classList.remove('wo-mode');
+  document.getElementById('kiModalTitle').textContent=title;
+  document.getElementById('kiModalSum').innerHTML=`<div><span>新體驗：</span><strong>${totalNew} 人</strong></div><div><span>成交：</span><strong>${totalSold} 人（${rate}%）</strong></div><div><span>舊客業績：</span><strong>$${totalRev.toLocaleString()}</strong></div>`;
+  document.getElementById('kiModalDays').innerHTML=daysHtml;
+  overlay.classList.add('open');
+}
 </script>
 
 <div class="ki-modal-overlay" id="kiModalOverlay" onclick="if(event.target===this)closeKiModal()">
