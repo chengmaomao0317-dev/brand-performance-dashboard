@@ -4316,5 +4316,42 @@ const CONSULTANT_RECORDS = [
       {type:'舊客', trial_amt:0,   total_amt:0, name:'蔡淑華'},
     ]
   },
+  // ─── 台中原綺 2026-08-26 ──────────────────────────────────
+  {
+    date:'2026-08-26', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'何欣穎',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:100000, name:'沈若筠'},
+    ]
+  },
+  // ─── 台北原綺 2026-08-26 ──────────────────────────────────
+  {
+    date:'2026-08-26', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'柯孟君',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:68999, name:'賴岱瑛'},
+      {type:'新客', trial_amt:0, total_amt:31999, name:'杜籽济'},
+      {type:'新客', trial_amt:0, total_amt:111499, name:'潘欣蕾'},
+      {type:'新客', trial_amt:0, total_amt:0,      name:'邱羿捷'},
+    ]
+  },
+  {
+    date:'2026-08-26', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳甯',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:32998, name:'黃栩鎧'},
+      {type:'新客', trial_amt:0, total_amt:86887, name:'洪嘉憶'},
+      {type:'新客', trial_amt:0, total_amt:0,     name:'蔡秀娥'},
+    ]
+  },
+  {
+    date:'2026-08-26', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:22000, name:'黃蜜蜜'},
+      {type:'新客', trial_amt:0, total_amt:14999, name:'張雅情'},
+      {type:'新客', trial_amt:0, total_amt:0,     name:'林薇琦'},
+    ]
+  },
   // 新增記錄時複製上面的格式
 ];
