@@ -4316,6 +4316,209 @@ const CONSULTANT_RECORDS = [
       {type:'舊客', trial_amt:0,   total_amt:0, name:'蔡淑華'},
     ]
   },
+  // ─── 大安 2026-08-27 ──────────────────────────────────────
+  {
+    date:'2026-08-27', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞杉',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:2000, name:'吳雨桐'},
+      {type:'舊客', trial_amt:0,   total_amt:0,    name:'葉純佑'},
+      {type:'舊客', trial_amt:0,   total_amt:0,    name:'廖于晴'},
+      {type:'舊客', trial_amt:0,   total_amt:0,    name:'王信凱'},
+      {type:'舊客', trial_amt:0,   total_amt:0,    name:'卓麗君'},
+      {type:'舊客', trial_amt:0,   total_amt:0,    name:'許依雯'},
+      {type:'舊客', trial_amt:0,   total_amt:0,    name:'林芸菲'},
+    ]
+  },
+  {
+    date:'2026-08-27', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:9600,  name:'陳舒涵'},
+      {type:'舊客', trial_amt:0,   total_amt:20000, name:'盧潔儀'},
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'胡幼炘'},
+    ]
+  },
+  // ─── 站前 2026-08-27 ──────────────────────────────────────
+  {
+    date:'2026-08-27', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷',
+    clients:[
+      {type:'新客', trial_amt:1998, total_amt:15500, name:'林佳璇'},
+      {type:'新客', trial_amt:1998, total_amt:2000,  name:'丘庭如'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'王柏雯'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'曹雅瑄'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'劉安柔'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'汪盈柔'},
+    ]
+  },
+  {
+    date:'2026-08-27', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵',
+    clients:[
+      {type:'新客', trial_amt:2999, total_amt:20999, name:'吳又予'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'蘇珉儀'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'顏敏樺'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'陳潔'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'張子晴'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'范雪莉'},
+    ]
+  },
+  {
+    date:'2026-08-27', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'其他',
+    clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'陳雅婷'},
+    ]
+  },
+  // ─── 忠孝 2026-08-27 ──────────────────────────────────────
+  {
+    date:'2026-08-27', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸',
+    clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'何佳晏'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'周千慧'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'簡稚昀'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'柯佳忻'},
+    ]
+  },
+  {
+    date:'2026-08-27', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵',
+    clients:[
+      {type:'舊客', trial_amt:0, total_amt:2000, name:'劉千瑜'},
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'黃詩雨'},
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'曾亮瑄'},
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'韓婷伃'},
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'康嘉蘭'},
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'易涵'},
+    ]
+  },
+  {
+    date:'2026-08-27', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'其他',
+    clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'曾詩涵'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'廖怡嘉'},
+    ]
+  },
+  // ─── 台中 2026-08-27 ──────────────────────────────────────
+  {
+    date:'2026-08-27', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'林雨芑',
+    clients:[
+      {type:'新客',  trial_amt:999, total_amt:0,     name:'蕭芷蓁'},
+      {type:'舊客',  trial_amt:0,   total_amt:13680, name:'李瑞雅'},
+      {type:'舊客',  trial_amt:0,   total_amt:0,     name:'林芳毓'},
+      {type:'舊客',  trial_amt:0,   total_amt:0,     name:'黃君薇'},
+      {type:'舊客',  trial_amt:0,   total_amt:0,     name:'枋佳瑩'},
+      {type:'舊客',  trial_amt:0,   total_amt:0,     name:'林香伶'},
+      {type:'舊客',  trial_amt:0,   total_amt:0,     name:'曾雅淇'},
+      {type:'舊客',  trial_amt:0,   total_amt:0,     name:'鐘侑靜'},
+    ]
+  },
+  {
+    date:'2026-08-27', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:999, total_amt:40000, name:'曹幀柅'},
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'王家慧'},
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'邱映琬'},
+    ]
+  },
+  {
+    date:'2026-08-27', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'呂秋玫',
+    clients:[
+      {type:'舊客體驗', trial_amt:999, total_amt:15000, product_amt:500, name:'朱翌慈'},
+      {type:'舊客',     trial_amt:0,   total_amt:0,                      name:'陳儀容'},
+    ]
+  },
+  {
+    date:'2026-08-27', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'何欣穎',
+    clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'張馨予'},
+    ]
+  },
+  // ─── 板橋 2026-08-27 ──────────────────────────────────────
+  {
+    date:'2026-08-27', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠',
+    clients:[
+      {type:'新客',    trial_amt:2000, total_amt:0, name:'黃靖淳'},
+      {type:'舊客體驗', trial_amt:1299, total_amt:0, name:'吳宥婕'},
+      {type:'舊客',    trial_amt:0,    total_amt:0, name:'吳文琳'},
+      {type:'舊客',    trial_amt:0,    total_amt:0, name:'林倩好'},
+      {type:'舊客',    trial_amt:0,    total_amt:0, name:'李明瑋'},
+      {type:'舊客',    trial_amt:0,    total_amt:0, name:'江靜頤'},
+      {type:'舊客',    trial_amt:0,    total_amt:0, name:'葉芳好'},
+    ]
+  },
+  {
+    date:'2026-08-27', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'其他',
+    clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'陳家欣'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'簡敏芳'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'顏紫瑩'},
+    ]
+  },
+  // ─── 東門 2026-08-27 ──────────────────────────────────────
+  {
+    date:'2026-08-27', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆',
+    clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'胡馨芝'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'劉明宜'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'周欣誼'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'周怡婷'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'張閔筑'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'吳欣芸'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'張可慧'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'趙立媗'},
+    ]
+  },
+  {
+    date:'2026-08-27', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'其他',
+    clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'郭詠茹'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'涂志梅'},
+    ]
+  },
+  // ─── 台北原綺 2026-08-27 ──────────────────────────────────
+  {
+    date:'2026-08-27', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳甯',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:66000, name:'謝曉硯'},
+    ]
+  },
+  {
+    date:'2026-08-27', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:21999, name:'吳峻豪'},
+      {type:'新客', trial_amt:0, total_amt:21300, name:'蔡瑋憶'},
+    ]
+  },
+  {
+    date:'2026-08-27', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:45998, name:'呂品穎'},
+    ]
+  },
+  // ─── 台中原綺 2026-08-27 ──────────────────────────────────
+  {
+    date:'2026-08-27', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍',
+    clients:[
+      {type:'新客', trial_amt:0, total_amt:45899, name:'許家馨'},
+      {type:'新客', trial_amt:0, total_amt:0,     name:'唐依璿'},
+    ]
+  },
   // ─── 台中原綺 2026-08-26 ──────────────────────────────────
   {
     date:'2026-08-26', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
