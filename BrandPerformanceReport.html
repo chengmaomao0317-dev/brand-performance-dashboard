@@ -3351,10 +3351,13 @@ function renderConsultantTab(){
         </select>
         <button class="cs-seg-btn${_csMode==='custom'?' on':''}"    onclick="_csMode='custom';renderConsultantTab()">自訂</button>
       </div>
-      ${_csMode!=='month'?`<span style="font-size:12px;color:#999;margin-left:10px">${modeLabel}</span>`:''}
-      <button class="cs-trend-btn${_csTrendOpen?' on':''}" onclick="_csTrendOpen=!_csTrendOpen;renderConsultantTab()">客單趨勢 ${_csTrendOpen?'▲':'▼'}</button>
+      ${_csMode==='custom' ? `
+        <input type="date" class="cs-date-input" style="margin-left:8px" value="${_csStart}" onchange="_csStart=this.value;renderConsultantTab()">
+        <span style="color:#aaa;margin:0 6px">～</span>
+        <input type="date" class="cs-date-input" value="${_csEnd}" onchange="_csEnd=this.value;renderConsultantTab()">
+      ` : (_csMode!=='month'?`<span style="font-size:12px;color:#999;margin-left:10px">${modeLabel}</span>`:'')}
+      <button class="cs-trend-btn${_csTrendOpen?' on':''}" onclick="_csTrendOpen=!_csTrendOpen;renderConsultantTab()">新客客單趨勢 ${_csTrendOpen?'▲':'▼'}</button>
     </div>
-    ${customRow}
     ${(()=>{
       const refDate = _csMode==='month' ? _csMonth+'-01' : _csMode==='yesterday' ? yestStr : _csStart || todayStr;
       return refDate < '2026-07-01' ? `<div style="font-size:10px;color:#bbb8b2;margin-top:-6px;padding-bottom:6px">2026/07前資料參考用</div>` : '';
@@ -3425,14 +3428,15 @@ const NICKNAMES = {
 };
 
 // ══════════════════════════════════════════
-//  客單趨勢 Panel
+//  新客客單趨勢 Panel
 // ══════════════════════════════════════════
 function computeMonthlyAvg(){
   const raw={};
   CONSULTANT_RECORDS.forEach(rec=>{
     const key=`${rec.brandKey}|${rec.store}|${rec.consultant}|${rec.date.slice(0,7)}`;
     if(!raw[key]) raw[key]={bk:rec.brandKey,store:rec.store,cs:rec.consultant,mo:rec.date.slice(0,7),sum:0,n:0};
-    rec.clients.forEach(c=>{if(c.total_amt>c.trial_amt){raw[key].sum+=c.total_amt;raw[key].n++;}});
+    // 分母=接待人數（含未成交），分子=成交 total_amt 加總，與 detail card 一致
+    rec.clients.forEach(c=>{if(c.type==='新客'){raw[key].n++;if(c.total_amt>0)raw[key].sum+=c.total_amt;}});
   });
   const res={wo:{},ki:{}};
   Object.values(raw).forEach(({bk,store,cs,mo,sum,n})=>{
@@ -3497,7 +3501,7 @@ function computeStoreMonthlyAvg(){
     const key=`${rec.brandKey}|${rec.store}|${rec.date.slice(0,7)}`;
     if(!raw[key]) raw[key]={bk:rec.brandKey,store:rec.store,mo:rec.date.slice(0,7),sum:0,n:0};
     rec.clients.forEach(c=>{
-      if(c.type!=='其他'&&c.total_amt>c.trial_amt){raw[key].sum+=c.total_amt;raw[key].n++;}
+      if(c.type==='新客'){raw[key].n++;if(c.total_amt>0)raw[key].sum+=c.total_amt;}
     });
   });
   const res={wo:{},ki:{}};
