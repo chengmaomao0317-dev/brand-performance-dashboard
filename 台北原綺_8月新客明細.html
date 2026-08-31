@@ -33,6 +33,15 @@
 </style>
 </head>
 <body>
+<div id="pw-overlay" style="position:fixed;inset:0;z-index:9999;background:#000;display:flex;align-items:center;justify-content:center">
+  <div style="text-align:center;color:#fff">
+    <div style="font-size:13px;letter-spacing:3px;color:#888;margin-bottom:28px">LA LUEUR 原渥集團</div>
+    <input id="pw-input" type="password" placeholder="請輸入密碼" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:8px;color:#fff;font-size:15px;padding:12px 20px;width:240px;outline:none;text-align:center;letter-spacing:2px" onkeydown="if(event.key==='Enter')checkPw()">
+    <div id="pw-err" style="color:#e57373;font-size:12px;margin-top:10px;height:16px"></div>
+    <button onclick="checkPw()" style="margin-top:16px;background:#fff;color:#000;border:none;border-radius:8px;padding:10px 36px;font-size:13px;font-weight:600;cursor:pointer;letter-spacing:1px">進入</button>
+  </div>
+</div>
+<script>(function(){if(sessionStorage.getItem('pw_ok')==='1'){document.getElementById('pw-overlay').style.display='none';}})();function checkPw(){var v=document.getElementById('pw-input').value;if(v==='lalueur'){sessionStorage.setItem('pw_ok','1');document.getElementById('pw-overlay').style.display='none';}else{document.getElementById('pw-err').textContent='密碼錯誤，請再試一次';document.getElementById('pw-input').value='';document.getElementById('pw-input').focus();}}</script>
 <h1>台北原綺（診所東門）— 8/1 至 8/17 新客接待明細</h1>
 <div class="summary-bar">
   <div><span>統計期間：</span><strong>2026/8/1 – 8/17</strong></div>
