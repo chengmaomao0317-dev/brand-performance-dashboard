@@ -3077,6 +3077,7 @@ async function loadData(){
 //  RENDER: 諮詢師成交
 // ══════════════════════════════════════════
 let _csMode = 'month'; // 'today' | 'yesterday' | 'month' | 'custom'
+let _csClientFilter = 'all'; // 'all' | 'new' | 'ret'
 let _csMonth = '';    // YYYY-MM，月份選擇器
 let _csStart = '';
 let _csEnd   = '';
@@ -3201,7 +3202,7 @@ function renderConsultantTab(){
       const crs = calcRetStats(cr);
       const init = c.charAt(0);
       const hasRet = crs.totalOld > 0;
-      const newSec = `<div class="cs-c-sec">
+      const newSec = `<div class="cs-c-sec"${_csClientFilter==='ret'?' style="display:none"':''}>
         <div class="cs-c-sec-top">
           <div class="cs-c-sec-left">
             <span class="cs-c-tag cs-c-tag-new">新客</span>
@@ -3222,7 +3223,7 @@ function renderConsultantTab(){
           <div class="cs-c-g"><div class="cs-c-gv" style="color:${rateClr(cs.成交率)}">${fmtRate(cs.成交率)}</div><div class="cs-c-gl">成交率</div></div>
         </div>
       </div>`;
-      const retSec = `<div class="cs-c-sec">
+      const retSec = `<div class="cs-c-sec"${_csClientFilter==='new'?' style="display:none"':''}>
         <div class="cs-c-sec-top">
           <div class="cs-c-sec-left">
             <span class="cs-c-tag cs-c-tag-ret">舊客新體驗</span>
@@ -3243,12 +3244,13 @@ function renderConsultantTab(){
       </div>`;
       const isOther = c==='其他';
       const avStyle = isOther ? 'background:#c8c4be;color:#fff' : '';
+      const bodyStyle = _csClientFilter!=='all' ? ' style="grid-template-columns:1fr"' : '';
       return `<div class="cs-c-card">
         <div class="cs-c-card-hd">
           <div class="cs-av ${isOther?'':avCls}" style="${avStyle}">${isOther?'他':init}</div>
           <div><span class="cs-c-name">${c}</span>${NICKNAMES[c]?`<span class="cs-c-nick">${NICKNAMES[c]}</span>`:''}</div>
         </div>
-        <div class="cs-c-card-body">${newSec}${retSec}</div>
+        <div class="cs-c-card-body"${bodyStyle}>${newSec}${retSec}</div>
       </div>`;
     }).join('');
     // 公司列
@@ -3258,7 +3260,7 @@ function renderConsultantTab(){
     const crs公司 = calcRetStats(compRecs);
     const has公司 = cs公司.接待>0 || shareCount>0 || crs公司.totalOld>0;
     const 公司新客總接待 = cs公司.接待 + shareCount;
-    const 公司newSec = `<div class="cs-c-sec">
+    const 公司newSec = `<div class="cs-c-sec"${_csClientFilter==='ret'?' style="display:none"':''}>
       <div class="cs-c-sec-top">
         <div class="cs-c-sec-left">
           <span class="cs-c-tag cs-c-tag-new">新客</span>
@@ -3280,7 +3282,7 @@ function renderConsultantTab(){
       </div>
     </div>`;
     const has公司Ret = crs公司.totalOld > 0;
-    const 公司retSec = `<div class="cs-c-sec">
+    const 公司retSec = `<div class="cs-c-sec"${_csClientFilter==='new'?' style="display:none"':''}>
       <div class="cs-c-sec-top">
         <div class="cs-c-sec-left">
           <span class="cs-c-tag cs-c-tag-ret">舊客新體驗</span>
@@ -3299,17 +3301,18 @@ function renderConsultantTab(){
       </div>
       <div class="cs-c-foot">開發率 <strong>${fmtRate(crs公司.開發率)}</strong>　舊客業績 <strong>${fmtAmt(crs公司.舊客業績)}</strong></div>`:''}
     </div>`;
+    const 公司bodyStyle = _csClientFilter!=='all' ? ' style="grid-template-columns:1fr"' : '';
     const otherRow = has公司 ? `<div class="cs-c-card" style="opacity:.75">
       <div class="cs-c-card-hd">
         <div class="cs-av" style="background:#d0ccc6;color:#fff">公</div>
         <div><span class="cs-c-name">公司</span></div>
       </div>
-      <div class="cs-c-card-body">${公司newSec}${公司retSec}</div>
+      <div class="cs-c-card-body"${公司bodyStyle}>${公司newSec}${公司retSec}</div>
     </div>` : '';
     const hdCls = brandKey==='wo'?'cs-store-hd-wo':'cs-store-hd-ki';
     const rateStyle = s.成交率===null?'color:rgba(255,255,255,.5)':s.成交率>=70?'color:#7fe0a8':s.成交率>=50?'color:#ffd68a':'color:#ff9f9f';
     const retRateStyle = v => v===null?'color:rgba(255,255,255,.5)':v>=70?'color:#7fe0a8':v>=50?'color:#ffd68a':'color:#ff9f9f';
-    const retRow = rs.totalOld>0 ? `<div class="cs-store-ret">
+    const retRow = rs.totalOld>0 && _csClientFilter!=='new' ? `<div class="cs-store-ret">
       <div class="cs-store-ret-row">
         <div class="cs-ss"><div class="cs-ss-v">${rs.totalOld}</div><div class="cs-ss-l">總舊客</div></div>
         <div class="cs-ss"><div class="cs-ss-v">${rs.newTrial}</div><div class="cs-ss-l">新體驗</div></div>
@@ -3400,6 +3403,11 @@ function renderConsultantTab(){
         <input type="date" class="cs-date-input" value="${_csEnd}" onchange="_csEnd=this.value;renderConsultantTab()">
       ` : (_csMode!=='month'?`<span style="font-size:12px;color:#999;margin-left:10px">${modeLabel}</span>`:'')}
       <button class="cs-trend-btn${_csTrendOpen?' on':''}" onclick="_csTrendOpen=!_csTrendOpen;renderConsultantTab()">新客客單趨勢 ${_csTrendOpen?'▲':'▼'}</button>
+      <div class="cs-client-filter-seg" style="margin-left:auto;display:flex;border:.5px solid rgba(0,0,0,.15);border-radius:8px;overflow:hidden">
+        <button style="font-size:11px;padding:4px 12px;border:none;border-right:.5px solid rgba(0,0,0,.1);cursor:pointer;font-weight:500;transition:background .12s;${_csClientFilter==='all'?'background:#1a1a18;color:#fff':'background:#fff;color:#888'}" onclick="_csClientFilter='all';renderConsultantTab()">全部</button>
+        <button style="font-size:11px;padding:4px 12px;border:none;border-right:.5px solid rgba(0,0,0,.1);cursor:pointer;font-weight:500;transition:background .12s;${_csClientFilter==='new'?'background:#1a1a18;color:#fff':'background:#fff;color:#888'}" onclick="_csClientFilter='new';renderConsultantTab()">新客</button>
+        <button style="font-size:11px;padding:4px 12px;border:none;cursor:pointer;font-weight:500;transition:background .12s;${_csClientFilter==='ret'?'background:#1a1a18;color:#fff':'background:#fff;color:#888'}" onclick="_csClientFilter='ret';renderConsultantTab()">舊客</button>
+      </div>
     </div>
     ${(()=>{
       const refDate = _csMode==='month' ? _csMonth+'-01' : _csMode==='yesterday' ? yestStr : _csStart || todayStr;
