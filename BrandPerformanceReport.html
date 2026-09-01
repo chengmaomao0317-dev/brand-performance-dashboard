@@ -717,6 +717,29 @@ function checkPw(){
   </div>
 </nav>
 
+<!-- ═══ 計算邏輯 MODAL ═══ -->
+<div id="logic-modal" style="display:none;position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.6);align-items:center;justify-content:center;padding:20px" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#fff;border-radius:14px;max-width:420px;width:100%;padding:28px 28px 24px;box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative">
+    <button onclick="document.getElementById('logic-modal').style.display='none'" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;color:#aaa;cursor:pointer;line-height:1">×</button>
+    <div style="font-size:15px;font-weight:700;color:#111;margin-bottom:18px;letter-spacing:.3px">成交客單計算邏輯</div>
+    <div style="display:flex;flex-direction:column;gap:16px;font-size:13px;color:#333;line-height:1.8">
+      <div style="border-top:0px;padding-top:0px">
+        <div style="font-size:11px;color:#aaa;margin-bottom:12px">店與諮詢師通用，產品價僅含諮詢師本人銷售</div>
+        <div style="margin-bottom:10px">
+          <div style="font-weight:600;color:#555;margin-bottom:4px">新客（不計體驗價）</div>
+          <div>✓ 成交：課程價＋產品價</div>
+          <div style="color:#888">✗ 未成交：產品價</div>
+        </div>
+        <div>
+          <div style="font-weight:600;color:#555;margin-bottom:4px">舊客（計體驗價）</div>
+          <div>✓ 成交：體驗價＋課程價＋產品價</div>
+          <div style="color:#888">✗ 未成交：體驗價＋產品價</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ CONTENT ═══ -->
 <div class="page">
 
@@ -3109,13 +3132,9 @@ function renderConsultantTab(){
           接待++;
           const converted = c.total_amt > 0; // 有課程金額即成交（含訂金）
           const pAmt = c.product_amt || 0;
-          if(storeLevel){
-            totalAmt += c.trial_amt + pAmt;
-            if(converted) totalAmt += c.total_amt;
-          } else {
-            totalAmt += pAmt; // 自有產品通用計入
-            if(converted) totalAmt += c.total_amt;
-          }
+          // 新客皆不計體驗價
+          totalAmt += pAmt;
+          if(converted) totalAmt += c.total_amt;
           if(converted) 成交++;
         } else if(c.type==='其他' && includeOther){
           接待++;
@@ -3133,11 +3152,11 @@ function renderConsultantTab(){
     let totalOld=0,newTrial=0,purchased=0,revSum=0;
     recs.forEach(r=>{
       r.clients.forEach(c=>{
-        if(c.type==='舊客'){totalOld++;}
+        if(c.type==='舊客'){if(!c.noCount)totalOld++;}
         else if(c.type==='舊客體驗'){
           totalOld++;newTrial++;
-          revSum+=c.trial_amt+(c.product_amt||0); // 體驗金額+自有產品全數計入
-          if(c.total_amt>c.trial_amt){purchased++;revSum+=c.total_amt;} // 成交再加課程金額
+          revSum+=c.trial_amt; // 體驗金額計入（自有產品不計入舊客業績）
+          if(c.total_amt>0){purchased++;revSum+=c.total_amt;} // 成交再加課程金額
         }
       });
     });
@@ -3162,10 +3181,11 @@ function renderConsultantTab(){
   function brandBlock(brandKey, brandLabel){
     const br = records.filter(r=>r.brandKey===brandKey);
     const s = calcStats(br, true, true);
+    const rs = calcRetStats(br);
     const topCls = brandKey==='wo'?'cs-brand-top-wo':'cs-brand-top-ki';
     const nameCls = brandKey==='wo'?'wo':'ki';
     const stores = [...new Set(br.map(r=>r.storeKey))];
-    return {s, topCls, nameCls, stores, br, brandLabel};
+    return {s, rs, topCls, nameCls, stores, br, brandLabel};
   }
 
   // 門市+諮詢師區塊
@@ -3290,14 +3310,13 @@ function renderConsultantTab(){
     const rateStyle = s.成交率===null?'color:rgba(255,255,255,.5)':s.成交率>=70?'color:#7fe0a8':s.成交率>=50?'color:#ffd68a':'color:#ff9f9f';
     const retRateStyle = v => v===null?'color:rgba(255,255,255,.5)':v>=70?'color:#7fe0a8':v>=50?'color:#ffd68a':'color:#ff9f9f';
     const retRow = rs.totalOld>0 ? `<div class="cs-store-ret">
-      <div class="cs-store-ret-lbl">舊客</div>
       <div class="cs-store-ret-row">
         <div class="cs-ss"><div class="cs-ss-v">${rs.totalOld}</div><div class="cs-ss-l">總舊客</div></div>
         <div class="cs-ss"><div class="cs-ss-v">${rs.newTrial}</div><div class="cs-ss-l">新體驗</div></div>
         <div class="cs-ss"><div class="cs-ss-v" style="${retRateStyle(rs.開發率)}">${fmtRate(rs.開發率)}</div><div class="cs-ss-l">開發率</div></div>
         <div class="cs-ss"><div class="cs-ss-v">${rs.purchased}</div><div class="cs-ss-l">購買</div></div>
         <div class="cs-ss"><div class="cs-ss-v" style="${retRateStyle(rs.成交率)}">${fmtRate(rs.成交率)}</div><div class="cs-ss-l">成交率</div></div>
-        <div class="cs-ss"><div class="cs-ss-v">${rs.舊客客單===null?'—':'$'+rs.舊客客單.toLocaleString()}</div><div class="cs-ss-l">舊客客單</div></div>
+        <div class="cs-ss"><div class="cs-ss-v">${rs.舊客客單===null?'—':'$'+rs.舊客客單.toLocaleString()}</div><div class="cs-ss-l">新體驗客單</div></div>
       </div>
     </div>` : '';
     return `<div class="cs-store-wrap">
@@ -3373,6 +3392,7 @@ function renderConsultantTab(){
           })()}
         </select>
         <button class="cs-seg-btn${_csMode==='custom'?' on':''}"    onclick="_csMode='custom';renderConsultantTab()">自訂</button>
+        <button onclick="document.getElementById('logic-modal').style.display='flex'" style="background:rgba(0,0,0,.06);border:0.5px solid rgba(0,0,0,.15);color:#666;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;white-space:nowrap">計算邏輯 ?</button>
       </div>
       ${_csMode==='custom' ? `
         <input type="date" class="cs-date-input" style="margin-left:8px" value="${_csStart}" onchange="_csStart=this.value;renderConsultantTab()">
@@ -3428,6 +3448,14 @@ function renderConsultantTab(){
             <div class="cs-bs"><div class="cs-bs-v" style="color:${rateClr(b.s.成交率)}">${fmtRate(b.s.成交率)}</div><div class="cs-bs-l">成交率</div></div>
             <div class="cs-bs"><div class="cs-bs-v">${fmtAmt(b.s.平均客單)}</div><div class="cs-bs-l">平均客單</div></div>
           </div>
+          ${b.rs.totalOld>0?`<div style="display:grid;grid-template-columns:repeat(6,1fr);border-top:.5px solid rgba(0,0,0,.07);background:#f9f8f6">
+            <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px">${b.rs.totalOld}</div><div class="cs-bs-l">總舊客</div></div>
+            <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px">${b.rs.newTrial}</div><div class="cs-bs-l">新體驗</div></div>
+            <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px;color:${b.rs.開發率===null?'#aaa':b.rs.開發率>=70?'#2a7a4a':b.rs.開發率>=50?'#ba7517':'#a32d2d'}">${fmtRate(b.rs.開發率)}</div><div class="cs-bs-l">開發率</div></div>
+            <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px">${b.rs.purchased}</div><div class="cs-bs-l">購買</div></div>
+            <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px;color:${b.rs.成交率===null?'#aaa':b.rs.成交率>=70?'#2a7a4a':b.rs.成交率>=50?'#ba7517':'#a32d2d'}">${fmtRate(b.rs.成交率)}</div><div class="cs-bs-l">成交率</div></div>
+            <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px">${b.rs.舊客客單===null?'—':'$'+b.rs.舊客客單.toLocaleString()}</div><div class="cs-bs-l">新體驗客單</div></div>
+          </div>`:''}
         </div>`;
       }).join('')}
     </div>
@@ -3684,7 +3712,7 @@ function showStoreDetail(storeKey){
   const brandKey=firstRec.brandKey||'wo';
   const byDate={};
   recs.forEach(rec=>{
-    rec.clients.filter(c=>c.type!=='未到').forEach(c=>{
+    rec.clients.filter(c=>c.type==='新客'||c.type==='其他').forEach(c=>{
       if(!byDate[rec.date])byDate[rec.date]=[];
       byDate[rec.date].push({consultant:rec.consultant,type:c.type,sold:c.total_amt>c.trial_amt,amt:c.total_amt,name:c.name||''});
     });
