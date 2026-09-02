@@ -2318,6 +2318,7 @@ function renderBrandTrendChart(){
   const labels = MO_LABELS.slice(0, maxIdx+1);
   const kiData = labels.map((_,i)=> KI_STORES.reduce((s,k)=>s+(DATA[k].months[i]?.rev||0),0));
   const woData = labels.map((_,i)=> WO_STORES.reduce((s,k)=>s+(DATA[k].months[i]?.rev||0),0));
+  const totalData = kiData.map((v,i)=>v+woData[i]);
 
   // Last point = open circle (current month still in progress)
   const lastIdx = labels.length - 1;
@@ -2329,6 +2330,9 @@ function renderBrandTrendChart(){
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
         <span style="font-size:13px;font-weight:600;color:#1a1a18">品牌月業績趨勢</span>
         <div style="display:flex;gap:14px">
+          <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#555">
+            <div style="width:12px;height:12px;border-radius:2px;background:rgba(180,175,168,.35)"></div>雙品牌總計
+          </div>
           <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#555">
             <div style="width:18px;height:2.5px;background:#c04070;border-radius:2px"></div>原綺
           </div>
@@ -2343,23 +2347,35 @@ function renderBrandTrendChart(){
   if(_brandTrendChart){ _brandTrendChart.destroy(); _brandTrendChart=null; }
   const ctx = document.getElementById('brand-trend-canvas').getContext('2d');
   _brandTrendChart = new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
     data: {
       labels,
       datasets: [
         {
+          label:'雙品牌總計', data:totalData,
+          type:'bar',
+          backgroundColor:'rgba(180,175,168,.22)',
+          borderColor:'rgba(180,175,168,.4)',
+          borderWidth:1, borderRadius:4,
+          order:3
+        },
+        {
           label:'原綺', data:kiData,
+          type:'line',
           borderColor:'#c04070', backgroundColor:'rgba(192,64,112,0.07)',
           borderWidth:2, tension:0.35, fill:true,
           pointRadius:4, pointBorderWidth:2,
           pointBackgroundColor:kiPtBg, pointBorderColor:'#c04070',
+          order:1
         },
         {
           label:'原渥', data:woData,
+          type:'line',
           borderColor:'#2d5a9e', backgroundColor:'rgba(45,90,158,0.06)',
           borderWidth:2, tension:0.35, fill:true,
           pointRadius:4, pointBorderWidth:2,
           pointBackgroundColor:woPtBg, pointBorderColor:'#2d5a9e',
+          order:2
         }
       ]
     },
