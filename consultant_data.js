@@ -6411,6 +6411,19 @@ const CONSULTANT_RECORDS = [
       {type:'舊客', trial_amt:0, total_amt:0, name:'蔡妤晨'},
       {type:'舊客', trial_amt:0, total_amt:0, name:'周昱綺'},
     ]},
+  // ─── 東門 2026-09-03 ──────────────────────────────────────
+  { date:'2026-09-03', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆', clients:[
+      {type:'舊客體驗', trial_amt:999, total_amt:0,    name:'鄭吏婷'},
+      {type:'舊客',     trial_amt:0,   total_amt:0,    name:'周思好'},
+      {type:'舊客',     trial_amt:0,   total_amt:0,    name:'陳沛容'},
+      {type:'舊客',     trial_amt:0,   total_amt:9000, name:'楊羽樺'},
+      {type:'舊客',     trial_amt:0,   total_amt:0,    name:'李鈺慈'},
+      {type:'舊客',     trial_amt:0,   total_amt:0,    name:'周育瑄'},
+      {type:'舊客',     trial_amt:0,   total_amt:0,    name:'周欣誼'},
+      {type:'舊客',     trial_amt:0,   total_amt:0,    name:'吳聖蕙'},
+      {type:'舊客',     trial_amt:0,   total_amt:0,    name:'趙立嫣'},
+    ]},
   // ─── 東門 2026-08-31 ──────────────────────────────────────
   {
     date:'2026-08-31', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
