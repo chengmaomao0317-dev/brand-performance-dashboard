@@ -659,6 +659,48 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
 .ki-modal-overlay.wo-mode .ki-day{border-color:#e0e8f5}
 .ki-modal-overlay.wo-mode .ki-tbl td{border-color:#e0e8f5}
 .ki-modal-overlay.wo-mode .ki-sold{color:#2d5a9e}
+/* ══ 列印預覽 Modal ══ */
+.cs-print-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;align-items:center;justify-content:center;padding:20px}
+.cs-print-overlay.open{display:flex}
+.cs-print-modal{background:#fff;border-radius:14px;width:min(860px,100%);max-height:90vh;display:flex;flex-direction:column;overflow:hidden}
+.cs-print-mhd{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:.5px solid rgba(0,0,0,.09);flex-shrink:0}
+.cs-print-mhd-title{font-size:14px;font-weight:600;color:#1a1a18}
+.cs-print-mhd-right{display:flex;align-items:center;gap:8px}
+.cs-print-close{background:none;border:none;font-size:20px;color:#888;cursor:pointer;line-height:1;padding:2px 6px}
+.cs-print-do{font-size:12px;padding:6px 18px;border-radius:7px;background:#1a1a18;color:#fff;border:none;cursor:pointer;font-weight:500}
+.cs-print-body{overflow-y:auto;padding:20px 24px}
+.cs-print-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.cs-print-tbl th{font-size:10px;font-weight:500;color:#888;padding:6px 8px;border-bottom:.5px solid #d0cec8;text-align:right;white-space:nowrap;background:#fafaf8}
+.cs-print-tbl th:first-child,.cs-print-tbl th:nth-child(2){text-align:left}
+.cs-print-tbl td{padding:7px 8px;border-bottom:.5px solid #eae8e4;text-align:right;color:#1a1a18;vertical-align:middle}
+.cs-print-tbl td:first-child,.cs-print-tbl td:nth-child(2){text-align:left}
+.cs-print-tbl .pt-brand td{background:rgba(45,90,158,.04);color:#0c447c;font-size:11px;font-weight:500;padding:8px 12px;border-top:.5px solid #d0cec8;border-bottom:.5px solid #d0cec8}
+.cs-print-tbl .pt-brand.ki td{background:rgba(192,64,112,.04);color:#72243e}
+.cs-print-tbl .pt-store td{font-size:11px;font-weight:500;padding:7px 12px 7px 14px;border-top:.5px solid #d0cec8;border-bottom:.5px solid #d0cec8}
+.cs-print-tbl .pt-store.wo td{background:rgba(45,90,158,.06);color:#0c447c;border-left:3px solid #2d5a9e}
+.cs-print-tbl .pt-store.ki td{background:rgba(192,64,112,.06);color:#72243e;border-left:3px solid #c04070}
+.cs-print-tbl .pt-cs td:nth-child(2){padding-left:18px}
+.cs-print-nick{font-size:10px;color:#999;margin-left:5px}
+.cs-print-tbl .pt-sub td{background:#f9f7f4;font-weight:500;font-size:11px;color:#555;border-top:.5px solid #d0cec8;border-bottom:.5px solid #d0cec8}
+.cs-print-tbl .pt-sub.ki td{background:#fdf0f5}
+.cs-print-tbl tr:last-child td{border-bottom:none}
+.cs-print-rate-ok{color:#2a7a4a;font-weight:500}
+.cs-print-rate-mid{color:#ba7517;font-weight:500}
+.cs-print-rate-lo{color:#a32d2d;font-weight:500}
+.cs-print-dim{color:#ccc}
+.cs-print-range{font-size:11px;color:#888;margin-left:8px;font-weight:400}
+@media print{
+  body>*:not(.cs-print-overlay){display:none!important}
+  .cs-print-overlay{position:static;background:none;padding:0;display:block}
+  .cs-print-modal{max-height:none;border-radius:0;box-shadow:none;width:100%}
+  .cs-print-mhd-right{display:none}
+  .cs-print-body{overflow:visible;padding:10px 0}
+  .cs-print-tbl{font-size:10px}
+  .cs-print-tbl th,.cs-print-tbl td{padding:4px 6px}
+  .cs-print-tbl .pt-brand.ki{break-before:page;page-break-before:always}
+  .cs-print-pagebreak{display:none;break-before:page;page-break-before:always}
+  .cs-print-pagebreak td{padding:0;border:none;height:0}
+}
 </style>
 </head>
 <body>
@@ -3424,6 +3466,7 @@ function renderConsultantTab(){
         <button style="font-size:11px;padding:4px 12px;border:none;border-right:.5px solid rgba(0,0,0,.1);cursor:pointer;font-weight:500;transition:background .12s;${_csClientFilter==='new'?'background:#1a1a18;color:#fff':'background:#fff;color:#888'}" onclick="_csClientFilter='new';renderConsultantTab()">新客</button>
         <button style="font-size:11px;padding:4px 12px;border:none;cursor:pointer;font-weight:500;transition:background .12s;${_csClientFilter==='ret'?'background:#1a1a18;color:#fff':'background:#fff;color:#888'}" onclick="_csClientFilter='ret';renderConsultantTab()">舊客</button>
       </div>
+      <button onclick="openCSPrintPreview()" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:5px 13px;border-radius:7px;border:.5px solid rgba(45,90,158,.4);background:rgba(45,90,158,.07);color:#2d5a9e;cursor:pointer;font-weight:500;flex-shrink:0">🖨 列印清單</button>
     </div>
     ${(()=>{
       const refDate = _csMode==='month' ? _csMonth+'-01' : _csMode==='yesterday' ? yestStr : _csStart || todayStr;
@@ -3828,6 +3871,173 @@ function showRetDetail(storeKey){
   overlay.classList.add('open');
 }
 </script>
+
+<script>
+function openCSPrintPreview(){
+  // 重用 renderConsultantTab 裡的篩選邏輯取得 records
+  const now = new Date();
+  const fmt = d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  const todayStr = fmt(now);
+  const yest = new Date(now); yest.setDate(yest.getDate()-1);
+  const yestStr = fmt(yest);
+  const records = CONSULTANT_RECORDS.filter(r=>{
+    if(_csMode==='today')     return r.date===todayStr;
+    if(_csMode==='yesterday') return r.date===yestStr;
+    if(_csMode==='month')     return r.date.startsWith(_csMonth);
+    if(_csMode==='custom')    return r.date>=_csStart && r.date<=_csEnd;
+    return false;
+  });
+
+  // 標題時間標籤
+  let rangeLabel='';
+  if(_csMode==='today') rangeLabel=todayStr.replace(/-/g,'/');
+  else if(_csMode==='yesterday') rangeLabel=yestStr.replace(/-/g,'/');
+  else if(_csMode==='month') rangeLabel=`${_csMonth.replace('-','年')}月`;
+  else rangeLabel=`${_csStart.slice(5).replace('-','/')} ～ ${_csEnd.slice(5).replace('-','/')}`;
+
+  function calcNew(recs){
+    let 接待=0,成交=0,amt=0;
+    recs.forEach(r=>r.clients.forEach(c=>{
+      if(c.type==='新客'){
+        接待++;
+        const pAmt=c.product_amt||0;
+        amt+=pAmt;
+        if(c.total_amt>0){成交++;amt+=c.total_amt;}
+      }
+    }));
+    const 成交率=接待>0?Math.round(成交/接待*100):null;
+    const 客單=接待>0?Math.round(amt/接待):null;
+    return{接待,成交,成交率,客單};
+  }
+  function calcRet(recs){
+    let totalOld=0,newTrial=0,purchased=0,rev=0;
+    recs.forEach(r=>r.clients.forEach(c=>{
+      if(c.type==='舊客') totalOld++;
+      else if(c.type==='舊客體驗'){
+        totalOld++;newTrial++;
+        rev+=c.trial_amt;
+        if(c.total_amt>0){purchased++;rev+=c.total_amt;}
+      }
+    }));
+    const 成交率=newTrial>0?Math.round(purchased/newTrial*100):null;
+    return{totalOld,newTrial,purchased,成交率,rev};
+  }
+  function rateClr(r){return r===null?'cs-print-dim':r>=70?'cs-print-rate-ok':r>=50?'cs-print-rate-mid':'cs-print-rate-lo';}
+  function fmtAmt(v){return v===null?'<span class="cs-print-dim">—</span>':'$'+v.toLocaleString();}
+  function fmtRate(r){return r===null?'<span class="cs-print-dim">—</span>':`<span class="${rateClr(r)}">${r}%</span>`;}
+
+  // 按品牌→門市→諮詢師組織
+  const BRAND_ORDER=[{key:'wo',label:'原渥',color:'#2d5a9e'},{key:'ki',label:'原綺',color:'#c04070'}];
+  const STORE_ORDER=['wo_zhanqian','wo_daan','wo_zhongxiao','wo_banqiao','wo_dongmen','wo_taichung','ki_dongmen','ki_taichung'];
+  const STORE_NAMES={wo_zhanqian:'站前',wo_daan:'大安',wo_zhongxiao:'忠孝',wo_banqiao:'板橋',wo_dongmen:'東門',wo_taichung:'台中',ki_dongmen:'台北',ki_taichung:'台中'};
+
+  let rows='';
+  BRAND_ORDER.forEach(({key:bk,label:bl,color:bc},bi)=>{
+    const storeKeys=STORE_ORDER.filter(sk=>sk.startsWith(bk));
+    let brandNewTotal={接待:0,成交:0,amt:0};
+    let brandRetTotal={totalOld:0,newTrial:0,purchased:0,rev:0};
+    const storeBlocks=[];
+    storeKeys.forEach(sk=>{
+      const srecs=records.filter(r=>r.storeKey===sk);
+      if(!srecs.length) return;
+      const consultants=[...new Set(srecs.map(r=>r.consultant))].filter(c=>c!=='公司');
+      if(!consultants.length) return;
+      let storeRows='';
+      let sNewTot={接待:0,成交:0,amt:0};
+      let sRetTot={totalOld:0,newTrial:0,purchased:0,rev:0};
+      consultants.forEach(c=>{
+        const cr=srecs.filter(r=>r.consultant===c);
+        const n=calcNew(cr);
+        const ret=calcRet(cr);
+        const nick=NICKNAMES[c]?`<span class="cs-print-nick">${NICKNAMES[c]}</span>`:'';
+        storeRows+=`<tr class="pt-cs">
+          <td></td>
+          <td>${c}${nick}</td>
+          <td>${n.接待||'<span class="cs-print-dim">0</span>'}</td>
+          <td>${n.成交||'<span class="cs-print-dim">0</span>'}</td>
+          <td>${fmtRate(n.成交率)}</td>
+          <td>${fmtAmt(n.客單)}</td>
+          <td>${ret.totalOld||'<span class="cs-print-dim">0</span>'}</td>
+          <td>${ret.newTrial||'<span class="cs-print-dim">0</span>'}</td>
+          <td>${fmtRate(ret.成交率)}</td>
+          <td>${ret.rev>0?'$'+ret.rev.toLocaleString():'<span class="cs-print-dim">—</span>'}</td>
+        </tr>`;
+        // 累加門市小計（用原始值）
+        sNewTot.接待+=n.接待;sNewTot.成交+=n.成交;
+        if(n.客單!==null){sNewTot.amt+=n.客單*n.接待;}
+        sRetTot.totalOld+=ret.totalOld;sRetTot.newTrial+=ret.newTrial;sRetTot.purchased+=ret.purchased;sRetTot.rev+=ret.rev;
+      });
+      // 門市小計
+      const sNr=sNewTot.接待>0?Math.round(sNewTot.成交/sNewTot.接待*100):null;
+      const sNk=sNewTot.接待>0?Math.round(sNewTot.amt/sNewTot.接待):null;
+      const sRr=sRetTot.newTrial>0?Math.round(sRetTot.purchased/sRetTot.newTrial*100):null;
+      storeRows+=`<tr class="pt-sub${bk==='ki'?' ki':''}">
+        <td></td><td style="color:#555">${STORE_NAMES[sk]} 小計</td>
+        <td>${sNewTot.接待}</td><td>${sNewTot.成交}</td>
+        <td>${fmtRate(sNr)}</td><td>${fmtAmt(sNk)}</td>
+        <td>${sRetTot.totalOld}</td><td>${sRetTot.newTrial}</td>
+        <td>${fmtRate(sRr)}</td>
+        <td>${sRetTot.rev>0?'$'+sRetTot.rev.toLocaleString():'<span class="cs-print-dim">—</span>'}</td>
+      </tr>`;
+      storeBlocks.push({sk,rows:storeRows,sNewTot,sRetTot});
+      brandNewTotal.接待+=sNewTot.接待;brandNewTotal.成交+=sNewTot.成交;brandNewTotal.amt+=sNewTot.amt;
+      brandRetTotal.totalOld+=sRetTot.totalOld;brandRetTotal.newTrial+=sRetTot.newTrial;brandRetTotal.purchased+=sRetTot.purchased;brandRetTotal.rev+=sRetTot.rev;
+    });
+    if(!storeBlocks.length) return;
+    // 每個品牌用獨立 tbody；原綺的 tbody 加 break-before:page
+    const tbodyStyle = bk==='ki' ? ' style="break-before:page;page-break-before:always"' : '';
+    let bRows=`<tbody${tbodyStyle}>`;
+    bRows+=`<tr class="pt-brand${bk==='ki'?' ki':''}"><td colspan="10">${bl}</td></tr>`;
+    storeBlocks.forEach(({sk,rows:sr})=>{
+      bRows+=`<tr class="pt-store ${bk}"><td colspan="10">${STORE_NAMES[sk]}</td></tr>`;
+      bRows+=sr;
+    });
+    const bNr=brandNewTotal.接待>0?Math.round(brandNewTotal.成交/brandNewTotal.接待*100):null;
+    const bNk=brandNewTotal.接待>0?Math.round(brandNewTotal.amt/brandNewTotal.接待):null;
+    const bRr=brandRetTotal.newTrial>0?Math.round(brandRetTotal.purchased/brandRetTotal.newTrial*100):null;
+    bRows+=`<tr class="pt-sub${bk==='ki'?' ki':''}">
+      <td colspan="2" style="font-weight:600;color:${bc}">${bl} 合計</td>
+      <td>${brandNewTotal.接待}</td><td>${brandNewTotal.成交}</td>
+      <td>${fmtRate(bNr)}</td><td>${fmtAmt(bNk)}</td>
+      <td>${brandRetTotal.totalOld}</td><td>${brandRetTotal.newTrial}</td>
+      <td>${fmtRate(bRr)}</td>
+      <td>${brandRetTotal.rev>0?'$'+brandRetTotal.rev.toLocaleString():'<span class="cs-print-dim">—</span>'}</td>
+    </tr></tbody>`;
+    rows+=bRows;
+  });
+
+  const html=`<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px">
+    <div style="font-size:14px;font-weight:600;color:#1a1a18">諮詢師成交明細<span class="cs-print-range">${rangeLabel}</span></div>
+    <div style="font-size:10px;color:#bbb">原渥集團</div>
+  </div>
+  <table class="cs-print-tbl">
+    <thead><tr>
+      <th style="width:32px"></th><th style="width:110px">諮詢師</th>
+      <th>新客<br>接待</th><th>新客<br>成交</th><th>新客<br>成交率</th><th>平均<br>客單</th>
+      <th>舊客<br>接待</th><th>新體驗<br>人數</th><th>體驗<br>成交率</th><th>舊客<br>業績</th>
+    </tr></thead>
+    ${rows}
+  </table>`;
+
+  document.getElementById('csPrintBody').innerHTML=html;
+  document.getElementById('csPrintOverlay').classList.add('open');
+}
+function closeCSPrint(){document.getElementById('csPrintOverlay').classList.remove('open');}
+function doCSPrint(){window.print();}
+</script>
+
+<div class="cs-print-overlay" id="csPrintOverlay" onclick="if(event.target===this)closeCSPrint()">
+  <div class="cs-print-modal">
+    <div class="cs-print-mhd">
+      <span class="cs-print-mhd-title">列印預覽</span>
+      <div class="cs-print-mhd-right">
+        <button class="cs-print-do" onclick="doCSPrint()">🖨 列印</button>
+        <button class="cs-print-close" onclick="closeCSPrint()">×</button>
+      </div>
+    </div>
+    <div class="cs-print-body" id="csPrintBody"></div>
+  </div>
+</div>
 
 <div class="ki-modal-overlay" id="kiModalOverlay" onclick="if(event.target===this)closeKiModal()">
   <div class="ki-modal">
