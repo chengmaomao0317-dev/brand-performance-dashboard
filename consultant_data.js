@@ -7698,6 +7698,24 @@ const CONSULTANT_RECORDS = [
     consultant:'呂秋玫', clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'王禕婷'},
     ]},
+  // ─── 台中原綺 2026-09-08 ──────────────────────────────────
+  { date:'2026-09-08', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'何欣穎', clients:[
+      {type:'新客', trial_amt:0, total_amt:9999,  name:'巫欣育'},
+    ]},
+  { date:'2026-09-08', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'呂秋玫', clients:[
+      {type:'新客', trial_amt:0, total_amt:28888, name:'陳昕甜'},
+      {type:'新客', trial_amt:0, total_amt:64495, name:'繆景愉'},
+      {type:'新客', trial_amt:0, total_amt:39998, name:'林妘健'},
+      {type:'新客', trial_amt:0, total_amt:36998, name:'蘇彤榆'},
+    ]},
+  { date:'2026-09-08', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍', clients:[
+      {type:'新客', trial_amt:0, total_amt:73000, name:'楊惠凱'},
+      {type:'新客', trial_amt:0, total_amt:33498, name:'賴于昕'},
+      {type:'新客', trial_amt:0, total_amt:0,     name:'鄭宇珊'},
+    ]},
   // ─── 台中原綺 2026-09-04 ──────────────────────────────────
   { date:'2026-09-04', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
     consultant:'何欣穎', clients:[
