@@ -235,7 +235,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
 .yr-axis span{font-size:8px;color:#888780}
 
 /* ══ 每月業績狀況進度 Tab ══ */
-.mo-tabs-wrap{display:flex;gap:4px;margin-bottom:14px;background:#f0ede8;padding:4px;border-radius:10px;width:fit-content;position:sticky;top:125px;z-index:50}
+.mo-tabs-wrap{display:flex;gap:4px;margin-bottom:0;background:#f0ede8;padding:4px;border-radius:10px;width:fit-content;position:sticky;top:125px;z-index:50}
 .mo-tab-btn{padding:5px 14px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:500;color:#888;background:none;border:none;transition:background .12s}
 .mo-tab-btn:hover:not(.dim){background:rgba(0,0,0,.05)}
 .mo-tab-btn.active{background:#fff;color:#1a1a18;box-shadow:0 1px 3px rgba(0,0,0,.1)}
@@ -701,6 +701,40 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
   .cs-print-pagebreak{display:none;break-before:page;page-break-before:always}
   .cs-print-pagebreak td{padding:0;border:none;height:0}
 }
+/* ══ 新客配客進度 Modal ══ */
+.nc-open-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;font-size:12px;font-weight:500;border:0.5px solid rgba(45,90,158,.35);border-radius:8px;background:rgba(45,90,158,.07);color:#1a3a6e;cursor:pointer;transition:background .12s}
+.nc-open-btn:hover{background:rgba(45,90,158,.14)}
+.nc-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:999;align-items:center;justify-content:center}
+.nc-overlay.open{display:flex}
+.nc-modal{background:#fff;border-radius:16px;border:0.5px solid rgba(0,0,0,.1);width:400px;max-height:90vh;overflow-y:auto;box-shadow:0 16px 48px rgba(0,0,0,.18)}
+.nc-mhd{padding:18px 20px 12px;position:sticky;top:0;background:#fff;z-index:1;border-bottom:0.5px solid rgba(0,0,0,.08)}
+.nc-title{font-size:15px;font-weight:500;color:#1a1a18}
+.nc-sub{font-size:11px;color:#888780;margin-top:3px}
+.nc-hd-row{display:flex;justify-content:space-between;align-items:flex-start}
+.nc-xbtn{width:26px;height:26px;border-radius:50%;border:0.5px solid rgba(0,0,0,.12);background:#f5f4f0;cursor:pointer;font-size:15px;color:#888;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nc-xbtn:hover{background:#ebe9e3}
+.nc-edit-btn{display:inline-flex;align-items:center;gap:4px;margin-top:10px;padding:4px 10px;font-size:11px;border:0.5px solid rgba(0,0,0,.15);border-radius:6px;background:#f5f4f0;cursor:pointer;color:#666}
+.nc-edit-btn:hover{background:#ebe9e3}
+.nc-sec-hd{display:flex;align-items:center;gap:8px;padding:10px 20px 7px;border-top:0.5px solid rgba(0,0,0,.07)}
+.nc-brand-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.nc-sec-label{font-size:10px;font-weight:600;letter-spacing:.07em}
+.nc-col-hd{display:grid;grid-template-columns:78px 1fr 62px 38px 22px;padding:0 20px 5px;font-size:9.5px;color:#aaa;letter-spacing:.04em}
+.nc-row{display:grid;grid-template-columns:78px 1fr 62px 38px 22px;padding:7px 20px;align-items:center;border-top:0.5px solid rgba(0,0,0,.06)}
+.nc-row:nth-child(even){background:rgba(0,0,0,.018)}
+.nc-rname{font-size:12px;color:#1a1a18}
+.nc-bar-outer{position:relative;height:6px;background:#eeece7;border-radius:3px;margin-right:6px}
+.nc-bar-inner{height:100%;border-radius:3px;transition:width .3s}
+.nc-tick{position:absolute;top:-2px;width:2px;height:10px;background:#aaa;border-radius:1px;opacity:.55}
+.nc-nums{font-size:12px;font-weight:500;text-align:right}
+.nc-tgt{font-size:11px;color:#aaa;text-align:right}
+.nc-tgt-inp{width:36px;font-size:11px;border:0.5px solid #2d5a9e;border-radius:4px;padding:2px 4px;text-align:right;background:rgba(45,90,158,.07);color:#2d5a9e}
+.nc-ic{font-size:13px;text-align:center}
+.nc-footer{padding:9px 20px;border-top:0.5px solid rgba(0,0,0,.08);display:flex;justify-content:space-between;align-items:center;background:#faf9f7;border-radius:0 0 16px 16px;position:sticky;bottom:0}
+.nc-fnote{font-size:10px;color:#aaa}
+.nc-pills{display:flex;gap:8px}
+.nc-pill{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500}
+.nc-pill-ok{background:rgba(26,107,60,.1);color:#1a6b3c}
+.nc-pill-ng{background:rgba(192,57,43,.1);color:#c0392b}
 </style>
 </head>
 <body>
@@ -2299,7 +2333,10 @@ function renderTab4(){
   const achColor = tot_ach!==null&&tot_ach>=1?'#1a6b3c':'#c0392b';
 
   el.innerHTML=`
-    <div class="mo-tabs-wrap">${tabsHtml}</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:14px">
+      <div class="mo-tabs-wrap" style="margin-bottom:0">${tabsHtml}</div>
+      <button class="nc-open-btn" onclick="openNcModal()">👥 新客配客進度</button>
+    </div>
     <div class="mo-group-card">
       <div class="mo-group-label">集團月業績</div>
       <div class="mo-group-row">
@@ -3873,6 +3910,119 @@ function showRetDetail(storeKey){
 </script>
 
 <script>
+// ══════════════════════════════════════════
+//  新客配客進度 Modal
+// ══════════════════════════════════════════
+
+// ── 每月新客目標（每月初調整這裡）──
+// 格式：storeKey: 月目標人數
+const NC_TGT = {
+  wo_zhanqian: 50,
+  wo_daan:     40,
+  wo_zhongxiao:40,
+  wo_banqiao:  40,
+  wo_dongmen:  30,
+  wo_taichung: 50,
+  ki_taipei:   100,
+  ki_taichung: 50,
+};
+
+const NC_STORE_LABELS = {
+  wo_zhanqian:'站前', wo_daan:'大安', wo_zhongxiao:'忠孝',
+  wo_banqiao:'板橋',  wo_dongmen:'東門', wo_taichung:'台中原渥',
+  ki_taipei:'台北原綺', ki_taichung:'台中原綺',
+};
+
+let _ncEditing = false;
+
+function openNcModal(){
+  _ncEditing = false;
+  document.getElementById('ncEditBtn').textContent = '✏ 調整目標';
+  renderNcModal();
+  document.getElementById('ncOverlay').classList.add('open');
+}
+function closeNcModal(){
+  document.getElementById('ncOverlay').classList.remove('open');
+}
+function toggleNcEdit(){
+  _ncEditing = !_ncEditing;
+  document.getElementById('ncEditBtn').textContent = _ncEditing ? '✔ 完成' : '✏ 調整目標';
+  renderNcModal();
+}
+
+function renderNcModal(){
+  const now = new Date();
+  const mo = now.getMonth()+1;
+  const day = Math.max(1, now.getDate()-1);
+  const daysInMo = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+  const ratio = day / daysInMo;
+
+  document.getElementById('ncSub').textContent =
+    `${mo}/1–${mo}/${day} · 應達 = 月目標 × ${day}/${daysInMo}`;
+
+  // Gather current new_n from latest loaded monthly data
+  const moData = MO_SNAP_DATA[_curMoTab] || {};
+
+  function getCur(key){ return (moData[key]||{}).new_n || 0; }
+  function calcDue(key){ return Math.ceil((NC_TGT[key]||0) * ratio); }
+
+  function mkRow(key, clr){
+    const cur = getCur(key);
+    const due = calcDue(key);
+    const tgt = NC_TGT[key] || 0;
+    const ok  = cur >= due;
+    const numClr = ok ? '#1a6b3c' : '#c0392b';
+    const pct  = tgt > 0 ? Math.min(cur/tgt*100, 100).toFixed(1) : 0;
+    const tpct = tgt > 0 ? Math.min(due/tgt*100, 100).toFixed(1) : 0;
+    const tgtCell = _ncEditing
+      ? `<input class="nc-tgt-inp" type="number" value="${tgt}" min="1"
+           onchange="NC_TGT['${key}']=+this.value;renderNcModal()">`
+      : `<span class="nc-tgt">${tgt}</span>`;
+    return `<div class="nc-row">
+      <span class="nc-rname">${NC_STORE_LABELS[key]||key}</span>
+      <div style="padding-right:6px">
+        <div class="nc-bar-outer">
+          <div class="nc-bar-inner" style="width:${pct}%;background:${clr}"></div>
+          <div class="nc-tick" style="left:${tpct}%"></div>
+        </div>
+      </div>
+      <span class="nc-nums" style="color:${numClr}">${cur} / ${due}</span>
+      <div style="text-align:right">${tgtCell}</div>
+      <span class="nc-ic">${ok ? '✅' : '❗️'}</span>
+    </div>`;
+  }
+
+  const colHd = `<div class="nc-col-hd">
+    <span>門市</span><span></span>
+    <span style="text-align:right">目前/應達</span>
+    <span style="text-align:right">目標</span><span></span>
+  </div>`;
+
+  let html = '';
+  html += `<div class="nc-sec-hd">
+    <div class="nc-brand-dot" style="background:#2d5a9e"></div>
+    <span class="nc-sec-label" style="color:#1a3a6e">原渥</span>
+  </div>${colHd}`;
+  html += WO_STORES.map(k => mkRow(k, '#2d5a9e')).join('');
+
+  html += `<div class="nc-sec-hd" style="margin-top:4px">
+    <div class="nc-brand-dot" style="background:#c04070"></div>
+    <span class="nc-sec-label" style="color:#8c2044">原綺</span>
+  </div>${colHd}`;
+  html += KI_STORES.map(k => mkRow(k, '#c04070')).join('');
+
+  document.getElementById('ncBody').innerHTML = html;
+
+  const allKeys = [...WO_STORES, ...KI_STORES];
+  const okCnt = allKeys.filter(k => getCur(k) >= calcDue(k)).length;
+  const ngCnt = allKeys.length - okCnt;
+  document.getElementById('ncPills').innerHTML =
+    `<span class="nc-pill nc-pill-ok">${okCnt} 達標</span>
+     <span class="nc-pill nc-pill-ng">${ngCnt} 落後</span>`;
+}
+</script>
+
+<script>
 function openCSPrintPreview(){
   // 重用 renderConsultantTab 裡的篩選邏輯取得 records
   const now = new Date();
@@ -4047,6 +4197,27 @@ function doCSPrint(){window.print();}
     </div>
     <div class="ki-sum" id="kiModalSum"></div>
     <div class="ki-modal-body" id="kiModalDays"></div>
+  </div>
+</div>
+
+<!-- ── 新客配客進度 Modal ── -->
+<div class="nc-overlay" id="ncOverlay" onclick="if(event.target===this)closeNcModal()">
+  <div class="nc-modal">
+    <div class="nc-mhd">
+      <div class="nc-hd-row">
+        <div>
+          <div class="nc-title">新客配客進度</div>
+          <div class="nc-sub" id="ncSub"></div>
+        </div>
+        <button class="nc-xbtn" onclick="closeNcModal()" aria-label="關閉">✕</button>
+      </div>
+      <button class="nc-edit-btn" id="ncEditBtn" onclick="toggleNcEdit()">✏ 調整目標</button>
+    </div>
+    <div id="ncBody"></div>
+    <div class="nc-footer">
+      <span class="nc-fnote">▏= 應達線</span>
+      <div class="nc-pills" id="ncPills"></div>
+    </div>
   </div>
 </div>
 </body>
