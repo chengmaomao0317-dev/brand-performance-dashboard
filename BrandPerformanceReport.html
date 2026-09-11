@@ -3437,7 +3437,7 @@ function renderConsultantTab(){
   const total = calcStats(records, true, true);
 
   // 門市排序
-  const STORE_ORDER = ['wo_zhanqian','wo_daan','wo_zhongxiao','wo_dongmen','wo_banqiao','wo_taichung','ki_dongmen','ki_taichung'];
+  const STORE_ORDER = ['wo_zhanqian','wo_daan','wo_zhongxiao','wo_dongmen','wo_banqiao','wo_taichung','ki_taipei','ki_taichung'];
   const STORE_INFO = {
     wo_zhanqian:{store:'站前', brand:'原渥', brandKey:'wo'},
     wo_daan:    {store:'大安', brand:'原渥', brandKey:'wo'},
@@ -3445,7 +3445,7 @@ function renderConsultantTab(){
     wo_dongmen: {store:'東門', brand:'原渥', brandKey:'wo'},
     wo_banqiao: {store:'板橋', brand:'原渥', brandKey:'wo'},
     wo_taichung:{store:'台中', brand:'原渥', brandKey:'wo'},
-    ki_dongmen: {store:'台北', brand:'原綺', brandKey:'ki'},
+    ki_taipei:  {store:'台北', brand:'原綺', brandKey:'ki'},
     ki_taichung:{store:'台中', brand:'原綺', brandKey:'ki'},
   };
   // 原渥六間固定顯示（含無資料的大安）；原綺只顯示有資料的門市

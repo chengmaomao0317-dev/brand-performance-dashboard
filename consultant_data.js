@@ -1639,21 +1639,21 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-01', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-01', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'柯孟君',
     clients:[
       {type:'新客', trial_amt:0, total_amt:118999, name:'林鈺淳'},  // 林鈺淳
     ]
   },
   {
-    date:'2026-08-01', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-01', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬',
     clients:[
       {type:'新客', trial_amt:0, total_amt:14999, name:'黃舒鈺'},   // 黃舒鈺
     ]
   },
   {
-    date:'2026-08-01', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-01', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗',
     clients:[
       {type:'新客', trial_amt:0, total_amt:41799, name:'徐雅瑩'},   // 徐雅瑩
@@ -2740,7 +2740,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-03', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-03', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉',
     clients:[
       {type:'新客', trial_amt:0, total_amt:14999, name:'范美儀'},  // 范美儀，微整雕塑喬亞登HAJ，成交
@@ -3144,7 +3144,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-04', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-04', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬',
     clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'洪于芳'},  // 洪于芳，黑眼圈填充，已到未購
@@ -3152,28 +3152,28 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-04', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-04', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗',
     clients:[
       {type:'新客', trial_amt:0, total_amt:9999, name:'方詠瑩'},   // 方詠瑩，膠原蛋白針，成交
     ]
   },
   {
-    date:'2026-08-04', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-04', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉',
     clients:[
       {type:'新客', trial_amt:0, total_amt:36000, name:'蘇汗雨'},  // 蘇汗雨，瑞斯朗HA，成交
     ]
   },
   {
-    date:'2026-08-10', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-10', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'柯孟君',
     clients:[
       {type:'新客', trial_amt:0, total_amt:15000, name:'徐郁惠'},  // 徐郁惠，嘟嘟唇→肉毒(1U)，成交
     ]
   },
   {
-    date:'2026-08-10', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-10', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉',
     clients:[
       {type:'新客', trial_amt:0, total_amt:138888, name:'林美妤'}, // 林美妤，喬亞登HAJ+無雙電波，成交
@@ -3181,7 +3181,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-10', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-10', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗',
     clients:[
       {type:'新客', trial_amt:0, total_amt:70999, name:'黃湘勻'},  // 黃湘勻，微晶瓷+瑞斯朗HA，成交
@@ -3189,7 +3189,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-08', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-08', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬',
     clients:[
       {type:'新客', trial_amt:0, total_amt:10000, name:'陳品君'},  // 陳品君，無雙電波成交
@@ -3198,7 +3198,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-08', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-08', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉',
     clients:[
       {type:'新客', trial_amt:0, total_amt:45999, name:'蘇以文'},  // 蘇以文，膠原蛋白針成交
@@ -3206,7 +3206,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-08', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-08', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'柯孟君',
     clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'藍雅偵'},      // 藍雅偵，諮詢未成交
@@ -3215,7 +3215,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-07', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-07', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗',
     clients:[
       {type:'新客', trial_amt:0, total_amt:22000, name:'黃穎彤'},  // 黃穎彤，嘟嘟唇+玻尿酸成交
@@ -3224,28 +3224,28 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-07', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-07', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'柯孟君',
     clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'林孟璇'},  // 林孟璇，已到未成交
     ]
   },
   {
-    date:'2026-08-07', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-07', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉',
     clients:[
       {type:'新客', trial_amt:0, total_amt:16998, name:'邱宇翔'},  // 邱宇翔，皮秒體驗+喬雅露成交
     ]
   },
   {
-    date:'2026-08-05', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-05', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'公司',
     clients:[
       {type:'其他', trial_amt:0, total_amt:0, name:'林哲緯'},  // 林哲緯，分享客
     ]
   },
   {
-    date:'2026-08-05', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-05', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗',
     clients:[
       {type:'新客', trial_amt:0, total_amt:121885, name:'蘇毓斐'},  // 蘇毓斐，水光針+微整雕塑+無雙電波+鼻線
@@ -3386,14 +3386,14 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-11', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-11', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'柯孟君',
     clients:[
       {type:'新客', trial_amt:0, total_amt:81999, name:'鄭綺云'}, // 鄭綺云，仙女HA×2，成交
     ]
   },
   {
-    date:'2026-08-11', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-11', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗',
     clients:[
       {type:'新客', trial_amt:0, total_amt:9999, name:'楊鎵綺'},  // 楊鎵綺，瑞斯朗HA，成交
@@ -3455,21 +3455,21 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-12', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-12', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗',
     clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'楊沂瑾'},     // 楊沂瑾，鼻部埋線，未成交
     ]
   },
   {
-    date:'2026-08-12', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-12', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬',
     clients:[
       {type:'新客', trial_amt:0, total_amt:60498, name:'李怡萱'}, // 李怡萱，喬亞登HA×2+肉毒×2+鼻線，成交
     ]
   },
   {
-    date:'2026-08-12', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-12', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉',
     clients:[
       {type:'新客', trial_amt:0, total_amt:1499, name:'朱紜璟'},  // 朱紜璟，肉毒除皺，成交
@@ -3551,14 +3551,14 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-13', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-13', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬',
     clients:[
       {type:'新客', trial_amt:0, total_amt:27888, name:'劉珈妘'}, // 劉珈妘，無雙電波×2，成交
     ]
   },
   {
-    date:'2026-08-13', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-13', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'柯孟君',
     clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'于珊'},     // 于珊，頰凹填充，未成交
@@ -3690,21 +3690,21 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-14', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-14', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬',
     clients:[
       {type:'新客', trial_amt:0, total_amt:14999, name:'黃紀茹'}, // 黃紀茹，喬亞登HAJ，成交
     ]
   },
   {
-    date:'2026-08-14', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-14', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'柯孟君',
     clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'廖艾薇'},     // 廖艾薇，黑眼圈填充，未成交
     ]
   },
   {
-    date:'2026-08-15', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-15', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬',
     clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'黃小姐'},     // 黃小姐，嘟嘟唇，未成交
@@ -3713,7 +3713,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-15', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-15', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'柯孟君',
     clients:[
       {type:'新客', trial_amt:0, total_amt:3999, name:'趙曼真'},   // 趙曼真，蜂巢+皮秒，成交
@@ -3722,7 +3722,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-15', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-15', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗',
     clients:[
       {type:'新客', trial_amt:0, total_amt:61999, name:'楊怡璇'}, // 楊怡璇，肉毒+瑞斯朗HA×3，成交
@@ -3780,14 +3780,14 @@ const CONSULTANT_RECORDS = [
   },
   // ─── 8/17 台北原綺 ──────────────────────────
   {
-    date:'2026-08-17', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-17', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'柯孟君',
     clients:[
       {type:'新客', trial_amt:0, total_amt:9999, name:'高畠泉'},  // 高畠泉，消脂針×2，成交
     ]
   },
   {
-    date:'2026-08-17', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-17', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉',
     clients:[
       {type:'新客', trial_amt:0, total_amt:23499, name:'楊毓娟'}, // 楊毓娟，女神HA×2+肉毒，成交
@@ -3795,7 +3795,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-17', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-17', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗',
     clients:[
       {type:'新客', trial_amt:0, total_amt:22349, name:'陳冠豪'},  // 陳冠豪，黑眼圈填充(8/17)+膠原蛋白針(8/19付款)，成交
@@ -3866,7 +3866,7 @@ const CONSULTANT_RECORDS = [
   },
   // ─── 8/18 台北原綺 ──────────────────────────
   {
-    date:'2026-08-18', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-18', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗',
     clients:[
       {type:'新客', trial_amt:0, total_amt:6000, name:'劉昀軒'}, // 劉昀軒，肉毒除皺一區，成交
@@ -3935,7 +3935,7 @@ const CONSULTANT_RECORDS = [
   },
   // ─── 8/19 台北原綺 ────────────────────────────────────────
   {
-    date:'2026-08-19', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-19', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉',
     clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'張華珍'},      // 張華珍，嘟嘟唇，未成交
@@ -3943,21 +3943,21 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-19', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-19', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬',
     clients:[
       {type:'新客', trial_amt:0, total_amt:15000, name:'曾詩喬'},  // 曾詩喬，肉毒，成交
     ]
   },
   {
-    date:'2026-08-19', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-19', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'柯孟君',
     clients:[
       {type:'新客', trial_amt:0, total_amt:87498, name:'余葦柔'},  // 余葦柔，玻尿酸+肉毒，成交
     ]
   },
   {
-    date:'2026-08-19', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-19', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗',
     clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'何瑀宸'},      // 何瑀宸，頰凹填充，未成交
@@ -3965,7 +3965,7 @@ const CONSULTANT_RECORDS = [
   },
   // ─── 8/20 台北原綺 ────────────────────────────────────────
   {
-    date:'2026-08-20', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-20', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉',
     clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'邱貞寧'},  // 嘟嘟唇，待確認
@@ -4015,14 +4015,14 @@ const CONSULTANT_RECORDS = [
   },
   // ─── 8/21 台北原綺 ────────────────────────────────────────
   {
-    date:'2026-08-21', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-21', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬',
     clients:[
       {type:'新客', trial_amt:0, total_amt:1499,  name:'陳又瑄'},  // 肉毒除皺1區，成交
     ]
   },
   {
-    date:'2026-08-21', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-21', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'柯孟君',
     clients:[
       {type:'新客', trial_amt:0, total_amt:57999, name:'沈依霓'},  // 仙女玻尿酸HA，成交
@@ -4157,7 +4157,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-22', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-22', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'柯孟君',
     clients:[
       {type:'新客', trial_amt:0, total_amt:0,     name:'謝羽柔'},
@@ -4165,14 +4165,14 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-22', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-22', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉',
     clients:[
       {type:'新客', trial_amt:0, total_amt:9999, name:'蔡亭君'},
     ]
   },
   {
-    date:'2026-08-22', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-22', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬',
     clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'梁平'},
@@ -4226,14 +4226,14 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-24', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-24', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬',
     clients:[
       {type:'新客', trial_amt:0, total_amt:88000, name:'練瑋庭'},
     ]
   },
   {
-    date:'2026-08-24', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-24', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉',
     clients:[
       {type:'新客', trial_amt:0, total_amt:180000, name:'黃淑怡'},
@@ -4277,21 +4277,21 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-25', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-25', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗',
     clients:[
       {type:'新客', trial_amt:0, total_amt:100888, name:'林依璇'},
     ]
   },
   {
-    date:'2026-08-25', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-25', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉',
     clients:[
       {type:'新客', trial_amt:0, total_amt:31398, name:'吳蕙君'},
     ]
   },
   {
-    date:'2026-08-25', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-25', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬',
     clients:[
       {type:'新客', trial_amt:0, total_amt:14999, name:'張雁筑'},
@@ -7669,14 +7669,14 @@ const CONSULTANT_RECORDS = [
   },
   // ─── 台北原綺 2026-08-27 ──────────────────────────────────
   {
-    date:'2026-08-27', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-27', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗',
     clients:[
       {type:'新客', trial_amt:0, total_amt:66000, name:'謝曉硯'},
     ]
   },
   {
-    date:'2026-08-27', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-27', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬',
     clients:[
       {type:'新客', trial_amt:0, total_amt:21999, name:'吳峻豪'},
@@ -7684,7 +7684,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-27', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-27', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉',
     clients:[
       {type:'新客', trial_amt:0, total_amt:45998, name:'呂品穎'},
@@ -7692,7 +7692,7 @@ const CONSULTANT_RECORDS = [
   },
   // ─── 台北原綺 2026-08-28 ──────────────────────────────────
   {
-    date:'2026-08-28', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-28', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗',
     clients:[
       {type:'新客', trial_amt:0, total_amt:22999, name:'夏凱琳'},
@@ -7700,7 +7700,7 @@ const CONSULTANT_RECORDS = [
   },
   // ─── 台北原綺 2026-08-29 ──────────────────────────────────
   {
-    date:'2026-08-29', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-29', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗',
     clients:[
       {type:'新客', trial_amt:0, total_amt:100000, name:'陳雪琴'},
@@ -7708,7 +7708,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-29', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-29', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬',
     clients:[
       {type:'新客', trial_amt:0, total_amt:9999, name:'郭子綾'},
@@ -7716,14 +7716,14 @@ const CONSULTANT_RECORDS = [
   },
   // ─── 台北原綺 2026-08-31 ──────────────────────────────────
   {
-    date:'2026-08-31', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-31', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗',
     clients:[
       {type:'新客', trial_amt:0, total_amt:95999, name:'蔡宥萱'},  // 鼻線+喬亞登HAJ×2+肉毒，成交
     ]
   },
   {
-    date:'2026-08-31', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-31', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬',
     clients:[
       {type:'新客', trial_amt:0, total_amt:32998, name:'吳品靜'},  // 膠原蛋白針+瑞斯朗HA+膠原蛋白針，成交
@@ -7731,41 +7731,41 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-31', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-31', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'柯孟君',
     clients:[
       {type:'新客', trial_amt:0, total_amt:48000, name:'廖于晴'},  // 微整雕塑微晶瓷，成交
     ]
   },
   {
-    date:'2026-08-31', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-31', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'公司',
     clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'鍾孟哲'},      // 水光針，已到未購
     ]
   },
   // ─── 台北原綺 2026-09-01 ──────────────────────────────────
-  { date:'2026-09-01', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+  { date:'2026-09-01', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉', clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'陳家漆'},
     ]},
   // ─── 台北原綺 2026-09-02 ──────────────────────────────────
-  { date:'2026-09-02', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+  { date:'2026-09-02', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬', clients:[
       {type:'新客', trial_amt:0, total_amt:19998, name:'顧芸菲'},
       {type:'新客', trial_amt:0, total_amt:31999, name:'游思庭'},
     ]},
-  { date:'2026-09-02', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+  { date:'2026-09-02', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉', clients:[
       {type:'新客', trial_amt:0, total_amt:31999, name:'李元珍'},
       {type:'新客', trial_amt:0, total_amt:1499,  name:'許庭瑄'},
     ]},
   // ─── 台北原綺 2026-09-03 ──────────────────────────────────
-  { date:'2026-09-03', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+  { date:'2026-09-03', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗', clients:[
       {type:'新客', trial_amt:0, total_amt:54888, name:'林宜萱'},
     ]},
-  { date:'2026-09-03', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+  { date:'2026-09-03', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉', clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'陳宥妏'},
     ]},
@@ -7787,39 +7787,39 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:0, total_amt:79999, name:'李采璇'},
     ]},
   // ─── 台北原綺 2026-09-09 ──────────────────────────────────
-  { date:'2026-09-09', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+  { date:'2026-09-09', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬', clients:[
       {type:'新客', trial_amt:0, total_amt:31999, name:'朱虹瑾'},
     ]},
   // ─── 台北原綺 2026-09-08 ──────────────────────────────────
-  { date:'2026-09-08', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+  { date:'2026-09-08', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬', clients:[
       {type:'新客', trial_amt:0, total_amt:0,     name:'林蔚喬'},
     ]},
-  { date:'2026-09-08', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+  { date:'2026-09-08', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗', clients:[
       {type:'新客', trial_amt:0, total_amt:42999, name:'劉德翔'},
     ]},
   // ─── 台北原綺 2026-09-07 ──────────────────────────────────
-  { date:'2026-09-07', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+  { date:'2026-09-07', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉', clients:[
       {type:'新客', trial_amt:0, total_amt:19999, name:'林思帆'},
     ]},
-  { date:'2026-09-07', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+  { date:'2026-09-07', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬', clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'陳律東'},
     ]},
   // ─── 台北原綺 2026-09-05 ──────────────────────────────────
-  { date:'2026-09-05', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+  { date:'2026-09-05', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗', clients:[
       {type:'新客', trial_amt:0, total_amt:82500, name:'徐千惠'},
     ]},
-  { date:'2026-09-05', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+  { date:'2026-09-05', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬', clients:[
       {type:'新客', trial_amt:0, total_amt:14999, name:'曹嘉芸'},
     ]},
   // ─── 台北原綺 2026-09-04 ──────────────────────────────────
-  { date:'2026-09-04', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+  { date:'2026-09-04', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗', clients:[
       {type:'新客', trial_amt:0, total_amt:31999, name:'侯詠玲'},
     ]},
@@ -7846,6 +7846,17 @@ const CONSULTANT_RECORDS = [
   { date:'2026-09-03', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
     consultant:'呂秋玫', clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'王禕婷'},
+    ]},
+  // ─── 台中原綺 2026-09-10 ──────────────────────────────────
+  { date:'2026-09-10', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'呂秋玫', clients:[
+      {type:'新客', trial_amt:0, total_amt:29999, name:'劉媛姍'},
+      {type:'新客', trial_amt:0, total_amt:15000, name:'葉玉草'},
+    ]},
+  { date:'2026-09-10', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍', clients:[
+      {type:'新客', trial_amt:0, total_amt:35999, name:'朝澤莉'},
+      {type:'新客', trial_amt:0, total_amt:15000, name:'盧逸菲'},
     ]},
   // ─── 台中原綺 2026-09-08 ──────────────────────────────────
   { date:'2026-09-08', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
@@ -7912,7 +7923,7 @@ const CONSULTANT_RECORDS = [
   },
   // ─── 台北原綺 2026-08-26 ──────────────────────────────────
   {
-    date:'2026-08-26', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-26', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'柯孟君',
     clients:[
       {type:'新客', trial_amt:0, total_amt:68999, name:'賴岱瑛'},
@@ -7922,7 +7933,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-26', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-26', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳寗',
     clients:[
       {type:'新客', trial_amt:0, total_amt:32998, name:'黃栩鎧'},
@@ -7931,7 +7942,7 @@ const CONSULTANT_RECORDS = [
     ]
   },
   {
-    date:'2026-08-26', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
+    date:'2026-08-26', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉',
     clients:[
       {type:'新客', trial_amt:0, total_amt:22000, name:'黃蜜蜜'},
