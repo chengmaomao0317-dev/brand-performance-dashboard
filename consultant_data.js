@@ -7769,6 +7769,23 @@ const CONSULTANT_RECORDS = [
     consultant:'計品卉', clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'陳宥妏'},
     ]},
+  // ─── 台北原綺 2026-09-10 ──────────────────────────────────
+  { date:'2026-09-10', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'柯孟君', clients:[
+      {type:'新客', trial_amt:0, total_amt:89499, name:'陳澗萱'},
+    ]},
+  { date:'2026-09-10', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳寗', clients:[
+      {type:'新客', trial_amt:0, total_amt:0,     name:'黃竹君'},
+      {type:'新客', trial_amt:0, total_amt:0,     name:'許忠義'},
+      {type:'新客', trial_amt:0, total_amt:15000, name:'李虹萱'},
+    ]},
+  { date:'2026-09-10', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉', clients:[
+      {type:'新客', trial_amt:0, total_amt:14999, name:'陳雯婷'},
+      {type:'新客', trial_amt:0, total_amt:0,     name:'吳婕安'},
+      {type:'新客', trial_amt:0, total_amt:79999, name:'李采璇'},
+    ]},
   // ─── 台北原綺 2026-09-09 ──────────────────────────────────
   { date:'2026-09-09', storeKey:'ki_dongmen', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳詩喬', clients:[
