@@ -1616,6 +1616,7 @@ const CONSULTANT_RECORDS = [
       {type:'舊客', trial_amt:0,    total_amt:17600, name:'徐若庭'},
       {type:'舊客', trial_amt:0,    total_amt:0,     name:'楊舜雯'},
       {type:'舊客', trial_amt:0,    total_amt:0,     name:'賴雯琪'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'林羿孜'},
     ]
   },
   {
