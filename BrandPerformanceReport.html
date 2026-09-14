@@ -735,6 +735,43 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
 .nc-pill{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500}
 .nc-pill-ok{background:rgba(26,107,60,.1);color:#1a6b3c}
 .nc-pill-ng{background:rgba(192,57,43,.1);color:#c0392b}
+/* ══ 各店業績進度簡表 Modal ══ */
+.sp-open-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;font-size:12px;font-weight:500;border:0.5px solid rgba(45,90,158,.35);border-radius:8px;background:rgba(45,90,158,.07);color:#1a3a6e;cursor:pointer;transition:background .12s}
+.sp-open-btn:hover{background:rgba(45,90,158,.14)}
+.sp-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:999;align-items:center;justify-content:center}
+.sp-overlay.open{display:flex}
+.sp-modal{background:#fff;border-radius:16px;border:0.5px solid rgba(0,0,0,.1);width:540px;max-height:90vh;overflow-y:auto;box-shadow:0 16px 48px rgba(0,0,0,.18)}
+.sp-mhd{padding:18px 20px 14px;position:sticky;top:0;background:#fff;z-index:1;border-bottom:0.5px solid rgba(0,0,0,.08)}
+.sp-hd-row{display:flex;justify-content:space-between;align-items:flex-start}
+.sp-title{font-size:15px;font-weight:500;color:#1a1a18}
+.sp-sub{font-size:11px;color:#888780;margin-top:3px}
+.sp-xbtn{width:26px;height:26px;border-radius:50%;border:0.5px solid rgba(0,0,0,.12);background:#f5f4f0;cursor:pointer;font-size:15px;color:#888;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sp-xbtn:hover{background:#ebe9e3}
+.sp-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:14px 20px}
+.sp-card{background:#faf9f7;border-radius:10px;padding:10px 12px;border:0.5px solid rgba(0,0,0,.08)}
+.sp-card-label{font-size:10px;font-weight:600;letter-spacing:.06em;color:#888;margin-bottom:6px}
+.sp-card-rev{font-size:18px;font-weight:600;color:#1a1a18;letter-spacing:-.3px}
+.sp-card-ach{font-size:11px;font-weight:500;margin-top:2px}
+.sp-card-yoy{font-size:10px;margin-top:3px}
+.sp-card-bar-outer{height:4px;background:#e8e6e0;border-radius:2px;margin-top:6px}
+.sp-card-bar-inner{height:100%;border-radius:2px;transition:width .3s}
+.sp-card-tgt{font-size:10px;color:#aaa;margin-top:3px}
+.sp-brand-hd{padding:8px 20px 6px;font-size:10px;font-weight:600;letter-spacing:.08em;color:#fff}
+.sp-brand-hd.wo{background:#2d5a9e}
+.sp-brand-hd.ki{background:#c04070}
+.sp-col-hd{display:grid;grid-template-columns:56px 1fr 70px 52px 56px 46px;padding:5px 20px;font-size:9.5px;color:#aaa;letter-spacing:.04em;border-bottom:0.5px solid rgba(0,0,0,.06)}
+.sp-row{display:grid;grid-template-columns:56px 1fr 70px 52px 56px 46px;padding:7px 20px;align-items:center;border-bottom:0.5px solid rgba(0,0,0,.05)}
+.sp-row:nth-child(even){background:rgba(0,0,0,.018)}
+.sp-sname{font-size:12px;color:#1a1a18;font-weight:500}
+.sp-bar-outer{position:relative;height:6px;background:#eeece7;border-radius:3px;margin-right:4px}
+.sp-bar-inner{height:100%;border-radius:3px;transition:width .3s}
+.sp-rev-num{font-size:11px;font-weight:500;color:#1a1a18}
+.sp-tgt-cell{font-size:11px;color:#666;text-align:right}
+.sp-ach-cell{font-size:12px;font-weight:600;text-align:center}
+.sp-yoy-cell{font-size:11px;text-align:center;color:#aaa}
+.sp-ach-green{color:#3B6D11}
+.sp-ach-amber{color:#b07d00}
+.sp-ach-red{color:#A32D2D}
 </style>
 </head>
 <body>
@@ -2336,6 +2373,7 @@ function renderTab4(){
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:14px">
       <div class="mo-tabs-wrap" style="margin-bottom:0">${tabsHtml}</div>
       <button class="nc-open-btn" onclick="openNcModal()">👥 新客配客進度</button>
+      <button class="sp-open-btn" onclick="openSpModal()">📊 各店業績進度簡表</button>
     </div>
     <div class="mo-group-card">
       <div class="mo-group-label">集團月業績</div>
@@ -3950,6 +3988,108 @@ function toggleNcEdit(){
   renderNcModal();
 }
 
+/* ── 各店業績進度簡表 ── */
+function openSpModal(){
+  const today = new Date();
+  const yd = new Date(today); yd.setDate(today.getDate()-1);
+  const yr = yd.getFullYear(), mo = yd.getMonth()+1, day = yd.getDate();
+  const moIdx = today.getMonth(); // 0-indexed, same as _curMoTab
+
+  // 讀 MO_SNAP_DATA（跟每月業績進度分頁同源，來自 Google Sheet 同步）
+  const snap = (typeof MO_SNAP_DATA!=='undefined' && MO_SNAP_DATA[moIdx]) ? MO_SNAP_DATA[moIdx] : {};
+
+  const fmtM  = v=>v>=10000?(v/10000).toFixed(1)+'萬':(v/1000).toFixed(1)+'K';
+  const fmtM2 = v=>v>=10000?Math.round(v/10000)+'萬':(v/1000).toFixed(0)+'K';
+  const fmtN  = v=>'$'+Math.round(v).toLocaleString('zh-TW');
+  const achColor  = a=>a===null?'#aaa':a>=1?'#3B6D11':a>=0.8?'#b07d00':'#A32D2D';
+  const achClass  = a=>a===null?'':a>=1?'sp-ach-green':a>=0.8?'sp-ach-amber':'sp-ach-red';
+  const achTxt    = a=>a===null?'—':(a*100).toFixed(0)+'%';
+
+  function sd(sk){
+    const s=snap[sk]||{}, d=DATA[sk]||{};
+    const mtd = s.total_rev||0;
+    const tgt = s.target||(d.monthly_tgt?d.monthly_tgt[moIdx]:0)||(d.target_h1?Math.round(d.target_h1/6):0)||0;
+    const ach = tgt>0?mtd/tgt:null;
+    return {mtd,tgt,ach};
+  }
+
+  // LY helper
+  const ly = (typeof LY_MONTHLY!=='undefined') ? LY_MONTHLY : {};
+  function lyRev(sk){ const a=ly[sk]; return (a&&a[moIdx])?a[moIdx].rev:0; }
+  function yoyTxt(cur,prev){
+    if(!prev) return {txt:'—',clr:'#aaa'};
+    const r=(cur-prev)/prev;
+    const arrow=r>=0?'↑':'↓';
+    const clr=r>=0?'#3B6D11':'#A32D2D';
+    return {txt:`${arrow} ${Math.abs(r*100).toFixed(1)}%`, clr};
+  }
+
+  // 集團、品牌合計
+  let woMTD=0,woTgt=0,woLY=0,kiMTD=0,kiTgt=0,kiLY=0;
+  WO_STORES.forEach(k=>{const x=sd(k);woMTD+=x.mtd;woTgt+=x.tgt;woLY+=lyRev(k);});
+  KI_STORES.forEach(k=>{const x=sd(k);kiMTD+=x.mtd;kiTgt+=x.tgt;kiLY+=lyRev(k);});
+  const totalMTD=woMTD+kiMTD, totalTgt=woTgt+kiTgt, totalLY=woLY+kiLY;
+  const totalAch=totalTgt>0?totalMTD/totalTgt:null;
+  const woAch=woTgt>0?woMTD/woTgt:null;
+  const kiAch=kiTgt>0?kiMTD/kiTgt:null;
+
+  function cardHtml(label,mtd,tgt,ach,lyr,dotColor){
+    const barW=tgt>0?Math.min(100,mtd/tgt*100):0;
+    const yoy=yoyTxt(mtd,lyr);
+    return `<div class="sp-card">
+      <div class="sp-card-label" style="color:${dotColor}">${label}</div>
+      <div class="sp-card-rev">${fmtN(mtd)}</div>
+      <div class="sp-card-ach" style="color:${achColor(ach)}">${achTxt(ach)}</div>
+      <div class="sp-card-yoy" style="color:${yoy.clr}">去年同期 ${yoy.txt}</div>
+      <div class="sp-card-bar-outer"><div class="sp-card-bar-inner" style="width:${barW}%;background:${dotColor}"></div></div>
+      <div class="sp-card-tgt">目標 ${tgt>0?fmtM(tgt):'—'}</div>
+    </div>`;
+  }
+
+  const cardsHtml = cardHtml('集團合計',totalMTD,totalTgt,totalAch,totalLY,'#555')
+    + cardHtml('原渥',woMTD,woTgt,woAch,woLY,'#2d5a9e')
+    + cardHtml('原綺',kiMTD,kiTgt,kiAch,kiLY,'#c04070');
+
+  function storeRowHtml(sk){
+    const d=DATA[sk]; if(!d) return '';
+    const {mtd,tgt,ach}=sd(sk);
+    const lyr=lyRev(sk);
+    const yoy=yoyTxt(mtd,lyr);
+    const barW=tgt>0?Math.min(100,mtd/tgt*100):0;
+    const barColor=d.brandKey==='ki'?'#c04070':'#2d5a9e';
+    return `<div class="sp-row">
+      <div class="sp-sname">${d.label}</div>
+      <div>
+        <div class="sp-bar-outer"><div class="sp-bar-inner" style="width:${barW}%;background:${barColor}"></div></div>
+        <div class="sp-rev-num">${fmtN(mtd)}</div>
+      </div>
+      <div class="sp-tgt-cell">${tgt>0?fmtM2(tgt):'—'}</div>
+      <div class="sp-ach-cell ${achClass(ach)}">${achTxt(ach)}</div>
+      <div class="sp-yoy-cell" style="color:${yoy.clr}">${lyr?fmtM2(lyr):'—'}</div>
+      <div class="sp-yoy-cell" style="color:${yoy.clr};font-size:10px">${lyr?yoy.txt:''}</div>
+    </div>`;
+  }
+
+  const colHd=`<div class="sp-col-hd"><span>門市</span><span>本月至今</span><span style="text-align:right">月目標</span><span style="text-align:center">達成率</span><span style="text-align:center">去年同期</span><span style="text-align:center">YoY</span></div>`;
+
+  const bodyHtml = `
+    <div class="sp-brand-hd wo">原渥</div>
+    ${colHd}
+    ${WO_STORES.map(storeRowHtml).join('')}
+    <div class="sp-brand-hd ki" style="margin-top:4px">原綺</div>
+    ${colHd}
+    ${KI_STORES.map(storeRowHtml).join('')}
+  `;
+
+  document.getElementById('spSub').textContent = `${yr}年${mo}月 · 截至 ${mo}/${day}`;
+  document.getElementById('spCards').innerHTML = cardsHtml;
+  document.getElementById('spBody').innerHTML = bodyHtml;
+  document.getElementById('spOverlay').classList.add('open');
+}
+function closeSpModal(){
+  document.getElementById('spOverlay').classList.remove('open');
+}
+
 function renderNcModal(){
   const now = new Date();
   const mo = now.getMonth()+1;
@@ -4197,6 +4337,23 @@ function doCSPrint(){window.print();}
     </div>
     <div class="ki-sum" id="kiModalSum"></div>
     <div class="ki-modal-body" id="kiModalDays"></div>
+  </div>
+</div>
+
+<!-- ── 各店業績進度簡表 Modal ── -->
+<div class="sp-overlay" id="spOverlay" onclick="if(event.target===this)closeSpModal()">
+  <div class="sp-modal">
+    <div class="sp-mhd">
+      <div class="sp-hd-row">
+        <div>
+          <div class="sp-title">各店業績進度簡表</div>
+          <div class="sp-sub" id="spSub"></div>
+        </div>
+        <button class="sp-xbtn" onclick="closeSpModal()" aria-label="關閉">✕</button>
+      </div>
+    </div>
+    <div class="sp-cards" id="spCards"></div>
+    <div id="spBody" style="padding-bottom:16px"></div>
   </div>
 </div>
 

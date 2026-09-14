@@ -5045,7 +5045,7 @@ const CONSULTANT_RECORDS = [
       {type:'舊客體驗', trial_amt:999,  total_amt:44000, product_amt:4193, name:'戴雅萍'},
     ]},
   { date:'2026-09-01', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
-    consultant:'廖梓涵', clients:[
+    consultant:'公司', clients:[
       {type:'舊客', trial_amt:0, total_amt:0, name:'何亭儀'},
     ]},
   // ─── 板橋 2026-09-02 ──────────────────────────────────────
@@ -5106,7 +5106,7 @@ const CONSULTANT_RECORDS = [
       {type:'舊客', trial_amt:0,    total_amt:0,      product_amt:7998,  name:'林書伶'},
     ]},
   { date:'2026-09-12', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
-    consultant:'吳凱婷', clients:[
+    consultant:'公司', clients:[
       {type:'舊客', trial_amt:0, total_amt:0, name:'游怡庭'},
     ]},
   { date:'2026-09-12', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
