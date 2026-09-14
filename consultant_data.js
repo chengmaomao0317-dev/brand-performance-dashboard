@@ -7924,6 +7924,30 @@ const CONSULTANT_RECORDS = [
     consultant:'計品卉', clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'陳宥妏'},
     ]},
+  // ─── 台北原綺 2026-09-12 ──────────────────────────────────
+  { date:'2026-09-12', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳寗', clients:[
+      {type:'新客', trial_amt:0, total_amt:9999,  name:'廖凡儀'},
+      {type:'新客', trial_amt:0, total_amt:22999, name:'余昕庭'},
+      {type:'新客', trial_amt:0, total_amt:27888, name:'陳嘉立'},
+    ]},
+  { date:'2026-09-12', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉', clients:[
+      {type:'新客', trial_amt:0, total_amt:36000, name:'楊若婷'},
+    ]},
+  { date:'2026-09-12', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬', clients:[
+      {type:'新客', trial_amt:0, total_amt:9999, name:'徐佳翎'},
+    ]},
+  // ─── 台北原綺 2026-09-11 ──────────────────────────────────
+  { date:'2026-09-11', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉', clients:[
+      {type:'新客', trial_amt:0, total_amt:22999, name:'宋淑芬'},
+    ]},
+  { date:'2026-09-11', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳寗', clients:[
+      {type:'新客', trial_amt:0, total_amt:27999, name:'黃萱宜'},
+    ]},
   // ─── 台北原綺 2026-09-10 ──────────────────────────────────
   { date:'2026-09-10', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'柯孟君', clients:[
@@ -8001,6 +8025,17 @@ const CONSULTANT_RECORDS = [
   { date:'2026-09-03', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
     consultant:'呂秋玫', clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'王禕婷'},
+    ]},
+  // ─── 台中原綺 2026-09-12 ──────────────────────────────────
+  { date:'2026-09-12', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'呂秋玫', clients:[
+      {type:'新客', trial_amt:0, total_amt:19899, name:'張家瑜'},
+      {type:'新客', trial_amt:0, total_amt:22999, name:'陳莉妮'},
+    ]},
+  { date:'2026-09-12', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍', clients:[
+      {type:'新客', trial_amt:0, total_amt:0,     name:'溫家毓'},
+      {type:'新客', trial_amt:0, total_amt:21900, name:'溫育琳'},
     ]},
   // ─── 台中原綺 2026-09-10 ──────────────────────────────────
   { date:'2026-09-10', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
