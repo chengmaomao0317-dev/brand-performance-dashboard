@@ -4146,7 +4146,7 @@ function openCSPrintPreview(){
     const bNk=brandNewTotal.接待>0?Math.round(brandNewTotal.amt/brandNewTotal.接待):null;
     const bRr=brandRetTotal.newTrial>0?Math.round(brandRetTotal.purchased/brandRetTotal.newTrial*100):null;
     bRows+=`<tr class="pt-sub${bk==='ki'?' ki':''}">
-      <td colspan="2" style="font-weight:600;color:${bc}">${bl} 合計</td>
+      <td></td><td style="font-weight:600;color:${bc}">${bl} 合計</td>
       <td>${brandNewTotal.接待}</td><td>${brandNewTotal.成交}</td>
       <td>${fmtRate(bNr)}</td><td>${fmtAmt(bNk)}</td>
       <td>${brandRetTotal.totalOld}</td><td>${brandRetTotal.newTrial}</td>
