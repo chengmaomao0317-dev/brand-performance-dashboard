@@ -809,6 +809,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
 .wr-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .wr-grid-full{grid-column:1/-1}
 .wr-cs-nick{font-size:10px;color:#888;margin-left:4px;font-weight:400}
+.wr-cs-title{font-size:10px;color:#aaa;font-weight:400;margin-top:1px}
 @media(max-width:640px){.wr-grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -2290,7 +2291,13 @@ function renderTab4(){
   const _daysInMo=new Date(_now.getFullYear(),_curMoTab+1,0).getDate();
   const _dayRatio=_dayOfMo/_daysInMo;
   function dailyProg(rev,tgt){
-    if(!_isCurMo||!tgt||!rev) return'';
+    if(!tgt||!rev) return'';
+    // 歷史月：顯示簡單達成率進度條
+    if(!_isCurMo){
+      const fillPct=Math.min(rev/tgt*100,100).toFixed(1);
+      const color=rev>=tgt?'#3B6D11':rev/tgt>=0.8?'#b07d00':'#A32D2D';
+      return`<div class="mo-prog-track" style="margin:4px 0 9px"><div class="mo-prog-fill" style="width:${fillPct}%;background:${color}"></div></div>`;
+    }
     const exp=Math.round(tgt*_dayRatio);
     const gap=rev-exp;
     const isAhead=gap>=0;
@@ -3373,7 +3380,9 @@ function renderConsultantTab(){
     const rs = calcRetStats(recs);
     const pillCls = brandKey==='wo'?'cs-pill-wo':'cs-pill-ki';
     const avCls = brandKey==='wo'?'cs-av-wo':'cs-av-ki';
-    const consultants = [...new Set(recs.map(r=>r.consultant))].filter(c=>c!=='公司'&&c!=='其他');
+    const _csPresent = new Set(recs.map(r=>r.consultant).filter(c=>c!=='公司'&&c!=='其他'));
+    const _csOrderList = STORE_CS_ORDER[storeKey]||[];
+    const consultants = [..._csOrderList.filter(c=>_csPresent.has(c)), ...[..._csPresent].filter(c=>!_csOrderList.includes(c))];
     const cRows = consultants.map(c=>{
       const cr = recs.filter(r=>r.consultant===c);
       const cs = calcStats(cr);
@@ -3426,7 +3435,7 @@ function renderConsultantTab(){
       return `<div class="cs-c-card">
         <div class="cs-c-card-hd">
           <div class="cs-av ${isOther?'':avCls}" style="${avStyle}">${isOther?'他':init}</div>
-          <div><span class="cs-c-name">${c}</span>${NICKNAMES[c]?`<span class="cs-c-nick">${NICKNAMES[c]}</span>`:''}</div>
+          <div><span class="cs-c-name">${c}</span>${NICKNAMES[c]?`<span class="cs-c-nick">${NICKNAMES[c]}</span>`:''}${CONSULTANT_TITLES[c]?`<span class="cs-c-nick">${CONSULTANT_TITLES[c]}</span>`:''}</div>
         </div>
         <div class="cs-c-card-body"${bodyStyle}>${newSec}${retSec}</div>
       </div>`;
@@ -3663,6 +3672,29 @@ const NICKNAMES = {
   '森珮筠': '森森', '郭子萍': 'Una', '呂秋玫': 'Mei',
   '林雨芑': 'Lulu', '何欣穎': 'Molly', '柯孟君': 'Kelly',
   '計品卉': 'Krystal', '陳甯': 'Ning',
+};
+
+const CONSULTANT_TITLES = {
+  '廖梓涵': '店長', '吳凱婷': '副店',
+  '蔡亞衫': '店長', '李晨研': '副店',
+  '王詩涵': '店長', '翁筱芸': '副店',
+  '森珮筠': '店長',
+  '邱家榆': '副店',
+  '柯孟君': '店長', '計品卉': '諮詢', '陳詩喬': '諮詢', '陳甯': '諮詢',
+  '呂秋玫': '店長', '郭子萍': '諮詢', '何欣穎': 'PT',
+  '林雨芑': '副店',
+};
+
+// 各門市諮詢師顯示順序（未列門市維持原排序）
+const STORE_CS_ORDER = {
+  'wo_zhanqian':  ['廖梓涵','吳凱婷'],
+  'wo_daan':      ['蔡亞衫','李晨研'],
+  'wo_zhongxiao': ['王詩涵','翁筱芸'],
+  'wo_banqiao':   ['森珮筠'],
+  'wo_dongmen':   ['邱家榆'],
+  'ki_taipei':    ['柯孟君','計品卉','陳詩喬','陳甯'],
+  'ki_taichung':  ['呂秋玫','郭子萍','何欣穎'],
+  'wo_taichung':  ['呂秋玫','林雨芑','郭子萍','何欣穎'],
 };
 
 // ══════════════════════════════════════════
@@ -4036,9 +4068,15 @@ function toggleNcEdit(){
 /* ── 各店業績進度簡表 ── */
 function openSpModal(){
   const today = new Date();
-  const yd = new Date(today); yd.setDate(today.getDate()-1);
-  const yr = yd.getFullYear(), mo = yd.getMonth()+1, day = yd.getDate();
-  const moIdx = today.getMonth(); // 0-indexed, same as _curMoTab
+  const moIdx = (typeof _curMoTab !== 'undefined') ? _curMoTab : today.getMonth(); // 0-indexed, sync with outer month tab
+  // 顯示用的年月：以 moIdx 為準
+  const dispYear = today.getFullYear();
+  const dispMo   = moIdx + 1; // 1-based
+  // 截至日：選當月→昨天；選歷史月→當月最後一天
+  const isCurMo  = (moIdx === today.getMonth());
+  const yd       = new Date(today); yd.setDate(today.getDate()-1);
+  const dispDay  = isCurMo ? yd.getDate() : new Date(dispYear, moIdx+1, 0).getDate();
+  const yr = dispYear, mo = dispMo, day = dispDay;
 
   // 讀 MO_SNAP_DATA（跟每月業績進度分頁同源，來自 Google Sheet 同步）
   const snap = (typeof MO_SNAP_DATA!=='undefined' && MO_SNAP_DATA[moIdx]) ? MO_SNAP_DATA[moIdx] : {};
@@ -4178,15 +4216,19 @@ function renderWeeklyTab(){
     el.innerHTML='<div class="wr-empty">尚無數據</div>'; return;
   }
 
-  const mode  = window._wrMode  || 'month';
-  const start = window._wrStart || '';
-  const end   = window._wrEnd   || '';
+  // 固定本月至今
+  const today = new Date();
+  const pad = n=>String(n).padStart(2,'0');
+  const fmt = d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  const moIdx = today.getMonth();
+  const start = `${today.getFullYear()}-${pad(moIdx+1)}-01`;
+  const end   = fmt(today);
 
-  // 篩選紀錄
-  const recs = CONSULTANT_RECORDS.filter(r=>{
-    if(!r.date) return false;
-    return r.date >= start && r.date <= end;
-  });
+  // 諮詢師記錄篩本月至今
+  const recs = CONSULTANT_RECORDS.filter(r=>r.date>=start&&r.date<=end);
+
+  // MO_SNAP_DATA：門市業績來源
+  const snap = (typeof MO_SNAP_DATA!=='undefined'&&MO_SNAP_DATA[moIdx])?MO_SNAP_DATA[moIdx]:{};
 
   // ── 輔助函數 ──
   const fmtN  = v=>'$'+Math.round(v).toLocaleString('zh-TW');
@@ -4200,65 +4242,57 @@ function renderWeeklyTab(){
   }
   function rateColor(r){ return r===null?'#aaa':r>=70?'#3B6D11':r>=50?'#b07d00':'#A32D2D'; }
 
-  // 當月目標
-  const moIdx = new Date(start).getMonth();
-  const snap  = (typeof MO_SNAP_DATA!=='undefined'&&MO_SNAP_DATA[moIdx])?MO_SNAP_DATA[moIdx]:{};
-
+  // 從 MO_SNAP_DATA 取門市業績與目標
+  function getSnapRev(sk){ return (snap[sk]&&snap[sk].total_rev)||0; }
   function getTarget(sk){
     const s=snap[sk]||{}, d=DATA[sk]||{};
     return s.target||(d.monthly_tgt?d.monthly_tgt[moIdx]:0)||(d.target_h1?Math.round(d.target_h1/6):0)||0;
   }
 
-  // 計算門市業績
-  function calcStoreRev(storeRecs){
-    let rev=0;
-    storeRecs.forEach(r=>r.clients.forEach(c=>{
-      if(c.type==='新客'){
-        if(c.total_amt>0) rev+=c.total_amt;
-        rev+=(c.product_amt||0);
-      } else if(c.type==='舊客'||c.type==='舊客體驗'){
-        rev+=c.trial_amt+(c.total_amt||0)+(c.product_amt||0);
-      }
-    }));
-    return rev;
-  }
-
+  // 產品金額仍從 CONSULTANT_RECORDS 算（MO_SNAP_DATA 無此欄）
   function calcStoreProd(storeRecs){
     let p=0;
     storeRecs.forEach(r=>r.clients.forEach(c=>{ p+=(c.product_amt||0); }));
     return p;
   }
 
-  // 計算諮詢師新客數據
+  // 計算諮詢師數據（與諮詢師詳情頁公式一致）
   function calcConsultant(csRecs){
-    let 接待=0, 成交=0, amt=0;
+    let 接待=0, 成交=0, totalAmt=0;
     csRecs.forEach(r=>r.clients.forEach(c=>{
       if(c.type==='新客'){
         接待++;
-        if(c.total_amt>0){ 成交++; amt+=c.total_amt; }
+        const pAmt = c.product_amt||0;
+        totalAmt += pAmt;
+        if(c.total_amt>0){ 成交++; totalAmt+=c.total_amt; }
       }
     }));
     const 成交率 = 接待>0?Math.round(成交/接待*100):null;
-    const 客單   = 成交>0?Math.round(amt/成交):null;
+    const 客單   = 接待>0?Math.round(totalAmt/接待):null;
     return {接待,成交,成交率,客單};
   }
 
-  // 取諮詢師列表（排除公司）
-  function getConsultants(storeRecs){
-    return [...new Set(storeRecs.map(r=>r.consultant))].filter(c=>c&&c!=='公司').sort();
+  // 取諮詢師列表（排除公司，按 STORE_CS_ORDER 排序）
+  function getConsultants(storeRecs, sk){
+    const present = new Set(storeRecs.map(r=>r.consultant).filter(c=>c&&c!=='公司'));
+    const order = (STORE_CS_ORDER&&STORE_CS_ORDER[sk]) || [];
+    const sorted = order.filter(c=>present.has(c));
+    present.forEach(c=>{ if(!sorted.includes(c)) sorted.push(c); });
+    return sorted;
   }
 
-  function csRowsHtml(storeRecs){
-    const cs = getConsultants(storeRecs);
+  function csRowsHtml(storeRecs, sk){
+    const cs = getConsultants(storeRecs, sk);
     if(!cs.length) return '';
     const colHd = `<div class="wr-col-hd"><span>諮詢師</span><span style="text-align:center">新客/成交</span><span style="text-align:center">成交率</span><span style="text-align:right">客單</span></div>`;
     const rows = cs.map(c=>{
       const cr = storeRecs.filter(r=>r.consultant===c);
       const {接待,成交,成交率,客單} = calcConsultant(cr);
       const rateClr = rateColor(成交率);
-      const nick = (typeof NICKNAMES!=='undefined'&&NICKNAMES[c])?`<span class="wr-cs-nick">${NICKNAMES[c]}</span>`:'';
+      const nick = (NICKNAMES&&NICKNAMES[c])?`<span class="wr-cs-nick">${NICKNAMES[c]}</span>`:'';
+      const title = (CONSULTANT_TITLES&&CONSULTANT_TITLES[c])?`<div class="wr-cs-title">${CONSULTANT_TITLES[c]}</div>`:'';
       return `<div class="wr-cs-row">
-        <span class="wr-cs-name">${c}${nick}</span>
+        <span class="wr-cs-name" style="display:flex;flex-direction:column;gap:0"><span>${c}${nick}</span>${title}</span>
         <span class="wr-cs-nc">${接待}/${成交}</span>
         <span class="wr-cs-rate" style="color:${rateClr}">${成交率!==null?成交率+'%':'—'}</span>
         <span class="wr-cs-amt">${客單?fmtN(客單):'—'}</span>
@@ -4271,7 +4305,7 @@ function renderWeeklyTab(){
   function soloSectionHtml(sk, barColor){
     const d = DATA[sk]; if(!d) return '';
     const storeRecs = recs.filter(r=>r.storeKey===sk);
-    const rev  = calcStoreRev(storeRecs);
+    const rev  = getSnapRev(sk);
     const prod = calcStoreProd(storeRecs);
     const tgt  = getTarget(sk);
     const ach  = tgt>0?rev/tgt:null;
@@ -4288,7 +4322,7 @@ function renderWeeklyTab(){
       <div class="wr-bars">
         <div class="wr-bar-outer"><div class="wr-bar-inner" style="width:${barW}%;background:${barColor}"></div></div>
       </div>
-      ${csRowsHtml(storeRecs)}
+      ${csRowsHtml(storeRecs, sk)}
     </div>`;
   }
 
@@ -4296,8 +4330,8 @@ function renderWeeklyTab(){
   function dualSectionHtml(label, kiKey, woKey){
     const kiRecs = recs.filter(r=>r.storeKey===kiKey);
     const woRecs = recs.filter(r=>r.storeKey===woKey);
-    const kiRev  = calcStoreRev(kiRecs);
-    const woRev  = calcStoreRev(woRecs);
+    const kiRev  = getSnapRev(kiKey);
+    const woRev  = getSnapRev(woKey);
     const kiProd = calcStoreProd(kiRecs);
     const woProd = calcStoreProd(woRecs);
     const total  = kiRev + woRev;
@@ -4314,8 +4348,8 @@ function renderWeeklyTab(){
     const kiLblTxt = `${kiLbl} ${fmtN(kiRev)}${kiProd?` 產品 ${fmtN(kiProd)}`:''}`;
     const woLblTxt = `${woLbl} ${fmtN(woRev)}${woProd?` 產品 ${fmtN(woProd)}`:''}`;
 
-    const kiCsRows = csRowsHtml(kiRecs);
-    const woCsRows = csRowsHtml(woRecs);
+    const kiCsRows = csRowsHtml(kiRecs, kiKey);
+    const woCsRows = csRowsHtml(woRecs, woKey);
     const kiName = DATA[kiKey]?.brand||'原綺';
     const woName = DATA[woKey]?.brand||'原渥';
 
@@ -4344,21 +4378,9 @@ function renderWeeklyTab(){
     </div>`;
   }
 
-  // ── Toolbar ──
-  const toolbar = `<div class="wr-toolbar">
-    <span class="wr-range-lbl">期間</span>
-    <button class="wr-seg-btn${mode==='month'?' on':''}"    onclick="_wrSetRange('month')">本月至今</button>
-    <button class="wr-seg-btn${mode==='week'?' on':''}"     onclick="_wrSetRange('week')">本週</button>
-    <button class="wr-seg-btn${mode==='lastweek'?' on':''}" onclick="_wrSetRange('lastweek')">上週</button>
-    <button class="wr-seg-btn${mode==='custom'?' on':''}"   onclick="window._wrMode='custom';renderWeeklyTab()">自訂</button>
-    ${mode==='custom'?`
-      <input type="date" class="wr-date-input" value="${start}" onchange="window._wrStart=this.value;renderWeeklyTab()">
-      <span class="wr-date-sep">—</span>
-      <input type="date" class="wr-date-input" value="${end}" onchange="window._wrEnd=this.value;renderWeeklyTab()">
-    `:`<span style="font-size:11px;color:#888">${start} — ${end}</span>`}
-  </div>`;
-
   // ── 渲染 ──
+  const mo = moIdx+1;
+  const header = `<div style="font-size:11px;color:#999;padding:10px 0 12px">${today.getFullYear()}年${mo}月 本月至今</div>`;
   const grid = `<div class="wr-grid">
     ${soloSectionHtml('wo_zhanqian','#2d5a9e')}
     ${soloSectionHtml('wo_daan','#2d5a9e')}
@@ -4368,7 +4390,7 @@ function renderWeeklyTab(){
     ${dualSectionHtml('台中','ki_taichung','wo_taichung')}
   </div>`;
 
-  el.innerHTML = toolbar + grid;
+  el.innerHTML = header + grid;
 }
 
 function renderNcModal(){
@@ -4511,7 +4533,9 @@ function openCSPrintPreview(){
     storeKeys.forEach(sk=>{
       const srecs=records.filter(r=>r.storeKey===sk);
       if(!srecs.length) return;
-      const consultants=[...new Set(srecs.map(r=>r.consultant))].filter(c=>c!=='公司');
+      const _prt=new Set(srecs.map(r=>r.consultant).filter(c=>c!=='公司'));
+      const _ord=STORE_CS_ORDER[sk]||[];
+      const consultants=[..._ord.filter(c=>_prt.has(c)),...[..._prt].filter(c=>!_ord.includes(c))];
       if(!consultants.length) return;
       let storeRows='';
       let sNewTot={接待:0,成交:0,amt:0};
@@ -4521,9 +4545,10 @@ function openCSPrintPreview(){
         const n=calcNew(cr);
         const ret=calcRet(cr);
         const nick=NICKNAMES[c]?`<span class="cs-print-nick">${NICKNAMES[c]}</span>`:'';
+        const ptitle=CONSULTANT_TITLES[c]?`<span class="cs-print-nick">${CONSULTANT_TITLES[c]}</span>`:'';
         storeRows+=`<tr class="pt-cs">
           <td></td>
-          <td>${c}${nick}</td>
+          <td>${c}${nick}${ptitle}</td>
           <td>${n.接待||'<span class="cs-print-dim">0</span>'}</td>
           <td>${n.成交||'<span class="cs-print-dim">0</span>'}</td>
           <td>${fmtRate(n.成交率)}</td>
