@@ -772,6 +772,44 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
 .sp-ach-green{color:#3B6D11}
 .sp-ach-amber{color:#b07d00}
 .sp-ach-red{color:#A32D2D}
+/* ══ 週報簡表 Tab ══ */
+.wr-toolbar{display:flex;align-items:center;gap:8px;padding:12px 0 14px;flex-wrap:wrap}
+.wr-range-lbl{font-size:12px;color:#666;font-weight:500}
+.wr-seg-btn{font-size:11px;padding:4px 11px;border-radius:6px;border:0.5px solid rgba(0,0,0,.15);background:#fff;color:#555;cursor:pointer;font-weight:500;transition:background .12s}
+.wr-seg-btn.on{background:#1a1a18;color:#fff;border-color:#1a1a18}
+.wr-date-sep{font-size:11px;color:#aaa}
+.wr-date-input{font-size:11px;padding:4px 8px;border:0.5px solid rgba(0,0,0,.18);border-radius:6px;color:#333;background:#fff}
+.wr-section{background:#fff;border:0.5px solid rgba(0,0,0,.09);border-radius:12px;overflow:hidden;margin-bottom:10px}
+.wr-sec-hd{display:grid;grid-template-columns:auto 1fr auto auto auto;align-items:center;gap:10px;padding:10px 14px;background:#faf9f7}
+.wr-sec-name{font-weight:600;font-size:13px;color:#1a1a18}
+.wr-sec-revs{display:flex;gap:12px;align-items:baseline}
+.wr-sec-rev{font-size:13px;font-weight:600;color:#1a1a18}
+.wr-sec-prod-lbl{font-size:11px;color:#888;margin-right:2px}
+.wr-sec-prod{font-size:13px;font-weight:600;color:#444}
+.wr-sec-tgt{font-size:11px;color:#999;white-space:nowrap}
+.wr-badge{font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.wr-badge-g{background:#eaf3de;color:#3B6D11}
+.wr-badge-y{background:#faeeda;color:#854F0B}
+.wr-badge-r{background:#fcebeb;color:#A32D2D}
+.wr-bars{padding:5px 14px 9px;background:#f5f4f0;display:flex;flex-direction:column;gap:7px}
+.wr-bar-outer{height:5px;background:#e3e0d8;border-radius:3px}
+.wr-bar-inner{height:100%;border-radius:3px;transition:width .3s}
+.wr-dual-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wr-bar-lbl{font-size:12px;color:#1a1a18;margin-bottom:3px;font-weight:500}
+.wr-col-hd{display:grid;grid-template-columns:80px 1fr 44px 70px;gap:4px;padding:5px 14px;font-size:10px;color:#aaa;letter-spacing:.04em}
+.wr-cs-row{display:grid;grid-template-columns:80px 1fr 44px 70px;gap:4px;padding:7px 14px;align-items:center;border-top:0.5px solid rgba(0,0,0,.05)}
+.wr-cs-name{font-size:12px;font-weight:500;color:#1a1a18}
+.wr-cs-nc{font-size:12px;text-align:center;color:#444}
+.wr-cs-rate{font-size:12px;font-weight:600;text-align:center}
+.wr-cs-amt{font-size:12px;text-align:right;color:#1a1a18}
+.wr-brand-subhd{padding:5px 14px 2px;font-size:10px;font-weight:600;letter-spacing:.06em}
+.wr-brand-subhd.wo{color:#1a3a6e;background:#f0f4fc}
+.wr-brand-subhd.ki{color:#5a0f2a;background:#faf0f4}
+.wr-empty{padding:40px;text-align:center;color:#aaa;font-size:13px}
+.wr-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wr-grid-full{grid-column:1/-1}
+.wr-cs-nick{font-size:10px;color:#888;margin-left:4px;font-weight:400}
+@media(max-width:640px){.wr-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -823,6 +861,7 @@ function checkPw(){
     <button class="nav-item" onclick="switchTab(3,this)">每月達標狀況</button>
     <button class="nav-item" onclick="switchTab(4,this)">產品業績</button>
     <button class="nav-item" onclick="switchTab(5,this)">諮詢師成交</button>
+    <button class="nav-item" onclick="switchTab(6,this)">週報簡表</button>
     <div class="nav-filter">
       <span class="filter-label">年份</span>
       <select id="year-filter" onchange="refreshAll()"><option value="2026" selected>2026</option></select>
@@ -887,6 +926,11 @@ function checkPw(){
   <!-- ── TAB 6: 諮詢師成交 ── -->
   <div id="tab5" class="tab-content">
     <div id="consultant-tab-body"></div>
+  </div>
+
+  <!-- ── TAB 7: 週報簡表 ── -->
+  <div id="tab6" class="tab-content">
+    <div id="weekly-tab-body"></div>
   </div>
 
 </div>
@@ -1121,6 +1165,7 @@ function switchTab(idx, el){
   if(idx===3) renderAchMatrix();
   if(idx===4) renderProductTab();
   if(idx===5) renderConsultantTab();
+  if(idx===6) renderWeeklyTab();
 }
 
 // ══════════════════════════════════════════
@@ -4088,6 +4133,242 @@ function openSpModal(){
 }
 function closeSpModal(){
   document.getElementById('spOverlay').classList.remove('open');
+}
+
+// ══════════════════════════════════════════
+//  週報簡表 Tab
+// ══════════════════════════════════════════
+(function(){
+  const today = new Date();
+  const pad = n=>String(n).padStart(2,'0');
+  const fmt = d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  // 預設：本月1日到今天
+  const m1 = new Date(today.getFullYear(), today.getMonth(), 1);
+  window._wrMode = 'month';
+  window._wrStart = fmt(m1);
+  window._wrEnd   = fmt(today);
+})();
+
+function _wrSetRange(mode){
+  const today = new Date();
+  const pad = n=>String(n).padStart(2,'0');
+  const fmt = d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  if(mode==='week'){
+    // 本週一到今天
+    const dow = today.getDay()||7;
+    const mon = new Date(today); mon.setDate(today.getDate()-(dow-1));
+    window._wrStart = fmt(mon); window._wrEnd = fmt(today);
+  } else if(mode==='lastweek'){
+    const dow = today.getDay()||7;
+    const lmon = new Date(today); lmon.setDate(today.getDate()-(dow-1)-7);
+    const lsun = new Date(lmon); lsun.setDate(lmon.getDate()+6);
+    window._wrStart = fmt(lmon); window._wrEnd = fmt(lsun);
+  } else if(mode==='month'){
+    const m1 = new Date(today.getFullYear(), today.getMonth(), 1);
+    window._wrStart = fmt(m1); window._wrEnd = fmt(today);
+  }
+  window._wrMode = mode;
+  renderWeeklyTab();
+}
+
+function renderWeeklyTab(){
+  const el = document.getElementById('weekly-tab-body');
+  if(!el) return;
+  if(typeof CONSULTANT_RECORDS==='undefined'||!CONSULTANT_RECORDS.length){
+    el.innerHTML='<div class="wr-empty">尚無數據</div>'; return;
+  }
+
+  const mode  = window._wrMode  || 'month';
+  const start = window._wrStart || '';
+  const end   = window._wrEnd   || '';
+
+  // 篩選紀錄
+  const recs = CONSULTANT_RECORDS.filter(r=>{
+    if(!r.date) return false;
+    return r.date >= start && r.date <= end;
+  });
+
+  // ── 輔助函數 ──
+  const fmtN  = v=>'$'+Math.round(v).toLocaleString('zh-TW');
+  const fmtM2 = v=>v>=10000?Math.round(v/10000)+'萬':(v/1000).toFixed(0)+'K';
+
+  function achBadge(ach){
+    if(ach===null) return '<span class="wr-badge">—</span>';
+    const pct = Math.round(ach*100);
+    const cls = ach>=1?'wr-badge-g':ach>=0.7?'wr-badge-y':'wr-badge-r';
+    return `<span class="wr-badge ${cls}">${pct}%</span>`;
+  }
+  function rateColor(r){ return r===null?'#aaa':r>=70?'#3B6D11':r>=50?'#b07d00':'#A32D2D'; }
+
+  // 當月目標
+  const moIdx = new Date(start).getMonth();
+  const snap  = (typeof MO_SNAP_DATA!=='undefined'&&MO_SNAP_DATA[moIdx])?MO_SNAP_DATA[moIdx]:{};
+
+  function getTarget(sk){
+    const s=snap[sk]||{}, d=DATA[sk]||{};
+    return s.target||(d.monthly_tgt?d.monthly_tgt[moIdx]:0)||(d.target_h1?Math.round(d.target_h1/6):0)||0;
+  }
+
+  // 計算門市業績
+  function calcStoreRev(storeRecs){
+    let rev=0;
+    storeRecs.forEach(r=>r.clients.forEach(c=>{
+      if(c.type==='新客'){
+        if(c.total_amt>0) rev+=c.total_amt;
+        rev+=(c.product_amt||0);
+      } else if(c.type==='舊客'||c.type==='舊客體驗'){
+        rev+=c.trial_amt+(c.total_amt||0)+(c.product_amt||0);
+      }
+    }));
+    return rev;
+  }
+
+  function calcStoreProd(storeRecs){
+    let p=0;
+    storeRecs.forEach(r=>r.clients.forEach(c=>{ p+=(c.product_amt||0); }));
+    return p;
+  }
+
+  // 計算諮詢師新客數據
+  function calcConsultant(csRecs){
+    let 接待=0, 成交=0, amt=0;
+    csRecs.forEach(r=>r.clients.forEach(c=>{
+      if(c.type==='新客'){
+        接待++;
+        if(c.total_amt>0){ 成交++; amt+=c.total_amt; }
+      }
+    }));
+    const 成交率 = 接待>0?Math.round(成交/接待*100):null;
+    const 客單   = 成交>0?Math.round(amt/成交):null;
+    return {接待,成交,成交率,客單};
+  }
+
+  // 取諮詢師列表（排除公司）
+  function getConsultants(storeRecs){
+    return [...new Set(storeRecs.map(r=>r.consultant))].filter(c=>c&&c!=='公司').sort();
+  }
+
+  function csRowsHtml(storeRecs){
+    const cs = getConsultants(storeRecs);
+    if(!cs.length) return '';
+    const colHd = `<div class="wr-col-hd"><span>諮詢師</span><span style="text-align:center">新客/成交</span><span style="text-align:center">成交率</span><span style="text-align:right">客單</span></div>`;
+    const rows = cs.map(c=>{
+      const cr = storeRecs.filter(r=>r.consultant===c);
+      const {接待,成交,成交率,客單} = calcConsultant(cr);
+      const rateClr = rateColor(成交率);
+      const nick = (typeof NICKNAMES!=='undefined'&&NICKNAMES[c])?`<span class="wr-cs-nick">${NICKNAMES[c]}</span>`:'';
+      return `<div class="wr-cs-row">
+        <span class="wr-cs-name">${c}${nick}</span>
+        <span class="wr-cs-nc">${接待}/${成交}</span>
+        <span class="wr-cs-rate" style="color:${rateClr}">${成交率!==null?成交率+'%':'—'}</span>
+        <span class="wr-cs-amt">${客單?fmtN(客單):'—'}</span>
+      </div>`;
+    }).join('');
+    return colHd+rows;
+  }
+
+  // ── 獨立門市卡 ──
+  function soloSectionHtml(sk, barColor){
+    const d = DATA[sk]; if(!d) return '';
+    const storeRecs = recs.filter(r=>r.storeKey===sk);
+    const rev  = calcStoreRev(storeRecs);
+    const prod = calcStoreProd(storeRecs);
+    const tgt  = getTarget(sk);
+    const ach  = tgt>0?rev/tgt:null;
+    const barW = tgt>0?Math.min(100,rev/tgt*100):0;
+    const prodHtml = prod>0?`<span class="wr-sec-prod"><span class="wr-sec-prod-lbl">產品</span>${fmtN(prod)}</span>`:'';
+
+    return `<div class="wr-section">
+      <div class="wr-sec-hd">
+        <span class="wr-sec-name">${d.label}</span>
+        <div class="wr-sec-revs"><span class="wr-sec-rev">${fmtN(rev)}</span>${prodHtml}</div>
+        <span class="wr-sec-tgt">目標 ${tgt?fmtM2(tgt):'—'}</span>
+        ${achBadge(ach)}
+      </div>
+      <div class="wr-bars">
+        <div class="wr-bar-outer"><div class="wr-bar-inner" style="width:${barW}%;background:${barColor}"></div></div>
+      </div>
+      ${csRowsHtml(storeRecs)}
+    </div>`;
+  }
+
+  // ── 雙品牌門市（台北/台中）卡 ──
+  function dualSectionHtml(label, kiKey, woKey){
+    const kiRecs = recs.filter(r=>r.storeKey===kiKey);
+    const woRecs = recs.filter(r=>r.storeKey===woKey);
+    const kiRev  = calcStoreRev(kiRecs);
+    const woRev  = calcStoreRev(woRecs);
+    const kiProd = calcStoreProd(kiRecs);
+    const woProd = calcStoreProd(woRecs);
+    const total  = kiRev + woRev;
+    const kiTgt  = getTarget(kiKey);
+    const woTgt  = getTarget(woKey);
+    const tgt    = kiTgt + woTgt;
+    const ach    = tgt>0?total/tgt:null;
+    const barW   = tgt>0?Math.min(100,total/tgt*100):0;
+    const kiBarW = kiTgt>0?Math.min(100,kiRev/kiTgt*100):0;
+    const woBarW = woTgt>0?Math.min(100,woRev/woTgt*100):0;
+    const kiLbl  = DATA[kiKey]?.brand||'原綺';
+    const woLbl  = DATA[woKey]?.label||'原渥';
+
+    const kiLblTxt = `${kiLbl} ${fmtN(kiRev)}${kiProd?` 產品 ${fmtN(kiProd)}`:''}`;
+    const woLblTxt = `${woLbl} ${fmtN(woRev)}${woProd?` 產品 ${fmtN(woProd)}`:''}`;
+
+    const kiCsRows = csRowsHtml(kiRecs);
+    const woCsRows = csRowsHtml(woRecs);
+    const kiName = DATA[kiKey]?.brand||'原綺';
+    const woName = DATA[woKey]?.brand||'原渥';
+
+    return `<div class="wr-section">
+      <div class="wr-sec-hd">
+        <span class="wr-sec-name">${label}</span>
+        <div class="wr-sec-revs"><span class="wr-sec-rev">${fmtN(total)}</span></div>
+        <span class="wr-sec-tgt">目標 ${tgt?fmtM2(tgt):'—'}</span>
+        ${achBadge(ach)}
+      </div>
+      <div class="wr-bars">
+        <div class="wr-bar-outer"><div class="wr-bar-inner" style="width:${barW}%;background:#888"></div></div>
+        <div class="wr-dual-grid">
+          <div>
+            <div class="wr-bar-lbl">${kiLblTxt}</div>
+            <div class="wr-bar-outer"><div class="wr-bar-inner" style="width:${kiBarW}%;background:#c04070"></div></div>
+          </div>
+          <div>
+            <div class="wr-bar-lbl">${woLblTxt}</div>
+            <div class="wr-bar-outer"><div class="wr-bar-inner" style="width:${woBarW}%;background:#2d5a9e"></div></div>
+          </div>
+        </div>
+      </div>
+      ${kiCsRows?`<div class="wr-brand-subhd ki">${kiName}</div>${kiCsRows}`:''}
+      ${woCsRows?`<div class="wr-brand-subhd wo">${woName}</div>${woCsRows}`:''}
+    </div>`;
+  }
+
+  // ── Toolbar ──
+  const toolbar = `<div class="wr-toolbar">
+    <span class="wr-range-lbl">期間</span>
+    <button class="wr-seg-btn${mode==='month'?' on':''}"    onclick="_wrSetRange('month')">本月至今</button>
+    <button class="wr-seg-btn${mode==='week'?' on':''}"     onclick="_wrSetRange('week')">本週</button>
+    <button class="wr-seg-btn${mode==='lastweek'?' on':''}" onclick="_wrSetRange('lastweek')">上週</button>
+    <button class="wr-seg-btn${mode==='custom'?' on':''}"   onclick="window._wrMode='custom';renderWeeklyTab()">自訂</button>
+    ${mode==='custom'?`
+      <input type="date" class="wr-date-input" value="${start}" onchange="window._wrStart=this.value;renderWeeklyTab()">
+      <span class="wr-date-sep">—</span>
+      <input type="date" class="wr-date-input" value="${end}" onchange="window._wrEnd=this.value;renderWeeklyTab()">
+    `:`<span style="font-size:11px;color:#888">${start} — ${end}</span>`}
+  </div>`;
+
+  // ── 渲染 ──
+  const grid = `<div class="wr-grid">
+    ${soloSectionHtml('wo_zhanqian','#2d5a9e')}
+    ${soloSectionHtml('wo_daan','#2d5a9e')}
+    ${soloSectionHtml('wo_zhongxiao','#2d5a9e')}
+    ${soloSectionHtml('wo_banqiao','#2d5a9e')}
+    ${dualSectionHtml('台北','ki_taipei','wo_dongmen')}
+    ${dualSectionHtml('台中','ki_taichung','wo_taichung')}
+  </div>`;
+
+  el.innerHTML = toolbar + grid;
 }
 
 function renderNcModal(){
