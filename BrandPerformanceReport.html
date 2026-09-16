@@ -4644,6 +4644,8 @@ function openCSPrintPreview(){
         const pAmt=c.product_amt||0;
         amt+=pAmt;
         if(c.total_amt>0){成交++;amt+=c.total_amt;}
+      } else if(c.type==='其他'){
+        接待++; // 分享客計入接待，不計成交
       }
     }));
     const 成交率=接待>0?Math.round(成交/接待*100):null;
@@ -4720,6 +4722,17 @@ function openCSPrintPreview(){
         if(ret.purchased) sRetTot.purchased+=ret.purchased;
         sRetTot.rev+=ret.rev;
       });
+      // 將「公司」底下的客人也計入小計（不顯示獨立列）
+      const compRecs=srecs.filter(r=>r.consultant==='公司');
+      if(compRecs.length){
+        const cn=calcNew(compRecs);
+        const cret=bk==='ki'?{totalOld:0,newTrial:0,purchased:0,rev:0,取消:0}:calcRet(compRecs);
+        sNewTot.接待+=cn.接待;sNewTot.成交+=cn.成交;
+        if(cn.客單!==null) sNewTot.amt+=cn.客單*cn.接待;
+        sRetTot.totalOld+=cret.totalOld;sRetTot.newTrial+=cret.newTrial;sRetTot.取消+=cret.取消||0;
+        if(cret.purchased) sRetTot.purchased+=cret.purchased;
+        sRetTot.rev+=cret.rev;
+      }
       // 門市小計
       const sNr=sNewTot.接待>0?Math.round(sNewTot.成交/sNewTot.接待*100):null;
       const sNk=sNewTot.接待>0?Math.round(sNewTot.amt/sNewTot.接待):null;
