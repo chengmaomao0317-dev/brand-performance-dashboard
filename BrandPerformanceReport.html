@@ -2726,8 +2726,8 @@ const PROD_EC_DATA = {
 let _prodSubTab='store', _prodStoreYr=2026, _prodEcYr=2026;
 
 const PROD_STORE_CLR={
-  wo_zhanqian:'#2d5a9e', wo_daan:'#4a7abc', wo_zhongxiao:'#1a3a7e',
-  wo_banqiao:'#9ab8d8', wo_dongmen:'#5472a8', wo_taichung:'#3d6db3',
+  wo_zhanqian:'#2d5a9e', wo_daan:'#2d5a9e', wo_zhongxiao:'#2d5a9e',
+  wo_banqiao:'#2d5a9e', wo_dongmen:'#2d5a9e', wo_taichung:'#2d5a9e',
   ki_taipei:'#c04070',
 };
 
@@ -2871,9 +2871,93 @@ function renderProductTab(){
       </div>
     </div>
 
+    <div class="prod-sec-hd" style="display:flex;justify-content:space-between;align-items:center;margin-top:16px">
+      <span>各店年度業績排名（${yr}）</span>
+      <span style="font-size:11px;color:var(--text-muted)">YOY vs 前一年同期</span>
+    </div>
+    <div style="background:#fff;border:0.5px solid var(--border);border-radius:8px;padding:.875rem;margin-bottom:4px">
+      ${(()=>{
+        const allYrs=[2024,2025,2026];
+        const storesByTotal=[...stores].sort((a,b)=>b.months.reduce((s,v)=>s+v,0)-a.months.reduce((s,v)=>s+v,0));
+        const maxTotal=Math.max(...storesByTotal.map(st=>st.months.reduce((s,v)=>s+v,0)),1);
+        return storesByTotal.map(st=>{
+          const clr=PROD_STORE_CLR[st.key]||'#888780';
+          const total=st.months.reduce((s,v)=>s+v,0);
+          const pct=Math.max(Math.round(total/maxTotal*100),total>0?2:0);
+          const prevSt=prevStores.find(s=>s.key===st.key);
+          const prevTotal=prevSt?prevSt.months.slice(0,showMo).reduce((a,b)=>a+b,0):0;
+          const yoy=prevTotal>0?(total/prevTotal-1):null;
+          const yoyStr=yoy!==null
+            ?`<span style="font-size:11px;font-weight:600;color:${yoy>=0?'#3b6d11':'#a32d2d'};width:46px;text-align:right;flex-shrink:0">${yoy>=0?'▲':'▼'}${Math.abs(Math.round(yoy*100))}%</span>`
+            :`<span style="font-size:11px;color:var(--text-muted);width:46px;text-align:right;flex-shrink:0">新</span>`;
+          return`<div style="display:flex;align-items:center;gap:10px;margin-bottom:9px">
+            <span style="font-size:12px;font-weight:600;color:#444;width:52px;flex-shrink:0;text-align:right">${st.label}</span>
+            <div style="flex:1;height:22px;background:var(--surface-0);border-radius:4px;overflow:hidden">
+              <div style="height:100%;width:${pct}%;background:${clr};border-radius:4px"></div>
+            </div>
+            <span style="font-size:12px;font-weight:700;color:var(--text-primary);width:72px;flex-shrink:0;text-align:right">${fmtM(total)}</span>
+            ${yoyStr}
+          </div>`;
+        }).join('');
+      })()}
+    </div>
+
+    <div class="prod-sec-hd" style="margin-top:14px">門市趨勢一覽</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">
+      ${(()=>{
+        const allYrs=[2024,2025,2026];
+        // 所有出現過的 store keys
+        const allKeys=[];
+        [2024,2025,2026].forEach(y=>(PROD_STORE_DATA[y]||[]).forEach(st=>{if(!allKeys.includes(st.key))allKeys.push(st.key);}));
+        return allKeys.map(key=>{
+          // 找 label 與 brandKey
+          let label=key, brandKey='wo';
+          for(const y of allYrs){const sd=(PROD_STORE_DATA[y]||[]).find(s=>s.key===key);if(sd){label=sd.label;brandKey=sd.brandKey||'wo';break;}}
+          const clr=PROD_STORE_CLR[key]||'#888780';
+          const isBrandKi=brandKey==='ki';
+          const vals=allYrs.map(y=>{const sd=(PROD_STORE_DATA[y]||[]).find(s=>s.key===key);return sd?sd.months.reduce((a,b)=>a+b,0):0;});
+          const curVal=vals[allYrs.indexOf(yr)]||0;
+          const maxV=Math.max(...vals,1);
+          // YoY: 當年 vs 上一年同期
+          const curIdx=allYrs.indexOf(yr);
+          // 同期比：前一年取相同月數
+          const prevYrData=curIdx>0?(PROD_STORE_DATA[allYrs[curIdx-1]]||[]).find(s=>s.key===key):null;
+          const prevVal=prevYrData?prevYrData.months.slice(0,showMo).reduce((a,b)=>a+b,0):0;
+          const yoy=prevVal>0?(curVal/prevVal-1):null;
+          const yoyStr=yoy!==null
+            ?`<span style="font-size:10px;font-weight:500;color:${yoy>=0?'#3b6d11':'#a32d2d'}">${yoy>=0?'▲':'▼'}${Math.abs(Math.round(yoy*100))}%</span>`
+            :`<span style="font-size:10px;color:var(--text-muted)">新</span>`;
+          const sparkBars=allYrs.map((y,i)=>{
+            const v=vals[i];
+            const h=Math.max(Math.round(v/maxV*100),v>0?6:0);
+            const isActive=y===yr;
+            const label=v>0?(v>=1000000?'$'+(v/10000).toFixed(0)+'萬':v>=10000?'$'+(v/10000).toFixed(1)+'萬':'$'+v.toLocaleString()):'—';
+            return`<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:54px;gap:2px">
+              <div style="font-size:8px;font-weight:${isActive?700:400};color:${isActive?(isBrandKi?'#c04070':'#2d5a9e'):'#888'};white-space:nowrap;line-height:1">${label}</div>
+              <div style="width:100%;height:${h}%;background:${isActive?clr:'#d4d2ce'};border-radius:2px 2px 0 0;min-height:${v>0?2:0}px"></div>
+            </div>`;
+          }).join('');
+          const yrLabels=allYrs.map((y,i)=>`<div style="flex:1;text-align:center;font-size:8px;color:${y===yr?'#333':'#ccc'};font-weight:${y===yr?600:400}">'${String(y).slice(2)}</div>`).join('');
+          const badge=isBrandKi
+            ?`<span style="font-size:8px;padding:1px 5px;border-radius:8px;background:#f8edf2;color:#c04070;font-weight:500">原綺</span>`
+            :`<span style="font-size:8px;padding:1px 5px;border-radius:8px;background:#edf1f8;color:#2d5a9e;font-weight:500">原渥</span>`;
+          return`<div style="background:#fff;border:0.5px solid var(--border);border-radius:8px;padding:10px 12px 8px">
+            <div style="display:flex;align-items:center;gap:5px;margin-bottom:5px">
+              <span style="font-size:11px;font-weight:600;color:#444">${label}</span>${badge}
+            </div>
+            <div style="font-size:17px;font-weight:700;color:var(--text-primary);letter-spacing:-.3px">${fmtM(curVal)}</div>
+            <div style="font-size:9px;color:var(--text-muted);margin-bottom:6px">${yr} 全年累計</div>
+            <div style="display:flex;gap:3px;border-bottom:0.5px solid var(--border);padding-bottom:0">${sparkBars}</div>
+            <div style="display:flex;gap:3px;margin-top:3px;margin-bottom:6px">${yrLabels}</div>
+            ${yoyStr}
+          </div>`;
+        }).join('');
+      })()}
+    </div>
+
     <div class="prod-sec-hd" style="display:flex;justify-content:space-between;align-items:center">
       <span>各店業績（${yr}）</span>
-      <span style="font-size:11px;color:var(--text-muted)">YOY vs 前一年同期</span>
+      <span style="font-size:11px;color:var(--text-muted)">月份明細</span>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">${cards}</div>
 
@@ -4170,11 +4254,16 @@ function openSpModal(){
   function cardHtml(label,mtd,tgt,ach,lyr,dotColor){
     const barW=tgt>0?Math.min(100,mtd/tgt*100):0;
     const yoy=yoyTxt(mtd,lyr);
+    const lyrStr=lyr?fmtM2(lyr):'—';
     return `<div class="sp-card">
       <div class="sp-card-label" style="color:${dotColor}">${label}</div>
       <div class="sp-card-rev">${fmtN(mtd)}</div>
-      <div class="sp-card-ach" style="color:${achColor(ach)}">${achTxt(ach)}</div>
+      <div class="sp-card-ach" style="color:${achColor(ach)}">達成率 ${achTxt(ach)}</div>
       <div class="sp-card-yoy" style="color:${yoy.clr}">去年同期 ${yoy.txt}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1px">
+        <span style="font-size:11px;color:#aaa">去年同期業績</span>
+        <span style="font-size:12px;font-weight:500;color:#888">${lyrStr}</span>
+      </div>
       <div class="sp-card-bar-outer"><div class="sp-card-bar-inner" style="width:${barW}%;background:${dotColor}"></div></div>
       <div class="sp-card-tgt">目標 ${tgt>0?fmtM(tgt):'—'}</div>
     </div>`;
@@ -4199,7 +4288,7 @@ function openSpModal(){
       </div>
       <div class="sp-tgt-cell">${tgt>0?fmtM2(tgt):'—'}</div>
       <div class="sp-ach-cell ${achClass(ach)}">${achTxt(ach)}</div>
-      <div class="sp-yoy-cell" style="color:${yoy.clr}">${lyr?fmtM2(lyr):'—'}</div>
+      <div class="sp-yoy-cell" style="color:#777">${lyr?fmtM2(lyr):'—'}</div>
       <div class="sp-yoy-cell" style="color:${yoy.clr};font-size:10px">${lyr?yoy.txt:''}</div>
     </div>`;
   }
