@@ -468,7 +468,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
 .cs-av-wo{background:#e6eef8;color:#0c447c}
 .cs-av-ki{background:#fbeaf0;color:#72243e}
 .cs-c-name{font-size:11px;color:#1a1a18;white-space:nowrap}
-.cs-c-nick{font-size:10px;color:#aaa8a2;white-space:nowrap;display:block;line-height:1.2}
+.cs-c-nick{font-size:10px;color:#aaa8a2;white-space:nowrap;margin-left:4px}
 .cs-c-stats{display:flex;gap:0;flex:1}
 .cs-cs{flex:1;text-align:center;border-right:.5px solid rgba(0,0,0,.06)}
 .cs-cs:last-child{border-right:none}
@@ -680,7 +680,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
 .cs-print-tbl .pt-store.wo td{background:rgba(45,90,158,.06);color:#0c447c;border-left:3px solid #2d5a9e}
 .cs-print-tbl .pt-store.ki td{background:rgba(192,64,112,.06);color:#72243e;border-left:3px solid #c04070}
 .cs-print-tbl .pt-cs td:nth-child(2){padding-left:18px}
-.cs-print-nick{font-size:10px;color:#999;margin-left:5px}
+.cs-print-nick{font-size:10px;color:#999;margin-left:5px;white-space:nowrap}
 .cs-print-tbl .pt-sub td{background:#f9f7f4;font-weight:500;font-size:11px;color:#555;border-top:.5px solid #d0cec8;border-bottom:.5px solid #d0cec8}
 .cs-print-tbl .pt-sub.ki td{background:#fdf0f5}
 .cs-print-tbl tr:last-child td{border-bottom:none}
@@ -2816,19 +2816,29 @@ function renderProductTab(){
     // 總計列
     const prevMoTotals=Array.from({length:showMo},(_,i)=>prevStores.reduce((s,st)=>s+(st.months[i]||0),0));
     const moTotals=Array.from({length:showMo},(_,i)=>stores.reduce((s,st)=>s+(st.months[i]||0),0));
-    const totalBars=Array.from({length:showMo},(_,i)=>{
-      const v=moTotals[i]||0, pv=prevMoTotals[i]||0;
-      const maxMo2=Math.max(...moTotals,1);
-      const h=Math.max(Math.round(v/maxMo2*100),v>0?3:0);
-      const yoyMo=pv>0?(v/pv-1):null;
-      const yoyStr=yoyMo!==null?`<div style="font-size:9px;font-weight:500;color:${yoyMo>=0?'#3b6d11':'#a32d2d'};margin-top:2px">${yoyMo>=0?'+':''}${Math.round(yoyMo*100)}%</div>`:'';
-      return`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:0">
-        <div style="width:100%;flex:1;display:flex;align-items:flex-end">
-          <div style="width:100%;height:${h}%;background:#888780;border-radius:2px 2px 0 0;min-height:${v>0?3:0}px"></div>
-        </div>
-        ${yoyStr}
-        <div style="font-size:9px;color:var(--text-muted);margin-top:2px">${i+1}月</div>
+    // Y 軸刻度
+    const maxMoVal=Math.max(...moTotals,1);
+    const niceMax=(function(v){const mag=Math.pow(10,Math.floor(Math.log10(v)));const n=v/mag;return(n<=1?1:n<=2?2:n<=5?5:10)*mag;})(maxMoVal*1.15);
+    const tickCount=4;
+    const yTicks=Array.from({length:tickCount+1},(_,i)=>Math.round(niceMax/tickCount*(tickCount-i)));
+    const yAxisHtml=yTicks.map(t=>`<div style="font-size:8.5px;color:var(--text-muted);line-height:1">$${t.toLocaleString('en-US')}</div>`).join('');
+    const gridHtml=yTicks.map((t,i)=>`<div style="border-top:${i===tickCount?'1px solid var(--border)':'0.5px dashed rgba(0,0,0,.06)'};width:100%"></div>`).join('');
+
+    const barsHtml=Array.from({length:showMo},(_,i)=>{
+      const v=moTotals[i]||0;
+      const h=v>0?Math.max(Math.round(v/niceMax*100),1):0;
+      const vLabel=v>0?'$'+v.toLocaleString('en-US'):'';
+      return`<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:0">
+        <div style="font-size:8.5px;font-weight:600;color:#1a1a18;margin-bottom:2px;white-space:nowrap">${vLabel}</div>
+        <div style="width:100%;height:${h}%;background:#888780;border-radius:2px 2px 0 0${h>0?';min-height:3px':''}"></div>
       </div>`;
+    }).join('');
+
+    const labelsHtml=Array.from({length:showMo},(_,i)=>{
+      const v=moTotals[i]||0,pv=prevMoTotals[i]||0;
+      const yoyMo=pv>0?(v/pv-1):null;
+      const yStr=yoyMo!==null?`<div style="font-size:8.5px;color:${yoyMo>=0?'#3b6d11':'#a32d2d'};font-weight:500">${yoyMo>=0?'+':''}${Math.round(yoyMo*100)}%</div>`:'';
+      return`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:1px">${yStr}<div style="font-size:9px;color:var(--text-muted)">${i+1}月</div></div>`;
     }).join('');
     const totalYoyHtml=totalYoy!==null
       ?`<span style="font-size:11px;font-weight:500;color:${totalYoy>=0?'#3b6d11':'#a32d2d'}">${totalYoy>=0?'▲':'▼'} ${Math.abs(Math.round(totalYoy*100))}%</span>`:'';
@@ -2849,7 +2859,16 @@ function renderProductTab(){
       <span style="font-size:13px;font-weight:500;color:var(--text-primary)">${fmtM(grandTotal)} ${totalYoyHtml}</span>
     </div>
     <div style="background:#fff;border:0.5px solid var(--border);border-radius:8px;padding:.875rem;margin-bottom:12px">
-      <div style="display:flex;gap:4px;height:150px;border-bottom:1px solid var(--border)">${totalBars}</div>
+      <div style="display:flex;gap:0">
+        <div style="display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;padding-right:8px;padding-bottom:34px;flex-shrink:0;width:72px">${yAxisHtml}</div>
+        <div style="flex:1;display:flex;flex-direction:column">
+          <div style="position:relative;height:150px;border-left:1px solid var(--border)">
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none">${gridHtml}</div>
+            <div style="position:absolute;inset:0;display:flex;gap:4px;align-items:stretch;padding:0 4px">${barsHtml}</div>
+          </div>
+          <div style="display:flex;gap:4px;padding:0 4px;margin-top:4px">${labelsHtml}</div>
+        </div>
+      </div>
     </div>
 
     <div class="prod-sec-hd" style="display:flex;justify-content:space-between;align-items:center">
@@ -3215,6 +3234,34 @@ async function loadData(){
 // 直接編輯 consultant_data.js 新增或修改記錄
 
 // ══════════════════════════════════════════
+//  原綺 舊客回約 — 月度資料（來自 Google Sheets G5/G6/G8/G9）
+// ══════════════════════════════════════════
+const KI_REBOOK_STORE_DATA = {
+  '2026-01': { ki_taipei:{ 舊客:292, 業績:4168623 }, ki_taichung:{ 舊客:95,  業績:1251151 } },
+  '2026-02': { ki_taipei:{ 舊客:280, 業績:3595165 }, ki_taichung:{ 舊客:81,  業績:1358530 } },
+  '2026-03': { ki_taipei:{ 舊客:253, 業績:3693133 }, ki_taichung:{ 舊客:96,  業績:1217284 } },
+  '2026-04': { ki_taipei:{ 舊客:258, 業績:2822904 }, ki_taichung:{ 舊客:96,  業績:1086500 } },
+  '2026-05': { ki_taipei:{ 舊客:266, 業績:3119571 }, ki_taichung:{ 舊客:67,  業績:1326707 } },
+  '2026-06': { ki_taipei:{ 舊客:220, 業績:2788513 }, ki_taichung:{ 舊客:63,  業績:1159113 } },
+  '2026-07': { ki_taipei:{ 舊客:204, 業績:2849116 }, ki_taichung:{ 舊客:81,  業績:1216280 } },
+  '2026-08': { ki_taipei:{ 舊客:242, 業績:3301837 }, ki_taichung:{ 舊客:66,  業績:1216914 } },
+  '2026-09': { ki_taipei:{ 舊客:96,  業績:1457419 }, ki_taichung:{ 舊客:33,  業績:969799  } },
+};
+
+// 各諮詢師回約明細（回約＝已預約、取消＝未到、業績＝實際業績）
+const KI_REBOOK_CS_DATA = {
+  '2026-07': {
+    ki_taipei: {
+      '柯孟君': { 回約: 46, 取消: 5, 業績: 964499 },
+      '計品卉': { 回約: 38, 取消: 5, 業績: 353253 },
+      '陳詩喬': { 回約: 42, 取消: 7, 業績: 413374 },
+      '陳甯':   { 回約: 37, 取消: 2, 業績: 477362 },
+    },
+    ki_taichung: {},
+  },
+};
+
+// ══════════════════════════════════════════
 //  RENDER: 諮詢師成交
 // ══════════════════════════════════════════
 let _csMode = 'month'; // 'today' | 'yesterday' | 'month' | 'custom'
@@ -3334,9 +3381,22 @@ function renderConsultantTab(){
   function storeHtml(storeKey, storeName, brand, brandKey, recs){
     const s = calcStats(recs, true, true);
     const rs = calcRetStats(recs);
+    // 原綺舊客回約月數據（支援所有模式，以起始日期推算月份）
+    const _kiRefMonth = _csMode==='month' ? _csMonth
+      : _csMode==='today' ? todayStr.slice(0,7)
+      : _csMode==='yesterday' ? yestStr.slice(0,7)
+      : (_csStart||'').slice(0,7);
+    const kiRebookStore = brandKey==='ki'
+      ? ((KI_REBOOK_STORE_DATA[_kiRefMonth]||{})[storeKey]||null)
+      : null;
+    const kiRebookCsData = brandKey==='ki'
+      ? ((KI_REBOOK_CS_DATA[_kiRefMonth]||{})[storeKey]||{})
+      : {};
     const pillCls = brandKey==='wo'?'cs-pill-wo':'cs-pill-ki';
     const avCls = brandKey==='wo'?'cs-av-wo':'cs-av-ki';
     const _csPresent = new Set(recs.map(r=>r.consultant).filter(c=>c!=='公司'&&c!=='其他'));
+    // 原綺：補上舊客回約資料中出現的諮詢師（即使當月無日常記錄）
+    if(brandKey==='ki') Object.keys(kiRebookCsData).forEach(c=>_csPresent.add(c));
     const _csOrderList = STORE_CS_ORDER[storeKey]||[];
     const consultants = [..._csOrderList.filter(c=>_csPresent.has(c)), ...[..._csPresent].filter(c=>!_csOrderList.includes(c))];
     const cRows = consultants.map(c=>{
@@ -3345,6 +3405,7 @@ function renderConsultantTab(){
       const crs = calcRetStats(cr);
       const init = c.charAt(0);
       const hasRet = crs.totalOld > 0;
+      const kiCsRebook = kiRebookCsData[c] || null;
       const newSec = `<div class="cs-c-sec"${_csClientFilter==='ret'?' style="display:none"':''}>
         <div class="cs-c-sec-top">
           <div class="cs-c-sec-left">
@@ -3366,32 +3427,47 @@ function renderConsultantTab(){
           <div class="cs-c-g"><div class="cs-c-gv" style="color:${rateClr(cs.成交率)}">${fmtRate(cs.成交率)}</div><div class="cs-c-gl">成交率</div></div>
         </div>
       </div>`;
-      const retSec = `<div class="cs-c-sec"${_csClientFilter==='new'?' style="display:none"':''}>
-        <div class="cs-c-sec-top">
-          <div class="cs-c-sec-left">
-            <span class="cs-c-tag cs-c-tag-ret">舊客新體驗</span>
-            ${hasRet?`<span class="cs-c-cnt">舊客 ${crs.totalOld}　新體驗 ${crs.newTrial}</span>`:`<span class="cs-c-cnt" style="color:#ddd">無資料</span>`}
-          </div>
-          ${hasRet&&crs.舊客客單!==null?`<div class="cs-c-avg-r"><div class="cs-c-avg-l">舊客客單</div><div class="cs-c-avg-v">$${crs.舊客客單.toLocaleString()}</div></div>`:''}
-        </div>
-        ${hasRet?`<div class="cs-c-g4">
-          <div class="cs-c-g"><div class="cs-c-gv">${crs.newTrial}</div><div class="cs-c-gl">新體驗</div></div>
-          <div class="cs-c-gp">
-            ${crs.purchased>0?`<span class="cs-chip cs-chip-ok">成交 ×${crs.purchased}</span>`:''}
-            ${crs.未購買>0?`<span class="cs-chip cs-chip-no">未成 ×${crs.未購買}</span>`:''}
-          </div>
-          <div class="cs-c-g"><div class="cs-c-gv">${crs.purchased}</div><div class="cs-c-gl">購買</div></div>
-          <div class="cs-c-g"><div class="cs-c-gv" style="color:${rateClr(crs.成交率)}">${fmtRate(crs.成交率)}</div><div class="cs-c-gl">成交率</div></div>
-        </div>
-        <div class="cs-c-foot">開發率 <strong>${fmtRate(crs.開發率)}</strong>　舊客業績 <strong>${fmtAmt(crs.舊客業績)}</strong></div>`:''}
-      </div>`;
+      const retSec = brandKey==='ki'
+        ? `<div class="cs-c-sec"${_csClientFilter==='new'?' style="display:none"':''}>
+            <div class="cs-c-sec-top">
+              <div class="cs-c-sec-left">
+                <span class="cs-c-tag cs-c-tag-ret">舊客回約</span>
+                ${kiCsRebook?`<span class="cs-c-cnt">到場 ${kiCsRebook.回約-kiCsRebook.取消} 人</span>`:`<span class="cs-c-cnt" style="color:#ddd">無資料</span>`}
+              </div>
+              ${kiCsRebook?`<div class="cs-c-avg-r"><div class="cs-c-avg-l">舊客業績</div><div class="cs-c-avg-v">$${kiCsRebook.業績.toLocaleString()}</div></div>`:''}
+            </div>
+            ${kiCsRebook?`<div class="cs-c-g4" style="grid-template-columns:repeat(3,1fr)">
+              <div class="cs-c-g"><div class="cs-c-gv">${kiCsRebook.回約}</div><div class="cs-c-gl">回約</div>${kiCsRebook.取消>0?`<div><span class="cs-chip cs-chip-no">取消 ×${kiCsRebook.取消}</span></div>`:''}</div>
+              <div class="cs-c-g"><div class="cs-c-gv">${kiCsRebook.回約-kiCsRebook.取消}</div><div class="cs-c-gl">到場</div></div>
+              <div class="cs-c-g"><div class="cs-c-gv">$${Math.round(kiCsRebook.業績/(kiCsRebook.回約-kiCsRebook.取消)).toLocaleString()}</div><div class="cs-c-gl">客單</div></div>
+            </div>`:''}
+          </div>`
+        : `<div class="cs-c-sec"${_csClientFilter==='new'?' style="display:none"':''}>
+            <div class="cs-c-sec-top">
+              <div class="cs-c-sec-left">
+                <span class="cs-c-tag cs-c-tag-ret">舊客新體驗</span>
+                ${hasRet?`<span class="cs-c-cnt">舊客 ${crs.totalOld}　新體驗 ${crs.newTrial}</span>`:`<span class="cs-c-cnt" style="color:#ddd">無資料</span>`}
+              </div>
+              ${hasRet&&crs.舊客客單!==null?`<div class="cs-c-avg-r"><div class="cs-c-avg-l">舊客客單</div><div class="cs-c-avg-v">$${crs.舊客客單.toLocaleString()}</div></div>`:''}
+            </div>
+            ${hasRet?`<div class="cs-c-g4">
+              <div class="cs-c-g"><div class="cs-c-gv">${crs.newTrial}</div><div class="cs-c-gl">新體驗</div></div>
+              <div class="cs-c-gp">
+                ${crs.purchased>0?`<span class="cs-chip cs-chip-ok">成交 ×${crs.purchased}</span>`:''}
+                ${crs.未購買>0?`<span class="cs-chip cs-chip-no">未成 ×${crs.未購買}</span>`:''}
+              </div>
+              <div class="cs-c-g"><div class="cs-c-gv">${crs.purchased}</div><div class="cs-c-gl">購買</div></div>
+              <div class="cs-c-g"><div class="cs-c-gv" style="color:${rateClr(crs.成交率)}">${fmtRate(crs.成交率)}</div><div class="cs-c-gl">成交率</div></div>
+            </div>
+            <div class="cs-c-foot">開發率 <strong>${fmtRate(crs.開發率)}</strong>　舊客業績 <strong>${fmtAmt(crs.舊客業績)}</strong></div>`:''}
+          </div>`;
       const isOther = c==='其他';
       const avStyle = isOther ? 'background:#c8c4be;color:#fff' : '';
       const bodyStyle = _csClientFilter!=='all' ? ' style="grid-template-columns:1fr"' : '';
       return `<div class="cs-c-card">
         <div class="cs-c-card-hd">
           <div class="cs-av ${isOther?'':avCls}" style="${avStyle}">${isOther?'他':init}</div>
-          <div><span class="cs-c-name">${c}</span>${NICKNAMES[c]?`<span class="cs-c-nick">${NICKNAMES[c]}</span>`:''}${CONSULTANT_TITLES[c]?`<span class="cs-c-nick">${CONSULTANT_TITLES[c]}</span>`:''}</div>
+          <div><span class="cs-c-name">${c}</span>${(NICKNAMES[c]||CONSULTANT_TITLES[c])?`<span class="cs-c-nick">${[NICKNAMES[c],CONSULTANT_TITLES[c]].filter(Boolean).join(' ')}</span>`:''}</div>
         </div>
         <div class="cs-c-card-body"${bodyStyle}>${newSec}${retSec}</div>
       </div>`;
@@ -3455,19 +3531,27 @@ function renderConsultantTab(){
     const hdCls = brandKey==='wo'?'cs-store-hd-wo':'cs-store-hd-ki';
     const rateStyle = s.成交率===null?'color:rgba(255,255,255,.5)':s.成交率>=70?'color:#7fe0a8':s.成交率>=50?'color:#ffd68a':'color:#ff9f9f';
     const retRateStyle = v => v===null?'color:rgba(255,255,255,.5)':v>=70?'color:#7fe0a8':v>=50?'color:#ffd68a':'color:#ff9f9f';
-    const retRow = rs.totalOld>0 && _csClientFilter!=='new' ? `<div class="cs-store-ret">
-      <div class="cs-store-ret-row">
-        <div class="cs-ss"><div class="cs-ss-v">${rs.totalOld}</div><div class="cs-ss-l">總舊客</div></div>
-        <div class="cs-ss"><div class="cs-ss-v">${rs.newTrial}</div><div class="cs-ss-l">新體驗</div></div>
-        <div class="cs-ss"><div class="cs-ss-v" style="${retRateStyle(rs.開發率)}">${fmtRate(rs.開發率)}</div><div class="cs-ss-l">開發率</div></div>
-        <div class="cs-ss"><div class="cs-ss-v">${rs.purchased}</div><div class="cs-ss-l">購買</div></div>
-        <div class="cs-ss"><div class="cs-ss-v" style="${retRateStyle(rs.成交率)}">${fmtRate(rs.成交率)}</div><div class="cs-ss-l">成交率</div></div>
-        <div class="cs-ss"><div class="cs-ss-v">${rs.舊客客單===null?'—':'$'+rs.舊客客單.toLocaleString()}</div><div class="cs-ss-l">新體驗客單</div></div>
-      </div>
-    </div>` : '';
+    const retRow = brandKey==='ki'
+      ? (kiRebookStore && _csClientFilter!=='new' ? `<div class="cs-store-ret">
+          <div class="cs-store-ret-row" style="grid-template-columns:repeat(3,1fr)">
+            <div class="cs-ss"><div class="cs-ss-v">${kiRebookStore.舊客}</div><div class="cs-ss-l">門市舊客到場</div></div>
+            <div class="cs-ss"><div class="cs-ss-v">$${kiRebookStore.業績.toLocaleString()}</div><div class="cs-ss-l">舊客業績</div></div>
+            <div class="cs-ss"><div class="cs-ss-v" style="color:#7fe0a8">$${Math.round(kiRebookStore.業績/kiRebookStore.舊客).toLocaleString()}</div><div class="cs-ss-l">平均客單</div></div>
+          </div>
+        </div>` : '')
+      : (rs.totalOld>0 && _csClientFilter!=='new' ? `<div class="cs-store-ret">
+          <div class="cs-store-ret-row">
+            <div class="cs-ss"><div class="cs-ss-v">${rs.totalOld}</div><div class="cs-ss-l">總舊客</div></div>
+            <div class="cs-ss"><div class="cs-ss-v">${rs.newTrial}</div><div class="cs-ss-l">新體驗</div></div>
+            <div class="cs-ss"><div class="cs-ss-v" style="${retRateStyle(rs.開發率)}">${fmtRate(rs.開發率)}</div><div class="cs-ss-l">開發率</div></div>
+            <div class="cs-ss"><div class="cs-ss-v">${rs.purchased}</div><div class="cs-ss-l">購買</div></div>
+            <div class="cs-ss"><div class="cs-ss-v" style="${retRateStyle(rs.成交率)}">${fmtRate(rs.成交率)}</div><div class="cs-ss-l">成交率</div></div>
+            <div class="cs-ss"><div class="cs-ss-v">${rs.舊客客單===null?'—':'$'+rs.舊客客單.toLocaleString()}</div><div class="cs-ss-l">新體驗客單</div></div>
+          </div>
+        </div>` : '');
     return `<div class="cs-store-wrap">
       <div class="cs-store-hd ${hdCls}">
-        <div class="cs-store-label"><span class="cs-store-nm">${storeName}</span><span class="cs-pill ${pillCls}">${brand}</span><button onclick="event.stopPropagation();showStoreDetail('${storeKey}')" style="margin-left:8px;padding:2px 9px;border:none;border-radius:10px;background:rgba(255,255,255,0.25);color:#fff;font-size:11px;cursor:pointer;font-weight:600">新客明細</button>${rs.totalOld>0?`<button onclick="event.stopPropagation();showRetDetail('${storeKey}')" style="margin-left:5px;padding:2px 9px;border:none;border-radius:10px;background:rgba(255,255,255,0.15);color:#fff;font-size:11px;cursor:pointer;font-weight:600">舊客明細</button>`:''}</div>
+        <div class="cs-store-label"><span class="cs-store-nm">${storeName}</span><span class="cs-pill ${pillCls}">${brand}</span><button onclick="event.stopPropagation();showStoreDetail('${storeKey}')" style="margin-left:8px;padding:2px 9px;border:none;border-radius:10px;background:rgba(255,255,255,0.25);color:#fff;font-size:11px;cursor:pointer;font-weight:600">新客明細</button>${brandKey==='ki'?(kiRebookStore?`<span style="margin-left:5px;padding:2px 9px;border-radius:10px;background:rgba(255,255,255,0.25);color:#fff;font-size:11px;font-weight:600">舊客回約</span>`:''): (rs.totalOld>0?`<button onclick="event.stopPropagation();showRetDetail('${storeKey}')" style="margin-left:5px;padding:2px 9px;border:none;border-radius:10px;background:rgba(255,255,255,0.15);color:#fff;font-size:11px;cursor:pointer;font-weight:600">舊客明細</button>`:'')}</div>
         <div class="cs-store-stats">
           <div class="cs-ss"><div class="cs-ss-v">${s.接待}</div><div class="cs-ss-l">新客接待</div></div>
           <div class="cs-ss"><div class="cs-ss-v">${s.成交}</div><div class="cs-ss-l">成交</div></div>
@@ -3496,9 +3580,14 @@ function renderConsultantTab(){
     ki_taipei:  {store:'台北', brand:'原綺', brandKey:'ki'},
     ki_taichung:{store:'台中', brand:'原綺', brandKey:'ki'},
   };
-  // 原渥六間固定顯示（含無資料的大安）；原綺只顯示有資料的門市
+  // 原渥六間固定顯示（含無資料的大安）；原綺顯示有諮詢師記錄 OR 有舊客回約資料的門市
+  const _outerRefMonth = _csMode==='month' ? _csMonth
+    : _csMode==='today' ? todayStr.slice(0,7)
+    : _csMode==='yesterday' ? yestStr.slice(0,7)
+    : (_csStart||'').slice(0,7);
+  const _kiRebookMonthData = KI_REBOOK_STORE_DATA[_outerRefMonth] || {};
   const woKeys = STORE_ORDER.filter(k=>k.startsWith('wo_'));
-  const kiKeys = STORE_ORDER.filter(k=>k.startsWith('ki_') && records.some(r=>r.storeKey===k));
+  const kiKeys = STORE_ORDER.filter(k=>k.startsWith('ki_') && (records.some(r=>r.storeKey===k) || !!_kiRebookMonthData[k]));
   const storeBlocks = [...woKeys, ...kiKeys].map(sk=>{
     const sr = records.filter(r=>r.storeKey===sk);
     const info = STORE_INFO[sk] || (sr.length>0 ? {store:sr[0].store, brand:sr[0].brand, brandKey:sr[0].brandKey} : {store:sk,brand:'',brandKey:''});
@@ -3588,11 +3677,13 @@ function renderConsultantTab(){
     <div class="cs-brand-row">
       ${['wo','ki'].map(bk=>{
         const b = bk==='wo'?wo:ki;
-        const stores = [...new Set(records.filter(r=>r.brandKey===bk).map(r=>r.store))];
+        const recStoreKeys = new Set(records.filter(r=>r.brandKey===bk).map(r=>r.storeKey).filter(Boolean));
+        const allStores = STORE_ORDER.filter(sk=>sk.startsWith(bk)&&(recStoreKeys.has(sk)||(bk==='ki'&&!!_kiRebookMonthData[sk])));
+        const kiRebookTotal = bk==='ki' ? Object.values(_kiRebookMonthData).reduce((a,s)=>({舊客:a.舊客+(s.舊客||0),業績:a.業績+(s.業績||0)}),{舊客:0,業績:0}) : null;
         return `<div class="cs-brand-card ${b.topCls}">
           <div class="cs-brand-hd">
             <span class="cs-brand-name ${b.nameCls}">${b.brandLabel}</span>
-            <span style="font-size:10px;color:#aaa">${stores.length} 間門市</span>
+            <span style="font-size:10px;color:#aaa">${allStores.length} 間門市</span>
           </div>
           <div class="cs-brand-stats">
             <div class="cs-bs"><div class="cs-bs-v">${b.s.接待}</div><div class="cs-bs-l">新客接待</div></div>
@@ -3600,7 +3691,11 @@ function renderConsultantTab(){
             <div class="cs-bs"><div class="cs-bs-v" style="color:${rateClr(b.s.成交率)}">${fmtRate(b.s.成交率)}</div><div class="cs-bs-l">成交率</div></div>
             <div class="cs-bs"><div class="cs-bs-v">${fmtAmt(b.s.平均客單)}</div><div class="cs-bs-l">平均客單</div></div>
           </div>
-          ${b.rs.totalOld>0?`<div style="display:grid;grid-template-columns:repeat(6,1fr);border-top:.5px solid rgba(0,0,0,.07);background:#f9f8f6">
+          ${bk==='ki'&&kiRebookTotal&&kiRebookTotal.舊客>0?`<div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:.5px solid rgba(0,0,0,.07);background:#f9f8f6">
+            <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px">${kiRebookTotal.舊客}</div><div class="cs-bs-l">舊客到場</div></div>
+            <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px">$${kiRebookTotal.業績.toLocaleString()}</div><div class="cs-bs-l">舊客業績</div></div>
+            <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px;color:#2a7a4a">$${Math.round(kiRebookTotal.業績/kiRebookTotal.舊客).toLocaleString()}</div><div class="cs-bs-l">平均客單</div></div>
+          </div>`:bk==='wo'&&b.rs.totalOld>0?`<div style="display:grid;grid-template-columns:repeat(6,1fr);border-top:.5px solid rgba(0,0,0,.07);background:#f9f8f6">
             <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px">${b.rs.totalOld}</div><div class="cs-bs-l">總舊客</div></div>
             <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px">${b.rs.newTrial}</div><div class="cs-bs-l">新體驗</div></div>
             <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px;color:${b.rs.開發率===null?'#aaa':b.rs.開發率>=70?'#2a7a4a':b.rs.開發率>=50?'#ba7517':'#a32d2d'}">${fmtRate(b.rs.開發率)}</div><div class="cs-bs-l">開發率</div></div>
@@ -4574,68 +4669,75 @@ function openCSPrintPreview(){
 
   // 按品牌→門市→諮詢師組織
   const BRAND_ORDER=[{key:'wo',label:'原渥',color:'#2d5a9e'},{key:'ki',label:'原綺',color:'#c04070'}];
-  const STORE_ORDER=['wo_zhanqian','wo_daan','wo_zhongxiao','wo_banqiao','wo_dongmen','wo_taichung','ki_dongmen','ki_taichung'];
-  const STORE_NAMES={wo_zhanqian:'站前',wo_daan:'大安',wo_zhongxiao:'忠孝',wo_banqiao:'板橋',wo_dongmen:'東門',wo_taichung:'台中',ki_dongmen:'台北',ki_taichung:'台中'};
+  const STORE_ORDER=['wo_zhanqian','wo_daan','wo_zhongxiao','wo_banqiao','wo_dongmen','wo_taichung','ki_taipei','ki_taichung'];
+  const STORE_NAMES={wo_zhanqian:'站前',wo_daan:'大安',wo_zhongxiao:'忠孝',wo_banqiao:'板橋',wo_dongmen:'東門',wo_taichung:'台中',ki_taipei:'台北',ki_taichung:'台中'};
 
-  let rows='';
-  BRAND_ORDER.forEach(({key:bk,label:bl,color:bc},bi)=>{
+  // 原綺舊客回約月數據
+  const _pRefMonth=_csMode==='month'?_csMonth:_csMode==='today'?todayStr.slice(0,7):_csMode==='yesterday'?yestStr.slice(0,7):(_csStart||'').slice(0,7);
+  const _pKiStore=KI_REBOOK_STORE_DATA[_pRefMonth]||{};
+  const _pKiCs=KI_REBOOK_CS_DATA[_pRefMonth]||{};
+
+  // 雙品牌各自獨立渲染，欄位定義不同
+  let woBody='', kiBody='';
+  BRAND_ORDER.forEach(({key:bk,label:bl,color:bc})=>{
     const storeKeys=STORE_ORDER.filter(sk=>sk.startsWith(bk));
     let brandNewTotal={接待:0,成交:0,amt:0};
-    let brandRetTotal={totalOld:0,newTrial:0,purchased:0,rev:0};
+    let brandRetTotal={totalOld:0,newTrial:0,purchased:0,rev:0,取消:0};
     const storeBlocks=[];
     storeKeys.forEach(sk=>{
       const srecs=records.filter(r=>r.storeKey===sk);
-      if(!srecs.length) return;
+      const kiStoreRebook=bk==='ki'?(_pKiStore[sk]||null):null;
+      const kiCsRebook=bk==='ki'?(_pKiCs[sk]||{}):{};
+      if(!srecs.length && !kiStoreRebook) return;
       const _prt=new Set(srecs.map(r=>r.consultant).filter(c=>c!=='公司'));
+      if(bk==='ki') Object.keys(kiCsRebook).forEach(c=>_prt.add(c));
       const _ord=STORE_CS_ORDER[sk]||[];
       const consultants=[..._ord.filter(c=>_prt.has(c)),...[..._prt].filter(c=>!_ord.includes(c))];
-      if(!consultants.length) return;
+      if(!consultants.length && !kiStoreRebook) return;
       let storeRows='';
       let sNewTot={接待:0,成交:0,amt:0};
-      let sRetTot={totalOld:0,newTrial:0,purchased:0,rev:0};
+      let sRetTot={totalOld:0,newTrial:0,purchased:0,rev:0,取消:0};
       consultants.forEach(c=>{
         const cr=srecs.filter(r=>r.consultant===c);
         const n=calcNew(cr);
-        const ret=calcRet(cr);
+        let ret;
+        if(bk==='ki'){
+          const rb=kiCsRebook[c]||null;
+          ret=rb?{totalOld:rb.回約,取消:rb.取消,newTrial:rb.回約-rb.取消,purchased:null,成交率:null,rev:rb.業績}:{totalOld:0,取消:0,newTrial:0,purchased:null,成交率:null,rev:0};
+        } else {
+          ret=calcRet(cr);
+        }
         const nick=NICKNAMES[c]?`<span class="cs-print-nick">${NICKNAMES[c]}</span>`:'';
         const ptitle=CONSULTANT_TITLES[c]?`<span class="cs-print-nick">${CONSULTANT_TITLES[c]}</span>`:'';
-        storeRows+=`<tr class="pt-cs">
-          <td></td>
-          <td>${c}${nick}${ptitle}</td>
-          <td>${n.接待||'<span class="cs-print-dim">0</span>'}</td>
-          <td>${n.成交||'<span class="cs-print-dim">0</span>'}</td>
-          <td>${fmtRate(n.成交率)}</td>
-          <td>${fmtAmt(n.客單)}</td>
-          <td>${ret.totalOld||'<span class="cs-print-dim">0</span>'}</td>
-          <td>${ret.newTrial||'<span class="cs-print-dim">0</span>'}</td>
-          <td>${fmtRate(ret.成交率)}</td>
-          <td>${ret.rev>0?'$'+ret.rev.toLocaleString():'<span class="cs-print-dim">—</span>'}</td>
-        </tr>`;
-        // 累加門市小計（用原始值）
+        const newCols=`<td>${n.接待||'<span class="cs-print-dim">0</span>'}</td><td>${n.成交||'<span class="cs-print-dim">0</span>'}</td><td>${fmtRate(n.成交率)}</td><td>${fmtAmt(n.客單)}</td>`;
+        const retCols=bk==='wo'
+          ?`<td>${ret.totalOld||'<span class="cs-print-dim">0</span>'}</td><td>${ret.newTrial||'<span class="cs-print-dim">0</span>'}</td><td>${fmtRate(ret.成交率)}</td><td>${ret.rev>0?'$'+ret.rev.toLocaleString():'<span class="cs-print-dim">—</span>'}</td>`
+          :`<td>${ret.totalOld||'<span class="cs-print-dim">0</span>'}</td><td>${ret.取消>0?ret.取消:'<span class="cs-print-dim">0</span>'}</td><td>${ret.newTrial||'<span class="cs-print-dim">0</span>'}</td><td>${ret.rev>0?'$'+ret.rev.toLocaleString():'<span class="cs-print-dim">—</span>'}</td>`;
+        storeRows+=`<tr class="pt-cs"><td></td><td>${c}${nick}${ptitle}</td>${newCols}${retCols}</tr>`;
         sNewTot.接待+=n.接待;sNewTot.成交+=n.成交;
-        if(n.客單!==null){sNewTot.amt+=n.客單*n.接待;}
-        sRetTot.totalOld+=ret.totalOld;sRetTot.newTrial+=ret.newTrial;sRetTot.purchased+=ret.purchased;sRetTot.rev+=ret.rev;
+        if(n.客單!==null) sNewTot.amt+=n.客單*n.接待;
+        sRetTot.totalOld+=ret.totalOld;sRetTot.newTrial+=ret.newTrial;sRetTot.取消+=ret.取消||0;
+        if(ret.purchased) sRetTot.purchased+=ret.purchased;
+        sRetTot.rev+=ret.rev;
       });
       // 門市小計
       const sNr=sNewTot.接待>0?Math.round(sNewTot.成交/sNewTot.接待*100):null;
       const sNk=sNewTot.接待>0?Math.round(sNewTot.amt/sNewTot.接待):null;
       const sRr=sRetTot.newTrial>0?Math.round(sRetTot.purchased/sRetTot.newTrial*100):null;
-      storeRows+=`<tr class="pt-sub${bk==='ki'?' ki':''}">
-        <td></td><td style="color:#555">${STORE_NAMES[sk]} 小計</td>
-        <td>${sNewTot.接待}</td><td>${sNewTot.成交}</td>
-        <td>${fmtRate(sNr)}</td><td>${fmtAmt(sNk)}</td>
-        <td>${sRetTot.totalOld}</td><td>${sRetTot.newTrial}</td>
-        <td>${fmtRate(sRr)}</td>
-        <td>${sRetTot.rev>0?'$'+sRetTot.rev.toLocaleString():'<span class="cs-print-dim">—</span>'}</td>
-      </tr>`;
-      storeBlocks.push({sk,rows:storeRows,sNewTot,sRetTot});
+      // 原綺：沒有 CS 資料時用 store-level 數據 (KI_REBOOK_STORE_DATA) 補小計
+      const kiFallback=bk==='ki'&&sRetTot.totalOld===0&&kiStoreRebook
+        ?{totalOld:kiStoreRebook.舊客,取消:0,newTrial:kiStoreRebook.舊客,rev:kiStoreRebook.業績}:null;
+      const effRet=kiFallback||sRetTot;
+      const subRetCols=bk==='wo'
+        ?`<td>${sRetTot.totalOld}</td><td>${sRetTot.newTrial}</td><td>${fmtRate(sRr)}</td><td>${sRetTot.rev>0?'$'+sRetTot.rev.toLocaleString():'<span class="cs-print-dim">—</span>'}</td>`
+        :`<td>${effRet.totalOld||'<span class="cs-print-dim">0</span>'}</td><td>${effRet.取消>0?effRet.取消:'<span class="cs-print-dim">—</span>'}</td><td>${effRet.newTrial||'<span class="cs-print-dim">0</span>'}</td><td>${effRet.rev>0?'$'+effRet.rev.toLocaleString():'<span class="cs-print-dim">—</span>'}</td>`;
+      storeRows+=`<tr class="pt-sub${bk==='ki'?' ki':''}"><td></td><td style="color:#555">${STORE_NAMES[sk]} 小計${kiFallback?'<span style="font-size:9px;color:#bbb;margin-left:4px">門市</span>':''}</td><td>${sNewTot.接待}</td><td>${sNewTot.成交}</td><td>${fmtRate(sNr)}</td><td>${fmtAmt(sNk)}</td>${subRetCols}</tr>`;
+      storeBlocks.push({sk,rows:storeRows,sNewTot,effRet});
       brandNewTotal.接待+=sNewTot.接待;brandNewTotal.成交+=sNewTot.成交;brandNewTotal.amt+=sNewTot.amt;
-      brandRetTotal.totalOld+=sRetTot.totalOld;brandRetTotal.newTrial+=sRetTot.newTrial;brandRetTotal.purchased+=sRetTot.purchased;brandRetTotal.rev+=sRetTot.rev;
+      brandRetTotal.totalOld+=effRet.totalOld;brandRetTotal.newTrial+=effRet.newTrial;brandRetTotal.取消+=effRet.取消||0;brandRetTotal.purchased+=effRet.purchased||0;brandRetTotal.rev+=effRet.rev;
     });
     if(!storeBlocks.length) return;
-    // 每個品牌用獨立 tbody；原綺的 tbody 加 break-before:page
-    const tbodyStyle = bk==='ki' ? ' style="break-before:page;page-break-before:always"' : '';
-    let bRows=`<tbody${tbodyStyle}>`;
+    let bRows=`<tbody>`;
     bRows+=`<tr class="pt-brand${bk==='ki'?' ki':''}"><td colspan="10">${bl}</td></tr>`;
     storeBlocks.forEach(({sk,rows:sr})=>{
       bRows+=`<tr class="pt-store ${bk}"><td colspan="10">${STORE_NAMES[sk]}</td></tr>`;
@@ -4644,29 +4746,29 @@ function openCSPrintPreview(){
     const bNr=brandNewTotal.接待>0?Math.round(brandNewTotal.成交/brandNewTotal.接待*100):null;
     const bNk=brandNewTotal.接待>0?Math.round(brandNewTotal.amt/brandNewTotal.接待):null;
     const bRr=brandRetTotal.newTrial>0?Math.round(brandRetTotal.purchased/brandRetTotal.newTrial*100):null;
-    bRows+=`<tr class="pt-sub${bk==='ki'?' ki':''}">
-      <td></td><td style="font-weight:600;color:${bc}">${bl} 合計</td>
-      <td>${brandNewTotal.接待}</td><td>${brandNewTotal.成交}</td>
-      <td>${fmtRate(bNr)}</td><td>${fmtAmt(bNk)}</td>
-      <td>${brandRetTotal.totalOld}</td><td>${brandRetTotal.newTrial}</td>
-      <td>${fmtRate(bRr)}</td>
-      <td>${brandRetTotal.rev>0?'$'+brandRetTotal.rev.toLocaleString():'<span class="cs-print-dim">—</span>'}</td>
-    </tr></tbody>`;
-    rows+=bRows;
+    const totRetCols=bk==='wo'
+      ?`<td>${brandRetTotal.totalOld}</td><td>${brandRetTotal.newTrial}</td><td>${fmtRate(bRr)}</td><td>${brandRetTotal.rev>0?'$'+brandRetTotal.rev.toLocaleString():'<span class="cs-print-dim">—</span>'}</td>`
+      :`<td>${brandRetTotal.totalOld}</td><td>${brandRetTotal.取消}</td><td>${brandRetTotal.newTrial}</td><td>${brandRetTotal.rev>0?'$'+brandRetTotal.rev.toLocaleString():'<span class="cs-print-dim">—</span>'}</td>`;
+    bRows+=`<tr class="pt-sub${bk==='ki'?' ki':''}"><td></td><td style="font-weight:600;color:${bc}">${bl} 合計</td><td>${brandNewTotal.接待}</td><td>${brandNewTotal.成交}</td><td>${fmtRate(bNr)}</td><td>${fmtAmt(bNk)}</td>${totRetCols}</tr></tbody>`;
+    if(bk==='wo') woBody=bRows;
+    else kiBody=bRows;
   });
 
-  const html=`<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px">
-    <div style="font-size:14px;font-weight:600;color:#1a1a18">諮詢師成交明細<span class="cs-print-range">${rangeLabel}</span></div>
+  const mkHd=(brand)=>`<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px">
+    <div style="font-size:14px;font-weight:600;color:#1a1a18">${brand}諮詢師成交明細<span class="cs-print-range">${rangeLabel}</span></div>
     <div style="font-size:10px;color:#bbb">原渥集團</div>
-  </div>
-  <table class="cs-print-tbl">
-    <thead><tr>
-      <th style="width:32px"></th><th style="width:110px">諮詢師</th>
-      <th>新客<br>接待</th><th>新客<br>成交</th><th>新客<br>成交率</th><th>平均<br>客單</th>
-      <th>舊客<br>接待</th><th>新體驗<br>人數</th><th>體驗<br>成交率</th><th>舊客<br>業績</th>
-    </tr></thead>
-    ${rows}
-  </table>`;
+  </div>`;
+  const woSection=woBody?`${mkHd('原渥 ')}<table class="cs-print-tbl"><thead><tr>
+    <th style="width:32px"></th><th style="width:110px">諮詢師</th>
+    <th>新客<br>接待</th><th>新客<br>成交</th><th>新客<br>成交率</th><th>平均<br>客單</th>
+    <th>舊客<br>接待</th><th>新體驗<br>人數</th><th>體驗<br>成交率</th><th>舊客<br>業績</th>
+  </tr></thead>${woBody}</table>`:'';
+  const kiSection=kiBody?`<div style="page-break-before:always;padding-top:4px">${mkHd('原綺 ')}<table class="cs-print-tbl"><thead><tr>
+    <th style="width:32px"></th><th style="width:110px">諮詢師</th>
+    <th>新客<br>接待</th><th>新客<br>成交</th><th>新客<br>成交率</th><th>平均<br>客單</th>
+    <th>回約</th><th>取消</th><th>到場</th><th>舊客<br>業績</th>
+  </tr></thead>${kiBody}</table></div>`:'';
+  const html=woSection+kiSection;
 
   document.getElementById('csPrintBody').innerHTML=html;
   document.getElementById('csPrintOverlay').classList.add('open');
