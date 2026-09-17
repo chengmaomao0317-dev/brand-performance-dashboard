@@ -3454,7 +3454,7 @@ const KI_REBOOK_STORE_DATA = {
   '2026-06': { ki_taipei:{ 舊客:220, 業績:2788513 }, ki_taichung:{ 舊客:63,  業績:1159113 } },
   '2026-07': { ki_taipei:{ 舊客:204, 業績:2849116 }, ki_taichung:{ 舊客:81,  業績:1216280 } },
   '2026-08': { ki_taipei:{ 舊客:242, 業績:3301837 }, ki_taichung:{ 舊客:66,  業績:1216914 } },
-  '2026-09': { ki_taipei:{ 舊客:96,  業績:1457419 }, ki_taichung:{ 舊客:33,  業績:969799  } },
+  '2026-09': { ki_taipei:{ 舊客:106, 業績:1620666 }, ki_taichung:{ 舊客:37,  業績:1204746 } },
 };
 
 // 各諮詢師回約明細（回約＝已預約、取消＝未到、業績＝實際業績）
@@ -5002,6 +5002,65 @@ function openCSPrintPreview(){
 }
 function closeCSPrint(){document.getElementById('csPrintOverlay').classList.remove('open');}
 function doCSPrint(){window.print();}
+
+// ══════════════════════════════════════════
+//  動態連動：原綺舊客月報 ← Google Sheets
+//  每次載入頁面自動抓 GID 644930812
+// ══════════════════════════════════════════
+(async function loadKIRebookFromSheet(){
+  const SHEET_ID = '1sdjXTUo1tW9-fLWlUaWnXqNxxdzK573YuUSJcZdWSns';
+  const GID      = '644930812';
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${GID}`;
+  try {
+    const res  = await fetch(url);
+    if(!res.ok) return;
+    const text = await res.text();
+    const lines = text.split('\n');
+
+    // 解析 CSV（處理帶引號的逗號）
+    function parseCSVLine(line){
+      const cols=[]; let cur='', inQ=false;
+      for(const ch of line){
+        if(ch==='"') inQ=!inQ;
+        else if(ch===','&&!inQ){cols.push(cur);cur='';}
+        else cur+=ch;
+      }
+      cols.push(cur); return cols;
+    }
+    function toNum(s){ return parseInt((s||'').replace(/[$,\s]/g,''))||0; }
+
+    // 從 R2 讀取月份（col index 1）: "2026/9" → "2026-09"
+    const r2 = parseCSVLine(lines[1]||'');
+    const raw = (r2[1]||'').trim(); // e.g. "2026/9"
+    const m = raw.match(/(\d{4})\/(\d{1,2})/);
+    if(!m) return;
+    const monthKey = `${m[1]}-${String(m[2]).padStart(2,'0')}`; // "2026-09"
+
+    // G5=col6, G6=col6, G8=col6, G9=col6（0-based）
+    const r5 = parseCSVLine(lines[4]||'');
+    const r6 = parseCSVLine(lines[5]||'');
+    const r8 = parseCSVLine(lines[7]||'');
+    const r9 = parseCSVLine(lines[8]||'');
+
+    const taipei_old  = toNum(r5[6]);
+    const taipei_rev  = toNum(r6[6]);
+    const tc_old      = toNum(r8[6]);
+    const tc_rev      = toNum(r9[6]);
+
+    if(!taipei_old && !taipei_rev && !tc_old && !tc_rev) return; // 資料異常時不覆蓋
+
+    KI_REBOOK_STORE_DATA[monthKey] = {
+      ki_taipei:   { 舊客: taipei_old, 業績: taipei_rev },
+      ki_taichung: { 舊客: tc_old,     業績: tc_rev     },
+    };
+
+    // 若諮詢師成交頁正在顯示則重新渲染
+    const csTab = document.querySelector('.tab-content:nth-child(6)');
+    if(csTab && csTab.classList.contains('active')) renderConsultantTab();
+  } catch(e){
+    console.warn('KI rebook fetch failed:', e);
+  }
+})();
 </script>
 
 <div class="cs-print-overlay" id="csPrintOverlay" onclick="if(event.target===this)closeCSPrint()">
