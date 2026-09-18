@@ -9485,8 +9485,7 @@ const CONSULTANT_RECORDS = [
     ]},
   { date:'2026-09-17', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'陳甯', clients:[
-      {type:'新客', trial_amt:0, total_amt:0,     name:'林芳伊'},
-      {type:'新客', trial_amt:0, total_amt:14999, name:'李京柔'},
+      {type:'新客', trial_amt:0, total_amt:0, name:'林芳伊'},
     ]},
 
   // ══════════════════════════════════════════
