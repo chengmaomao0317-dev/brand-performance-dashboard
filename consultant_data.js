@@ -9516,5 +9516,48 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:0, total_amt:0,     name:'陳昱喬'},
     ]},
 
+  // ---------- 2026-09-18 東門 ----------
+  { date:'2026-09-18', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆', clients:[
+      {type:'舊客',     trial_amt:0,    total_amt:0,     name:'郭貞蘭'},
+      {type:'舊客',     trial_amt:0,    total_amt:0,     name:'蔡佩樺'},
+      {type:'舊客',     trial_amt:0,    total_amt:0,     name:'簡瑜君'},
+      {type:'舊客體驗', trial_amt:1999, total_amt:15498, name:'劉憶靜'}, // 體驗1999+課程(10499+4999)
+      {type:'舊客',     trial_amt:0,    total_amt:9000,  name:'周思好'},
+      {type:'舊客',     trial_amt:0,    total_amt:0,     name:'簡增庭'},
+      {type:'舊客',     trial_amt:0,    total_amt:0,     name:'林姿含'},
+      {type:'舊客',     trial_amt:0,    total_amt:0,     name:'王鳳娟'},
+      {type:'舊客體驗', trial_amt:1499, total_amt:35099, name:'劉靜穎'}, // 體驗1499+課程(9500+25000)+自有599
+      {type:'舊客',     trial_amt:0,    total_amt:4999,  name:'蕭雅方'},
+      {type:'舊客',     trial_amt:0,    total_amt:12998, name:'沈家筠'},
+      {type:'舊客',     trial_amt:0,    total_amt:0,     name:'吳依貞'},
+      {type:'舊客',     trial_amt:0,    total_amt:0,     name:'鄭巧筠'},
+    ]},
+  { date:'2026-09-18', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'公司', clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'郭貞蘭', noCount:true}, // 森珮筠→公司，已計入邱家榆
+      {type:'舊客', trial_amt:0, total_amt:0, name:'李芳好'},               // 蔡亞衫→公司
+      {type:'舊客', trial_amt:0, total_amt:0, name:'黃紀茹'},               // 陳詩喬→公司
+    ]},
+
+  // ---------- 2026-09-19 東門 ----------
+  { date:'2026-09-19', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆', clients:[
+      {type:'新客', trial_amt:999,  total_amt:15000, name:'康娟祈'},
+      {type:'新客', trial_amt:999,  total_amt:0,     name:'薛孝帆'},
+      {type:'新客', trial_amt:999,  total_amt:14400, name:'廖翊雯'},
+      {type:'舊客', trial_amt:0,    total_amt:9000,  name:'黃鈺珊'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'劉昀竺'},
+      {type:'舊客', trial_amt:2000, total_amt:0,     name:'韋蘋芸'}, // 付體驗費2000但未購課
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'謝琦'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'楊羽樺'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'黃莉玲'},
+    ]},
+  { date:'2026-09-19', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'公司', clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'黃鈺珊', noCount:true}, // 森珮筠→公司，已計入邱家榆
+      {type:'舊客', trial_amt:0, total_amt:0, name:'林儷紜'},               // 柯孟君→公司
+    ]},
+
   // 新增記錄時複製上面的格式
 ];
