@@ -3475,7 +3475,9 @@ const KI_REBOOK_CS_DATA = {
 // ══════════════════════════════════════════
 let _csMode = 'month'; // 'today' | 'yesterday' | 'month' | 'custom'
 let _csClientFilter = 'all'; // 'all' | 'new' | 'ret'
-let _csMonth = '';    // YYYY-MM，月份選擇器
+// 初始化為當月，確保月份模式一開啟就能對到 KI_REBOOK_STORE_DATA
+const _csNow = new Date();
+let _csMonth = `${_csNow.getFullYear()}-${String(_csNow.getMonth()+1).padStart(2,'0')}`;  // YYYY-MM
 let _csStart = '';
 let _csEnd   = '';
 let _csTrendOpen = false;
