@@ -3526,7 +3526,7 @@ function renderConsultantTab(){
     let 接待=0, 成交=0, totalAmt=0;
     recs.forEach(r => {
       r.clients.forEach(c=>{
-        if(c.type==='新客'){
+        if(c.type==='新客' && !c.noCount){
           接待++;
           const converted = c.total_amt > 0; // 有課程金額即成交（含訂金）
           const pAmt = c.product_amt || 0;
@@ -3552,9 +3552,9 @@ function renderConsultantTab(){
       r.clients.forEach(c=>{
         if(c.type==='舊客'){if(!c.noCount)totalOld++;}
         else if(c.type==='舊客體驗'){
-          totalOld++;newTrial++;
+          if(!c.noCount){totalOld++;newTrial++;} // noCount=true：算業績但不計人數（如線上付款人未到）
           revSum+=c.trial_amt; // 體驗金額計入（自有產品不計入舊客業績）
-          if(c.total_amt>0){purchased++;revSum+=c.total_amt;} // 成交再加課程金額
+          if(c.total_amt>0){if(!c.noCount)purchased++;revSum+=c.total_amt;} // 成交再加課程金額
         }
       });
     });
