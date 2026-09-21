@@ -9815,5 +9815,31 @@ const CONSULTANT_RECORDS = [
       {type:'舊客', trial_amt:0,    total_amt:5879,  name:'陳憶慈'}, // 補差880+音波3堂4999
     ]},
 
+  // ---------- 2026-09-19 忠孝 ----------
+  { date:'2026-09-19', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵', clients:[
+      {type:'新客',     trial_amt:999, total_amt:18750, name:'許雅鈞'}, // 音波8堂贈2堂18750
+      {type:'新客',     trial_amt:0,   total_amt:0,     name:'吳宜君'}, // 諮詢，下次再做
+      {type:'舊客',     trial_amt:0,   total_amt:9000,  name:'廖真真'}, // 九宮格9000
+      {type:'舊客',     trial_amt:0,   total_amt:0,     name:'唐薇'},
+      {type:'舊客',     trial_amt:0,   total_amt:0,     name:'陳詠希'},
+      {type:'舊客',     trial_amt:0,   total_amt:4999,  name:'涂采榆'}, // 九宮格4999
+      {type:'舊客',     trial_amt:0,   total_amt:0,     name:'邱意茹'},
+      {type:'舊客',     trial_amt:0,   total_amt:0,     name:'尹遜涵'},
+    ]},
+  { date:'2026-09-19', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸', clients:[
+      {type:'舊客',     trial_amt:0,    total_amt:0,     name:'許慈庭'},
+      {type:'舊客體驗', trial_amt:1500, total_amt:16000, name:'陳郁婷'}, // 體驗液態皮秒+購課16000
+      {type:'舊客',     trial_amt:0,    total_amt:18750, name:'劉瑄'},   // 音波8堂贈2堂18750
+      {type:'舊客',     trial_amt:0,    total_amt:0,     name:'李沂瑾'},
+      {type:'舊客',     trial_amt:0,    total_amt:0,     name:'黃琬茹'},
+    ]},
+  { date:'2026-09-19', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'公司', clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'劉瑄',   noCount:true}, // 廖梓涵消耗→公司
+      {type:'舊客', trial_amt:0, total_amt:0, name:'涂采榆', noCount:true}, // 廖梓涵消耗→公司
+    ]},
+
   // 新增記錄時複製上面的格式
 ];
