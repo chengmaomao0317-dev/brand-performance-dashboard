@@ -5017,11 +5017,10 @@ function doCSPrint(){window.print();}
     if(!gd || !gd.table || !gd.table.rows) return;
     const rows = gd.table.rows;
 
-    // gviz 以試算表第1列為 header，rows[0] = 試算表第2列（含月份）
-    const monthVal = cv(rows[0], 1);
+    // row[1] col[1] = 月份（如 "2026/9"），row[0] 只是計數列
+    const monthVal = cv(rows[1], 1);
     let monthKey;
     if(monthVal instanceof Date){
-      // gviz 把日期格的值當 Date 物件回傳
       monthKey = `${monthVal.getFullYear()}-${String(monthVal.getMonth()+1).padStart(2,'0')}`;
     } else {
       const monthRaw = String(monthVal || '');
@@ -5030,8 +5029,8 @@ function doCSPrint(){window.print();}
       monthKey = `${m[1]}-${String(m[2]).padStart(2,'0')}`;
     }
 
-    // rows[3]=試算表R5(台北人數), rows[4]=R6(台北業績)
-    // rows[6]=試算表R8(台中人數), rows[7]=R9(台中業績)
+    // row[3] col[6]=台北舊客人數, row[4] col[6]=台北舊客業績
+    // row[6] col[6]=台中舊客人數, row[7] col[6]=台中舊客業績
     const taipei_old = toN(cv(rows[3], 6));
     const taipei_rev = toN(cv(rows[4], 6));
     const tc_old     = toN(cv(rows[6], 6));
