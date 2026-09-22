@@ -215,8 +215,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
 .ytbl tbody td:first-child{text-align:left;font-weight:600;font-size:10px;position:sticky;left:0;background:#fff;z-index:2;border-right:0.5px solid rgba(0,0,0,.08)}
 .ytbl .brow td{background:#f5f3ee;font-size:9px;color:#888780;padding:3px 8px;font-weight:600;letter-spacing:.3px}
 .ytbl .brow td:first-child{background:#f5f3ee}
-.ytbl tfoot td{font-weight:700;background:#f5f3ee;border-top:0.5px solid rgba(0,0,0,.1);border-bottom:none;font-size:10.5px}
-.ytbl tfoot td:first-child{background:#f5f3ee}
+.ytbl tfoot td{font-weight:700;background:#f5f3ee;border-top:0.5px solid rgba(0,0,0,.1);border-bottom:none;font-size:10.5px;padding:5px 8px;text-align:right;vertical-align:middle}
+.ytbl tfoot td:first-child{background:#f5f3ee;text-align:left}
 .ytbl .yr-sep{border-left:0.5px solid rgba(0,0,0,.08)}
 .ach{display:inline-block;font-size:8.5px;font-weight:600;padding:1px 5px;border-radius:3px}
 .ach-g{background:#EAF3DE;color:#3B6D11}.ach-b{background:#E6F1FB;color:#185FA5}
@@ -1667,7 +1667,7 @@ function renderTab1(){
       }
       if(rev) prevRev=rev;
     });
-    const t26=TOTAL_REV, tgt26=TOTAL_TARGET;
+    const t26=TOTAL_REV, tgt26=TOTAL_TARGET_YR;
     cells+=`<td class="yr-sep" style="color:#5b8dee;font-weight:700">${fmtM(t26)}</td><td>${tgtCell(tgt26)}</td><td>${achChip(t26,tgt26)}</td><td>—</td>`;
     return `<tr>${cells}</tr>`;
   }
@@ -1745,18 +1745,23 @@ function renderTab1(){
   `;
 
   // Init Chart.js trend charts
-  const lineBlue='#185FA5', lineFill='rgba(24,95,165,0.07)', targetOrange='#f0a030';
+  const targetOrange='#f0a030';
+  const BRAND_LINE={ki:{line:'#c04070',fill:'rgba(192,64,112,0.07)'},wo:{line:'#185FA5',fill:'rgba(24,95,165,0.07)'}};
   ALL_STORES.forEach((key,idx)=>{
     const s=DATA[key];
     const hm=histMap(key);
     const pts=YEARS.filter(y=>hm[y]&&hm[y].rev).map(y=>({yr:y,rev:hm[y].rev/1e6,tgt:hm[y].target?hm[y].target/1e6:null}));
-    // add 2026 H1
-    pts.push({yr:2026,rev:s.revenue/1e6,tgt:TARGET_2026[key]?TARGET_2026[key]/1e6:null});
+    // add 2026 H1 — paired stores share a combined target so no individual target line
+    const _isPaired=!!PAIRED_STORES[key];
+    pts.push({yr:2026,rev:s.revenue/1e6,tgt:(!_isPaired&&TARGET_2026[key])?TARGET_2026[key]/1e6:null});
 
     const labels=pts.map(p=>p.yr===2026?"'26H1":"'"+String(p.yr).slice(2));
     const revData=pts.map(p=>p.rev);
     const tgtData=pts.map(p=>p.tgt);
     const hasTgt=tgtData.some(v=>v!==null);
+    const bk=s.brandKey||'wo';
+    const lineColor=BRAND_LINE[bk]?.line||'#185FA5';
+    const lineFill=BRAND_LINE[bk]?.fill||'rgba(24,95,165,0.07)';
 
     const ctx=document.getElementById('tc'+idx);
     if(!ctx) return;
@@ -1765,7 +1770,7 @@ function renderTab1(){
       data:{
         labels,
         datasets:[
-          {label:'業績',data:revData,borderColor:lineBlue,borderWidth:2,pointRadius:3,pointBackgroundColor:lineBlue,pointBorderWidth:0,fill:true,backgroundColor:lineFill,tension:0.3,spanGaps:false},
+          {label:'業績',data:revData,borderColor:lineColor,borderWidth:2,pointRadius:3,pointBackgroundColor:lineColor,pointBorderWidth:0,fill:true,backgroundColor:lineFill,tension:0.3,spanGaps:false},
           ...(hasTgt?[{label:'目標',data:tgtData,borderColor:targetOrange,borderWidth:1.5,borderDash:[4,3],pointRadius:2,pointBackgroundColor:targetOrange,pointBorderWidth:0,fill:false,tension:0.3,spanGaps:true}]:[])
         ]
       },
@@ -1786,10 +1791,8 @@ function renderTab1(){
 function renderStorePerfTable(s){
   const rows = s.months.map(m=>{
     if(m.rev===0 && m.new_n===0) return `<tr><td>${m.m}</td><td colspan="6" style="color:#ccc;font-size:9px">— 尚未開業 —</td></tr>`;
-    const imp_target = m.achieve ? Math.round(m.rev/m.achieve) : null;
     const achieveStr = m.achieve!==null ? fmtPct(m.achieve) : '—';
     const achieveColor = m.achieve!==null ? pctTextColor(m.achieve) : '#bbb';
-    const tgtStr = imp_target ? fmtM(imp_target) : '—';
     return `<tr>
       <td>${m.m}</td>
       <td>${fmtM(m.new_rev)}</td>
@@ -1802,12 +1805,14 @@ function renderStorePerfTable(s){
   }).join('');
 
   const total_count = s.new_count + s.old_count;
+  const t2ytdTgt = s.months.filter(m=>(m.rev||0)>0).reduce((sum,m)=>sum+(m.tgt||0),0);
+  const t2ytdAch = t2ytdTgt>0 ? s.revenue/t2ytdTgt : s.achieve_h1;
   return `<div class="store-tbl-card">
     <div class="store-tbl-title">
       <span class="brand-pill ${s.brandKey==='ki'?'bp-ki':'bp-wo'}">${s.brand}</span>
       ${s.label}
-      <span style="margin-left:auto;font-size:10px;color:#888780">H1目標 ${fmtM(s.target_h1)}</span>
-      <span style="font-size:10px;font-weight:700;color:${pctTextColor(s.achieve_h1)}">${fmtPct(s.achieve_h1)}</span>
+      <span style="margin-left:auto;font-size:10px;color:#888780">目標 ${t2ytdTgt?fmtM(t2ytdTgt):fmtM(s.target_h1)}</span>
+      <span style="font-size:10px;font-weight:700;color:${pctTextColor(t2ytdAch)}">${fmtPct(t2ytdAch)}</span>
       ${yoyBadge(s.yoy_h1)}
     </div>
     <table class="perf-tbl">
@@ -1824,7 +1829,7 @@ function renderStorePerfTable(s){
         <td>${fmtM(s.new_rev)}</td><td>${fmtN(s.new_count)}</td>
         <td>${fmtM(s.old_rev)}</td><td>${fmtN(s.old_count)}</td>
         <td>${fmtM(s.revenue)}</td>
-        <td style="color:${pctTextColor(s.achieve_h1)}">${fmtPct(s.achieve_h1)}</td>
+        <td style="color:${pctTextColor(t2ytdAch)}">${fmtPct(t2ytdAch)}</td>
       </tr>
     </table>
   </div>`;
@@ -1998,6 +2003,10 @@ function renderStoreDetail(s, storeKey){
   const new_avg = s.new_count>0?fmtM(Math.round(s.new_rev/s.new_count)):'—';
   const old_avg = s.old_count>0?fmtM(Math.round(s.old_rev/s.old_count)):'—';
 
+  // YTD totals: sum targets only for months that have actual revenue data
+  const ytdTgt = s.months.filter(m=>(m.rev||0)>0).reduce((sum,m)=>sum+(m.tgt||0),0);
+  const ytdAch = ytdTgt>0 ? s.revenue/ytdTgt : (s.achieve_h1||null);
+
   return `<div class="store-tbl-card">
 
     <!-- header + H1 summary -->
@@ -2005,14 +2014,12 @@ function renderStoreDetail(s, storeKey){
       <div class="store-hd-name">
         <span class="brand-pill ${s.brandKey==='ki'?'bp-ki':'bp-wo'}">${s.brand}</span>
         <span class="store-name-big">${s.label}</span>
-        <span class="sc-badge ${badgeClass}" style="font-size:9px;padding:2px 8px;border-radius:12px;font-weight:600">${badgeText} ${fmtPct(s.achieve_h1)}</span>
-        ${yoyBadge(s.yoy_h1)}
       </div>
       <div class="store-summary-top">
         <div class="store-summary-left">
-          <div style="font-size:10px;color:#aaa">H1 累計</div>
-          <div class="store-rev-big">${fmtM(s.revenue)} <span style="font-size:14px;font-weight:500;color:${pctTextColor(s.achieve_h1)}">${fmtPct(s.achieve_h1)}</span></div>
-          <div style="font-size:10px;color:#aaa">目標 ${s.target_h1?fmtM(s.target_h1):'—'}</div>
+          <div style="font-size:10px;color:#aaa">累計</div>
+          <div class="store-rev-big">${fmtM(s.revenue)} <span style="font-size:14px;font-weight:500;color:${pctTextColor(ytdAch)}">${ytdAch!==null?fmtPct(ytdAch):'—'}</span></div>
+          <div style="font-size:10px;color:#aaa">目標 ${ytdTgt?fmtM(ytdTgt):'—'}</div>
         </div>
         <div>
           <div style="height:6px;border-radius:3px;overflow:hidden;display:flex;gap:1px;margin-bottom:5px">
@@ -2050,8 +2057,8 @@ function renderStoreDetail(s, storeKey){
           <td>${mkLyCell(s.new_rev, lyYTD?.new_rev)}</td><td>${mkLyCell(s.new_count, lyYTD?.new_n, true)}</td>
           <td>${mkLyCell(s.old_rev, lyYTD?.old_rev)}</td><td>${mkLyCell(s.old_count, lyYTD?.old_n, true)}</td>
           <td>${mkLyCell(s.revenue, lyYTD?.rev)}</td>
-          <td style="${TGT_CELL}">${s.target_h1?fmtM(s.target_h1):'—'}</td>
-          <td><span style="color:${pctTextColor(s.achieve_h1)}">${fmtPct(s.achieve_h1)}</span></td>
+          <td style="${TGT_CELL}">${ytdTgt?fmtM(ytdTgt):'—'}</td>
+          <td><span style="color:${pctTextColor(ytdAch)}">${ytdAch!==null?fmtPct(ytdAch):'—'}</span></td>
         </tr>
       </table>
     </div>
@@ -3398,7 +3405,8 @@ async function loadData(){
       d.new_count=ss.newCnt; d.old_count=ss.oldCnt;
       d.new_avg=ss.newCnt>0?Math.round(ss.newRev/ss.newCnt):0;
       d.old_avg=ss.oldCnt>0?Math.round(ss.oldRev/ss.oldCnt):0;
-      d.achieve_h1=d.target_h1>0?ss.totalRev/d.target_h1:0;
+      const _h1Rev=ss.months.slice(0,6).reduce((s,m)=>s+(m.rev||0),0);
+      d.achieve_h1=d.target_h1>0?_h1Rev/d.target_h1:0;
       // Monthly target priority: Sheet 目標 row → DATA.monthly_tgt → H1/6 fallback
       const fallbackMTgt=d.target_h1/6;
       d.months=ss.months.map((m,idx)=>{
@@ -3459,6 +3467,51 @@ const KI_REBOOK_STORE_DATA = {
 
 // 各諮詢師回約明細（回約＝已預約、取消＝未到、業績＝實際業績）
 const KI_REBOOK_CS_DATA = {
+  '2026-02': {
+    ki_taipei: {
+      '柯孟君': { 回約: 57, 取消: 7, 業績: 991513 },
+      '計品卉': { 回約: 47, 取消: 10, 業績: 431380 },
+      '陳詩喬': { 回約: 49, 取消: 5, 業績: 861956 },
+      '陳甯':   { 回約: 32, 取消: 1, 業績: 538540 },
+    },
+    ki_taichung: {},
+  },
+  '2026-03': {
+    ki_taipei: {
+      '柯孟君': { 回約: 66, 取消: 7, 業績: 1118803 },
+      '計品卉': { 回約: 36, 取消: 3, 業績: 571791 },
+      '陳詩喬': { 回約: 38, 取消: 3, 業績: 632762 },
+      '陳甯':   { 回約: 39, 取消: 7, 業績: 366595 },
+    },
+    ki_taichung: {},
+  },
+  '2026-04': {
+    ki_taipei: {
+      '柯孟君': { 回約: 54, 取消: 4, 業績: 752034 },
+      '計品卉': { 回約: 44, 取消: 6, 業績: 333294 },
+      '陳詩喬': { 回約: 34, 取消: 1, 業績: 191491 },
+      '陳甯':   { 回約: 36, 取消: 5, 業績: 363197 },
+    },
+    ki_taichung: {},
+  },
+  '2026-05': {
+    ki_taipei: {
+      '柯孟君': { 回約: 47, 取消: 2, 業績: 450009 },
+      '計品卉': { 回約: 43, 取消: 4, 業績: 407413 },
+      '陳詩喬': { 回約: 46, 取消: 2, 業績: 591798 },
+      '陳甯':   { 回約: 38, 取消: 8, 業績: 405810 },
+    },
+    ki_taichung: {},
+  },
+  '2026-06': {
+    ki_taipei: {
+      '柯孟君': { 回約: 52, 取消: 9, 業績: 747595 },
+      '計品卉': { 回約: 31, 取消: 1, 業績: 311499 },
+      '陳詩喬': { 回約: 40, 取消: 6, 業績: 402586 },
+      '陳甯':   { 回約: 38, 取消: 6, 業績: 281594 },
+    },
+    ki_taichung: {},
+  },
   '2026-07': {
     ki_taipei: {
       '柯孟君': { 回約: 46, 取消: 5, 業績: 964499 },
@@ -3745,7 +3798,7 @@ function renderConsultantTab(){
     const retRow = brandKey==='ki'
       ? (kiRebookStore && _csClientFilter!=='new' ? `<div class="cs-store-ret">
           <div class="cs-store-ret-row" style="grid-template-columns:repeat(3,1fr)">
-            <div class="cs-ss"><div class="cs-ss-v">${kiRebookStore.舊客}</div><div class="cs-ss-l">門市舊客到場</div></div>
+            <div class="cs-ss"><div class="cs-ss-v">${kiRebookStore.舊客}</div><div class="cs-ss-l">總舊客</div></div>
             <div class="cs-ss"><div class="cs-ss-v">$${kiRebookStore.業績.toLocaleString()}</div><div class="cs-ss-l">舊客業績</div></div>
             <div class="cs-ss"><div class="cs-ss-v" style="color:#7fe0a8">$${Math.round(kiRebookStore.業績/kiRebookStore.舊客).toLocaleString()}</div><div class="cs-ss-l">平均客單</div></div>
           </div>
@@ -3903,7 +3956,7 @@ function renderConsultantTab(){
             <div class="cs-bs"><div class="cs-bs-v">${fmtAmt(b.s.平均客單)}</div><div class="cs-bs-l">平均客單</div></div>
           </div>
           ${bk==='ki'&&kiRebookTotal&&kiRebookTotal.舊客>0?`<div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:.5px solid rgba(0,0,0,.07);background:#f9f8f6">
-            <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px">${kiRebookTotal.舊客}</div><div class="cs-bs-l">舊客到場</div></div>
+            <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px">${kiRebookTotal.舊客}</div><div class="cs-bs-l">總舊客</div></div>
             <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px">$${kiRebookTotal.業績.toLocaleString()}</div><div class="cs-bs-l">舊客業績</div></div>
             <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px;color:#2a7a4a">$${Math.round(kiRebookTotal.業績/kiRebookTotal.舊客).toLocaleString()}</div><div class="cs-bs-l">平均客單</div></div>
           </div>`:bk==='wo'&&b.rs.totalOld>0?`<div style="display:grid;grid-template-columns:repeat(6,1fr);border-top:.5px solid rgba(0,0,0,.07);background:#f9f8f6">
