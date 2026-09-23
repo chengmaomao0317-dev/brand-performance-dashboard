@@ -434,6 +434,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC',sans-
 .cs-tp-li{display:flex;align-items:center;gap:4px;font-size:11px;color:#888}
 .cs-tp-ld{width:16px;height:3px;border-radius:2px}
 .cs-tp-divider{height:.5px;background:rgba(0,0,0,.07);margin:14px 0}
+.cs-spark-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:8px;padding-top:2px}
+.cs-rebook-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding-top:2px}
+@media(max-width:700px){.cs-rebook-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:400px){.cs-rebook-grid{grid-template-columns:1fr}}
+.cs-spark-card{background:#fafaf8;border:.5px solid rgba(0,0,0,.08);border-radius:10px;padding:10px 12px}
+.cs-spark-name{font-size:10px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cs-spark-val{font-size:16px;font-weight:700;line-height:1.2}
+.cs-spark-chg{font-size:10px;font-weight:600}
+.cs-spark-svg{margin-top:5px;width:100%;height:30px;display:block;overflow:visible}
+.cs-spark-mo-row{display:grid;margin-top:5px;border-top:.5px solid rgba(0,0,0,.06);padding-top:5px;gap:0}
 .cs-mo-btn{font-size:12px;padding:5px 12px;border-radius:7px;border:.5px solid rgba(0,0,0,.12);background:#fff;color:#888;cursor:pointer}
 .cs-brand-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
 .cs-brand-card{border-radius:0 10px 10px 0;border:.5px solid rgba(0,0,0,.09);background:#fff;overflow:hidden}
@@ -3536,8 +3546,14 @@ let _csEnd   = '';
 let _csTrendOpen = false;
 let _woTrendStore = '全部';
 let _kiTrendStore = '全部';
+let _kiRebookTrendOpen = false;
+let _kiRebookTrendStore = 'ki_taipei';
+let _woRebookTrendOpen = false;
+let _woRebookTrendStore = 'wo_zhanqian';
 let _woTrendChart = null;
 let _kiTrendChart = null;
+let _woActiveStores = null; // null = all on
+let _kiActiveStores = null;
 
 function renderConsultantTab(){
   const el = document.getElementById('consultant-tab-body');
@@ -3583,12 +3599,11 @@ function renderConsultantTab(){
       r.clients.forEach(c=>{
         if(c.type==='新客' && !c.noCount){
           接待++;
-          const converted = c.total_amt > 0; // 有課程金額即成交（含訂金）
+          const converted = (c.total_amt||0) > (c.trial_amt||0); // 超過體驗價才算成交
           const pAmt = c.product_amt || 0;
           // 新客皆不計體驗價
           totalAmt += pAmt;
-          if(converted) totalAmt += c.total_amt;
-          if(converted) 成交++;
+          if(converted){ 成交++; totalAmt += (c.total_amt||0)-(c.trial_amt||0); }
         } else if(c.type==='其他' && includeOther){
           接待++;
           // 分享客不計成交
@@ -3608,8 +3623,8 @@ function renderConsultantTab(){
         if(c.type==='舊客'){if(!c.noCount)totalOld++;}
         else if(c.type==='舊客體驗'){
           if(!c.noCount){totalOld++;newTrial++;} // noCount=true：算業績但不計人數（如線上付款人未到）
-          revSum+=c.trial_amt; // 體驗金額計入（自有產品不計入舊客業績）
-          if(c.total_amt>0){if(!c.noCount)purchased++;revSum+=c.total_amt;} // 成交再加課程金額
+          revSum+=(c.total_amt||c.trial_amt||0); // 用total_amt（含體驗費）
+          if((c.total_amt||0)>(c.trial_amt||0)){if(!c.noCount)purchased++;} // 超過體驗價才算成交
         }
       });
     });
@@ -3632,7 +3647,8 @@ function renderConsultantTab(){
 
   // 品牌統計
   function brandBlock(brandKey, brandLabel){
-    const br = records.filter(r=>r.brandKey===brandKey);
+    // 原渥品牌總計：包含在原渥門市消耗的原綺舊客（如東門原綺客跑店）
+    const br = records.filter(r=>r.brandKey===brandKey || (brandKey==='wo' && r.storeKey.startsWith('wo_') && r.brandKey==='ki'));
     const s = calcStats(br, true, true);
     const rs = calcRetStats(br);
     const topCls = brandKey==='wo'?'cs-brand-top-wo':'cs-brand-top-ki';
@@ -3899,6 +3915,8 @@ function renderConsultantTab(){
         <input type="date" class="cs-date-input" value="${_csEnd}" onchange="_csEnd=this.value;renderConsultantTab()">
       ` : (_csMode!=='month'?`<span style="font-size:12px;color:#999;margin-left:10px">${modeLabel}</span>`:'')}
       <button class="cs-trend-btn${_csTrendOpen?' on':''}" onclick="_csTrendOpen=!_csTrendOpen;renderConsultantTab()">新客客單趨勢 ${_csTrendOpen?'▲':'▼'}</button>
+      <button class="cs-trend-btn${_woRebookTrendOpen?' on':''}" onclick="_woRebookTrendOpen=!_woRebookTrendOpen;renderConsultantTab()">原渥舊客趨勢 ${_woRebookTrendOpen?'▲':'▼'}</button>
+      <button class="cs-trend-btn${_kiRebookTrendOpen?' on':''}" onclick="_kiRebookTrendOpen=!_kiRebookTrendOpen;renderConsultantTab()">原綺舊客趨勢 ${_kiRebookTrendOpen?'▲':'▼'}</button>
       <div class="cs-client-filter-seg" style="margin-left:auto;display:flex;border:.5px solid rgba(0,0,0,.15);border-radius:8px;overflow:hidden">
         <button style="font-size:11px;padding:4px 12px;border:none;border-right:.5px solid rgba(0,0,0,.1);cursor:pointer;font-weight:500;transition:background .12s;${_csClientFilter==='all'?'background:#1a1a18;color:#fff':'background:#fff;color:#888'}" onclick="_csClientFilter='all';renderConsultantTab()">全部</button>
         <button style="font-size:11px;padding:4px 12px;border:none;border-right:.5px solid rgba(0,0,0,.1);cursor:pointer;font-weight:500;transition:background .12s;${_csClientFilter==='new'?'background:#1a1a18;color:#fff':'background:#fff;color:#888'}" onclick="_csClientFilter='new';renderConsultantTab()">新客</button>
@@ -3918,10 +3936,7 @@ function renderConsultantTab(){
           <span class="cs-tp-badge" style="background:#e6f1fb;color:#185fa5">原渥</span>
           <div class="cs-tp-tabs" id="cs-trend-wo-tabs"></div>
         </div>
-        <div class="cs-tp-leg" id="cs-trend-wo-leg"></div>
-        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
-          <div style="position:relative;min-width:480px;height:220px"><canvas id="cs-trend-wo" role="img" aria-label="原渥平均客單月趨勢">原渥平均客單月趨勢</canvas></div>
-        </div>
+        <div id="cs-trend-wo-body"></div>
       </div>
       <div class="cs-tp-divider"></div>
       <div>
@@ -3929,11 +3944,28 @@ function renderConsultantTab(){
           <span class="cs-tp-badge" style="background:#fbeaf0;color:#993556">原綺</span>
           <div class="cs-tp-tabs" id="cs-trend-ki-tabs"></div>
         </div>
-        <div class="cs-tp-leg" id="cs-trend-ki-leg"></div>
-        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
-          <div style="position:relative;min-width:480px;height:220px"><canvas id="cs-trend-ki" role="img" aria-label="原綺平均客單月趨勢">原綺平均客單月趨勢</canvas></div>
-        </div>
+        <div id="cs-trend-ki-body"></div>
       </div>
+    </div>
+    ` : ''}
+
+    ${_woRebookTrendOpen ? `
+    <div class="cs-trend-panel">
+      <div class="cs-tp-brand-hd">
+        <span class="cs-tp-badge" style="background:#e6f1fb;color:#185fa5">原渥 舊客趨勢</span>
+        <div class="cs-tp-tabs" id="wo-rebook-trend-tabs"></div>
+      </div>
+      <div id="wo-rebook-trend-body"></div>
+    </div>
+    ` : ''}
+
+    ${_kiRebookTrendOpen ? `
+    <div class="cs-trend-panel">
+      <div class="cs-tp-brand-hd">
+        <span class="cs-tp-badge" style="background:#fbeaf0;color:#993556">原綺 舊客回約趨勢</span>
+        <div class="cs-tp-tabs" id="ki-rebook-trend-tabs"></div>
+      </div>
+      <div id="ki-rebook-trend-body"></div>
     </div>
     ` : ''}
 
@@ -3978,6 +4010,8 @@ function renderConsultantTab(){
 
   `;
   if(_csTrendOpen) setTimeout(initTrendPanel, 0);
+  if(_woRebookTrendOpen) setTimeout(initWoRebookTrendPanel, 0);
+  if(_kiRebookTrendOpen) setTimeout(initKiRebookTrendPanel, 0);
 }
 
 // ── 諮詢師暱稱（全域）──────────────────────────────────────
@@ -4015,13 +4049,18 @@ const STORE_CS_ORDER = {
 // ══════════════════════════════════════════
 //  新客客單趨勢 Panel
 // ══════════════════════════════════════════
+const _STORE_ALIAS={'館前':'站前'};
+function _normStore(s){return _STORE_ALIAS[s]||s;}
+
 function computeMonthlyAvg(){
   const raw={};
   CONSULTANT_RECORDS.forEach(rec=>{
-    const key=`${rec.brandKey}|${rec.store}|${rec.consultant}|${rec.date.slice(0,7)}`;
-    if(!raw[key]) raw[key]={bk:rec.brandKey,store:rec.store,cs:rec.consultant,mo:rec.date.slice(0,7),sum:0,n:0};
+    if(!rec.consultant||rec.consultant==='公司') return;
+    const storeName=_normStore(rec.store);
+    const key=`${rec.brandKey}|${storeName}|${rec.consultant}|${rec.date.slice(0,7)}`;
+    if(!raw[key]) raw[key]={bk:rec.brandKey,store:storeName,cs:rec.consultant,mo:rec.date.slice(0,7),sum:0,n:0};
     // 分母=接待人數（含未成交），分子=成交 total_amt 加總，與 detail card 一致
-    rec.clients.forEach(c=>{if(c.type==='新客'){raw[key].n++;if(c.total_amt>0)raw[key].sum+=c.total_amt;}});
+    rec.clients.forEach(c=>{if(c.type==='新客'){raw[key].n++;if((c.total_amt||0)>(c.trial_amt||0))raw[key].sum+=(c.total_amt||0)-(c.trial_amt||0);}});
   });
   const res={wo:{},ki:{}};
   Object.values(raw).forEach(({bk,store,cs,mo,sum,n})=>{
@@ -4033,60 +4072,108 @@ function computeMonthlyAvg(){
   return res;
 }
 
-function drawTrendChart(canvasId,legId,storeData,bk){
-  const canvas=document.getElementById(canvasId);
-  const legEl=document.getElementById(legId);
-  if(!canvas||!legEl) return null;
-  const WO_C=['#185fa5','#378add','#0f6e56','#1d9e75','#4a3aa7','#85b7eb'];
+// ── Sparkline SVG helper — vals may contain nulls, x aligns to array index ─
+function _sparkSVG(vals, color){
+  if(!vals||!vals.length) return '';
+  const W=100,H=30;
+  const nonNull=vals.filter(v=>v!==null);
+  if(!nonNull.length) return '';
+  const minV=Math.min(...nonNull), maxV=Math.max(...nonNull), range=maxV-minV||1;
+  const n=vals.length;
+  const pts=vals.map((v,i)=>{
+    if(v===null) return null;
+    const x=(i+0.5)/n*W; // align to CSS grid column centers
+    const y=H-2-((v-minV)/range)*(H-4);
+    return [x,y];
+  });
+  // build path with M for new segments after gaps
+  let d='', prev=null;
+  pts.forEach(p=>{
+    if(!p){prev=null;return;}
+    d+=prev===null?`M${p[0]},${p[1]}`:`L${p[0]},${p[1]}`;
+    prev=p;
+  });
+  const last=[...pts].reverse().find(p=>p!==null);
+  return `<svg class="cs-spark-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="${d}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    ${last?`<circle cx="${last[0]}" cy="${last[1]}" r="2.5" fill="${color}"/>`:''}
+  </svg>`;
+}
+
+// ── Sparkline cards (門市 or 諮詢師, with monthly value row) ─────────────
+function renderSparkCards(bodyId, itemData, bk){
+  const bodyEl=document.getElementById(bodyId);
+  if(!bodyEl) return;
+  const WO_C=['#185fa5','#378add','#0f6e56','#8b5cf6','#cc5522','#9966cc'];
   const KI_C=['#c04070','#d4537e','#993556','#ed93b1'];
   const clrs=bk==='wo'?WO_C:KI_C;
-  const BD=[[],[5,5],[3,3],[8,3],[5,3,1,3]];
   const monthSet=new Set();
-  Object.values(storeData).forEach(m=>Object.keys(m).forEach(k=>monthSet.add(k)));
+  Object.values(itemData).forEach(m=>Object.keys(m).forEach(k=>monthSet.add(k)));
   const months=[...monthSet].sort();
-  const labels=months.map(m=>`${parseInt(m.split('-')[1])}月`);
-  const consultants=Object.keys(storeData);
-  legEl.innerHTML=consultants.map((cs,i)=>{
-    const nick=NICKNAMES[cs]?` (${NICKNAMES[cs]})`:'';
-    return `<span class="cs-tp-li"><span class="cs-tp-ld" style="background:${clrs[i%clrs.length]}"></span>${cs}${nick}</span>`;
-  }).join('');
-  const datasets=consultants.map((cs,i)=>({
-    label:cs+(NICKNAMES[cs]?` (${NICKNAMES[cs]})`:''),
-    data:months.map(mo=>storeData[cs][mo]??null),
-    backgroundColor:clrs[i%clrs.length]+'cc',
-    borderColor:clrs[i%clrs.length],
-    borderWidth:1,
-    borderRadius:3,
-    borderSkipped:false,
-  }));
-  return new Chart(canvas,{
-    type:'bar',
-    data:{labels,datasets},
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{
-        legend:{display:false},
-        tooltip:{
-          callbacks:{label:x=>x.parsed.y!=null?`${x.dataset.label}: NT$${Math.round(x.parsed.y).toLocaleString()}`:`${x.dataset.label}: —`},
-          backgroundColor:'#fff',borderColor:'#e8e7e1',borderWidth:0.5,
-          titleColor:'#1a1a18',bodyColor:'#898781',padding:10,
-        }
-      },
-      scales:{
-        x:{grid:{display:false},ticks:{color:'#898781',font:{size:11}},border:{color:'#e8e7e1'}},
-        y:{grid:{color:'#e8e7e1'},ticks:{color:'#898781',font:{size:10},callback:v=>'$'+Math.round(v/1000)+'K'},border:{color:'#e8e7e1'}}
-      }
-    }
+  // show last 5 months in the value row
+  const recentMos=months.slice(-5);
+  const cards=Object.keys(itemData).map((name,i)=>{
+    const clr=clrs[i%clrs.length];
+    const nonNull=months.map(mo=>({mo,v:itemData[name][mo]??null})).filter(x=>x.v!==null);
+    const last=nonNull[nonNull.length-1];
+    const prev=nonNull[nonNull.length-2];
+    const lastVal=last?last.v:null;
+    const lastMoLabel=last?parseInt(last.mo.split('-')[1])+'月':'—';
+    const chgPct=(lastVal&&prev)?((lastVal-prev.v)/prev.v*100):null;
+    const chgStr=chgPct!==null?(chgPct>=0?`+${chgPct.toFixed(0)}%`:`${chgPct.toFixed(0)}%`):'';
+    const chgClr=chgPct===null?'#bbb':chgPct>=0?'#0f6e56':'#c05030';
+    const displayName=NICKNAMES&&NICKNAMES[name]?NICKNAMES[name]:name;
+    // average across all non-null months
+    const avgVal=nonNull.length?Math.round(nonNull.reduce((s,x)=>s+x.v,0)/nonNull.length):null;
+    // sparkline aligned to recentMos (nulls = gaps), so x matches month columns
+    const sparkVals=recentMos.map(mo=>itemData[name][mo]??null);
+    // monthly value row
+    const moRow=recentMos.map(mo=>{
+      const v=itemData[name][mo]??null;
+      const isLast=mo===(last?last.mo:null);
+      return `<div style="text-align:center">
+        <div style="font-size:8px;color:#ccc;margin-bottom:1px">${parseInt(mo.split('-')[1])}月</div>
+        <div style="font-size:9px;font-weight:${isLast?'700':'400'};color:${isLast?clr:'#888'}">${v?'$'+Math.round(v).toLocaleString():'—'}</div>
+      </div>`;
+    }).join('');
+    return `<div class="cs-spark-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <div class="cs-spark-name" title="${name}">${displayName}</div>
+        <div style="font-size:8px;color:#ccc">均值</div>
+      </div>
+      <div style="font-size:9px;color:#bbb;margin-bottom:2px">平均客單</div>
+      <div style="display:flex;align-items:baseline;gap:6px">
+        <div class="cs-spark-val" style="color:${clr}">${avgVal?'$'+avgVal.toLocaleString():'—'}</div>
+      </div>
+      ${_sparkSVG(sparkVals,clr)}
+      <div class="cs-spark-mo-row" style="grid-template-columns:repeat(${recentMos.length},1fr)">
+        ${moRow}
+      </div>
+    </div>`;
   });
+  bodyEl.innerHTML=`<div class="cs-rebook-grid">${cards.join('')}</div>`;
+}
+
+// ── Render body: 全部→門市卡, 特定店→諮詢師卡 ──────────────────────────
+function renderTrendBody(bk, mo){
+  const store=bk==='wo'?_woTrendStore:_kiTrendStore;
+  const bodyId=`cs-trend-${bk}-body`;
+  if(store==='全部'){
+    const stMo=computeStoreMonthlyAvg();
+    renderSparkCards(bodyId,stMo[bk]||{},bk);
+  } else {
+    renderSparkCards(bodyId,mo[bk][store]||{},bk);
+  }
 }
 
 function computeStoreMonthlyAvg(){
   const raw={};
   CONSULTANT_RECORDS.forEach(rec=>{
-    const key=`${rec.brandKey}|${rec.store}|${rec.date.slice(0,7)}`;
-    if(!raw[key]) raw[key]={bk:rec.brandKey,store:rec.store,mo:rec.date.slice(0,7),sum:0,n:0};
+    const storeName=_normStore(rec.store);
+    const key=`${rec.brandKey}|${storeName}|${rec.date.slice(0,7)}`;
+    if(!raw[key]) raw[key]={bk:rec.brandKey,store:storeName,mo:rec.date.slice(0,7),sum:0,n:0};
     rec.clients.forEach(c=>{
-      if(c.type==='新客'){raw[key].n++;if(c.total_amt>0)raw[key].sum+=c.total_amt;}
+      if(c.type==='新客'){raw[key].n++;if((c.total_amt||0)>(c.trial_amt||0))raw[key].sum+=(c.total_amt||0)-(c.trial_amt||0);}
     });
   });
   const res={wo:{},ki:{}};
@@ -4096,11 +4183,6 @@ function computeStoreMonthlyAvg(){
     res[bk][store][mo]=Math.round(sum/n);
   });
   return res;
-}
-
-function getStoreData(mo,bk,store){
-  if(store==='全部') return computeStoreMonthlyAvg()[bk]||null;
-  return mo[bk][store]||null;
 }
 
 function initTrendPanel(){
@@ -4116,26 +4198,255 @@ function initTrendPanel(){
     if(tabsEl) tabsEl.innerHTML=stores.map(s=>
       `<button class="cs-tp-tab${s===cur?' '+bk+'-on':''}" onclick="_${bk}TrendStore='${s}';switchTrendStore('${bk}')">${s}</button>`
     ).join('');
+    renderTrendBody(bk,mo);
   });
-  const woData=getStoreData(mo,'wo',_woTrendStore);
-  const kiData=getStoreData(mo,'ki',_kiTrendStore);
-  if(woData) _woTrendChart=drawTrendChart('cs-trend-wo','cs-trend-wo-leg',woData,'wo');
-  if(kiData) _kiTrendChart=drawTrendChart('cs-trend-ki','cs-trend-ki-leg',kiData,'ki');
 }
 
 function switchTrendStore(bk){
   const mo=computeMonthlyAvg();
   const store=bk==='wo'?_woTrendStore:_kiTrendStore;
-  const data=getStoreData(mo,bk,store);
-  if(bk==='wo'){
-    if(_woTrendChart){_woTrendChart.destroy();_woTrendChart=null;}
-    if(data) _woTrendChart=drawTrendChart('cs-trend-wo','cs-trend-wo-leg',data,'wo');
-  } else {
-    if(_kiTrendChart){_kiTrendChart.destroy();_kiTrendChart=null;}
-    if(data) _kiTrendChart=drawTrendChart('cs-trend-ki','cs-trend-ki-leg',data,'ki');
-  }
+  renderTrendBody(bk,mo);
   document.querySelectorAll(`#cs-trend-${bk}-tabs .cs-tp-tab`).forEach(b=>{
     b.className='cs-tp-tab'+(b.textContent===store?` ${bk}-on`:'');
+  });
+}
+
+// ══════════════════════════════════════════
+//  原綺 舊客回約趨勢
+// ══════════════════════════════════════════
+function renderKiRebookCards(bodyId, storeKey){
+  const bodyEl=document.getElementById(bodyId);
+  if(!bodyEl) return;
+  const KI_C=['#c04070','#d4537e','#993556','#ed93b1'];
+  // collect all months from KI_REBOOK_CS_DATA that have data for this store
+  const months=Object.keys(KI_REBOOK_CS_DATA).sort().filter(mo=>{
+    const s=KI_REBOOK_CS_DATA[mo][storeKey];
+    return s&&Object.keys(s).length>0;
+  });
+  const recentMos=months;
+  // collect all consultants across months
+  const csSet=new Set();
+  months.forEach(mo=>{
+    const s=KI_REBOOK_CS_DATA[mo][storeKey]||{};
+    Object.keys(s).forEach(c=>csSet.add(c));
+  });
+  const consultants=[...csSet];
+  const cards=consultants.map((cs,i)=>{
+    const clr=KI_C[i%KI_C.length];
+    const nick=NICKNAMES&&NICKNAMES[cs]?NICKNAMES[cs]:cs;
+    // per month: 到場 and 業績
+    const getData=mo=>{
+      const d=(KI_REBOOK_CS_DATA[mo]||{})[storeKey]||{};
+      const r=d[cs];
+      if(!r) return null;
+      return {到場:r.回約-r.取消, 業績:r.業績};
+    };
+    const recentData=recentMos.map(mo=>getData(mo));
+    const last=recentData[recentData.length-1];
+    const prev=recentData.slice(0,-1).reverse().find(x=>x!==null);
+    // sparkline on 業績
+    const sparkVals=recentData.map(d=>d?d.業績:null);
+    // totals across all recent months
+    const totalArr=recentData.reduce((s,d)=>s+(d?d.到場:0),0);
+    const totalRev=recentData.reduce((s,d)=>s+(d?d.業績:0),0);
+    // chg vs prev for 業績 (latest month only, for sparkline reference)
+    const chgPct=(last&&prev)?((last.業績-prev.業績)/prev.業績*100):null;
+    const chgStr=chgPct!==null?(chgPct>=0?`+${chgPct.toFixed(0)}%`:`${chgPct.toFixed(0)}%`):'';
+    const chgClr=chgPct===null?'#bbb':chgPct>=0?'#0f6e56':'#c05030';
+    // person chg for 到場
+    const arrChgPct=(last&&prev)?((last.到場-prev.到場)/prev.到場*100):null;
+    const arrChgStr=arrChgPct!==null?(arrChgPct>=0?`+${arrChgPct.toFixed(0)}%`:`${arrChgPct.toFixed(0)}%`):'';
+    const arrChgClr=arrChgPct===null?'#bbb':arrChgPct>=0?'#0f6e56':'#c05030';
+    // two-row month table
+    const moRow=recentMos.map((mo,j)=>{
+      const d=recentData[j];
+      const isLast=j===recentMos.length-1;
+      return `<div style="text-align:center">
+        <div style="font-size:8px;color:#ccc;margin-bottom:1px">${parseInt(mo.split('-')[1])}月</div>
+        <div style="font-size:9px;font-weight:${isLast?'700':'400'};color:${isLast?clr:'#888'}">${d?d.到場+'人':'—'}</div>
+        <div style="font-size:9px;font-weight:${isLast?'700':'400'};color:${isLast?clr+'bb':'#aaa'}">${d?'$'+d.業績.toLocaleString():'—'}</div>
+      </div>`;
+    }).join('');
+    const moLabel=recentMos.length?`${parseInt(recentMos[0].split('-')[1])}–${parseInt(recentMos[recentMos.length-1].split('-')[1])}月`:'';
+    return `<div class="cs-spark-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+        <div class="cs-spark-name" title="${cs}">${nick}</div>
+        <div style="font-size:8px;color:#ccc">${moLabel} 累計</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:5px">
+        <div>
+          <div style="font-size:9px;color:#aaa;margin-bottom:1px">約回舊客</div>
+          <div style="display:flex;align-items:baseline;gap:4px">
+            <div style="font-size:15px;font-weight:700;color:${clr}">${totalArr?totalArr+'人':'—'}</div>
+            ${arrChgStr?`<div style="font-size:9px;font-weight:600;color:${arrChgClr}">${arrChgStr}</div>`:''}
+          </div>
+        </div>
+        <div>
+          <div style="font-size:9px;color:#aaa;margin-bottom:1px">舊客業績</div>
+          <div style="display:flex;align-items:baseline;gap:4px">
+            <div style="font-size:15px;font-weight:700;color:${clr}">${totalRev?'$'+totalRev.toLocaleString():'—'}</div>
+            ${chgStr?`<div style="font-size:9px;font-weight:600;color:${chgClr}">${chgStr}</div>`:''}
+          </div>
+        </div>
+      </div>
+      ${_sparkSVG(sparkVals,clr)}
+      <div style="display:grid;grid-template-columns:repeat(${recentMos.length},1fr);margin-top:5px;border-top:.5px solid rgba(0,0,0,.06);padding-top:5px">
+        ${moRow}
+      </div>
+    </div>`;
+  });
+  bodyEl.innerHTML=cards.length
+    ? `<div class="cs-rebook-grid">${cards.join('')}</div>`
+    : `<div style="font-size:12px;color:#bbb;padding:12px 0">此門市暫無資料</div>`;
+}
+
+// ── 原渥舊客趨勢 ─────────────────────────────────────────────
+function computeWoRebookData(){
+  // {storeKey:{csName:{YYYY-MM:{totalOld,newTrial,purchased,revenue}}}}
+  const res={};
+  CONSULTANT_RECORDS.forEach(rec=>{
+    if(rec.brandKey!=='wo') return;
+    if(!rec.consultant||rec.consultant==='公司') return;
+    const sk=rec.storeKey, mo=rec.date.slice(0,7), cs=rec.consultant;
+    if(!res[sk]) res[sk]={};
+    if(!res[sk][cs]) res[sk][cs]={};
+    if(!res[sk][cs][mo]) res[sk][cs][mo]={totalOld:0,newTrial:0,purchased:0,revenue:0};
+    const d=res[sk][cs][mo];
+    rec.clients.forEach(c=>{
+      if(c.type==='舊客'||c.type==='舊客體驗'){
+        d.totalOld++;
+        d.revenue+=(c.total_amt||0);
+        if(c.type==='舊客體驗'){
+          d.newTrial++;
+          if(c.total_amt>c.trial_amt) d.purchased++;
+        }
+      }
+    });
+  });
+  return res;
+}
+
+function renderWoRebookCards(bodyId, storeKey){
+  const bodyEl=document.getElementById(bodyId);
+  if(!bodyEl) return;
+  const WO_C=['#185fa5','#378add','#0f6e56','#8b5cf6','#cc5522','#9966cc'];
+  const data=computeWoRebookData();
+  const storeData=data[storeKey]||{};
+  const consultants=Object.keys(storeData);
+  if(!consultants.length){
+    bodyEl.innerHTML='<div style="font-size:12px;color:#bbb;padding:12px 0">此門市暫無資料</div>';
+    return;
+  }
+  // collect all months for this store
+  const moSet=new Set();
+  consultants.forEach(cs=>Object.keys(storeData[cs]).forEach(mo=>moSet.add(mo)));
+  const months=[...moSet].sort();
+  const fmtPct=v=>v===null?'—':Math.round(v)+'%';
+  const cards=consultants.map((cs,i)=>{
+    const clr=WO_C[i%WO_C.length];
+    const nick=NICKNAMES&&NICKNAMES[cs]?NICKNAMES[cs]:cs;
+    const csData=storeData[cs];
+    // totals across all months
+    let totOld=0,totTrial=0,totPurch=0,totRev=0;
+    months.forEach(mo=>{
+      const d=csData[mo];
+      if(!d) return;
+      totOld+=d.totalOld; totTrial+=d.newTrial; totPurch+=d.purchased; totRev+=d.revenue;
+    });
+    const devRate=totOld>0?(totTrial/totOld*100):null;
+    const cvRate=totTrial>0?(totPurch/totTrial*100):null;
+    const moLabel=months.length?`${parseInt(months[0].split('-')[1])}–${parseInt(months[months.length-1].split('-')[1])}月 累計`:'';
+    // sparkline on revenue
+    const sparkVals=months.map(mo=>csData[mo]?csData[mo].revenue:null);
+    // monthly table
+    const moRow=months.map((mo,j)=>{
+      const d=csData[mo];
+      const isLast=j===months.length-1;
+      const clrVal=isLast?clr:'var(--text-muted)';
+      const fw=isLast?'700':'400';
+      const pDev=d&&d.totalOld>0?Math.round(d.newTrial/d.totalOld*100):null;
+      const pCv=d&&d.newTrial>0?Math.round(d.purchased/d.newTrial*100):null;
+      return `<div style="text-align:center">
+        <div style="font-size:8px;color:var(--text-muted);margin-bottom:2px">${parseInt(mo.split('-')[1])}月</div>
+        <div style="font-size:8px;font-weight:${fw};color:${clrVal}">${d?d.newTrial+'/'+d.totalOld:'—'}</div>
+        <div style="font-size:8px;font-weight:${fw};color:${clrVal}">${fmtPct(pDev)}</div>
+        <div style="font-size:8px;font-weight:${fw};color:${clrVal}">${fmtPct(pCv)}</div>
+        <div style="font-size:8px;font-weight:${fw};color:${clrVal}">${d?'$'+d.revenue.toLocaleString():'—'}</div>
+      </div>`;
+    }).join('');
+    return `<div class="cs-spark-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px">
+        <span style="font-size:11px;font-weight:500;color:var(--text-primary)">${nick}</span>
+        <span style="font-size:8px;color:var(--text-muted)">${moLabel}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 8px;margin-top:6px">
+        <div>
+          <div style="font-size:8px;color:var(--text-muted);margin-bottom:1px">新體驗數</div>
+          <div style="font-size:14px;font-weight:500;color:${clr};line-height:1.2">${totTrial}<span style="font-size:10px;font-weight:400;color:var(--text-muted)"> / ${totOld}人</span></div>
+        </div>
+        <div>
+          <div style="font-size:8px;color:var(--text-muted);margin-bottom:1px">業績</div>
+          <div style="font-size:14px;font-weight:500;color:${clr};line-height:1.2">$${totRev.toLocaleString()}</div>
+        </div>
+        <div>
+          <div style="font-size:8px;color:var(--text-muted);margin-bottom:1px">開發率</div>
+          <div style="font-size:13px;font-weight:500;color:${clr}">${fmtPct(devRate)}</div>
+        </div>
+        <div>
+          <div style="font-size:8px;color:var(--text-muted);margin-bottom:1px">成交率</div>
+          <div style="font-size:13px;font-weight:500;color:${clr}">${fmtPct(cvRate)}</div>
+        </div>
+      </div>
+      ${_sparkSVG(sparkVals,clr)}
+      <div style="display:grid;grid-template-columns:repeat(${months.length},1fr);border-top:.5px solid rgba(0,0,0,.06);padding-top:5px;margin-top:0">
+        ${moRow}
+      </div>
+    </div>`;
+  });
+  bodyEl.innerHTML=`<div class="cs-rebook-grid">${cards.join('')}</div>`;
+}
+
+function initWoRebookTrendPanel(){
+  const storeMap={
+    wo_zhanqian:'站前', wo_daan:'大安', wo_zhongxiao:'忠孝',
+    wo_dongmen:'東門', wo_banqiao:'板橋', wo_taichung:'台中'
+  };
+  const tabsEl=document.getElementById('wo-rebook-trend-tabs');
+  if(tabsEl) tabsEl.innerHTML=Object.entries(storeMap).map(([sk,label])=>
+    `<button class="cs-tp-tab${sk===_woRebookTrendStore?' on':''}" onclick="_woRebookTrendStore='${sk}';switchWoRebookStore()">${label}</button>`
+  ).join('');
+  renderWoRebookCards('wo-rebook-trend-body',_woRebookTrendStore);
+}
+
+function switchWoRebookStore(){
+  renderWoRebookCards('wo-rebook-trend-body',_woRebookTrendStore);
+  const storeMap={
+    wo_zhanqian:'站前', wo_daan:'大安', wo_zhongxiao:'忠孝',
+    wo_dongmen:'東門', wo_banqiao:'板橋', wo_taichung:'台中'
+  };
+  document.querySelectorAll('#wo-rebook-trend-tabs .cs-tp-tab').forEach(b=>{
+    const sk=Object.keys(storeMap).find(k=>storeMap[k]===b.textContent)||'';
+    b.className='cs-tp-tab'+(sk===_woRebookTrendStore?' on':'');
+  });
+}
+
+function initKiRebookTrendPanel(){
+  const storeMap={'ki_taipei':'台北','ki_taichung':'台中'};
+  const stores=Object.keys(storeMap);
+  // build tabs
+  const tabsEl=document.getElementById('ki-rebook-trend-tabs');
+  if(tabsEl) tabsEl.innerHTML=stores.map(sk=>
+    `<button class="cs-tp-tab${sk===_kiRebookTrendStore?' ki-on':''}" onclick="_kiRebookTrendStore='${sk}';switchKiRebookStore()">${storeMap[sk]}</button>`
+  ).join('');
+  renderKiRebookCards('ki-rebook-trend-body',_kiRebookTrendStore);
+}
+
+function switchKiRebookStore(){
+  renderKiRebookCards('ki-rebook-trend-body',_kiRebookTrendStore);
+  const storeMap={'ki_taipei':'台北','ki_taichung':'台中'};
+  document.querySelectorAll('#ki-rebook-trend-tabs .cs-tp-tab').forEach(b=>{
+    const sk=Object.keys(storeMap).find(k=>storeMap[k]===b.textContent)||'';
+    b.className='cs-tp-tab'+(sk===_kiRebookTrendStore?' ki-on':'');
   });
 }
 
@@ -4653,7 +4964,7 @@ function renderWeeklyTab(){
         接待++;
         const pAmt = c.product_amt||0;
         totalAmt += pAmt;
-        if(c.total_amt>0){ 成交++; totalAmt+=c.total_amt; }
+        if((c.total_amt||0)>(c.trial_amt||0)){ 成交++; totalAmt+=(c.total_amt||0)-(c.trial_amt||0); }
       } else if(c.type==='其他' && storeLevel){
         接待++; // 分享客計入接待，不計成交
       }
@@ -4912,7 +5223,7 @@ function openCSPrintPreview(){
         接待++;
         const pAmt=c.product_amt||0;
         amt+=pAmt;
-        if(c.total_amt>0){成交++;amt+=c.total_amt;}
+        if((c.total_amt||0)>(c.trial_amt||0)){成交++;amt+=(c.total_amt||0)-(c.trial_amt||0);}
       } else if(c.type==='其他'){
         接待++; // 分享客計入接待，不計成交
       }
@@ -4927,8 +5238,8 @@ function openCSPrintPreview(){
       if(c.type==='舊客') totalOld++;
       else if(c.type==='舊客體驗'){
         totalOld++;newTrial++;
-        rev+=c.trial_amt;
-        if(c.total_amt>0){purchased++;rev+=c.total_amt;}
+        rev+=(c.total_amt||0);
+        if((c.total_amt||0)>(c.trial_amt||0)){purchased++;}
       }
     }));
     const 成交率=newTrial>0?Math.round(purchased/newTrial*100):null;
