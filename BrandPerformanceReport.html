@@ -2176,7 +2176,7 @@ function renderH1Matrix(){
   const MOS=['1月','2月','3月','4月','5月','6月'];
   function chip(p){
     if(p===null) return '<span class="mch mch-na">—</span>';
-    return`<span class="mch ${p>=1?'mch-g':'mch-r'}">${Math.round(p*100)}%</span>`;
+    return`<span class="mch ${Math.round(p*100)>=100?'mch-g':'mch-r'}">${Math.round(p*100)}%</span>`;
   }
   function moCell(key,i){
     const m=DATA[key].months[i];
@@ -2249,7 +2249,7 @@ function renderAchMatrix(){
   const cols=MOS.length+1;
   function chip(p){
     if(p===null||p===undefined) return'<span class="mch mch-na">—</span>';
-    return`<span class="mch ${p>=1?'mch-g':'mch-r'}">${Math.round(p*100)}%</span>`;
+    return`<span class="mch ${Math.round(p*100)>=100?'mch-g':'mch-r'}">${Math.round(p*100)}%</span>`;
   }
   function moCell(key,i){
     const m=DATA[key].months&&DATA[key].months[i];
@@ -2325,7 +2325,7 @@ function renderTab4(){
   const tot_na=tot_nn>0?Math.round(tot_nr/tot_nn):0;
   const tot_oa=tot_on>0?Math.round(tot_or/tot_on):0;
 
-  function achCls(p){return p===null?'r':p>=1?'g':'r';}
+  function achCls(p){return p===null?'r':Math.round(p*100)>=100?'g':'r';}
   function achTxt(p){return p===null?'—':Math.round(p*100)+'%';}
 
   // Daily progress (only for current month tab)
