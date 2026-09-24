@@ -9979,6 +9979,25 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:0, total_amt:105999, name:'黃雅芬'}, // 肉毒1U 15000+伊蓮斯1cc 90999
     ]},
 
+  // ─── 台北原綺 2026-09-23 ──────────────────────────────────
+  { date:'2026-09-23', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬', clients:[
+      {type:'新客', trial_amt:0, total_amt:24999, name:'許雅婷'}, // 水光針單堂3000+頂級配方2000+膠原蛋白針10000+9999
+      {type:'新客', trial_amt:0, total_amt:72999, name:'劉靜如'}, // 微晶瓷48000+膠原蛋白針9999+10000+肉毒5000
+    ]},
+  { date:'2026-09-23', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'柯孟君', clients:[
+      {type:'新客', trial_amt:0, total_amt:0,     name:'陳泫汐'}, // 頰凹填充，無付款紀錄
+    ]},
+  { date:'2026-09-23', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉', clients:[
+      {type:'新客', trial_amt:0, total_amt:22999, name:'李芸'}, // 膠原蛋白針22999
+    ]},
+  { date:'2026-09-23', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳甯', clients:[
+      {type:'新客', trial_amt:0, total_amt:64498, name:'黃郁茹'}, // 喬亞登HAJ62999+肉毒除皺1499
+    ]},
+
   // ─── 台中原綺 2026-09-22 ──────────────────────────────────
   { date:'2026-09-22', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
     consultant:'郭子萍', clients:[
@@ -10008,6 +10027,35 @@ const CONSULTANT_RECORDS = [
       {type:'舊客', trial_amt:0, total_amt:0,    name:'黃萱'},   // 消耗無針
     ]},
 
+  // ─── 板橋 2026-09-23 ──────────────────────────────────────
+  { date:'2026-09-23', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠', clients:[
+      {type:'舊客',       trial_amt:0,    total_amt:0,    name:'鄭凱玲'},    // 消耗
+      {type:'舊客體驗',   trial_amt:1499, total_amt:6498, name:'黃心宜'},    // 體驗無針1499+九宮格無針3堂4999
+      {type:'舊客',       trial_amt:0,    total_amt:0,    name:'蔡欣穎'},    // 消耗
+    ]},
+
+  // ─── 東門 2026-09-23 ──────────────────────────────────────
+  { date:'2026-09-23', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆', clients:[
+      {type:'新客', trial_amt:999, total_amt:15999, name:'徐于婷'}, // 體驗999+體雕6堂贈2堂15000；黃韻凌產品5391不計
+      {type:'新客', trial_amt:999, total_amt:999,   name:'黃湧緹'}, // 體驗體雕1部位，未成交
+      {type:'舊客', trial_amt:0, total_amt:0, name:'劉佳榕'}, // 消耗
+      {type:'舊客', trial_amt:0, total_amt:0, name:'施秀諭'}, // 消耗
+      {type:'舊客', trial_amt:0, total_amt:0, name:'張雁筑'}, // 消耗
+      {type:'舊客', trial_amt:0, total_amt:0, name:'段蒔希'}, // 消耗
+    ]},
+  { date:'2026-09-23', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'公司', clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'楊淖合'}, // 銷售陳令欣（非本店諮詢師），掛公司
+      {type:'舊客', trial_amt:0, total_amt:0, name:'王雨萱'}, // 銷售森珮筠（板橋），掛公司
+    ]},
+  // ─── 東門 原綺舊客 2026-09-23（掛公司）──────────────────
+  { date:'2026-09-23', storeKey:'wo_dongmen', store:'東門', brand:'原綺', brandKey:'ki',
+    consultant:'公司', clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'劉苡喬'}, // 原綺客消耗
+    ]},
+
   // ─── 原渥大安 2026-09-22 ──────────────────────────────────
   { date:'2026-09-22', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
     consultant:'李晨研', clients:[
@@ -10033,6 +10081,27 @@ const CONSULTANT_RECORDS = [
       {type:'舊客', trial_amt:0, total_amt:0,     name:'林昱伶'}, // 消耗
     ]},
 
+  // ─── 原渥大安 2026-09-23 ──────────────────────────────────
+  { date:'2026-09-23', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'李晨研', clients:[
+      {type:'新客', trial_amt:999, total_amt:20398, name:'陳子幼'}, // 體驗肩頸999+頸6堂贈2堂14400+九宮格肩頸2堂+音波1堂4999
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'徐端嬪'},
+      {type:'舊客', trial_amt:0,   total_amt:9000,  name:'盧潔儀'}, // 九宮格肩頸3堂+無針3堂9000
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'呂巧文'},
+    ]},
+  { date:'2026-09-23', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+    consultant:'蔡亞衫', clients:[
+      {type:'舊客', trial_amt:0, total_amt:39998, name:'黃培柔'}, // 童顏V臉20000發+無針水光2堂兩組39998
+      {type:'舊客', trial_amt:0, total_amt:9000,  name:'陳孟汾'}, // 九宮格肩頸3堂+音波3堂9000
+      {type:'舊客', trial_amt:0, total_amt:0,     name:'吳安希'},
+      {type:'舊客', trial_amt:0, total_amt:13709, name:'陳宜庭'}, // 無針尾款8710+九宮格肩頸3堂4999；美白膠囊+纖萃6291產品不計
+      {type:'舊客', trial_amt:0, total_amt:0,     name:'蔡君妮'},
+      {type:'舊客', trial_amt:0, total_amt:0,     name:'鄭芳宜'},
+      {type:'舊客', trial_amt:0, total_amt:0,     name:'張梓怡'},
+      {type:'舊客', trial_amt:0, total_amt:0,     name:'楊鈞婷'},
+      {type:'舊客', trial_amt:0, total_amt:0,     name:'洪瑞瑩'},
+    ]},
+
   // ─── 原渥館前 2026-09-22 ──────────────────────────────────
   { date:'2026-09-22', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
     consultant:'吳凱婷', clients:[
@@ -10053,6 +10122,37 @@ const CONSULTANT_RECORDS = [
       {type:'舊客', trial_amt:0, total_amt:0,     name:'唐茵希'}, // 消耗
       {type:'舊客', trial_amt:0, total_amt:0,     name:'劉胤映'}, // 消耗
       {type:'舊客', trial_amt:0, total_amt:42250, name:'黃郁姍'}, // 音波14堂贈6堂35000+九宮格補差7250
+    ]},
+
+  // ─── 原渥館前 2026-09-23 ──────────────────────────────────
+  { date:'2026-09-23', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵', clients:[
+      {type:'新客', trial_amt:2000, total_amt:2000, name:'林思涵'}, // 體驗音波2000，蜂巢皮秒780產品不計，未成交
+      {type:'新客', trial_amt:1499, total_amt:2699, name:'卓雅婷'}, // 體驗無針水光1499+精華2支1200，成交
+      {type:'舊客', trial_amt:0, total_amt:0,       name:'施惠薰'},
+      {type:'舊客', trial_amt:0, total_amt:0,       name:'林觀儀'},
+      {type:'舊客', trial_amt:0, total_amt:0,       name:'楊潔茹'},
+      {type:'舊客', trial_amt:0, total_amt:0,       name:'張心寧'},
+      {type:'舊客', trial_amt:0, total_amt:0,       name:'潘煒妮'},
+      {type:'舊客', trial_amt:0, total_amt:0,       name:'陳菲'},
+    ]},
+  { date:'2026-09-23', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷', clients:[
+      {type:'新客', trial_amt:999, total_amt:999,   name:'巫芋穎'},   // 體驗小香肩999，未成交
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'李惠婷'},
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'許家慧'},
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'廖希琳'},
+      {type:'舊客', trial_amt:0,   total_amt:20000, name:'劉明穎'},   // 升等音波差額20000
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'陳宣如'},
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'鐘明瑾'},
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'林芸米'},
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'蔡怡君'},
+      {type:'舊客', trial_amt:0,   total_amt:4999,  name:'劉雅芳'},   // 九宮格無針水光3堂4999
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'李祖昀'},
+    ]},
+  { date:'2026-09-23', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'公司', clients:[
+      {type:'舊客', trial_amt:0, total_amt:4999, name:'柯安琪'}, // 九月人氣課程九宮格4999，銷售掛公司
     ]},
 
   // ─── 原渥忠孝 2026-09-22 ──────────────────────────────────
@@ -10080,6 +10180,31 @@ const CONSULTANT_RECORDS = [
   { date:'2026-09-22', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
     consultant:'公司', clients:[
       {type:'舊客', trial_amt:0, total_amt:0, name:'李珮瑄'}, // 銷售為大安蔡亞衫，掛公司
+    ]},
+
+  // ─── 忠孝 2026-09-23 ──────────────────────────────────────
+  { date:'2026-09-23', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸', clients:[
+      {type:'新客',     trial_amt:0,   total_amt:4999,  name:'詹玉楨'},   // 購九宮格小香肩3堂4999（姊分享體驗，無體驗費）
+      {type:'舊客',     trial_amt:0,   total_amt:0,     name:'詹迺蔵'},   // 消耗
+      {type:'舊客',     trial_amt:0,   total_amt:6199,  name:'張庭瑄'},   // 加購保濕導入1堂1200+九宮格無針水光3堂4999
+      {type:'舊客',     trial_amt:0,   total_amt:4999,  name:'宋家慧'},   // 購九宮格童顏2000發3堂4999
+      {type:'舊客',     trial_amt:0,   total_amt:0,     name:'陳毓姍'},   // 消耗
+      {type:'舊客體驗', trial_amt:999, total_amt:999,   name:'莊雪琦'},   // 體驗小香肩999，未成交
+      {type:'舊客',     trial_amt:0,   total_amt:13999, name:'楊新瑞'},   // 購九宮格童顏3堂+無針水光3堂+肌肉管理3堂13999
+      {type:'舊客',     trial_amt:0,   total_amt:0,     name:'鄧仔婷'},   // 消耗
+      {type:'舊客',     trial_amt:0,   total_amt:9000,  name:'何姿儀'},   // 購九宮格童顏3堂+無針水光3堂9000
+      {type:'舊客',     trial_amt:0,   total_amt:0,     name:'曾曼萱'},   // 消耗
+      {type:'舊客',     trial_amt:0,   total_amt:0,     name:'李婕瑜'},   // 消耗
+    ]},
+  { date:'2026-09-23', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵', clients:[
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'朱庭慧'},   // 消耗
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'陳宜玟'},   // 消耗
+      {type:'舊客', trial_amt:0, total_amt:7000, name:'鄭棋云'},   // 購九宮格7000；王敬儀蜂巢599不計
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'陳業蕙'},   // 消耗
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'蘇仕芸'},   // 消耗
+      {type:'舊客', trial_amt:0, total_amt:4999, name:'陳盈臻'},   // 購九宮格香肩+音波+童顏4999
     ]},
 
   // ─── 原渥台中 2026-09-22 ──────────────────────────────────
@@ -10112,6 +10237,33 @@ const CONSULTANT_RECORDS = [
   { date:'2026-09-22', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
     consultant:'呂秋玫', clients:[
       {type:'舊客', trial_amt:0, total_amt:0, name:'李偉誠'}, // 消耗
+    ]},
+
+  // ─── 台中 2026-09-23 ──────────────────────────────────────
+  { date:'2026-09-23', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'林雨芑', clients:[
+      {type:'新客',     trial_amt:999,  total_amt:35999, name:'劉盈君'},   // 體驗999+音波14堂贈6堂35000
+      {type:'舊客',     trial_amt:0,    total_amt:0,     name:'尹紫芬'},   // 消耗
+      {type:'舊客',     trial_amt:0,    total_amt:0,     name:'黃珮珊'},   // 消耗
+      {type:'舊客',     trial_amt:0,    total_amt:0,     name:'楊晴薰'},   // 消耗；林佩珊產品不計
+      {type:'舊客',     trial_amt:0,    total_amt:0,     name:'何羽霏'},   // 消耗
+      {type:'舊客體驗', trial_amt:999,  total_amt:9999,  name:'羅詩涵'},   // 體驗999+九宮格肩頸3堂+音波3堂9000
+      {type:'舊客',     trial_amt:0,    total_amt:0,     name:'林佩萱'},   // 消耗
+      {type:'舊客',     trial_amt:0,    total_amt:0,     name:'賴柔聿'},   // 消耗
+    ]},
+  { date:'2026-09-23', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'郭子萍', clients:[
+      {type:'舊客', trial_amt:0, total_amt:480, name:'湯芷然'}, // 課程差額480
+    ]},
+  { date:'2026-09-23', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'呂秋玫', clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'吳怡慧'}, // 消耗
+    ]},
+  { date:'2026-09-23', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'公司', clients:[
+      {type:'新客', trial_amt:0, total_amt:0,    name:'許瓊方'}, // 銷售黃思雅（非本店諮詢師），僅購P4產品3999，無體驗費，不算成交
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'李昕'},   // 銷售翁筱芸（忠孝），跑店消耗
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'錢芳鈺'}, // 銷售廖梓涵（館前），跑店消耗
     ]},
 
   // ─── 原渥板橋 2026-09-22 ──────────────────────────────────

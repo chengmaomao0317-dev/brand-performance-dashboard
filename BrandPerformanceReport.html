@@ -4095,8 +4095,8 @@ function _sparkSVG(vals, color){
   });
   const last=[...pts].reverse().find(p=>p!==null);
   return `<svg class="cs-spark-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="${d}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-    ${last?`<circle cx="${last[0]}" cy="${last[1]}" r="2.5" fill="${color}"/>`:''}
+    <path d="${d}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+    ${last?`<circle cx="${last[0]}" cy="${last[1]}" r="2.5" fill="${color}" vector-effect="non-scaling-stroke"/>`:''}
   </svg>`;
 }
 
