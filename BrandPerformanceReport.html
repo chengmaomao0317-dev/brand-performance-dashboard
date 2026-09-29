@@ -3620,7 +3620,7 @@ function renderConsultantTab(){
     let totalOld=0,newTrial=0,purchased=0,revSum=0;
     recs.forEach(r=>{
       r.clients.forEach(c=>{
-        if(c.type==='舊客'){if(!c.noCount)totalOld++;}
+        if(c.type==='舊客'){if(!c.noCount)totalOld++;if((c.trial_amt||0)>0){if(!c.noCount)newTrial++;revSum+=Math.max(c.total_amt||0,c.trial_amt||0);}}
         else if(c.type==='舊客體驗'){
           if(!c.noCount){totalOld++;newTrial++;} // noCount=true：算業績但不計人數（如線上付款人未到）
           revSum+=(c.total_amt||c.trial_amt||0); // 用total_amt（含體驗費）
@@ -4559,7 +4559,7 @@ function showStoreDetail(storeKey){
   recs.forEach(rec=>{
     rec.clients.filter(c=>c.type==='新客'||c.type==='其他').forEach(c=>{
       if(!byDate[rec.date])byDate[rec.date]=[];
-      byDate[rec.date].push({consultant:rec.consultant,type:c.type,sold:c.total_amt>c.trial_amt,amt:c.total_amt,name:c.name||''});
+      byDate[rec.date].push({consultant:rec.consultant,type:c.type,sold:c.total_amt>c.trial_amt,amt:(c.total_amt||0)-(c.trial_amt||0),name:c.name||''});
     });
   });
   const sortedDates=Object.keys(byDate).sort();
@@ -4939,7 +4939,7 @@ function renderWeeklyTab(){
   function achBadge(ach){
     if(ach===null) return '<span class="wr-badge">—</span>';
     const pct = Math.round(ach*100);
-    const cls = ach>=1?'wr-badge-g':ach>=0.7?'wr-badge-y':'wr-badge-r';
+    const cls = pct>=100?'wr-badge-g':ach>=0.7?'wr-badge-y':'wr-badge-r';
     return `<span class="wr-badge ${cls}">${pct}%</span>`;
   }
   function rateColor(r){ return r===null?'#aaa':r>=70?'#3B6D11':r>=50?'#b07d00':'#A32D2D'; }
