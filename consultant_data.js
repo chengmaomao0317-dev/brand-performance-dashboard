@@ -11173,5 +11173,28 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:0, total_amt:22999, name:'林玥伶'},   // 診所東門施作，陳甯銷售→記ki_taipei
     ]},
 
+  // ─── 東門 9/30 ────────────────────────────
+  { date:'2026-09-30', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆', clients:[
+      {type:'新客', trial_amt:2000, total_amt:11000, name:'盧筠繁'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'段蒔希'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'張舜妤'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'鐘碧儀'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'張雁筑'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'蘇毓斐'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'楊雨禾'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'蘇澄婷'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'李沛芹'},
+    ]},
+  { date:'2026-09-30', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'公司', clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'朱蕙杏'},   // 森珮筠（板橋）跑店
+      {type:'舊客', trial_amt:0, total_amt:0, name:'黃姿穎'},   // 蔡亞衫（大安）跑店
+    ]},
+  { date:'2026-09-30', storeKey:'wo_dongmen', store:'東門', brand:'原綺', brandKey:'ki',
+    consultant:'公司', clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'許真瑜'},   // 東門原綺客一律掛公司
+    ]},
+
   // 新增記錄時複製上面的格式
 ];

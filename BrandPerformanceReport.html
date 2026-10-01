@@ -3536,11 +3536,11 @@ const KI_REBOOK_CS_DATA = {
 // ══════════════════════════════════════════
 //  RENDER: 諮詢師成交
 // ══════════════════════════════════════════
-let _csMode = 'month'; // 'today' | 'yesterday' | 'month' | 'custom'
+let _csMode = 'month'; // 'today' | 'yesterday' | 'month' | 'custom' | 'all'
 let _csClientFilter = 'all'; // 'all' | 'new' | 'ret'
-// 初始化為當月，確保月份模式一開啟就能對到 KI_REBOOK_STORE_DATA
+// 初始化為空，讓 renderConsultantTab 自動設為資料中最新的月份
 const _csNow = new Date();
-let _csMonth = `${_csNow.getFullYear()}-${String(_csNow.getMonth()+1).padStart(2,'0')}`;  // YYYY-MM
+let _csMonth = '';  // YYYY-MM，由 renderConsultantTab 初始化為資料最新月份
 let _csStart = '';
 let _csEnd   = '';
 let _csTrendOpen = false;
@@ -3585,6 +3585,7 @@ function renderConsultantTab(){
     if(_csMode==='yesterday') return r.date === yestStr;
     if(_csMode==='month')     return r.date.startsWith(monthPrefix);
     if(_csMode==='custom')    return r.date >= _csStart && r.date <= _csEnd;
+    if(_csMode==='all')       return true;
     return false;
   });
 
@@ -3665,6 +3666,7 @@ function renderConsultantTab(){
     const _kiRefMonth = _csMode==='month' ? _csMonth
       : _csMode==='today' ? todayStr.slice(0,7)
       : _csMode==='yesterday' ? yestStr.slice(0,7)
+      : _csMode==='all' ? todayStr.slice(0,7)
       : (_csStart||'').slice(0,7);
     const kiRebookStore = brandKey==='ki'
       ? ((KI_REBOOK_STORE_DATA[_kiRefMonth]||{})[storeKey]||null)
@@ -3864,6 +3866,7 @@ function renderConsultantTab(){
   const _outerRefMonth = _csMode==='month' ? _csMonth
     : _csMode==='today' ? todayStr.slice(0,7)
     : _csMode==='yesterday' ? yestStr.slice(0,7)
+    : _csMode==='all' ? todayStr.slice(0,7)
     : (_csStart||'').slice(0,7);
   const _kiRebookMonthData = KI_REBOOK_STORE_DATA[_outerRefMonth] || {};
   const woKeys = STORE_ORDER.filter(k=>k.startsWith('wo_'));
@@ -3877,6 +3880,7 @@ function renderConsultantTab(){
   let modeLabel = '';
   if(_csMode==='today')     modeLabel = todayStr.replace(/-/g,'/');
   else if(_csMode==='yesterday') modeLabel = yestStr.replace(/-/g,'/');
+  else if(_csMode==='all')  modeLabel = '2026全年';
   else modeLabel = `${_csStart.slice(5).replace('-','/')} ～ ${_csEnd.slice(5).replace('-','/')}`;
 
   const customRow = _csMode==='custom' ? `
@@ -3895,17 +3899,14 @@ function renderConsultantTab(){
                 onclick="if(_csMode!=='month'){_csMode='month';renderConsultantTab()}"
                 onchange="_csMonth=this.value;_csMode='month';renderConsultantTab()">
           ${(()=>{
-            const opts=[];
-            for(let i=0;i<12;i++){
-              const d=new Date(); d.setDate(1); d.setMonth(d.getMonth()-i);
-              const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0');
-              const val=`${y}-${m}`;
-              const label=`${y}年${m}月`;
-              opts.push(`<option value="${val}"${_csMonth===val?' selected':''}>${label}</option>`);
-            }
-            return opts.join('');
+            const allMonths=[...new Set(CONSULTANT_RECORDS.map(r=>r.date.slice(0,7)))].sort().reverse();
+            return allMonths.map(val=>{
+              const [y,m]=val.split('-');
+              return `<option value="${val}"${_csMonth===val?' selected':''}>${y}年${parseInt(m)}月</option>`;
+            }).join('');
           })()}
         </select>
+        <button class="cs-seg-btn${_csMode==='all'?' on':''}"       onclick="_csMode='all';renderConsultantTab()">2026</button>
         <button class="cs-seg-btn${_csMode==='custom'?' on':''}"    onclick="_csMode='custom';renderConsultantTab()">自訂</button>
         <button onclick="document.getElementById('logic-modal').style.display='flex'" style="background:rgba(0,0,0,.06);border:0.5px solid rgba(0,0,0,.15);color:#666;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;white-space:nowrap">計算邏輯 ?</button>
       </div>
@@ -5206,6 +5207,7 @@ function openCSPrintPreview(){
     if(_csMode==='yesterday') return r.date===yestStr;
     if(_csMode==='month')     return r.date.startsWith(_csMonth);
     if(_csMode==='custom')    return r.date>=_csStart && r.date<=_csEnd;
+    if(_csMode==='all')       return true;
     return false;
   });
 
@@ -5214,6 +5216,7 @@ function openCSPrintPreview(){
   if(_csMode==='today') rangeLabel=todayStr.replace(/-/g,'/');
   else if(_csMode==='yesterday') rangeLabel=yestStr.replace(/-/g,'/');
   else if(_csMode==='month') rangeLabel=`${_csMonth.replace('-','年')}月`;
+  else if(_csMode==='all') rangeLabel='2026全年';
   else rangeLabel=`${_csStart.slice(5).replace('-','/')} ～ ${_csEnd.slice(5).replace('-','/')}`;
 
   function calcNew(recs){
