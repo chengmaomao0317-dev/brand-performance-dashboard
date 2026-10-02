@@ -3472,7 +3472,7 @@ const KI_REBOOK_STORE_DATA = {
   '2026-06': { ki_taipei:{ 舊客:220, 業績:2788513 }, ki_taichung:{ 舊客:63,  業績:1159113 } },
   '2026-07': { ki_taipei:{ 舊客:204, 業績:2849116 }, ki_taichung:{ 舊客:81,  業績:1216280 } },
   '2026-08': { ki_taipei:{ 舊客:242, 業績:3301837 }, ki_taichung:{ 舊客:66,  業績:1216914 } },
-  '2026-09': { ki_taipei:{ 舊客:110, 業績:1675941 }, ki_taichung:{ 舊客:37,  業績:1204746 } },
+  '2026-09': { ki_taipei:{ 舊客:230, 業績:2824103 }, ki_taichung:{ 舊客:82,  業績:1890391 } },
 };
 
 // 各諮詢師回約明細（回約＝已預約、取消＝未到、業績＝實際業績）
@@ -5326,7 +5326,7 @@ function openCSPrintPreview(){
       const effRet=kiFallback||sRetTot;
       const subRetCols=bk==='wo'
         ?`<td>${sRetTot.totalOld}</td><td>${sRetTot.newTrial}</td><td>${fmtRate(sRr)}</td><td>${sRetTot.rev>0?'$'+sRetTot.rev.toLocaleString():'<span class="cs-print-dim">—</span>'}</td>`
-        :`<td>${effRet.totalOld||'<span class="cs-print-dim">0</span>'}</td><td>${effRet.取消>0?effRet.取消:'<span class="cs-print-dim">—</span>'}</td><td>${effRet.newTrial||'<span class="cs-print-dim">0</span>'}</td><td>${effRet.rev>0?'$'+effRet.rev.toLocaleString():'<span class="cs-print-dim">—</span>'}</td>`;
+        :`<td><span class="cs-print-dim">—</span></td><td><span class="cs-print-dim">—</span></td><td>${effRet.newTrial||'<span class="cs-print-dim">0</span>'}</td><td>${effRet.rev>0?'$'+effRet.rev.toLocaleString():'<span class="cs-print-dim">—</span>'}</td>`;
       storeRows+=`<tr class="pt-sub${bk==='ki'?' ki':''}"><td></td><td style="color:#555">${STORE_NAMES[sk]} 小計${kiFallback?'<span style="font-size:9px;color:#bbb;margin-left:4px">門市</span>':''}</td><td>${sNewTot.接待}</td><td>${sNewTot.成交}</td><td>${fmtRate(sNr)}</td><td>${fmtAmt(sNk)}</td>${subRetCols}</tr>`;
       storeBlocks.push({sk,rows:storeRows,sNewTot,effRet});
       brandNewTotal.接待+=sNewTot.接待;brandNewTotal.成交+=sNewTot.成交;brandNewTotal.amt+=sNewTot.amt;
@@ -5357,7 +5357,7 @@ function openCSPrintPreview(){
   const woSection=woBody?`${mkHd('原渥 ')}<table class="cs-print-tbl"><thead><tr>
     <th style="width:32px"></th><th style="width:110px">諮詢師</th>
     <th>新客<br>接待</th><th>新客<br>成交</th><th>新客<br>成交率</th><th>平均<br>客單</th>
-    <th>舊客<br>接待</th><th>新體驗<br>人數</th><th>體驗<br>成交率</th><th>舊客<br>業績</th>
+    <th>舊客<br>接待</th><th>新體驗<br>人數</th><th>體驗<br>成交率</th><th>舊客新體驗<br>業績</th>
   </tr></thead>${woBody}</table>`:'';
   const kiSection=kiBody?`<div style="page-break-before:always;padding-top:4px">${mkHd('原綺 ')}<table class="cs-print-tbl"><thead><tr>
     <th style="width:32px"></th><th style="width:110px">諮詢師</th>
@@ -5374,34 +5374,53 @@ function doCSPrint(){window.print();}
 
 // ══════════════════════════════════════════
 //  動態連動：原綺舊客月報 ← Google Sheets
-//  每次載入頁面自動抓 GID 644930812
+//  每月新增一個 GID，頁面載入時自動抓所有月份
+//  新增月份時：在 KI_MONTH_GIDS 陣列補上新分頁的 GID 即可
 // ══════════════════════════════════════════
 (async function loadKIRebookFromSheet(){
-  const GID = '644930812';
-  try {
-    // 使用 loadGviz（JSONP）而非 fetch，避免 file:// 的 CORS 限制
+  // 各月份的 Google Sheets 分頁 GID
+  // 每個月新建分頁後，把該分頁的 gid= 數字加進這個陣列
+  const KI_MONTH_GIDS = [
+    '644930812',   // 2026-09（九月）
+    '1312470435',  // 2026-10（十月）
+    // '???',      // 2026-11（十一月，待開分頁後補上）
+    // '???',      // 2026-12（十二月，待開分頁後補上）
+  ];
+
+  async function fetchOneMonth(GID) {
     const gd = await loadGviz('', {gid: GID});
     if(!gd || !gd.table || !gd.table.rows) return;
     const rows = gd.table.rows;
 
-    // row[1] col[1] = 月份（如 "2026/9"），row[0] 只是計數列
-    const monthVal = cv(rows[1], 1);
-    let monthKey;
-    if(monthVal instanceof Date){
-      monthKey = `${monthVal.getFullYear()}-${String(monthVal.getMonth()+1).padStart(2,'0')}`;
-    } else {
-      const monthRaw = String(monthVal || '');
-      const m = monthRaw.match(/(\d{4})[\/\.\-](\d{1,2})/);
-      if(!m) return;
-      monthKey = `${m[1]}-${String(m[2]).padStart(2,'0')}`;
+    // 動態找月份：掃前幾行找 "2026/xx" 格式（不依賴固定行號，避免 gviz header 偏移問題）
+    let monthKey = null;
+    for(let i = 0; i < Math.min(rows.length, 6); i++){
+      const v = cv(rows[i], 1);
+      const raw = v instanceof Date
+        ? `${v.getFullYear()}/${v.getMonth()+1}`
+        : String(v || '');
+      const m = raw.match(/(\d{4})[\/\.\-](\d{1,2})/);
+      if(m){ monthKey = `${m[1]}-${String(m[2]).padStart(2,'0')}`; break; }
     }
+    if(!monthKey) return;
 
-    // row[3] col[6]=台北舊客人數, row[4] col[6]=台北舊客業績
-    // row[6] col[6]=台中舊客人數, row[7] col[6]=台中舊客業績
-    const taipei_old = toN(cv(rows[3], 6));
-    const taipei_rev = toN(cv(rows[4], 6));
-    const tc_old     = toN(cv(rows[6], 6));
-    const tc_rev     = toN(cv(rows[7], 6));
+    // 動態找台北/台中人數行：找 col[1]=台北(台中) 且 col[3]=人數 的行
+    // 找到兩個就立即 break，避免繼續找到原渥台中行把結果覆蓋掉
+    let tpIdx = -1, tcIdx = -1;
+    for(let i = 0; i < rows.length; i++){
+      const c1 = String(cv(rows[i], 1) || '');
+      const c3 = String(cv(rows[i], 3) || '');
+      if(c1 === '台北' && c3 === '人數') tpIdx = i;
+      if(c1 === '台中' && c3 === '人數') tcIdx = i;
+      if(tpIdx >= 0 && tcIdx >= 0) break;  // 原綺兩個門市都找到，停止搜尋
+    }
+    if(tpIdx < 0 || tcIdx < 0) return;
+
+    // col[6] = 舊客人數；下一行 col[6] = 舊客業績
+    const taipei_old = toN(cv(rows[tpIdx],     6));
+    const taipei_rev = toN(cv(rows[tpIdx + 1], 6));
+    const tc_old     = toN(cv(rows[tcIdx],     6));
+    const tc_rev     = toN(cv(rows[tcIdx + 1], 6));
 
     if(!taipei_old && !taipei_rev && !tc_old && !tc_rev) return;
 
@@ -5409,6 +5428,12 @@ function doCSPrint(){window.print();}
       ki_taipei:   { 舊客: taipei_old, 業績: taipei_rev },
       ki_taichung: { 舊客: tc_old,     業績: tc_rev     },
     };
+  }
+
+  try {
+    await Promise.all(KI_MONTH_GIDS.map(gid => fetchOneMonth(gid).catch(e => {
+      console.warn('KI rebook load failed for GID', gid, e);
+    })));
 
     // 若諮詢師成交頁正在顯示則重新渲染
     const csTab = document.querySelector('.tab-content:nth-child(6)');
