@@ -3669,7 +3669,15 @@ function renderConsultantTab(){
       : _csMode==='all' ? todayStr.slice(0,7)
       : (_csStart||'').slice(0,7);
     const kiRebookStore = brandKey==='ki'
-      ? ((KI_REBOOK_STORE_DATA[_kiRefMonth]||{})[storeKey]||null)
+      ? (_csMode==='all'
+          ? (()=>{
+              const sum={舊客:0,業績:0}; let has=false;
+              Object.values(KI_REBOOK_STORE_DATA).forEach(m=>{
+                const d=m[storeKey]; if(d){sum.舊客+=(d.舊客||0);sum.業績+=(d.業績||0);has=true;}
+              });
+              return has?sum:null;
+            })()
+          : ((KI_REBOOK_STORE_DATA[_kiRefMonth]||{})[storeKey]||null))
       : null;
     const kiRebookCsData = brandKey==='ki'
       ? ((KI_REBOOK_CS_DATA[_kiRefMonth]||{})[storeKey]||{})
@@ -3868,7 +3876,14 @@ function renderConsultantTab(){
     : _csMode==='yesterday' ? yestStr.slice(0,7)
     : _csMode==='all' ? todayStr.slice(0,7)
     : (_csStart||'').slice(0,7);
-  const _kiRebookMonthData = KI_REBOOK_STORE_DATA[_outerRefMonth] || {};
+  const _kiRebookMonthData = _csMode==='all'
+    ? Object.values(KI_REBOOK_STORE_DATA).reduce((acc,m)=>{
+        Object.entries(m).forEach(([sk,d])=>{
+          if(!acc[sk]) acc[sk]={舊客:0,業績:0};
+          acc[sk].舊客+=(d.舊客||0); acc[sk].業績+=(d.業績||0);
+        }); return acc;
+      },{})
+    : (KI_REBOOK_STORE_DATA[_outerRefMonth] || {});
   const woKeys = STORE_ORDER.filter(k=>k.startsWith('wo_'));
   const kiKeys = STORE_ORDER.filter(k=>k.startsWith('ki_') && (records.some(r=>r.storeKey===k) || !!_kiRebookMonthData[k]));
   const storeBlocks = [...woKeys, ...kiKeys].map(sk=>{
