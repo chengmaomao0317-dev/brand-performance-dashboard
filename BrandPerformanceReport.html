@@ -3621,7 +3621,7 @@ function renderConsultantTab(){
     let totalOld=0,newTrial=0,purchased=0,revSum=0;
     recs.forEach(r=>{
       r.clients.forEach(c=>{
-        if(c.type==='舊客'){if(!c.noCount)totalOld++;if((c.trial_amt||0)>0){if(!c.noCount)newTrial++;revSum+=Math.max(c.total_amt||0,c.trial_amt||0);}}
+        if(c.type==='舊客'){if(!c.noCount)totalOld++;if((c.trial_amt||0)>0){if(!c.noCount)newTrial++;revSum+=Math.max(c.total_amt||0,c.trial_amt||0);if((c.total_amt||0)>(c.trial_amt||0)){if(!c.noCount)purchased++;}}}
         else if(c.type==='舊客體驗'){
           if(!c.noCount){totalOld++;newTrial++;} // noCount=true：算業績但不計人數（如線上付款人未到）
           revSum+=(c.total_amt||c.trial_amt||0); // 用total_amt（含體驗費）

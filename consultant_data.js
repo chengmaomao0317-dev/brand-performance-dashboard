@@ -11351,5 +11351,26 @@ const CONSULTANT_RECORDS = [
       {type:'舊客', trial_amt:0, total_amt:0,    name:'周欣穎'},
     ]},
 
+  // ─── 東門 10/2 ────────────────────────────
+  { date:'2026-10-02', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆', clients:[
+      {type:'新客', trial_amt:3497, total_amt:37896, name:'吳聿蓓'},   // 體驗3497+購課34399；機票換面膜1片
+      {type:'舊客', trial_amt:999,  total_amt:9999,  name:'廖淑樺'},   // 有購白吃；體驗香肩999+九宮格6格9000
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'周思好'},
+      {type:'舊客', trial_amt:0,    total_amt:9000,  name:'何欣'},     // 九宮格6格9000
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'李姿瑩'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'王鳳娟'},
+      {type:'舊客', trial_amt:999,  total_amt:999,   name:'陳宥瑄'},   // 體驗臉部煥膚淨痘999；機票換童顏1000發
+      {type:'舊客', trial_amt:2000, total_amt:11000, name:'周宛萱'},   // 有購白吃；體驗體雕2000+九宮格6格9000
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'王映珮'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'廖翊雯'},
+    ]},
+  { date:'2026-10-02', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'公司', clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'陳心怡'},              // 王沛晴跑店
+      {type:'舊客', trial_amt:0, total_amt:0, name:'廖淑樺', noCount:true},// 森珮筠跑店消耗；購課已計入邱家榆
+      {type:'舊客', trial_amt:0, total_amt:0, name:'周宛萱', noCount:true},// 李晨研跑店消耗；購課已計入邱家榆
+    ]},
+
   // 新增記錄時複製上面的格式
 ];
