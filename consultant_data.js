@@ -11467,5 +11467,34 @@ const CONSULTANT_RECORDS = [
       {type:'舊客', trial_amt:0, total_amt:0, name:'湯媛綺'},              // 王詩涵跑店
     ]},
 
+  // ─── 台中原渥 10/2 ────────────────────────────
+  { date:'2026-10-02', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'林雨芑', clients:[
+      {type:'新客', trial_amt:6000, total_amt:45998, name:'張雅鈞'},   // 體驗童顏6000+購課39998；自有709詹雯瑄操作不計
+      {type:'新客', trial_amt:999,  total_amt:999,   name:'張婷雅'},   // 體驗肩頸999，未成交
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'姜夢夢'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'林芳毓'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'徐悅真'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'王湘寧'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'沈沐熙'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'林莉萍'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'曾詠津'},   // 兩段消耗（何若榆+黃思雅操作）算一次
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'張仲綺'},   // 消耗；自有12062羅尹蔚不計
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'何意敏'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'范文慈'},
+    ]},
+  { date:'2026-10-02', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'郭子萍', clients:[
+      {type:'新客', trial_amt:999, total_amt:20398, name:'陳依璇'},   // 體驗肩頸999+購課19399
+      {type:'舊客', trial_amt:0,   total_amt:55990, name:'詹惠圩'},   // 購肌肉管理20堂50000+自有5990
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'林育伶'},   // 消耗；自有780羅尹蔚不計
+    ]},
+  { date:'2026-10-02', storeKey:'wo_taichung', store:'台中', brand:'原渥', brandKey:'wo',
+    consultant:'公司', clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'翁嘉芬'},                 // 銷售:連以雯（跑店）
+      {type:'舊客', trial_amt:0, total_amt:0, name:'吳昀芸'},                 // 導客:沈亦涵；銷售:黃詩涵（跑店）
+      {type:'舊客', trial_amt:0, total_amt:0, name:'詹惠圩', noCount:true},   // 消耗肌肉管理行，購課已計入郭子萍
+    ]},
+
   // 新增記錄時複製上面的格式
 ];
