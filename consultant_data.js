@@ -11496,5 +11496,57 @@ const CONSULTANT_RECORDS = [
       {type:'舊客', trial_amt:0, total_amt:0, name:'詹惠圩', noCount:true},   // 消耗肌肉管理行，購課已計入郭子萍
     ]},
 
+  // ─── 東門 10/6 ────────────────────────────
+  { date:'2026-10-06', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆', clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'段蒔希'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'李怡慧'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'吳佩穎'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'劉靜穎'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'鄧鈺叡'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'陳盈蓁'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'張可慧'},
+    ]},
+
+  // ─── 東門 10/7 ────────────────────────────
+  { date:'2026-10-07', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆', clients:[
+      {type:'新客', trial_amt:999,  total_amt:999,   name:'劉巧希'},   // 體驗體雕999，未成交
+      {type:'舊客', trial_amt:2498, total_amt:2498,  name:'張榕真'},   // 體驗無針水光1499+液態皮秒換膚999，未成交
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'胡馨芝'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'張舜妤'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'劉佳榕'},
+      {type:'舊客', trial_amt:0,    total_amt:18000, name:'鄭雪君'},   // 購九宮格12格18000
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'蘇毓斐'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'吳聖蕙'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'李巧瀛'},
+    ]},
+  { date:'2026-10-07', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'公司', clients:[
+      {type:'舊客', trial_amt:999, total_amt:29998, name:'張筑晴'},   // 導客:沈亦涵；銷售:公司；體驗小香肩999+購課28999
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'吳宥萱'},   // 王詩涵跑店
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'徐曼琳'},   // 陳令欣跑店
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'林怡君'},   // 森珮筠跑店
+    ]},
+
+  // ─── 東門 10/8 ────────────────────────────
+  { date:'2026-10-08', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆', clients:[
+      {type:'新客', trial_amt:2000, total_amt:21399, name:'林玹滋'},   // 體驗體雕2部位2000+購課19399
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'吳聿蓓'},
+      {type:'舊客', trial_amt:999,  total_amt:22959, name:'林詒婷'},   // 體驗香肩999+購課21960；自有699陳依柔不計
+      {type:'舊客', trial_amt:0,    total_amt:4999,  name:'孫婕明'},   // 購九宮格3格體雕4999
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'劉明宜'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'楊雨禾'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'吳珮芸'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'李昕穎'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'張祐慈'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'廖翊雯'},
+    ]},
+  { date:'2026-10-08', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'公司', clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'潘詠嫺'},   // 森珮筠跑店
+    ]},
+
   // 新增記錄時複製上面的格式
 ];
