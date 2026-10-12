@@ -11548,6 +11548,39 @@ const CONSULTANT_RECORDS = [
       {type:'舊客', trial_amt:0, total_amt:0, name:'潘詠嫺'},   // 森珮筠跑店
     ]},
 
+  // ── 東門 10/9 ──
+  { date:'2026-10-09', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆', clients:[
+      {type:'舊客', trial_amt:1499, total_amt:1499, name:'Claire Chen'},
+      {type:'舊客', trial_amt:0,    total_amt:0,    name:'韋藹芸'},
+      {type:'舊客', trial_amt:0,    total_amt:0,    name:'王鳳娟'},
+      {type:'舊客', trial_amt:0,    total_amt:0,    name:'蔡子琪'},
+    ]},
+  { date:'2026-10-09', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'公司', clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'黃群惠'},   // 森珮筠跑店
+      {type:'舊客', trial_amt:0, total_amt:0, name:'賀宜袖'},   // 森珮筠跑店
+    ]},
+  { date:'2026-10-09', storeKey:'wo_dongmen', store:'東門', brand:'原綺', brandKey:'ki',
+    consultant:'公司', clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'林萬非'},   // 原綺客/計品卉
+    ]},
+
+  // ── 東門 10/10 ──
+  { date:'2026-10-10', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+    consultant:'邱家榆', clients:[
+      {type:'新客', trial_amt:2000, total_amt:17000, name:'蘇秀佩'},   // 原綺舊客/原渥新客
+      {type:'新客', trial_amt:2499, total_amt:37499, name:'簡若涵'},
+      {type:'新客', trial_amt:999,  total_amt:24399, name:'李欣蓉'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'簡牧涵'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'丁予晨'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'楊羽樺'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'張雁筑'},
+      {type:'舊客', trial_amt:0,    total_amt:11000, name:'鄭宜庭'},
+      {type:'舊客', trial_amt:0,    total_amt:0,     name:'陳亮晴'},
+      {type:'舊客', trial_amt:1499, total_amt:10499, name:'陳怡安'},
+    ]},
+
   // ─── 板橋 10/6 ────────────────────────────
   { date:'2026-10-06', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
     consultant:'森珮筠', clients:[
