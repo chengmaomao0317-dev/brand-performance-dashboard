@@ -12294,6 +12294,47 @@ const CONSULTANT_RECORDS = [
       {type:'舊客', trial_amt:0, total_amt:0, name:'謝雅瑄'},   // 林律君/林佩珊跑店
     ]},
 
+  // ── 板橋 10/9 ──
+  { date:'2026-10-09', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠', clients:[
+      {type:'新客', trial_amt:999,  total_amt:999,  name:'陳曼林'},
+      {type:'新客', trial_amt:999,  total_amt:999,  name:'鄭凱芸'},
+      {type:'舊客', trial_amt:999,  total_amt:999,  name:'羅紫寧'},
+      {type:'舊客', trial_amt:0,    total_amt:0,    name:'黃冠瑜'},
+      {type:'舊客', trial_amt:0,    total_amt:0,    name:'吳涓竹'},
+      {type:'舊客', trial_amt:0,    total_amt:0,    name:'黃婷筠'},
+      {type:'舊客', trial_amt:0,    total_amt:0,    name:'李芷涵'},
+      {type:'舊客', trial_amt:0,    total_amt:0,    name:'徐亞平'},
+      {type:'舊客', trial_amt:2499, total_amt:2499, name:'李圓芳'},
+      {type:'舊客', trial_amt:0,    total_amt:0,    name:'吳瑞梅'},
+      {type:'舊客', trial_amt:0,    total_amt:0,    name:'鄭理文'},
+      {type:'舊客', trial_amt:999,  total_amt:999,  name:'陳霈臻'},
+      {type:'舊客', trial_amt:0,    total_amt:0,    name:'鄭亭琳'},
+      {type:'舊客', trial_amt:0,    total_amt:0,    name:'李翊綺'},
+      {type:'舊客', trial_amt:0,    total_amt:0,    name:'賴琬婷'},
+    ]},
+  { date:'2026-10-09', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'公司', clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'李俞靜'},   // 吳凱婷跑店
+      {type:'舊客', trial_amt:0, total_amt:0, name:'劉喬茵'},   // 蔡亞衫跑店
+    ]},
+
+  // ── 板橋 10/10 ──
+  { date:'2026-10-10', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'森珮筠', clients:[
+      {type:'新客', trial_amt:999, total_amt:999, name:'柯佳惠'},
+      {type:'舊客', trial_amt:0,   total_amt:0,   name:'黃秋萍'},
+      {type:'舊客', trial_amt:0,   total_amt:0,   name:'黃瑋婷'},
+      {type:'舊客', trial_amt:0,   total_amt:0,   name:'邱霈瑜'},
+      {type:'舊客', trial_amt:0,   total_amt:0,   name:'楊于瑢'},
+      {type:'舊客', trial_amt:0,   total_amt:0,   name:'林映璇'},
+      {type:'舊客', trial_amt:0,   total_amt:0,   name:'林明柔'},
+    ]},
+  { date:'2026-10-10', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+    consultant:'公司', clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'張子晴'},   // 廖梓涵跑店
+    ]},
+
   // ── 忠孝 10/7 ──
   { date:'2026-10-07', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
     consultant:'翁筱芸', clients:[
