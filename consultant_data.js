@@ -11196,6 +11196,62 @@ const CONSULTANT_RECORDS = [
       {type:'舊客', trial_amt:0, total_amt:0, name:'許真瑜'},   // 東門原綺客一律掛公司
     ]},
 
+  // ─── 台中原綺 9/29 ────────────────────────────
+  { date:'2026-09-29', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'呂秋玫', clients:[
+      {type:'新客', trial_amt:0, total_amt:15000, name:'張智珠'},   // 肉毒1瓶15000
+      {type:'新客', trial_amt:0, total_amt:4999,  name:'紀沛妤'},   // 肉毒小臉4999
+      {type:'新客', trial_amt:0, total_amt:14999, name:'王梓伃'},   // 喬雅登1CC14999
+    ]},
+  { date:'2026-09-29', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍', clients:[
+      {type:'新客', trial_amt:0, total_amt:48498, name:'王湘晴'},   // 肉毒除皺1499+肉毒15000+喬雅登14999+加購17000
+    ]},
+
+  // ─── 台中原綺 10/2 ────────────────────────────
+  { date:'2026-10-02', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'呂秋玫', clients:[
+      {type:'新客', trial_amt:0, total_amt:25873, name:'邱于慈'},   // 仙女玻尿酸21999+肉毒1499+肉毒2375
+      {type:'新客', trial_amt:0, total_amt:28000, name:'楊宗洺'},   // 喬雅露28000
+    ]},
+  { date:'2026-10-02', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍', clients:[
+      {type:'新客', trial_amt:0, total_amt:21999, name:'陳雅婷'},   // 仙女玻尿酸21999
+      {type:'新客', trial_amt:0, total_amt:9999,  name:'郭嘉樺'},   // 瑞斯朗9999
+      {type:'新客', trial_amt:0, total_amt:0,     name:'王湘寧'},   // 純諮詢
+    ]},
+
+  // ─── 台中原綺 10/3 ────────────────────────────
+  { date:'2026-10-03', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍', clients:[
+      {type:'新客', trial_amt:0, total_amt:31899, name:'蘇俞澄'},   // 仙女玻尿酸1CC9900+3CC21999
+    ]},
+  { date:'2026-10-03', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'呂秋玫', clients:[
+      {type:'新客', trial_amt:0, total_amt:85998, name:'劉晏瑜'},   // 膠原蛋白針9999+加購13000+喬雅登14999+加購3CC48000
+    ]},
+
+  // ─── 台中原綺 10/8 ────────────────────────────
+  { date:'2026-10-08', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍', clients:[
+      {type:'新客', trial_amt:0, total_amt:7998, name:'楊御鑫'},   // 皮砂蜂巢1堂3999+水光針1堂3999
+    ]},
+
+  // ─── 台中原綺 10/6 ────────────────────────────
+  { date:'2026-10-06', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'何欣穎', clients:[
+      {type:'新客', trial_amt:0, total_amt:51000,  name:'馮逸萱'},   // 鼻線8條36000+喬雅登1CC15000
+      {type:'新客', trial_amt:0, total_amt:110999, name:'王湘芸'},   // 再生針4.5CC66000+肉毒一年期25000+喬雅登1CC14999+訂付5000
+    ]},
+  { date:'2026-10-06', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'呂秋玫', clients:[
+      {type:'新客', trial_amt:0, total_amt:63000, name:'黃細羽'},   // 再生針3CC48000+肉毒1瓶15000
+    ]},
+  { date:'2026-10-06', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍', clients:[
+      {type:'新客', trial_amt:0, total_amt:32374, name:'連柔亭'},   // 肉毒一區1499+皮砂蜂巢5堂23750+水光+頂級配方7125(公司產品不計)
+    ]},
+
   // ─── 台中原綺 10/1 ────────────────────────────
   { date:'2026-10-01', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
     consultant:'呂秋玫', clients:[
@@ -11219,6 +11275,100 @@ const CONSULTANT_RECORDS = [
   { date:'2026-10-01', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉', clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'黃翊嘉'},   // 診所東門施作，待確認金額
+    ]},
+
+  // ─── 台北原綺 10/10 ────────────────────────────
+  { date:'2026-10-10', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉', clients:[
+      {type:'新客', trial_amt:0, total_amt:0, name:'盤柔君'},   // 臉部皮秒，無付款資料
+    ]},
+  { date:'2026-10-10', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳甯', clients:[
+      {type:'新客', trial_amt:0, total_amt:18000, name:'洪巧紋'},   // 線材塑型鼻線18000
+    ]},
+  { date:'2026-10-10', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬', clients:[
+      {type:'新客', trial_amt:0, total_amt:21999, name:'陳昱瑾'},   // 仙女玻尿酸21999
+    ]},
+
+  // ─── 台北原綺 10/9 ────────────────────────────
+  { date:'2026-10-09', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'柯孟君', clients:[
+      {type:'新客', trial_amt:0, total_amt:3000,  name:'廖軒志'},   // 光療雷射皮秒3000
+      {type:'新客', trial_amt:0, total_amt:34999, name:'余念慈'},   // 三代海芙拉提30000+4999
+      {type:'新客', trial_amt:0, total_amt:44000, name:'郭建輝'},   // 蜂巢2000+皮秒1999+皮秒20000+蜂巢20000+訂金1
+    ]},
+  { date:'2026-10-09', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳甯', clients:[
+      {type:'新客', trial_amt:0, total_amt:9999, name:'許毓璇'},   // 膠原蛋白針9999
+    ]},
+  { date:'2026-10-09', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉', clients:[
+      {type:'新客', trial_amt:0, total_amt:0, name:'張佳馨'},   // 黑眼圈填充，無付款資料
+    ]},
+
+  // ─── 台北原綺 10/8 ────────────────────────────
+  { date:'2026-10-08', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'柯孟君', clients:[
+      {type:'新客', trial_amt:0, total_amt:0, name:'張麗昌'},   // 肉毒小臉，無付款資料
+    ]},
+  { date:'2026-10-08', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬', clients:[
+      {type:'新客', trial_amt:0, total_amt:11498, name:'陳慈欣'},   // 瑞斯朗9999+肉毒1499
+      {type:'新客', trial_amt:0, total_amt:0,     name:'許茗茗'},   // 黑眼圈填充，無付款資料
+      {type:'新客', trial_amt:0, total_amt:4999,  name:'林彥佐'},   // 肉毒拉提4999
+    ]},
+  { date:'2026-10-08', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉', clients:[
+      {type:'新客', trial_amt:0, total_amt:0,     name:'胡學惠'},   // 頰凹填充，無付款資料
+      {type:'新客', trial_amt:0, total_amt:31998, name:'陳妍尹'},   // 仙女玻尿酸21999+瑞斯朗9999
+      {type:'新客', trial_amt:0, total_amt:31500, name:'彭子庭'},   // 麗珠蘭28000+水光針頂級配方3500
+    ]},
+
+  // ─── 台北原綺 10/7 ────────────────────────────
+  { date:'2026-10-07', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉', clients:[
+      {type:'新客', trial_amt:0, total_amt:79989, name:'賴欣怡'},   // 膠原蛋白針36000+肉毒3999+蜂巢19995+皮秒19995
+    ]},
+  { date:'2026-10-07', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳甯', clients:[
+      {type:'新客', trial_amt:0, total_amt:22999, name:'高子晴'},   // 瑞斯朗玻尿酸22999
+    ]},
+
+  // ─── 台北原綺 10/5 ────────────────────────────
+  { date:'2026-10-05', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'柯孟君', clients:[
+      {type:'新客', trial_amt:0, total_amt:9999,  name:'王伶毓'},   // 膠原蛋白針9999
+      {type:'新客', trial_amt:0, total_amt:45999, name:'鄭芷妍'},   // 仙女玻尿酸21999+24000
+    ]},
+  { date:'2026-10-05', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬', clients:[
+      {type:'新客', trial_amt:0, total_amt:9999, name:'汪家羽'},   // 瑞斯朗玻尿酸9999
+    ]},
+  { date:'2026-10-05', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉', clients:[
+      {type:'新客', trial_amt:0, total_amt:93999, name:'田雯瑜'},   // 膠原蛋白針36000+微晶瓷8000+微晶瓷40000+瑞斯朗9999
+    ]},
+
+  // ─── 台北原綺 10/3 ────────────────────────────
+  { date:'2026-10-03', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳甯', clients:[
+      {type:'新客', trial_amt:0, total_amt:0, name:'賈芷沁'},   // 頰凹填充，無付款資料
+    ]},
+  { date:'2026-10-03', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬', clients:[
+      {type:'新客', trial_amt:0, total_amt:6799, name:'呂知耘'},   // 肉毒小臉4999+1U肉毒1800
+    ]},
+  { date:'2026-10-03', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉', clients:[
+      {type:'新客', trial_amt:0, total_amt:0, name:'洪佳璇'},   // 黑眼圈填充，無付款資料
+    ]},
+
+  // ─── 台北原綺 10/2 ────────────────────────────
+  { date:'2026-10-02', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳甯', clients:[
+      {type:'新客', trial_amt:0,    total_amt:0,    name:'官淑樺'},   // 鼻基底填充，無付款資料
+      {type:'新客', trial_amt:0, total_amt:2000, name:'陳靖淳'},   // 光療雷射皮秒臉部
     ]},
 
   // ─── 東門 10/1 ────────────────────────────
