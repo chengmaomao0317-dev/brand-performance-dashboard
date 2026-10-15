@@ -12625,6 +12625,29 @@ const CONSULTANT_RECORDS = [
       {type:'舊客', trial_amt:0, total_amt:0, name:'廖怡嘉'},   // 邱家榆跑店
     ]},
 
+  // ── 忠孝 10/14 ──
+  { date:'2026-10-14', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'王詩涵', clients:[
+      {type:'新客', trial_amt:0, total_amt:9000, name:'鄭棋'},    // 沒操作也算
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'廖育紋'},
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'洪宜慈'},
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'黃筱茹'},
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'陳穎蓁'},
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'古澤繪美'},
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'鄭棋云'},
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'白惠禎'},
+      {type:'舊客', trial_amt:0, total_amt:0,    name:'陳業蓁'},
+    ]},
+  { date:'2026-10-14', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸', clients:[
+      {type:'新客', trial_amt:999, total_amt:18999, name:'蔡幸妤'},   // 體驗999+小香肩8堂贈2堂18000
+      {type:'新客', trial_amt:999, total_amt:35999, name:'韓婵'},    // 體驗999+音波14堂贈6堂35000
+      {type:'舊客', trial_amt:0,   total_amt:18000, name:'廖珮君'},   // 9宮格18000
+      {type:'舊客', trial_amt:0,   total_amt:4999,  name:'陳依婕'},   // 香肩3堂4999
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'彭郁庭'},
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'黃琬瑜'},
+    ]},
+
   // ── 館前 10/13 ──
   { date:'2026-10-13', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
     consultant:'吳凱婷', clients:[
