@@ -11237,6 +11237,16 @@ const CONSULTANT_RECORDS = [
       {type:'新客', trial_amt:0, total_amt:7998, name:'楊御鑫'},   // 皮砂蜂巢1堂3999+水光針1堂3999
     ]},
 
+  // ─── 台中原綺 10/14 ────────────────────────────
+  { date:'2026-10-14', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'呂秋玫', clients:[
+      {type:'新客', trial_amt:0, total_amt:65498, name:'石凱麗'},   // 埋線12條54000+膠原蛋白針9999+肉毒1499
+    ]},
+  { date:'2026-10-14', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
+    consultant:'郭子萍', clients:[
+      {type:'新客', trial_amt:0, total_amt:4999, name:'李翎漾'},   // 肉毒小臉40U4999
+    ]},
+
   // ─── 台中原綺 10/13 ────────────────────────────
   { date:'2026-10-13', storeKey:'ki_taichung', store:'台中', brand:'原綺', brandKey:'ki',
     consultant:'呂秋玫', clients:[
@@ -11286,6 +11296,29 @@ const CONSULTANT_RECORDS = [
   { date:'2026-10-01', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
     consultant:'計品卉', clients:[
       {type:'新客', trial_amt:0, total_amt:0, name:'黃翊嘉'},   // 診所東門施作，待確認金額
+    ]},
+
+  // ─── 台北原綺 10/14 ────────────────────────────
+  { date:'2026-10-14', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'柯孟君', clients:[
+      {type:'新客', trial_amt:0, total_amt:74999, name:'陳信佑'},   // 微晶瓷8999+16000+50000
+      {type:'新客', trial_amt:0, total_amt:7499,  name:'江渝志'},   // 肉毒除皺1499+6000
+    ]},
+  { date:'2026-10-14', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'計品卉', clients:[
+      {type:'新客', trial_amt:0, total_amt:31999, name:'李姍霓'},   // 喬亞登13000+1999+17000
+      {type:'新客', trial_amt:0, total_amt:0,     name:'黎正怡'},
+      {type:'新客', trial_amt:0, total_amt:0,     name:'張雅婷'},
+    ]},
+  { date:'2026-10-14', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳詩喬', clients:[
+      {type:'新客', trial_amt:0, total_amt:5498, name:'葉庭瑄'},   // 皮秒2000+蜂巢1999+肉毒1499
+      {type:'新客', trial_amt:0, total_amt:0,    name:'李英仟'},
+      {type:'新客', trial_amt:0, total_amt:0,    name:'謝佑顏'},
+    ]},
+  { date:'2026-10-14', storeKey:'ki_taipei', store:'台北', brand:'原綺', brandKey:'ki',
+    consultant:'陳甯', clients:[
+      {type:'新客', trial_amt:0, total_amt:9999, name:'鄭琬琪'},   // 瑞斯朗玻尿酸9999
     ]},
 
   // ─── 台北原綺 10/13 ────────────────────────────
