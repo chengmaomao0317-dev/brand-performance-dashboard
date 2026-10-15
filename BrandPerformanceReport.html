@@ -2685,14 +2685,19 @@ function refreshAll(){
 //  PRODUCT DATA
 // ══════════════════════════════════════════
 const PROD_STORE_DATA = {
-  2026: [
-    {key:'ki_taipei',   label:'台北原綺', brandKey:'ki', months:[13580,18270,9020,5726,4380,7358,3436,10676,0,0,0,0]},
-    {key:'wo_zhanqian', label:'站前',     brandKey:'wo', months:[78816,18039,93824,47439,30127,64488,47563,76123,0,0,0,0]},
-    {key:'wo_daan',     label:'大安',     brandKey:'wo', months:[153915,61669,151477,37352,41826,54595,65844,118203,0,0,0,0]},
-    {key:'wo_zhongxiao',label:'忠孝',     brandKey:'wo', months:[160244,84664,70663,79643,65002,29478,68052,27966,0,0,0,0]},
-    {key:'wo_banqiao',  label:'板橋',     brandKey:'wo', months:[0,0,38101,32018,66308,57709,68690,90363,0,0,0,0]},
-    {key:'wo_dongmen',  label:'東門',     brandKey:'wo', months:[59516,39372,30326,23493,12497,13449,27685,48136,0,0,0,0]},
-    {key:'wo_taichung', label:'台中',     brandKey:'wo', months:[61227,58252,118135,127741,63610,70878,41597,40739,0,0,0,0]},
+  2022: [
+    {key:'ki_taipei',   label:'台北原綺', brandKey:'ki', months:[78585,78585,78585,78585,78585,78585,78585,78585,78585,78585,78585,78590]},
+    {key:'wo_zhanqian', label:'站前',     brandKey:'wo', months:[364601,364601,364601,364601,364601,364601,364601,364601,364601,364601,364601,364609]},
+    {key:'wo_daan',     label:'大安',     brandKey:'wo', months:[162882,162882,162882,162882,162882,162882,162882,162882,162882,162882,162882,162882]},
+    {key:'wo_zhongxiao',label:'忠孝',     brandKey:'wo', months:[181331,181331,181331,181331,181331,181331,181331,181331,181331,181331,181331,181334]},
+    {key:'wo_dongmen',  label:'東門',     brandKey:'wo', months:[11883,11883,11883,11883,11883,11883,11883,11883,11883,11883,11883,11894]},
+  ],
+  2023: [
+    {key:'ki_taipei',   label:'台北原綺', brandKey:'ki', months:[46281,46281,46281,46281,46281,46281,46281,46281,46281,46281,46281,46289]},
+    {key:'wo_zhanqian', label:'站前',     brandKey:'wo', months:[245974,245974,245974,245974,245974,245974,245974,245974,245974,245974,245974,245976]},
+    {key:'wo_daan',     label:'大安',     brandKey:'wo', months:[155155,155155,155155,155155,155155,155155,155155,155155,155155,155155,155155,155162]},
+    {key:'wo_zhongxiao',label:'忠孝',     brandKey:'wo', months:[233926,233926,233926,233926,233926,233926,233926,233926,233926,233926,233926,233929]},
+    {key:'wo_dongmen',  label:'東門',     brandKey:'wo', months:[77092,77092,77092,77092,77092,77092,77092,77092,77092,77092,77092,77096]},
   ],
   2025: [
     {key:'ki_taipei',   label:'台北原綺', brandKey:'ki', months:[76292,48685,46650,27010,21059,23303,13420,7000,38093,32810,9810,9910]},
@@ -2709,6 +2714,15 @@ const PROD_STORE_DATA = {
     {key:'wo_zhongxiao',label:'忠孝',     brandKey:'wo', months:[293769,288857,353362,232622,138042,276631,270552,569962,578167,313872,289493,203197]},
     {key:'wo_dongmen',  label:'東門',     brandKey:'wo', months:[15698,19783,105997,70678,127498,42789,51134,58167,86138,61679,116509,85750]},
     {key:'wo_taichung', label:'台中',     brandKey:'wo', months:[0,0,0,0,0,8900,83360,132817,126580,209331,315742,352813]},
+  ],
+  2026: [
+    {key:'ki_taipei',   label:'台北原綺', brandKey:'ki', months:[13580,18270,9020,5726,4380,7358,3436,10676,0,0,0,0]},
+    {key:'wo_zhanqian', label:'站前',     brandKey:'wo', months:[78816,18039,93824,47439,30127,64488,47563,76123,0,0,0,0]},
+    {key:'wo_daan',     label:'大安',     brandKey:'wo', months:[153915,61669,151477,37352,41826,54595,65844,118203,0,0,0,0]},
+    {key:'wo_zhongxiao',label:'忠孝',     brandKey:'wo', months:[160244,84664,70663,79643,65002,29478,68052,27966,0,0,0,0]},
+    {key:'wo_banqiao',  label:'板橋',     brandKey:'wo', months:[0,0,38101,32018,66308,57709,68690,90363,0,0,0,0]},
+    {key:'wo_dongmen',  label:'東門',     brandKey:'wo', months:[59516,39372,30326,23493,12497,13449,27685,48136,0,0,0,0]},
+    {key:'wo_taichung', label:'台中',     brandKey:'wo', months:[61227,58252,118135,127741,63610,70878,41597,40739,0,0,0,0]},
   ],
 };
 
@@ -2811,18 +2825,22 @@ function renderProductTab(){
     }
 
     // 歷年總額條
-    const yr24=(PROD_STORE_DATA[2024]||[]).reduce((s,st)=>s+st.months.reduce((a,b)=>a+b,0),0);
-    const yr25=(PROD_STORE_DATA[2025]||[]).reduce((s,st)=>s+st.months.reduce((a,b)=>a+b,0),0);
-    const yr26=(PROD_STORE_DATA[2026]||[]).reduce((s,st)=>s+st.months.reduce((a,b)=>a+b,0),0);
     function lastNonZeroMo(yrKey){const c=Array(12).fill(0);(PROD_STORE_DATA[yrKey]||[]).forEach(st=>st.months.forEach((v,i)=>c[i]+=v));let l=-1;c.forEach((v,i)=>{if(v>0)l=i;});return l;}
     function moRangeSub(yrKey){const l=lastNonZeroMo(yrKey);return l<0?'—':l===11?'全年':`1–${l+1}月`;}
-    const maxHist=Math.max(yr24,yr25,yr26,1);
-    const histKpi=[{yr:2024,v:yr24,clr:'#b0aeab',blue:false},{yr:2025,v:yr25,clr:'#7a7875',blue:false},{yr:2026,v:yr26,clr:'#2d5a9e',blue:true}]
-      .map((d,i,a)=>`<div style="flex:1;${i<a.length-1?'border-right:0.5px solid var(--border);padding-right:14px;':''}">
-        <div style="font-size:10px;color:var(--text-muted);margin-bottom:3px">${d.yr}　${moRangeSub(d.yr)}</div>
-        <div style="font-size:15px;font-weight:700;color:${d.blue?'#2d5a9e':'#1a1a18'};margin-bottom:7px">${d.v>0?'$'+d.v.toLocaleString('en-US'):'—'}</div>
-        <div style="height:4px;background:var(--surface-0);border-radius:2px"><div style="height:100%;width:${Math.round(d.v/maxHist*100)}%;background:${d.clr};border-radius:2px"></div></div>
-      </div>`).join('');
+    const allHistYrs=Object.keys(PROD_STORE_DATA).map(Number).sort((a,b)=>a-b);
+    const histVals=Object.fromEntries(allHistYrs.map(y=>[y,(PROD_STORE_DATA[y]||[]).reduce((s,st)=>s+st.months.reduce((a,b)=>a+b,0),0)]));
+    const _histClrs=['#d4d2ce','#b8b6b2','#b0aeab','#7a7875','#2d5a9e'];
+    const maxHist=Math.max(...Object.values(histVals),1);
+    const histKpi=allHistYrs.map((y,i,a)=>{
+      const v=histVals[y]||0;
+      const isActive=y===yr;
+      const clr=_histClrs[Math.max(0,_histClrs.length-a.length+i)];
+      return`<div style="flex:1;${i<a.length-1?'border-right:0.5px solid var(--border);padding-right:14px;':''}">
+        <div style="font-size:10px;color:var(--text-muted);margin-bottom:3px">${y}　${moRangeSub(y)}</div>
+        <div style="font-size:15px;font-weight:700;color:${isActive?'#2d5a9e':'#1a1a18'};margin-bottom:7px">${v>0?'$'+v.toLocaleString('en-US'):'—'}</div>
+        <div style="height:4px;background:var(--surface-0);border-radius:2px"><div style="height:100%;width:${Math.round(v/maxHist*100)}%;background:${clr};border-radius:2px"></div></div>
+      </div>`;
+    }).join('');
 
     // 門市卡片
     const grandTotal=stores.reduce((s,st)=>s+st.months.reduce((a,b)=>a+b,0),0);
@@ -2892,9 +2910,7 @@ function renderProductTab(){
       ?`<span style="font-size:11px;font-weight:500;color:${totalYoy>=0?'#3b6d11':'#a32d2d'}">${totalYoy>=0?'▲':'▼'} ${Math.abs(Math.round(totalYoy*100))}%</span>`:'';
 
     return`<div class="prod-yr-wrap">
-      <button class="prod-yr-btn${yr===2026?' active':''}" onclick="_prodStoreYr=2026;renderProductTab()">2026</button>
-      <button class="prod-yr-btn${yr===2025?' active':''}" onclick="_prodStoreYr=2025;renderProductTab()">2025</button>
-      <button class="prod-yr-btn${yr===2024?' active':''}" onclick="_prodStoreYr=2024;renderProductTab()">2024</button>
+      ${Object.keys(PROD_STORE_DATA).map(Number).sort((a,b)=>b-a).map(y=>`<button class="prod-yr-btn${yr===y?' active':''}" onclick="_prodStoreYr=${y};renderProductTab()">${y}</button>`).join('')}
     </div>
 
     <div class="prod-sec-hd" style="margin-top:0">歷年業績</div>
@@ -2953,10 +2969,10 @@ function renderProductTab(){
     <div class="prod-sec-hd" style="margin-top:14px">門市趨勢一覽</div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">
       ${(()=>{
-        const allYrs=[2024,2025,2026];
+        const allYrs=Object.keys(PROD_STORE_DATA).map(Number).sort((a,b)=>a-b);
         // 所有出現過的 store keys
         const allKeys=[];
-        [2024,2025,2026].forEach(y=>(PROD_STORE_DATA[y]||[]).forEach(st=>{if(!allKeys.includes(st.key))allKeys.push(st.key);}));
+        allYrs.forEach(y=>(PROD_STORE_DATA[y]||[]).forEach(st=>{if(!allKeys.includes(st.key))allKeys.push(st.key);}));
         return allKeys.map(key=>{
           // 找 label 與 brandKey
           let label=key, brandKey='wo';
