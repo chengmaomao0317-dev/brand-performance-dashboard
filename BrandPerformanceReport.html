@@ -3594,6 +3594,7 @@ let _kiActiveStores = null;
 function renderConsultantTab(){
   const el = document.getElementById('consultant-tab-body');
   if(!el) return;
+  try {
   if(_woTrendChart){_woTrendChart.destroy();_woTrendChart=null;}
   if(_kiTrendChart){_kiTrendChart.destroy();_kiTrendChart=null;}
 
@@ -4064,6 +4065,12 @@ function renderConsultantTab(){
   if(_csTrendOpen) setTimeout(initTrendPanel, 0);
   if(_woRebookTrendOpen) setTimeout(initWoRebookTrendPanel, 0);
   if(_kiRebookTrendOpen) setTimeout(initKiRebookTrendPanel, 0);
+  } catch(err) {
+    el.innerHTML = `<div style="padding:40px;color:#c00;font-size:13px;font-family:monospace">
+      <strong>renderConsultantTab 錯誤：</strong><br>${err.message}<br><pre style="font-size:11px;margin-top:8px;white-space:pre-wrap">${err.stack}</pre>
+    </div>`;
+    console.error('renderConsultantTab error:', err);
+  }
 }
 
 // ── 諮詢師暱稱（全域）──────────────────────────────────────
