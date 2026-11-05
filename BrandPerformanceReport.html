@@ -5429,17 +5429,17 @@ function doCSPrint(){window.print();}
 //  新增月份時：在 KI_MONTH_GIDS 陣列補上新分頁的 GID 即可
 // ══════════════════════════════════════════
 (async function loadKIRebookFromSheet(){
-  // 各月份的 Google Sheets 分頁 GID
-  // 每個月新建分頁後，把該分頁的 gid= 數字加進這個陣列
+  // 各月份的 Google Sheets 分頁：可用 GID 數字或分頁名稱字串
   const KI_MONTH_GIDS = [
     '644930812',   // 2026-09（九月）
     '1312470435',  // 2026-10（十月）
-    // '???',      // 2026-11（十一月，待開分頁後補上）
-    // '???',      // 2026-12（十二月，待開分頁後補上）
+    '11月',        // 2026-11（十一月）
+    '12月',        // 2026-12（十二月）
   ];
 
   async function fetchOneMonth(GID) {
-    const gd = await loadGviz('', {gid: GID});
+    const isName = isNaN(Number(GID));
+    const gd = isName ? await loadGviz(GID) : await loadGviz('', {gid: GID});
     if(!gd || !gd.table || !gd.table.rows) return;
     const rows = gd.table.rows;
 
