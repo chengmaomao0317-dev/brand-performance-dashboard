@@ -16310,4 +16310,174 @@ const CONSULTANT_RECORDS = [
   consultant:'呂秋玫', clients:[
     {type:'新客', trial_amt:0, total_amt:66487, name:'曾巧雯'},
   ]},
+
+// 2026-11-11 東門
+{ date:'2026-11-11', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+  consultant:'邱家榆', clients:[
+    {type:'舊客', trial_amt:0, total_amt:16997, name:'李怡慧'},
+    {type:'舊客', trial_amt:0, total_amt:31199, name:'張舜潔'},
+    {type:'舊客', trial_amt:0, total_amt:1999,  name:'陳亮晴'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'劉佳榕'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'張雁筑'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'楊雨禾'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'劉靜穎'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'周傳柔'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'陳資云'},
+  ]},
+{ date:'2026-11-11', storeKey:'wo_dongmen', store:'東門', brand:'原渥', brandKey:'wo',
+  consultant:'公司', clients:[
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'涂志梅'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'張舜潔', noVisit:true},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'張荔荃'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'趙曼婷'},
+  ]},
+
+// 2026-11-11 板橋
+{ date:'2026-11-11', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+  consultant:'森珮筠', clients:[
+    {type:'新客', trial_amt:999,  total_amt:15999, name:'黃玉婷'},
+    {type:'舊客', trial_amt:0,    total_amt:0,     name:'吳欣芫'},
+    {type:'舊客', trial_amt:0,    total_amt:0,     name:'林育萱'},
+    {type:'舊客', trial_amt:2498, total_amt:2498,  name:'李怡嘉'},
+    {type:'舊客', trial_amt:999,  total_amt:999,   name:'盧玫心'},
+    {type:'舊客', trial_amt:0,    total_amt:21997, name:'彭縮妤'},
+    {type:'舊客', trial_amt:0,    total_amt:0,     name:'陳佩君'},
+    {type:'舊客', trial_amt:0,    total_amt:17997, name:'林健宇'},
+    {type:'舊客', trial_amt:0,    total_amt:0,     name:'戴雅萍'},
+    {type:'舊客', trial_amt:0,    total_amt:0,     name:'許以珍'},
+    {type:'舊客', trial_amt:0,    total_amt:1999,  name:'王琪驊'},
+  ]},
+{ date:'2026-11-11', storeKey:'wo_banqiao', store:'板橋', brand:'原渥', brandKey:'wo',
+  consultant:'公司', clients:[
+    {type:'舊客', trial_amt:0,    total_amt:2560,  name:'黃玉婷', noVisit:true},
+    {type:'舊客', trial_amt:0,    total_amt:19998, name:'李怡嘉', noVisit:true},
+    {type:'舊客', trial_amt:0,    total_amt:0,     name:'陳佩君', noVisit:true},
+    {type:'舊客', trial_amt:0,    total_amt:2560,  name:'林健宇', noVisit:true},
+    {type:'舊客', trial_amt:0,    total_amt:1560,  name:'許以珍', noVisit:true},
+  ]},
+
+// 2026-11-11 台中原渥
+{ date:'2026-11-11', storeKey:'wo_taichung', store:'台中原渥', brand:'原渥', brandKey:'wo',
+  consultant:'林雨芑', clients:[
+    {type:'新客', trial_amt:999, total_amt:999,   name:'林紫榆'},
+    {type:'新客', trial_amt:999, total_amt:15999, name:'張梓涵'},
+    {type:'新客', trial_amt:999, total_amt:15999, name:'黃瀅璇'},
+    {type:'新客', trial_amt:999, total_amt:15999, name:'王姵蓉'},
+    {type:'舊客', trial_amt:0,   total_amt:0,     name:'姜夢夢'},
+    {type:'舊客', trial_amt:0,   total_amt:0,     name:'徐悦真'},
+    {type:'舊客', trial_amt:0,   total_amt:0,     name:'劉幼華'},
+    {type:'舊客', trial_amt:0,   total_amt:0,     name:'洪薇淨'},
+    {type:'舊客', trial_amt:0,   total_amt:0,     name:'廖又潔'},
+    {type:'舊客', trial_amt:0,   total_amt:0,     name:'蕭雅菁'},
+    {type:'舊客', trial_amt:0,   total_amt:0,     name:'黃鈺惠'},
+    {type:'舊客', trial_amt:0,   total_amt:0,     name:'廖靖芬'},
+    {type:'舊客', trial_amt:0,   total_amt:0,     name:'吳怡慧'},
+    {type:'舊客', trial_amt:0,   total_amt:0,     name:'鄧怡珊'},
+    {type:'舊客', trial_amt:0,   total_amt:0,     name:'張品妤'},
+  ]},
+{ date:'2026-11-11', storeKey:'wo_taichung', store:'台中原渥', brand:'原渥', brandKey:'wo',
+  consultant:'郭子萍', clients:[
+    {type:'舊客', trial_amt:0,   total_amt:0,     name:'陳維茜'},
+    {type:'舊客', trial_amt:0,   total_amt:0,     name:'詹惠坪'},
+  ]},
+{ date:'2026-11-11', storeKey:'wo_taichung', store:'台中原渥', brand:'原渥', brandKey:'wo',
+  consultant:'呂秋玫', clients:[
+    {type:'舊客', trial_amt:0,   total_amt:0,     name:'吳瑞娟'},
+    {type:'舊客', trial_amt:0,   total_amt:0,     name:'楊雅芳'},
+    {type:'舊客', trial_amt:0,   total_amt:0,     name:'楊芷盈'},
+    {type:'舊客', trial_amt:0,   total_amt:0,     name:'沈宛穎'},
+  ]},
+{ date:'2026-11-11', storeKey:'wo_taichung', store:'台中原渥', brand:'原渥', brandKey:'wo',
+  consultant:'公司', clients:[
+    {type:'舊客', trial_amt:0,   total_amt:8097,  name:'廖又潔', noVisit:true},
+  ]},
+
+// 2026-11-11 忠孝
+{ date:'2026-11-11', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+  consultant:'翁筱芸', clients:[
+    {type:'舊客', trial_amt:0, total_amt:0,    name:'徐郁喬'},
+    {type:'舊客', trial_amt:0, total_amt:0,    name:'陳蕙涵'},
+    {type:'舊客', trial_amt:0, total_amt:0,    name:'楊瑞韻'},
+    {type:'舊客', trial_amt:0, total_amt:1999, name:'廖珮君'},
+    {type:'舊客', trial_amt:0, total_amt:0,    name:'蔡宜庭'},
+    {type:'舊客', trial_amt:0, total_amt:0,    name:'陳承欣'},
+    {type:'舊客', trial_amt:0, total_amt:500,  name:'許凱婷'},
+    {type:'舊客', trial_amt:0, total_amt:0,    name:'吳予昕'},
+  ]},
+{ date:'2026-11-11', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+  consultant:'王詩涵', clients:[
+    {type:'新客', trial_amt:999, total_amt:999, name:'溫晴宇'},
+    {type:'舊客', trial_amt:0,   total_amt:0,   name:'廖珮好'},
+    {type:'舊客', trial_amt:0,   total_amt:0,   name:'詹于禎'},
+    {type:'舊客', trial_amt:0,   total_amt:0,   name:'盧建靈'},
+    {type:'舊客', trial_amt:0,   total_amt:0,   name:'陳宇萱'},
+    {type:'舊客', trial_amt:0,   total_amt:0,   name:'黃雪雅'},
+  ]},
+{ date:'2026-11-11', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+  consultant:'公司', clients:[
+    {type:'舊客', trial_amt:0,   total_amt:0,   name:'郭姿瑩'},
+  ]},
+
+// 2026-11-11 館前
+{ date:'2026-11-11', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+  consultant:'吳凱婷', clients:[
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'李羿萱'},
+    {type:'舊客', trial_amt:0, total_amt:21997, name:'吳巧蕙'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'杜唯寧'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'賴小貝'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'呂芯茹'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'蔡亞臻'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'顏伶庭'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'王郁蓁'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'王妘瑄'},
+  ]},
+{ date:'2026-11-11', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+  consultant:'廖梓涵', clients:[
+    {type:'新客', trial_amt:999, total_amt:999, name:'王晨曦'},
+    {type:'舊客', trial_amt:0,   total_amt:0,   name:'錢榲芝'},
+    {type:'舊客', trial_amt:0,   total_amt:0,   name:'曹雅婷'},
+    {type:'舊客', trial_amt:0,   total_amt:0,   name:'楊潔茹'},
+    {type:'舊客', trial_amt:0,   total_amt:0,   name:'楊意'},
+  ]},
+{ date:'2026-11-11', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
+  consultant:'公司', clients:[
+    {type:'舊客', trial_amt:0,   total_amt:0,   name:'吳巧蕙', noVisit:true},
+    {type:'舊客', trial_amt:0,   total_amt:0,   name:'劉庭汝'},
+  ]},
+
+// 2026-11-11 大安
+{ date:'2026-11-11', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+  consultant:'蔡亞杉', clients:[
+    {type:'舊客', trial_amt:0, total_amt:60600, name:'何昱晶'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'洪瑞瑩'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'謝奕平'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'施宇玲'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'賴虹蓓'},
+    {type:'舊客', trial_amt:0, total_amt:0,     name:'陳翊軒'},
+  ]},
+{ date:'2026-11-11', storeKey:'wo_daan', store:'大安', brand:'原渥', brandKey:'wo',
+  consultant:'李晨研', clients:[
+    {type:'新客', trial_amt:999, total_amt:999, name:'賴姿穎'},
+    {type:'新客', trial_amt:999, total_amt:999, name:'曾子耘'},
+    {type:'舊客', trial_amt:0,   total_amt:0,   name:'吳慧芸'},
+    {type:'舊客', trial_amt:0,   total_amt:0,   name:'陳永潔'},
+  ]},
+
+// 2026-11-11 台中原綺
+{ date:'2026-11-11', storeKey:'ki_taichung', store:'台中原綺', brand:'原綺', brandKey:'ki',
+  consultant:'呂秋玫', clients:[
+    {type:'新客', trial_amt:0, total_amt:42886,  name:'黃正卉'},
+  ]},
+{ date:'2026-11-11', storeKey:'ki_taichung', store:'台中原綺', brand:'原綺', brandKey:'ki',
+  consultant:'郭子萍', clients:[
+    {type:'新客', trial_amt:0, total_amt:155999, name:'柯詠馨'},
+    {type:'新客', trial_amt:0, total_amt:118998, name:'莊立睛'},
+    {type:'新客', trial_amt:0, total_amt:3999,   name:'許旖慧'},
+  ]},
+
+// 2026-11-11 台北原綺
+{ date:'2026-11-11', storeKey:'ki_taipei', store:'台北原綺', brand:'原綺', brandKey:'ki',
+  consultant:'柯孟君', clients:[
+    {type:'新客', trial_amt:0, total_amt:11498, name:'許采綸'},
+  ]},
 ];
