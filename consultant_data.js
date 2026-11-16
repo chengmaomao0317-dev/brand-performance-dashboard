@@ -16933,4 +16933,34 @@ const CONSULTANT_RECORDS = [
     consultant:'公司', clients:[
       {type:'新客', trial_amt:0, total_amt:75000, name:'彭琪鈞'},
     ]},
+
+  // 2026-11-14 館前
+  { date:'2026-11-14', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'吳凱婷', clients:[
+      {type:'新客', trial_amt:999, total_amt:999,   name:'李小瑄'},
+      {type:'新客', trial_amt:999, total_amt:999,   name:'林吟樵'},
+      {type:'新客', trial_amt:999, total_amt:15999, name:'許丹'},
+      {type:'新客', trial_amt:999, total_amt:999,   name:'蔡汎傑'},
+      {type:'新客', trial_amt:0,   total_amt:0,     name:'郭禹岑'},
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'蘇珈玉'},
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'葉琇榕'},
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'向天莉'},
+      {type:'舊客', trial_amt:0,   total_amt:11998, name:'朱惠群'},
+      {type:'舊客', trial_amt:0,   total_amt:0,     name:'馮韻潔'},
+    ]},
+  { date:'2026-11-14', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'廖梓涵', clients:[
+      {type:'新客', trial_amt:0, total_amt:0, name:'陳俊翰'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'Oscar'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'趙翊汝'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'李沛蓉'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'黃莉茵'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'陳奕瑄'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'劉姿妤'},
+      {type:'舊客', trial_amt:0, total_amt:0, name:'周玉萍'},
+    ]},
+  { date:'2026-11-14', storeKey:'wo_zhanqian', store:'站前', brand:'原渥', brandKey:'wo',
+    consultant:'公司', clients:[
+      {type:'舊客', trial_amt:0, total_amt:1560, name:'胡惟茜'},
+    ]},
 ];
