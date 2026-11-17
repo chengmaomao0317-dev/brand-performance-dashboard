@@ -17273,4 +17273,10 @@ const CONSULTANT_RECORDS = [
         {type:'舊客', trial_amt:0, total_amt:0, name:'陳甯_回約35'},
         {type:'舊客', trial_amt:0, total_amt:0, name:'陳甯_回約36'},
       ]},
+
+  // 2026-11-13 忠孝
+  { date:'2026-11-13', storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo',
+    consultant:'翁筱芸', clients:[
+      {type:'舊客', trial_amt:0, total_amt:0, name:'劉詩韻'},
+    ]},
 ];
