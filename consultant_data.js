@@ -15157,8 +15157,6 @@ const CONSULTANT_RECORDS = [
     ]},
   { date:'2026-11-02', storeKey:'wo_zhanqian', store:'館前', brand:'原渥', brandKey:'wo',
     consultant:'公司', clients:[
-      {type:'新客', trial_amt:0, total_amt:780, name:'楊子妍', noCount:true, noVisit:true},
-      {type:'新客', trial_amt:0, total_amt:780, name:'李雨宸', noCount:true, noVisit:true},
       {type:'舊客', trial_amt:0, total_amt:0,   name:'黃彩瑜', noCount:true, noVisit:true},
     ]},
 
