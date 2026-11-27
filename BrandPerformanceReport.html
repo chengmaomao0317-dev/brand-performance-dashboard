@@ -3489,7 +3489,7 @@ const KI_REBOOK_STORE_DATA = {
   '2026-07': { ki_taipei:{ 舊客:204, 業績:2849116 }, ki_taichung:{ 舊客:81,  業績:1216280 } },
   '2026-08': { ki_taipei:{ 舊客:242, 業績:3301837 }, ki_taichung:{ 舊客:66,  業績:1216914 } },
   '2026-09': { ki_taipei:{ 舊客:230, 業績:2824103 }, ki_taichung:{ 舊客:82,  業績:1890391 } },
-  '2026-10': { ki_taipei:{ 舊客:139, 業績:1498743 }, ki_taichung:{ 舊客:0,   業績:0 } },
+  '2026-10': { ki_taipei:{ 舊客:139, 業績:1498743 }, ki_taichung:{ 舊客:66,  業績:1189062 } },
 };
 
 // 各諮詢師回約明細（回約＝已預約、取消＝未到、業績＝實際業績）
@@ -3575,7 +3575,11 @@ const KI_REBOOK_CS_DATA = {
       '柯孟君': { 回約: 37, 取消: 4, 業績: 381396 },
       '陳甯':   { 回約: 39, 取消: 3, 業績: 465979 },
     },
-    ki_taichung: {},
+    ki_taichung: {
+      '郭子萍': { 回約: 25, 取消: 0, 業績: 376257 },
+      '呂秋玫': { 回約: 35, 取消: 0, 業績: 744007 },
+      '何欣穎': { 回約: 6,  取消: 0, 業績: 68798  },
+    },
   },
 };
 
@@ -3870,8 +3874,9 @@ function renderConsultantTab(){
     const retRateStyle = v => v===null?'color:rgba(255,255,255,.5)':v>=70?'color:#7fe0a8':v>=50?'color:#ffd68a':'color:#ff9f9f';
     const retRow = brandKey==='ki'
       ? (kiRebookStore && _csClientFilter!=='new' ? `<div class="cs-store-ret">
-          <div class="cs-store-ret-row" style="grid-template-columns:repeat(3,1fr)">
+          <div class="cs-store-ret-row" style="grid-template-columns:repeat(4,1fr)">
             <div class="cs-ss"><div class="cs-ss-v">${kiRebookStore.舊客}</div><div class="cs-ss-l">總舊客</div></div>
+            <div class="cs-ss"><div class="cs-ss-v">${Object.keys(kiRebookCsData).length>0?kiRebookStore.舊客:'—'}</div><div class="cs-ss-l">回約到店</div></div>
             <div class="cs-ss"><div class="cs-ss-v">$${kiRebookStore.業績.toLocaleString()}</div><div class="cs-ss-l">舊客業績</div></div>
             <div class="cs-ss"><div class="cs-ss-v" style="color:#7fe0a8">$${Math.round(kiRebookStore.業績/kiRebookStore.舊客).toLocaleString()}</div><div class="cs-ss-l">平均客單</div></div>
           </div>
@@ -4039,6 +4044,9 @@ function renderConsultantTab(){
         const recStoreKeys = new Set(records.filter(r=>r.brandKey===bk).map(r=>r.storeKey).filter(Boolean));
         const allStores = STORE_ORDER.filter(sk=>sk.startsWith(bk)&&(recStoreKeys.has(sk)||(bk==='ki'&&!!_kiRebookMonthData[sk])));
         const kiRebookTotal = bk==='ki' ? Object.values(_kiRebookMonthData).reduce((a,s)=>({舊客:a.舊客+(s.舊客||0),業績:a.業績+(s.業績||0)}),{舊客:0,業績:0}) : null;
+        const hasKiCsData = bk==='ki' && (_csMode==='all'
+          ? Object.values(KI_REBOOK_CS_DATA).some(m=>Object.values(m).some(s=>Object.keys(s).length>0))
+          : Object.values((KI_REBOOK_CS_DATA[_outerRefMonth]||{})).some(s=>Object.keys(s).length>0));
         return `<div class="cs-brand-card ${b.topCls}">
           <div class="cs-brand-hd">
             <span class="cs-brand-name ${b.nameCls}">${b.brandLabel}</span>
@@ -4050,8 +4058,9 @@ function renderConsultantTab(){
             <div class="cs-bs"><div class="cs-bs-v" style="color:${rateClr(b.s.成交率)}">${fmtRate(b.s.成交率)}</div><div class="cs-bs-l">成交率</div></div>
             <div class="cs-bs"><div class="cs-bs-v">${fmtAmt(b.s.平均客單)}</div><div class="cs-bs-l">平均客單</div></div>
           </div>
-          ${bk==='ki'&&kiRebookTotal&&kiRebookTotal.舊客>0?`<div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:.5px solid rgba(0,0,0,.07);background:#f9f8f6">
+          ${bk==='ki'&&kiRebookTotal&&kiRebookTotal.舊客>0?`<div style="display:grid;grid-template-columns:repeat(4,1fr);border-top:.5px solid rgba(0,0,0,.07);background:#f9f8f6">
             <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px">${kiRebookTotal.舊客}</div><div class="cs-bs-l">總舊客</div></div>
+            <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px">${hasKiCsData?kiRebookTotal.舊客:'—'}</div><div class="cs-bs-l">回約到店</div></div>
             <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px">$${kiRebookTotal.業績.toLocaleString()}</div><div class="cs-bs-l">舊客業績</div></div>
             <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px;color:#2a7a4a">$${Math.round(kiRebookTotal.業績/kiRebookTotal.舊客).toLocaleString()}</div><div class="cs-bs-l">平均客單</div></div>
           </div>`:bk==='wo'&&b.rs.totalOld>0?`<div style="display:grid;grid-template-columns:repeat(6,1fr);border-top:.5px solid rgba(0,0,0,.07);background:#f9f8f6">
