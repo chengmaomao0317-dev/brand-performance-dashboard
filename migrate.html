@@ -28,7 +28,7 @@ button:disabled{opacity:.4;cursor:default}
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
-import { getFirestore, doc, writeBatch, collection, getDocs, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+import { getFirestore, doc, getDoc, setDoc, writeBatch, collection, getDocs, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 import { firebaseConfig, EDITORS } from './firebase-config.js';
 
 const KI = {"store":{"2026-01":{"ki_taipei":{"舊客":292,"業績":4168623},"ki_taichung":{"舊客":95,"業績":1251151}},"2026-02":{"ki_taipei":{"舊客":280,"業績":3595165},"ki_taichung":{"舊客":81,"業績":1358530}},"2026-03":{"ki_taipei":{"舊客":253,"業績":3693133},"ki_taichung":{"舊客":96,"業績":1217284}},"2026-04":{"ki_taipei":{"舊客":258,"業績":2822904},"ki_taichung":{"舊客":96,"業績":1086500}},"2026-05":{"ki_taipei":{"舊客":266,"業績":3119571},"ki_taichung":{"舊客":67,"業績":1326707}},"2026-06":{"ki_taipei":{"舊客":220,"業績":2788513},"ki_taichung":{"舊客":63,"業績":1159113}},"2026-07":{"ki_taipei":{"舊客":204,"業績":2849116},"ki_taichung":{"舊客":81,"業績":1216280}},"2026-08":{"ki_taipei":{"舊客":242,"業績":3301837},"ki_taichung":{"舊客":66,"業績":1216914}},"2026-09":{"ki_taipei":{"舊客":230,"業績":2824103},"ki_taichung":{"舊客":82,"業績":1890391}},"2026-10":{"ki_taipei":{"舊客":139,"業績":1498743},"ki_taichung":{"舊客":66,"業績":1189062}}},"cs":{"2026-02":{"ki_taipei":{"柯孟君":{"回約":57,"取消":7,"業績":991513},"計品卉":{"回約":47,"取消":10,"業績":431380},"陳詩喬":{"回約":49,"取消":5,"業績":861956},"陳甯":{"回約":32,"取消":1,"業績":538540}},"ki_taichung":{}},"2026-03":{"ki_taipei":{"柯孟君":{"回約":66,"取消":7,"業績":1118803},"計品卉":{"回約":36,"取消":3,"業績":571791},"陳詩喬":{"回約":38,"取消":3,"業績":632762},"陳甯":{"回約":39,"取消":7,"業績":366595}},"ki_taichung":{}},"2026-04":{"ki_taipei":{"柯孟君":{"回約":54,"取消":4,"業績":752034},"計品卉":{"回約":44,"取消":6,"業績":333294},"陳詩喬":{"回約":34,"取消":1,"業績":191491},"陳甯":{"回約":36,"取消":5,"業績":363197}},"ki_taichung":{}},"2026-05":{"ki_taipei":{"柯孟君":{"回約":47,"取消":2,"業績":450009},"計品卉":{"回約":43,"取消":4,"業績":407413},"陳詩喬":{"回約":46,"取消":2,"業績":591798},"陳甯":{"回約":38,"取消":8,"業績":405810}},"ki_taichung":{}},"2026-06":{"ki_taipei":{"柯孟君":{"回約":52,"取消":9,"業績":747595},"計品卉":{"回約":31,"取消":1,"業績":311499},"陳詩喬":{"回約":40,"取消":6,"業績":402586},"陳甯":{"回約":38,"取消":6,"業績":281594}},"ki_taichung":{}},"2026-07":{"ki_taipei":{"柯孟君":{"回約":46,"取消":5,"業績":964499},"計品卉":{"回約":38,"取消":5,"業績":353253},"陳詩喬":{"回約":42,"取消":7,"業績":413374},"陳甯":{"回約":37,"取消":2,"業績":477362}},"ki_taichung":{}},"2026-08":{"ki_taipei":{"柯孟君":{"回約":58,"取消":7,"業績":576784},"計品卉":{"回約":45,"取消":4,"業績":942780},"陳詩喬":{"回約":46,"取消":5,"業績":643880},"陳甯":{"回約":34,"取消":1,"業績":435935}},"ki_taichung":{}},"2026-09":{"ki_taipei":{"柯孟君":{"回約":39,"取消":7,"業績":260647},"計品卉":{"回約":46,"取消":4,"業績":548284},"陳詩喬":{"回約":39,"取消":2,"業績":708435},"陳甯":{"回約":33,"取消":2,"業績":517958}},"ki_taichung":{"郭子萍":{"回約":36,"取消":5,"業績":691789}}},"2026-10":{"ki_taipei":{"計品卉":{"回約":33,"取消":3,"業績":303400},"陳詩喬":{"回約":40,"取消":0,"業績":347968},"柯孟君":{"回約":37,"取消":4,"業績":381396},"陳甯":{"回約":39,"取消":3,"業績":465979}},"ki_taichung":{"郭子萍":{"回約":25,"取消":0,"業績":376257},"呂秋玫":{"回約":35,"取消":0,"業績":744007},"何欣穎":{"回約":6,"取消":0,"業績":68798}}}}};
@@ -62,7 +62,12 @@ function groupByMonthStore() {
 }
 
 document.getElementById('btnMigrate').onclick = async () => {
-  if (!confirm('確定要把 ' + RECORDS.length + ' 筆記錄寫入 Firestore？（同名文件會被覆蓋）')) return;
+  const lock = await getDoc(doc(db, 'settings', 'migration'));
+  if (lock.exists() && lock.data().locked) {
+    log('⛔ 已正式切換為匯入頁輸入（' + (lock.data().by || '') + '），遷移頁已鎖定。再跑一次會用舊的 consultant_data.js 蓋掉之後匯入的資料。', 'err');
+    return;
+  }
+  if (!confirm('確定要把 ' + RECORDS.length + ' 筆記錄寫入 Firestore？\n同名文件會被覆蓋、測試期間的匯入紀錄會清空，完成後此頁會鎖定。')) return;
   document.getElementById('btnMigrate').disabled = true;
   try {
     const groups = groupByMonthStore();
@@ -84,6 +89,13 @@ document.getElementById('btnMigrate').onclick = async () => {
     }));
     await batch.commit();
     log('ki_rebook 已寫入 ' + months.length + ' 個月', 'ok');
+    const logs = await getDocs(collection(db, 'import_log'));
+    for (let i = 0; i < logs.docs.length; i += 400) {
+      const b = writeBatch(db); logs.docs.slice(i, i + 400).forEach(d => b.delete(d.ref)); await b.commit();
+    }
+    log('已清空測試期間的匯入紀錄 ' + logs.size + ' 筆', 'ok');
+    await setDoc(doc(db, 'settings', 'migration'), { locked: true, by: user.email, at: serverTimestamp(), records: RECORDS.length });
+    log('遷移頁已鎖定，之後資料請一律從匯入頁輸入。', 'ok');
     log('遷移完成，請按「核對」。', 'ok');
   } catch (e) {
     log('寫入失敗：' + e.message, 'err');

@@ -1,6 +1,19 @@
 # 原渥集團業績總表 — 日報輸入規則
 
-> 每次新 session 開始，先讀此檔，再讀 consultant_data.js 尾端確認最新記錄位置。
+## 🔁 2026-11-27 起資料改存 Firestore（最重要）
+
+- 日報資料存在 Firebase 專案 `brand-performance-f8b01` 的 Firestore（`cs_months` 每月每店一份文件、`ki_rebook` 原綺回約明細）。
+- **不要再編輯 consultant_data.js**，它只是 Firestore 讀不到時的備份。改了也不會出現在報表上。
+- 收到日報截圖時，**輸出匯入格式文字**，讓用戶貼到 `import.html` 的「日報匯入」：
+  `日期, 門市, 諮詢師, 客別, 體驗金額, 總金額, 客戶姓名, 註記`（一行一位客人，註記為空、noVisit 或 noCount）
+- 原綺回約明細格式：`月份, 門市, 諮詢師, 回約, 取消, 業績`，貼到「原綺回約匯入」。
+- 整理規則的完整版在 import.html「給 Claude 的整理指令」分頁（存在 Firestore `settings/prompt`），以那份為準；下方規則為歷史說明。
+- migrate.html 已鎖定，不可再執行。
+- 編輯者白名單：chengmaomao0317@gmail.com、jatw14701@gmail.com、lalueur.marketing@gmail.com（改名單要同時改 firebase-config.js 和 Firestore 權限規則）。
+
+---
+
+> （舊流程）每次新 session 開始，先讀此檔，再讀 consultant_data.js 尾端確認最新記錄位置。
 
 ## ⛔️ 絕對禁止（未經明確指示不得執行）
 

@@ -973,7 +973,34 @@ function checkPw(){
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<script src="consultant_data.js"></script>
+<script>
+// ── 資料來源：Firestore（失敗時退回 consultant_data.js）──
+const CONSULTANT_RECORDS = [];
+window.__DATA_SOURCE = '';
+window.__csReady = (async () => {
+  try {
+    const FB = 'https://www.gstatic.com/firebasejs/10.12.2/';
+    const [{ initializeApp }, { getFirestore, collection, getDocs }, { firebaseConfig }] = await Promise.all([
+      import(FB + 'firebase-app.js'), import(FB + 'firebase-firestore.js'), import('./firebase-config.js')
+    ]);
+    const db = getFirestore(initializeApp(firebaseConfig));
+    const [cs, ki] = await Promise.all([getDocs(collection(db, 'cs_months')), getDocs(collection(db, 'ki_rebook'))]);
+    const records = [];
+    cs.docs.sort((a, b) => a.id.localeCompare(b.id)).forEach(d => records.push(...(d.data().records || [])));
+    if (!records.length) throw new Error('Firestore 沒有資料');
+    const kiStore = {}, kiCs = {};
+    ki.forEach(d => { const v = d.data(); if (v.store) kiStore[d.id] = v.store; if (v.cs) kiCs[d.id] = v.cs; });
+    window.__DATA_SOURCE = 'Firestore';
+    return { records, kiStore, kiCs };
+  } catch (e) {
+    console.warn('Firestore 載入失敗，改用 consultant_data.js：', e);
+    const txt = await (await fetch('consultant_data.js')).text();
+    const records = new Function(txt.replace('const CONSULTANT_RECORDS =', 'return'))();
+    window.__DATA_SOURCE = 'consultant_data.js（備援）';
+    return { records, kiStore: null, kiCs: null };
+  }
+})();
+</script>
 <script>
 // ══════════════════════════════════════════
 //  DATA
@@ -3473,8 +3500,8 @@ async function loadData(){
   }
 }
 
-// CONSULTANT_RECORDS 已移至 consultant_data.js（外部引用）
-// 直接編輯 consultant_data.js 新增或修改記錄
+// CONSULTANT_RECORDS 改由 Firestore（cs_months）載入，consultant_data.js 僅作備援
+// 新增資料請用 import.html 匯入，不要再編輯 consultant_data.js
 
 // ══════════════════════════════════════════
 //  原綺 舊客回約 — 月度資料（來自 Google Sheets G5/G6/G8/G9）
@@ -4541,7 +4568,19 @@ function switchKiRebookStore(){
 // ══════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════
-loadData();
+window.__csReady.then(d => {
+  CONSULTANT_RECORDS.push(...d.records);
+  if (d.kiCs) Object.keys(d.kiCs).forEach(m => { KI_REBOOK_CS_DATA[m] = d.kiCs[m]; });
+  if (d.kiStore) Object.keys(d.kiStore).forEach(m => { if (!KI_REBOOK_STORE_DATA[m]) KI_REBOOK_STORE_DATA[m] = d.kiStore[m]; });
+  const sub = document.getElementById('header-sub-text');
+  if (sub) {
+    const a = document.createElement('a'); a.href = 'import.html'; a.textContent = '資料匯入';
+    a.style.cssText = 'margin-left:8px;color:rgba(255,255,255,.6);font-size:10px;border:0.5px solid rgba(255,255,255,.2);border-radius:4px;padding:2px 8px;text-decoration:none';
+    sub.appendChild(a);
+    if (window.__DATA_SOURCE !== 'Firestore') { const w = document.createElement('span'); w.textContent = '　⚠ 雲端資料讀取失敗，目前顯示備份資料'; w.style.cssText = 'color:#ffb3b3;font-size:10px'; sub.appendChild(w); }
+  }
+  loadData();
+});
 
 // ══════════════════════════════════════════
 //  新客明細 Modal
