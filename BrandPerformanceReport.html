@@ -3492,6 +3492,19 @@ const KI_REBOOK_STORE_DATA = {
   '2026-10': { ki_taipei:{ 舊客:139, 業績:1498743 }, ki_taichung:{ 舊客:66,  業績:1189062 } },
 };
 
+// 原綺回約到店：各諮詢師（回約−取消）加總；month=null 代表全部月份；無明細回傳 null
+function kiRebookArrivals(month, storeKeys){
+  const months = month ? [month] : Object.keys(KI_REBOOK_CS_DATA);
+  let sum = 0, has = false;
+  months.forEach(m => {
+    const md = KI_REBOOK_CS_DATA[m] || {};
+    storeKeys.forEach(sk => Object.values(md[sk] || {}).forEach(c => {
+      if(c && c.回約 != null){ sum += (c.回約 || 0) - (c.取消 || 0); has = true; }
+    }));
+  });
+  return has ? sum : null;
+}
+
 // 各諮詢師回約明細（回約＝已預約、取消＝未到、業績＝實際業績）
 const KI_REBOOK_CS_DATA = {
   '2026-02': {
@@ -3876,7 +3889,7 @@ function renderConsultantTab(){
       ? (kiRebookStore && _csClientFilter!=='new' ? `<div class="cs-store-ret">
           <div class="cs-store-ret-row" style="grid-template-columns:repeat(4,1fr)">
             <div class="cs-ss"><div class="cs-ss-v">${kiRebookStore.舊客}</div><div class="cs-ss-l">總舊客</div></div>
-            <div class="cs-ss"><div class="cs-ss-v">${Object.keys(kiRebookCsData).length>0?kiRebookStore.舊客:'—'}</div><div class="cs-ss-l">回約到店</div></div>
+            <div class="cs-ss"><div class="cs-ss-v">${(v=>v==null?'—':v)(kiRebookArrivals(_csMode==='all'?null:_kiRefMonth,[storeKey]))}</div><div class="cs-ss-l">回約到店</div></div>
             <div class="cs-ss"><div class="cs-ss-v">$${kiRebookStore.業績.toLocaleString()}</div><div class="cs-ss-l">舊客業績</div></div>
             <div class="cs-ss"><div class="cs-ss-v" style="color:#7fe0a8">$${Math.round(kiRebookStore.業績/kiRebookStore.舊客).toLocaleString()}</div><div class="cs-ss-l">平均客單</div></div>
           </div>
@@ -4044,9 +4057,6 @@ function renderConsultantTab(){
         const recStoreKeys = new Set(records.filter(r=>r.brandKey===bk).map(r=>r.storeKey).filter(Boolean));
         const allStores = STORE_ORDER.filter(sk=>sk.startsWith(bk)&&(recStoreKeys.has(sk)||(bk==='ki'&&!!_kiRebookMonthData[sk])));
         const kiRebookTotal = bk==='ki' ? Object.values(_kiRebookMonthData).reduce((a,s)=>({舊客:a.舊客+(s.舊客||0),業績:a.業績+(s.業績||0)}),{舊客:0,業績:0}) : null;
-        const hasKiCsData = bk==='ki' && (_csMode==='all'
-          ? Object.values(KI_REBOOK_CS_DATA).some(m=>Object.values(m).some(s=>Object.keys(s).length>0))
-          : Object.values((KI_REBOOK_CS_DATA[_outerRefMonth]||{})).some(s=>Object.keys(s).length>0));
         return `<div class="cs-brand-card ${b.topCls}">
           <div class="cs-brand-hd">
             <span class="cs-brand-name ${b.nameCls}">${b.brandLabel}</span>
@@ -4060,7 +4070,7 @@ function renderConsultantTab(){
           </div>
           ${bk==='ki'&&kiRebookTotal&&kiRebookTotal.舊客>0?`<div style="display:grid;grid-template-columns:repeat(4,1fr);border-top:.5px solid rgba(0,0,0,.07);background:#f9f8f6">
             <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px">${kiRebookTotal.舊客}</div><div class="cs-bs-l">總舊客</div></div>
-            <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px">${hasKiCsData?kiRebookTotal.舊客:'—'}</div><div class="cs-bs-l">回約到店</div></div>
+            <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px">${(v=>v==null?'—':v)(kiRebookArrivals(_csMode==='all'?null:_outerRefMonth,allStores))}</div><div class="cs-bs-l">回約到店</div></div>
             <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px">$${kiRebookTotal.業績.toLocaleString()}</div><div class="cs-bs-l">舊客業績</div></div>
             <div class="cs-bs"><div class="cs-bs-v" style="font-size:12px;color:#2a7a4a">$${Math.round(kiRebookTotal.業績/kiRebookTotal.舊客).toLocaleString()}</div><div class="cs-bs-l">平均客單</div></div>
           </div>`:bk==='wo'&&b.rs.totalOld>0?`<div style="display:grid;grid-template-columns:repeat(6,1fr);border-top:.5px solid rgba(0,0,0,.07);background:#f9f8f6">
@@ -5480,6 +5490,8 @@ function doCSPrint(){window.print();}
       if(m){ monthKey = `${m[1]}-${String(m[2]).padStart(2,'0')}`; break; }
     }
     if(!monthKey) return;
+    // 用分頁名稱抓時（如 '12月'），內容月份必須相符；分頁不存在時 gviz 會回傳其他分頁，避免覆蓋掉正確月份
+    if(isName){ const want=parseInt(GID,10); if(want && Number(monthKey.slice(5))!==want) return; }
 
     // 動態找台北/台中人數行：找 col[1]=台北(台中) 且 col[3]=人數 的行
     // 找到兩個就立即 break，避免繼續找到原渥台中行把結果覆蓋掉
