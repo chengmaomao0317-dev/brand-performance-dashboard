@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>一次性資料遷移</title>
+<style>
+body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;max-width:720px;margin:40px auto;padding:0 20px;color:#222}
+button{font-size:15px;padding:10px 18px;border-radius:8px;border:1px solid #ccc;background:#fff;cursor:pointer;margin-right:8px}
+button.primary{background:#222;color:#fff;border-color:#222}
+button:disabled{opacity:.4;cursor:default}
+#log{white-space:pre-wrap;background:#f5f4f1;border-radius:8px;padding:14px;margin-top:20px;font-size:13px;line-height:1.7;min-height:120px}
+.ok{color:#2a7a4a}.err{color:#a32d2d}
+</style>
+</head>
+<body>
+<h2>一次性資料遷移：consultant_data.js → Firestore</h2>
+<p>只需要執行一次。登入白名單帳號後按「開始遷移」，完成後按「核對」確認筆數一致。</p>
+<div>
+  <button id="btnLogin">Google 登入</button>
+  <button id="btnMigrate" class="primary" disabled>開始遷移</button>
+  <button id="btnVerify" disabled>核對</button>
+</div>
+<div id="log"></div>
+
+<script src="consultant_data.js"></script>
+<script>window.__RECORDS = CONSULTANT_RECORDS;</script>
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+import { getFirestore, doc, writeBatch, collection, getDocs, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+import { firebaseConfig, EDITORS } from './firebase-config.js';
+
+const KI = {"store":{"2026-01":{"ki_taipei":{"舊客":292,"業績":4168623},"ki_taichung":{"舊客":95,"業績":1251151}},"2026-02":{"ki_taipei":{"舊客":280,"業績":3595165},"ki_taichung":{"舊客":81,"業績":1358530}},"2026-03":{"ki_taipei":{"舊客":253,"業績":3693133},"ki_taichung":{"舊客":96,"業績":1217284}},"2026-04":{"ki_taipei":{"舊客":258,"業績":2822904},"ki_taichung":{"舊客":96,"業績":1086500}},"2026-05":{"ki_taipei":{"舊客":266,"業績":3119571},"ki_taichung":{"舊客":67,"業績":1326707}},"2026-06":{"ki_taipei":{"舊客":220,"業績":2788513},"ki_taichung":{"舊客":63,"業績":1159113}},"2026-07":{"ki_taipei":{"舊客":204,"業績":2849116},"ki_taichung":{"舊客":81,"業績":1216280}},"2026-08":{"ki_taipei":{"舊客":242,"業績":3301837},"ki_taichung":{"舊客":66,"業績":1216914}},"2026-09":{"ki_taipei":{"舊客":230,"業績":2824103},"ki_taichung":{"舊客":82,"業績":1890391}},"2026-10":{"ki_taipei":{"舊客":139,"業績":1498743},"ki_taichung":{"舊客":66,"業績":1189062}}},"cs":{"2026-02":{"ki_taipei":{"柯孟君":{"回約":57,"取消":7,"業績":991513},"計品卉":{"回約":47,"取消":10,"業績":431380},"陳詩喬":{"回約":49,"取消":5,"業績":861956},"陳甯":{"回約":32,"取消":1,"業績":538540}},"ki_taichung":{}},"2026-03":{"ki_taipei":{"柯孟君":{"回約":66,"取消":7,"業績":1118803},"計品卉":{"回約":36,"取消":3,"業績":571791},"陳詩喬":{"回約":38,"取消":3,"業績":632762},"陳甯":{"回約":39,"取消":7,"業績":366595}},"ki_taichung":{}},"2026-04":{"ki_taipei":{"柯孟君":{"回約":54,"取消":4,"業績":752034},"計品卉":{"回約":44,"取消":6,"業績":333294},"陳詩喬":{"回約":34,"取消":1,"業績":191491},"陳甯":{"回約":36,"取消":5,"業績":363197}},"ki_taichung":{}},"2026-05":{"ki_taipei":{"柯孟君":{"回約":47,"取消":2,"業績":450009},"計品卉":{"回約":43,"取消":4,"業績":407413},"陳詩喬":{"回約":46,"取消":2,"業績":591798},"陳甯":{"回約":38,"取消":8,"業績":405810}},"ki_taichung":{}},"2026-06":{"ki_taipei":{"柯孟君":{"回約":52,"取消":9,"業績":747595},"計品卉":{"回約":31,"取消":1,"業績":311499},"陳詩喬":{"回約":40,"取消":6,"業績":402586},"陳甯":{"回約":38,"取消":6,"業績":281594}},"ki_taichung":{}},"2026-07":{"ki_taipei":{"柯孟君":{"回約":46,"取消":5,"業績":964499},"計品卉":{"回約":38,"取消":5,"業績":353253},"陳詩喬":{"回約":42,"取消":7,"業績":413374},"陳甯":{"回約":37,"取消":2,"業績":477362}},"ki_taichung":{}},"2026-08":{"ki_taipei":{"柯孟君":{"回約":58,"取消":7,"業績":576784},"計品卉":{"回約":45,"取消":4,"業績":942780},"陳詩喬":{"回約":46,"取消":5,"業績":643880},"陳甯":{"回約":34,"取消":1,"業績":435935}},"ki_taichung":{}},"2026-09":{"ki_taipei":{"柯孟君":{"回約":39,"取消":7,"業績":260647},"計品卉":{"回約":46,"取消":4,"業績":548284},"陳詩喬":{"回約":39,"取消":2,"業績":708435},"陳甯":{"回約":33,"取消":2,"業績":517958}},"ki_taichung":{"郭子萍":{"回約":36,"取消":5,"業績":691789}}},"2026-10":{"ki_taipei":{"計品卉":{"回約":33,"取消":3,"業績":303400},"陳詩喬":{"回約":40,"取消":0,"業績":347968},"柯孟君":{"回約":37,"取消":4,"業績":381396},"陳甯":{"回約":39,"取消":3,"業績":465979}},"ki_taichung":{"郭子萍":{"回約":25,"取消":0,"業績":376257},"呂秋玫":{"回約":35,"取消":0,"業績":744007},"何欣穎":{"回約":6,"取消":0,"業績":68798}}}}};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const logEl = document.getElementById('log');
+const log = (msg, cls='') => { logEl.innerHTML += (cls?'<span class="'+cls+'">':'') + msg + (cls?'</span>':'') + '\n'; };
+const RECORDS = window.__RECORDS;
+let user = null;
+
+log('consultant_data.js 共 ' + RECORDS.length + ' 筆記錄');
+
+document.getElementById('btnLogin').onclick = () => signInWithPopup(auth, new GoogleAuthProvider()).catch(e => log('登入失敗：' + e.message, 'err'));
+onAuthStateChanged(auth, u => {
+  user = u;
+  if (!u) return;
+  const ok = EDITORS.includes(u.email);
+  log('已登入：' + u.email + (ok ? '' : '（不在白名單，無法寫入）'), ok ? 'ok' : 'err');
+  document.getElementById('btnMigrate').disabled = !ok;
+  document.getElementById('btnVerify').disabled = false;
+});
+
+function groupByMonthStore() {
+  const m = {};
+  RECORDS.forEach(r => {
+    const id = r.date.slice(0,7) + '_' + r.storeKey;
+    (m[id] = m[id] || { month: r.date.slice(0,7), storeKey: r.storeKey, records: [] }).records.push(r);
+  });
+  return m;
+}
+
+document.getElementById('btnMigrate').onclick = async () => {
+  if (!confirm('確定要把 ' + RECORDS.length + ' 筆記錄寫入 Firestore？（同名文件會被覆蓋）')) return;
+  document.getElementById('btnMigrate').disabled = true;
+  try {
+    const groups = groupByMonthStore();
+    const ids = Object.keys(groups);
+    for (let i = 0; i < ids.length; i += 20) {
+      const batch = writeBatch(db);
+      ids.slice(i, i + 20).forEach(id => batch.set(doc(db, 'cs_months', id), {
+        ...JSON.parse(JSON.stringify(groups[id])),
+        updatedBy: user.email + '（遷移）', updatedAt: serverTimestamp(),
+      }));
+      await batch.commit();
+      log('cs_months 已寫入 ' + Math.min(i + 20, ids.length) + ' / ' + ids.length + ' 份');
+    }
+    const months = [...new Set([...Object.keys(KI.store), ...Object.keys(KI.cs)])];
+    const batch = writeBatch(db);
+    months.forEach(m => batch.set(doc(db, 'ki_rebook', m), {
+      month: m, store: KI.store[m] || null, cs: KI.cs[m] || null,
+      updatedBy: user.email + '（遷移）', updatedAt: serverTimestamp(),
+    }));
+    await batch.commit();
+    log('ki_rebook 已寫入 ' + months.length + ' 個月', 'ok');
+    log('遷移完成，請按「核對」。', 'ok');
+  } catch (e) {
+    log('寫入失敗：' + e.message, 'err');
+    document.getElementById('btnMigrate').disabled = false;
+  }
+};
+
+document.getElementById('btnVerify').onclick = async () => {
+  try {
+    const snap = await getDocs(collection(db, 'cs_months'));
+    let n = 0, clients = 0;
+    snap.forEach(d => { const recs = d.data().records || []; n += recs.length; recs.forEach(r => clients += (r.clients||[]).length); });
+    const srcClients = RECORDS.reduce((a, r) => a + (r.clients||[]).length, 0);
+    log('Firestore：' + snap.size + ' 份文件、' + n + ' 筆記錄、' + clients + ' 位客人');
+    log('原檔　　：' + Object.keys(groupByMonthStore()).length + ' 份文件、' + RECORDS.length + ' 筆記錄、' + srcClients + ' 位客人');
+    log(n === RECORDS.length && clients === srcClients ? '✔ 筆數一致' : '✘ 筆數不一致', n === RECORDS.length && clients === srcClients ? 'ok' : 'err');
+    const ki = await getDocs(collection(db, 'ki_rebook'));
+    log('ki_rebook：' + ki.size + ' 個月');
+  } catch (e) { log('核對失敗：' + e.message, 'err'); }
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isEditor() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email in [
+          'chengmaomao0317@gmail.com',
+          'jatw14701@gmail.com',
+          'lalueur.marketing@gmail.com'
+        ];
+    }
+    match /cs_months/{id}  { allow read: if true; allow write: if isEditor(); }
+    match /ki_rebook/{id}  { allow read: if true; allow write: if isEditor(); }
+    match /settings/{id}   { allow read: if true; allow write: if isEditor(); }
+    match /import_log/{id} { allow read, write: if isEditor(); }
+  }
+}
