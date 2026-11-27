@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>資料匯入｜原渥集團業績總表</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;margin:0;background:#f4f3ef;color:#222}
+header{background:#111;color:#fff;padding:16px 28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+header h1{font-size:18px;margin:0;font-weight:600}
+header a{color:#bbb;font-size:13px}
+#who{margin-left:auto;font-size:13px;color:#ccc}
+main{max-width:1080px;margin:24px auto;padding:0 20px}
+.tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.tabs button{border:0;background:#e6e4de;border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;color:#444}
+.tabs button.on{background:#222;color:#fff}
+.card{background:#fff;border-radius:14px;padding:22px;margin-bottom:16px}
+.hint{font-size:13px;color:#777;line-height:1.7;margin:0 0 12px}
+textarea{width:100%;min-height:220px;font-family:ui-monospace,Menlo,monospace;font-size:13px;line-height:1.6;border:1px solid #ddd;border-radius:10px;padding:12px;resize:vertical}
+button.btn{font-size:14px;padding:9px 18px;border-radius:999px;border:1px solid #ccc;background:#fff;cursor:pointer}
+button.btn.primary{background:#222;color:#fff;border-color:#222}
+button.btn:disabled{opacity:.35;cursor:default}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+label.chk{font-size:14px;display:flex;align-items:center;gap:6px}
+table{border-collapse:collapse;width:100%;font-size:13px;margin-top:12px}
+th,td{border-bottom:1px solid #eee;padding:7px 8px;text-align:left;vertical-align:top}
+th{background:#faf9f6;font-weight:600;color:#555}
+td.num,th.num{text-align:right}
+tr.err td{background:#fdeeee}
+tr.warn td{background:#fff8e6}
+.msg-err{color:#a32d2d}.msg-warn{color:#946200}.msg-ok{color:#2a7a4a}
+.pill{display:inline-block;font-size:11px;padding:1px 8px;border-radius:999px;background:#eee;margin-left:6px}
+#status{font-size:14px;margin-top:10px;min-height:20px}
+.locked{text-align:center;padding:60px 20px;color:#777}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<header>
+  <h1>資料匯入</h1>
+  <a href="BrandPerformanceReport.html">← 回報表</a>
+  <div id="who">尚未登入</div>
+  <button class="btn" id="btnLogin">Google 登入</button>
+  <button class="btn hidden" id="btnLogout">登出</button>
+</header>
+
+<main>
+  <div class="card locked" id="locked">請用編輯者帳號登入後才能匯入資料。</div>
+
+  <div id="app" class="hidden">
+    <div class="tabs">
+      <button data-tab="daily" class="on">日報匯入</button>
+      <button data-tab="rebook">原綺回約匯入</button>
+      <button data-tab="prompt">給 Claude 的整理指令</button>
+      <button data-tab="log">匯入紀錄</button>
+    </div>
+
+    <!-- 日報匯入 -->
+    <section data-pane="daily" class="card">
+      <p class="hint">每行一位客人：<b>日期, 門市, 諮詢師, 客別, 體驗金額, 總金額, 客戶姓名, 註記</b>。可用逗號或 Tab 分隔。註記可留空，或填 noVisit、noCount。<br>
+      先到「給 Claude 的整理指令」複製指令，連同日報截圖貼到 claude.ai，再把結果貼到下面。</p>
+      <textarea id="dailyText" placeholder="11/26, 館前, 吳凱婷, 新客, 2000, 7999, 張硯婷,&#10;11/26, 館前, 公司, 舊客, 0, 0, 林櫪瑋,"></textarea>
+      <div class="row">
+        <button class="btn" id="btnCheck">檢查並預覽</button>
+        <label class="chk"><input type="checkbox" id="replace" checked>取代相同日期＋門市的舊資料</label>
+        <button class="btn primary" id="btnImport" disabled>確認匯入</button>
+      </div>
+      <div id="status"></div>
+      <div id="preview"></div>
+    </section>
+
+    <!-- 原綺回約 -->
+    <section data-pane="rebook" class="card hidden">
+      <p class="hint">每行一位諮詢師：<b>月份, 門市, 諮詢師, 回約, 取消, 業績</b>。例：<code>2026-11, 台中原綺, 郭子萍, 25, 0, 376257</code><br>
+      匯入時會取代該月份該門市的全部諮詢師明細。</p>
+      <textarea id="rebookText" style="min-height:160px"></textarea>
+      <div class="row">
+        <button class="btn" id="btnRbCheck">檢查並預覽</button>
+        <button class="btn primary" id="btnRbImport" disabled>確認匯入</button>
+      </div>
+      <div id="rbStatus" style="font-size:14px;margin-top:10px"></div>
+      <div id="rbPreview"></div>
+    </section>
+
+    <!-- 整理指令 -->
+    <section data-pane="prompt" class="card hidden">
+      <p class="hint">按「複製指令」後，連同日報截圖一起貼到 claude.ai。規則有變動時可直接在這裡修改後按「儲存」。</p>
+      <textarea id="promptText" style="min-height:460px"></textarea>
+      <div class="row">
+        <button class="btn primary" id="btnCopy">複製指令</button>
+        <button class="btn" id="btnSavePrompt">儲存修改</button>
+        <span id="promptStatus" style="font-size:14px"></span>
+      </div>
+    </section>
+
+    <!-- 匯入紀錄 -->
+    <section data-pane="log" class="card hidden">
+      <p class="hint">最近 30 次匯入。「復原」會把該次匯入影響的資料還原成匯入前的樣子。</p>
+      <div id="logList">載入中…</div>
+    </section>
+  </div>
+</main>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+import { getFirestore, doc, getDoc, setDoc, deleteDoc, collection, query, orderBy, limit, getDocs, runTransaction, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+import { firebaseConfig, EDITORS } from './firebase-config.js';
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const $ = id => document.getElementById(id);
+let user = null;
+
+// ───────── 基本資料 ─────────
+const STORES = {
+  '館前':     { storeKey:'wo_zhanqian',  store:'站前', brand:'原渥', brandKey:'wo' },
+  '站前':     { storeKey:'wo_zhanqian',  store:'站前', brand:'原渥', brandKey:'wo' },
+  '大安':     { storeKey:'wo_daan',      store:'大安', brand:'原渥', brandKey:'wo' },
+  '忠孝':     { storeKey:'wo_zhongxiao', store:'忠孝', brand:'原渥', brandKey:'wo' },
+  '東門':     { storeKey:'wo_dongmen',   store:'東門', brand:'原渥', brandKey:'wo' },
+  '板橋':     { storeKey:'wo_banqiao',   store:'板橋', brand:'原渥', brandKey:'wo' },
+  '台中':     { storeKey:'wo_taichung',  store:'台中', brand:'原渥', brandKey:'wo' },
+  '台中原渥': { storeKey:'wo_taichung',  store:'台中', brand:'原渥', brandKey:'wo' },
+  '台北原綺': { storeKey:'ki_taipei',    store:'台北', brand:'原綺', brandKey:'ki' },
+  '診所東門': { storeKey:'ki_taipei',    store:'台北', brand:'原綺', brandKey:'ki' },
+  '台中原綺': { storeKey:'ki_taichung',  store:'台中', brand:'原綺', brandKey:'ki' },
+  '診所台中': { storeKey:'ki_taichung',  store:'台中', brand:'原綺', brandKey:'ki' },
+  '東門原綺': { storeKey:'wo_dongmen',   store:'東門', brand:'原綺', brandKey:'ki' },
+};
+const FIXED = {
+  'wo_zhanqian|wo':  ['廖梓涵','吳凱婷'],
+  'wo_daan|wo':      ['李晨研','蔡亞衫'],
+  'wo_zhongxiao|wo': ['王詩涵','翁筱芸'],
+  'wo_dongmen|wo':   ['邱家榆'],
+  'wo_banqiao|wo':   ['森珮筠'],
+  'wo_taichung|wo':  ['郭子萍','林雨芑','何欣穎','呂秋玫'],
+  'ki_taipei|ki':    ['陳詩喬','柯孟君','計品卉','陳甯'],
+  'ki_taichung|ki':  ['郭子萍','呂秋玫','何欣穎'],
+  'wo_dongmen|ki':   [],
+};
+const NAME_FIX = { '林雨芸':'林雨芑', '蔡亞杉':'蔡亞衫', '陳寧':'陳甯', '陳寗':'陳甯' };
+const TYPES = ['新客','舊客','舊客體驗'];
+
+// ───────── 登入 ─────────
+$('btnLogin').onclick = () => signInWithPopup(auth, new GoogleAuthProvider()).catch(e => alert('登入失敗：' + e.message));
+$('btnLogout').onclick = () => signOut(auth);
+onAuthStateChanged(auth, u => {
+  const ok = !!u && EDITORS.includes(u.email);
+  user = ok ? u : null;
+  $('who').textContent = u ? u.email + (ok ? '' : '（不在編輯者名單）') : '尚未登入';
+  $('btnLogin').classList.toggle('hidden', !!u);
+  $('btnLogout').classList.toggle('hidden', !u);
+  $('locked').classList.toggle('hidden', ok);
+  $('app').classList.toggle('hidden', !ok);
+  $('locked').textContent = u && !ok ? '這個帳號沒有匯入權限，請改用編輯者帳號登入。' : '請用編輯者帳號登入後才能匯入資料。';
+  if (ok) { loadPrompt(); loadLog(); }
+});
+
+// ───────── 分頁 ─────────
+document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.tabs button').forEach(x => x.classList.toggle('on', x === b));
+  document.querySelectorAll('[data-pane]').forEach(p => p.classList.toggle('hidden', p.dataset.pane !== b.dataset.tab));
+  if (b.dataset.tab === 'log') loadLog();
+});
+
+// ───────── 工具 ─────────
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt = n => '$' + Math.round(n).toLocaleString();
+const splitLine = l => l.split(/\t|,|，/).map(x => x.trim());
+const toNum = s => { const v = Number(String(s || '0').replace(/[$,\s]/g, '')); return isFinite(v) ? v : NaN; };
+function toDate(s) {
+  s = String(s).trim();
+  let m = s.match(/^(\d{4})[\/\-.](\d{1,2})[\/\-.](\d{1,2})$/);
+  if (m) return `${m[1]}-${m[2].padStart(2,'0')}-${m[3].padStart(2,'0')}`;
+  m = s.match(/^(\d{1,2})[\/\-.](\d{1,2})$/);
+  if (!m) return null;
+  const now = new Date(); let y = now.getFullYear();
+  if (Number(m[1]) > now.getMonth() + 2) y -= 1;   // 例如一月時貼十二月資料
+  return `${y}-${m[1].padStart(2,'0')}-${m[2].padStart(2,'0')}`;
+}
+const groupKey = r => `${r.date}|${r.storeKey}|${r.brandKey}`;
+const monthDocId = (date, storeKey) => date.slice(0,7) + '_' + storeKey;
+const rand = () => Math.random().toString(36).slice(2, 10);
+
+// ───────── 日報：解析 ─────────
+let parsed = null;
+function parseDaily(text) {
+  const rows = [];
+  text.split(/\r?\n/).forEach((line, i) => {
+    if (!line.trim() || /^待確認/.test(line.trim())) return;
+    const f = splitLine(line);
+    const r = { line: i + 1, raw: line, errs: [], warns: [] };
+    const [d, st, cs, ty, tr, to, nm, note] = f;
+    r.date = toDate(d); if (!r.date) r.errs.push('日期看不懂');
+    const S = STORES[(st || '').replace(/店$/, '')];
+    if (!S) r.errs.push('門市不認得：' + (st || '空白')); else Object.assign(r, S);
+    r.consultant = NAME_FIX[cs] || cs || '';
+    if (NAME_FIX[cs]) r.warns.push(`${cs} 已更正為 ${NAME_FIX[cs]}`);
+    if (S && r.consultant !== '公司' && !(FIXED[S.storeKey + '|' + S.brandKey] || []).includes(r.consultant))
+      r.errs.push(`${r.consultant || '空白'} 不是這間店的固定諮詢師（跑店請填「公司」）`);
+    r.type = ty; if (!TYPES.includes(ty)) r.errs.push('客別要是 新客／舊客／舊客體驗');
+    r.trial = toNum(tr); r.total = toNum(to);
+    if (isNaN(r.trial) || isNaN(r.total)) r.errs.push('金額不是數字');
+    r.name = (nm || '').trim(); if (!r.name) r.errs.push('沒有客戶姓名');
+    r.note = (note || '').trim();
+    if (r.note && !['noVisit','noCount'].includes(r.note)) r.errs.push('註記只能是 noVisit 或 noCount');
+    if (S && S.brandKey === 'ki' && r.type === '新客' && r.trial !== 0) r.errs.push('原綺新客的體驗金額要填 0');
+    if (!isNaN(r.trial) && !isNaN(r.total) && r.total > 0 && r.total < r.trial) r.warns.push('總金額小於體驗金額');
+    if (r.type === '舊客體驗' && r.trial === 0) r.warns.push('舊客體驗卻沒有體驗金額');
+    if (r.type === '舊客' && r.trial > 0) r.warns.push('有體驗金額，客別應該是「舊客體驗」');
+    if (f.length > 8 && f.slice(8).some(x => x)) r.warns.push('欄位超過 8 個，多的被忽略');
+    rows.push(r);
+  });
+  // 同日同店同一位客人出現兩次以上，第二次起要有 noVisit／noCount
+  const seen = {};
+  rows.forEach(r => {
+    if (r.errs.length) return;
+    const k = groupKey(r) + '|' + r.name;
+    if (seen[k] && !r.note) r.errs.push('同一天同一位客人出現第二次，請加註 noVisit');
+    seen[k] = true;
+  });
+  return rows;
+}
+
+function buildRecords(rows) {
+  const map = new Map();
+  rows.forEach(r => {
+    const k = groupKey(r) + '|' + r.consultant;
+    if (!map.has(k)) map.set(k, { date:r.date, storeKey:r.storeKey, store:r.store, brand:r.brand, brandKey:r.brandKey, consultant:r.consultant, clients:[] });
+    const c = { type:r.type, trial_amt:r.trial, total_amt:r.total, name:r.name };
+    if (r.note === 'noVisit') c.noVisit = true;
+    if (r.note === 'noCount') c.noCount = true;
+    map.get(k).clients.push(c);
+  });
+  return [...map.values()];
+}
+
+function summarize(records) {
+  // 依 日期＋門市＋諮詢師 統計：來客、新客、新客成交、業績（新客＝總額−體驗，其餘＝總額）
+  return records.map(r => {
+    let visit = 0, nw = 0, deal = 0, amt = 0;
+    r.clients.forEach(c => {
+      if (!c.noVisit && !c.noCount) visit++;
+      if (c.type === '新客' && !c.noCount) { nw++; if (c.total_amt > c.trial_amt) deal++; }
+      amt += c.type === '新客' ? Math.max(0, c.total_amt - c.trial_amt) : Math.max(c.total_amt, c.trial_amt);
+    });
+    return { ...r, visit, nw, deal, amt };
+  });
+}
+
+$('btnCheck').onclick = () => {
+  const rows = parseDaily($('dailyText').value);
+  const bad = rows.filter(r => r.errs.length), warn = rows.filter(r => !r.errs.length && r.warns.length);
+  let html = '';
+  if (bad.length || warn.length) {
+    html += '<table><tr><th>行</th><th>內容</th><th>問題</th></tr>' +
+      [...bad, ...warn].sort((a,b)=>a.line-b.line).map(r => `<tr class="${r.errs.length?'err':'warn'}"><td>${r.line}</td><td>${esc(r.raw)}</td><td>${[...r.errs.map(e=>'<span class="msg-err">✘ '+esc(e)+'</span>'), ...r.warns.map(w=>'<span class="msg-warn">⚠ '+esc(w)+'</span>')].join('<br>')}</td></tr>`).join('') + '</table>';
+  }
+  if (!rows.length) { $('status').innerHTML = '<span class="msg-err">沒有可匯入的內容</span>'; $('preview').innerHTML=''; $('btnImport').disabled = true; return; }
+  if (bad.length) {
+    parsed = null; $('btnImport').disabled = true;
+    $('status').innerHTML = `<span class="msg-err">有 ${bad.length} 行需要修正，修好後再按「檢查並預覽」。</span>`;
+    $('preview').innerHTML = html; return;
+  }
+  const records = buildRecords(rows);
+  parsed = { rows, records };
+  const sum = summarize(records);
+  const groups = [...new Set(records.map(groupKey))];
+  html += '<h3 style="font-size:15px;margin:18px 0 0">預覽（請對照日報小計）</h3><table><tr><th>日期</th><th>門市</th><th>諮詢師</th><th class="num">來客</th><th class="num">新客</th><th class="num">新客成交</th><th class="num">業績</th><th>客人</th></tr>' +
+    sum.map(s => `<tr><td>${s.date.slice(5)}</td><td>${esc(s.store)}${s.brandKey==='ki'?'<span class="pill">原綺</span>':''}</td><td>${esc(s.consultant)}</td><td class="num">${s.visit}</td><td class="num">${s.nw}</td><td class="num">${s.deal}</td><td class="num">${fmt(s.amt)}</td><td style="color:#666">${s.clients.map(c=>esc(c.name)+(c.total_amt?'('+c.total_amt.toLocaleString()+')':'')+(c.noVisit?'*':'')).join('、')}</td></tr>`).join('') + '</table>';
+  html += '<p class="hint" style="margin-top:8px">* = noVisit（不算來客）。業績：新客＝總金額−體驗金額；舊客＝總金額（或體驗金額）。</p>';
+  $('status').innerHTML = `<span class="msg-ok">✔ ${rows.length} 位客人、${records.length} 個諮詢師區塊、${groups.length} 個「日期＋門市」。${warn.length ? '有 ' + warn.length + ' 行提醒請確認。' : ''}</span>`;
+  $('preview').innerHTML = html;
+  $('btnImport').disabled = false;
+};
+$('dailyText').oninput = () => { $('btnImport').disabled = true; };
+
+// ───────── 日報：寫入 ─────────
+$('btnImport').onclick = async () => {
+  if (!parsed || !user) return;
+  const replace = $('replace').checked;
+  const groups = [...new Set(parsed.records.map(groupKey))];
+  if (!confirm(`確定匯入 ${parsed.rows.length} 位客人？\n${replace ? '會先刪除這些「日期＋門市」原有的資料：\n' + groups.map(g => g.split('|').slice(0,2).join(' ')).join('\n') : '不取代，直接加在原有資料後面。'}`)) return;
+  $('btnImport').disabled = true;
+  $('status').textContent = '寫入中…';
+  try {
+    const ids = [...new Set(parsed.records.map(r => monthDocId(r.date, r.storeKey)))];
+    const logRef = doc(collection(db, 'import_log'));
+    const rev = rand();
+    let removed = 0;
+    await runTransaction(db, async tx => {
+      const snaps = await Promise.all(ids.map(id => tx.get(doc(db, 'cs_months', id))));
+      const before = {};
+      snaps.forEach((s, i) => {
+        const id = ids[i];
+        const old = s.exists() ? (s.data().records || []) : [];
+        before[id] = s.exists() ? old : null;
+        const mine = parsed.records.filter(r => monthDocId(r.date, r.storeKey) === id);
+        const keep = replace ? old.filter(r => !groups.includes(groupKey(r))) : old;
+        removed += old.length - keep.length;
+        tx.set(doc(db, 'cs_months', id), {
+          month: id.slice(0,7), storeKey: id.slice(8), records: [...keep, ...mine],
+          updatedBy: user.email, updatedAt: serverTimestamp(), rev,
+        });
+      });
+      tx.set(logRef, {
+        kind: 'daily', by: user.email, at: serverTimestamp(), rev, replace,
+        groups, clients: parsed.rows.length, raw: $('dailyText').value, before, undone: false,
+      });
+    });
+    $('status').innerHTML = `<span class="msg-ok">✔ 匯入完成：寫入 ${parsed.rows.length} 位客人${replace ? '，取代舊資料 ' + removed + ' 個區塊' : ''}。報表重新整理後就會看到。</span>`;
+    parsed = null;
+  } catch (e) {
+    $('status').innerHTML = '<span class="msg-err">寫入失敗：' + esc(e.message) + '</span>';
+    $('btnImport').disabled = false;
+  }
+};
+
+// ───────── 原綺回約 ─────────
+let rbParsed = null;
+$('btnRbCheck').onclick = () => {
+  const out = {}, errs = [];
+  $('rebookText').value.split(/\r?\n/).forEach((line, i) => {
+    if (!line.trim()) return;
+    const [mo, st, cs, a, b, c] = splitLine(line);
+    const m = (mo || '').match(/^(\d{4})[\/\-.](\d{1,2})$/);
+    const S = STORES[(st || '').replace(/店$/, '')];
+    const name = NAME_FIX[cs] || cs;
+    const [rb, cx, rev] = [a, b, c].map(toNum);
+    const e = [];
+    if (!m) e.push('月份格式要像 2026-11');
+    if (!S || S.brandKey !== 'ki' || S.storeKey === 'wo_dongmen') e.push('門市要是 台北原綺 或 台中原綺');
+    else if (!(FIXED[S.storeKey + '|ki'] || []).includes(name)) e.push(name + ' 不是這間店的諮詢師');
+    if ([rb, cx, rev].some(isNaN)) e.push('數字看不懂');
+    if (e.length) { errs.push(`第 ${i+1} 行：${e.join('、')}`); return; }
+    const month = `${m[1]}-${m[2].padStart(2,'0')}`;
+    ((out[month] = out[month] || {})[S.storeKey] = out[month][S.storeKey] || {})[name] = { 回約: rb, 取消: cx, 業績: rev };
+  });
+  if (errs.length) { rbParsed = null; $('btnRbImport').disabled = true; $('rbStatus').innerHTML = '<span class="msg-err">' + errs.map(esc).join('<br>') + '</span>'; $('rbPreview').innerHTML=''; return; }
+  rbParsed = out;
+  $('rbPreview').innerHTML = '<table><tr><th>月份</th><th>門市</th><th>諮詢師</th><th class="num">回約</th><th class="num">取消</th><th class="num">到場</th><th class="num">業績</th></tr>' +
+    Object.entries(out).flatMap(([mo, st]) => Object.entries(st).flatMap(([sk, cs]) => Object.entries(cs).map(([n, v]) =>
+      `<tr><td>${mo}</td><td>${sk==='ki_taipei'?'台北原綺':'台中原綺'}</td><td>${esc(n)}</td><td class="num">${v.回約}</td><td class="num">${v.取消}</td><td class="num">${v.回約-v.取消}</td><td class="num">${fmt(v.業績)}</td></tr>`))).join('') + '</table>';
+  $('rbStatus').innerHTML = '<span class="msg-ok">✔ 格式正確，確認後按「確認匯入」。</span>';
+  $('btnRbImport').disabled = false;
+};
+$('rebookText').oninput = () => { $('btnRbImport').disabled = true; };
+$('btnRbImport').onclick = async () => {
+  if (!rbParsed || !user) return;
+  if (!confirm('會取代這些月份、門市原有的諮詢師回約明細，確定匯入？')) return;
+  $('btnRbImport').disabled = true;
+  try {
+    const months = Object.keys(rbParsed), logRef = doc(collection(db, 'import_log')), rev = rand();
+    await runTransaction(db, async tx => {
+      const snaps = await Promise.all(months.map(m => tx.get(doc(db, 'ki_rebook', m))));
+      const before = {};
+      snaps.forEach((s, i) => {
+        const m = months[i], old = s.exists() ? s.data() : null;
+        before[m] = old ? { store: old.store || null, cs: old.cs || null } : null;
+        tx.set(doc(db, 'ki_rebook', m), { month: m, store: old?.store || null, cs: { ...(old?.cs || {}), ...rbParsed[m] }, updatedBy: user.email, updatedAt: serverTimestamp(), rev });
+      });
+      tx.set(logRef, { kind: 'rebook', by: user.email, at: serverTimestamp(), rev, groups: months, raw: $('rebookText').value, before, undone: false });
+    });
+    $('rbStatus').innerHTML = '<span class="msg-ok">✔ 匯入完成。</span>';
+    rbParsed = null;
+  } catch (e) { $('rbStatus').innerHTML = '<span class="msg-err">寫入失敗：' + esc(e.message) + '</span>'; $('btnRbImport').disabled = false; }
+};
+
+// ───────── 整理指令 ─────────
+const DEFAULT_PROMPT = `你是原渥集團業績日報整理助手。我會附上日報截圖，請依下列規則轉成匯入格式，只輸出結果行，不要解釋。
+
+【輸出格式】一行一位客人：
+日期, 門市, 諮詢師, 客別, 體驗金額, 總金額, 客戶姓名, 註記
+- 日期寫 MM/DD；門市照日報寫（館前、大安、忠孝、東門、板橋、台中、台北原綺、台中原綺）
+- 診所東門＝台北原綺，診所台中＝台中原綺；東門（原渥）日報裡的原綺客 → 門市寫「東門原綺」，諮詢師一律「公司」
+- 客別：新客／舊客／舊客體驗（舊客且有體驗金額＝舊客體驗；館前日報客別寫「館前」＝新客）
+- 體驗金額＝「體驗金額」欄；總金額＝小計（含體驗＋課程＋諮詢師賣的自有產品，不含外來產品）
+- 金額不要加 $ 和千分位逗號
+- 註記：空白、noVisit 或 noCount
+
+【各店固定諮詢師（只有這些人能填在諮詢師欄）】
+館前：廖梓涵、吳凱婷
+大安：李晨研、蔡亞衫
+忠孝：王詩涵、翁筱芸
+東門：邱家榆
+板橋：森珮筠
+台中（原渥）：郭子萍、林雨芑、何欣穎、呂秋玫
+台北原綺：陳詩喬、柯孟君、計品卉、陳甯
+台中原綺：郭子萍、呂秋玫、何欣穎
+日報寫「林雨芸」就是林雨芑。
+
+【歸屬規則】
+1. 銷售美容師是本店固定諮詢師 → 填該諮詢師。
+2. 銷售美容師不是本店固定諮詢師（跑店、其他人、官方IG 等）→ 填「公司」。
+3. 同一位客人有兩列、兩位銷售美容師，其中一位是本店固定諮詢師 → 合併成一行歸該諮詢師，不另列公司。
+4. 操作美容師不是諮詢師。銷售美容師欄填的是操作美容師時，該列金額不計。
+5. 操作美容師欄空白＝當天沒有服務 → 不輸出。
+6. 分享客 → 公司。
+7. 原綺新客的體驗金額一律填 0，總金額填實付金額。
+8. 同一位客人需要兩行時（例如新客體驗另有一列舊客消耗），第二行客別寫舊客、註記 noVisit。
+
+【其他】
+- 贈品、贈送堂數不影響金額。
+- 看不清楚或不確定的列，照最可能的寫，並在結果最後另列「待確認：」說明。`;
+
+async function loadPrompt() {
+  try {
+    const s = await getDoc(doc(db, 'settings', 'prompt'));
+    $('promptText').value = s.exists() && s.data().text ? s.data().text : DEFAULT_PROMPT;
+  } catch { $('promptText').value = DEFAULT_PROMPT; }
+}
+$('btnCopy').onclick = async () => {
+  try { await navigator.clipboard.writeText($('promptText').value); $('promptStatus').innerHTML = '<span class="msg-ok">已複製</span>'; }
+  catch { $('promptText').select(); document.execCommand('copy'); $('promptStatus').innerHTML = '<span class="msg-ok">已複製</span>'; }
+};
+$('btnSavePrompt').onclick = async () => {
+  try { await setDoc(doc(db, 'settings', 'prompt'), { text: $('promptText').value, updatedBy: user.email, updatedAt: serverTimestamp() }); $('promptStatus').innerHTML = '<span class="msg-ok">已儲存</span>'; }
+  catch (e) { $('promptStatus').innerHTML = '<span class="msg-err">儲存失敗：' + esc(e.message) + '</span>'; }
+};
+
+// ───────── 匯入紀錄＋復原 ─────────
+async function loadLog() {
+  try {
+    const snap = await getDocs(query(collection(db, 'import_log'), orderBy('at', 'desc'), limit(30)));
+    if (snap.empty) { $('logList').textContent = '還沒有匯入紀錄。'; return; }
+    $('logList').innerHTML = '<table><tr><th>時間</th><th>操作者</th><th>類型</th><th>範圍</th><th></th></tr>' + snap.docs.map(d => {
+      const v = d.data(), t = v.at?.toDate?.();
+      const scope = v.kind === 'daily' ? v.groups.map(g => { const [dt, sk, bk] = g.split('|'); return dt.slice(5) + ' ' + (Object.entries(STORES).find(([n, s]) => s.storeKey === sk && s.brandKey === bk)?.[0] || sk); }).join('、') + `（${v.clients} 人）` : v.groups.join('、');
+      return `<tr><td>${t ? t.toLocaleString('zh-TW') : ''}</td><td>${esc(v.by)}</td><td>${v.kind === 'daily' ? '日報' : '原綺回約'}</td><td>${esc(scope)}</td><td>${v.undone ? '<span style="color:#999">已復原</span>' : `<button class="btn" data-undo="${d.id}">復原</button>`}</td></tr>`;
+    }).join('') + '</table>';
+    document.querySelectorAll('[data-undo]').forEach(b => b.onclick = () => undo(b.dataset.undo));
+  } catch (e) { $('logList').innerHTML = '<span class="msg-err">讀取失敗：' + esc(e.message) + '</span>'; }
+}
+
+async function undo(id) {
+  try {
+    const logRef = doc(db, 'import_log', id);
+    const log = (await getDoc(logRef)).data();
+    const coll = log.kind === 'daily' ? 'cs_months' : 'ki_rebook';
+    const ids = Object.keys(log.before);
+    const cur = await Promise.all(ids.map(x => getDoc(doc(db, coll, x))));
+    const changed = cur.some(s => s.exists() && s.data().rev !== log.rev);
+    if (!confirm(changed
+      ? '⚠ 這次匯入之後，同月份同門市又有其他匯入。復原會連那些後來的變動一起蓋掉，確定要復原嗎？'
+      : '確定把這次匯入影響的資料還原成匯入前的樣子？')) return;
+    await runTransaction(db, async tx => {
+      ids.forEach(x => {
+        const prev = log.before[x], ref = doc(db, coll, x);
+        if (prev === null) tx.delete(ref);
+        else if (log.kind === 'daily') tx.set(ref, { month: x.slice(0,7), storeKey: x.slice(8), records: prev, updatedBy: user.email + '（復原）', updatedAt: serverTimestamp(), rev: rand() });
+        else tx.set(ref, { month: x, store: prev.store, cs: prev.cs, updatedBy: user.email + '（復原）', updatedAt: serverTimestamp(), rev: rand() });
+      });
+      tx.update(logRef, { undone: true });
+    });
+    alert('已復原');
+    loadLog();
+  } catch (e) { alert('復原失敗：' + e.message); }
+}
+</script>
+</body>
+</html>
